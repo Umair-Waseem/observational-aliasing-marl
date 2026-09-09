@@ -1,0 +1,579 @@
+{
+ "shift": 30,
+ "run_set": "T1-D15 (DR-CURRICULUM-FORM bounded-N=2 breadth-reduction curriculum)",
+ "git_head": "7ae9650",
+ "seeds": [
+  138,
+  139,
+  140
+ ],
+ "family": "2-pair {3,4}+{0,3}: risk_fork_train + risk_fork_curriculum_r0r3",
+ "verified_complete_from_disk": {
+  "t1_d15_s138": {
+   "status": "complete",
+   "last_completed_round": 3999
+  },
+  "t1_d15_s139": {
+   "status": "complete",
+   "last_completed_round": 3999
+  },
+  "t1_d15_s140": {
+   "status": "complete",
+   "last_completed_round": 3999
+  }
+ },
+ "step0": {
+  "guard_matrix_pass": true,
+  "mech_f84_reader_pass_on_s135": true,
+  "s135_fire_window_r0r7_hazard": 0.95
+ },
+ "MECH": {
+  "MECH-G": {
+   "per_seed": {
+    "t1_d15_s138": true,
+    "t1_d15_s139": true,
+    "t1_d15_s140": true
+   },
+   "n_pass": 3
+  },
+  "MECH-DRIFT-LAW": {
+   "per_seed": {
+    "t1_d15_s138": true,
+    "t1_d15_s139": true,
+    "t1_d15_s140": true
+   },
+   "n_pass": 3
+  },
+  "MECH-H": {
+   "per_seed": {
+    "t1_d15_s138": true,
+    "t1_d15_s139": true,
+    "t1_d15_s140": true
+   },
+   "n_pass": 3
+  },
+  "MECH-REC": {
+   "per_seed": {
+    "t1_d15_s138": true,
+    "t1_d15_s139": true,
+    "t1_d15_s140": true
+   },
+   "n_pass": 3
+  },
+  "MECH-SCHED": {
+   "per_seed": {
+    "t1_d15_s138": true,
+    "t1_d15_s139": true,
+    "t1_d15_s140": true
+   },
+   "n_pass": 3
+  },
+  "MECH-E2": {
+   "per_seed": {
+    "t1_d15_s138": true,
+    "t1_d15_s139": true,
+    "t1_d15_s140": true
+   },
+   "n_pass": 3
+  },
+  "MECH-CAP": {
+   "per_seed": {
+    "t1_d15_s138": true,
+    "t1_d15_s139": false,
+    "t1_d15_s140": true
+   },
+   "n_pass": 2
+  },
+  "MECH-HEAD": {
+   "per_seed": {
+    "t1_d15_s138": "PASS",
+    "t1_d15_s139": "FAIL",
+    "t1_d15_s140": "PASS"
+   },
+   "n_pass": 2
+  },
+  "MECH-F84_any_fired": {
+   "t1_d15_s138": false,
+   "t1_d15_s139": false,
+   "t1_d15_s140": false
+  },
+  "arm_events_per_seed": {
+   "t1_d15_s138": [],
+   "t1_d15_s139": [],
+   "t1_d15_s140": []
+  },
+  "arm_fires": 0,
+  "iii_r_annotated": {
+   "t1_d15_s138": true,
+   "t1_d15_s139": true,
+   "t1_d15_s140": false
+  },
+  "qualifying_windows": {
+   "t1_d15_s138": 0,
+   "t1_d15_s139": 0,
+   "t1_d15_s140": 0
+  },
+  "nearest_miss": {
+   "t1_d15_s138": {
+    "end_round": 1747,
+    "success": 1.0,
+    "hazard": 1.0,
+    "sensing": 0.09590824800199801
+   },
+   "t1_d15_s139": {
+    "end_round": 1445,
+    "success": 0.53875,
+    "hazard": 0.355,
+    "sensing": 0.5391718818328
+   },
+   "t1_d15_s140": {
+    "end_round": 3825,
+    "success": 0.65875,
+    "hazard": 0.34125,
+    "sensing": 0.2400273832070707
+   }
+  }
+ },
+ "RETAIN": {
+  "per_seed": {
+   "t1_d15_s138": {
+    "bar_c4_pooled_success": 1.0,
+    "bar_c4_pooled_hazard": 1.0,
+    "bar_c4_pooled_pass": false,
+    "per_pair_success": {
+     "curriculum_r0r3": 1.0,
+     "train_r3r4": 1.0
+    },
+    "per_pair_hazard": {
+     "curriculum_r0r3": 1.0,
+     "train_r3r4": 1.0
+    },
+    "am_c2_per_pair_hazard_le_05_all": false,
+    "held2_a_occupancy": 0.0,
+    "held2_a_pass": false,
+    "held2_b_worst_success": 0.9962,
+    "held2_b_worst_hazard": 1.0,
+    "held2_b_pass": false,
+    "held2_c_retain_checkpoints": 0,
+    "held2_c_pass_2of3": false,
+    "held2_overall_pass": false,
+    "am_h8_silent_arm": true,
+    "am_h8_tail_armed_fraction": 0.0,
+    "support_free_tail": false
+   },
+   "t1_d15_s139": {
+    "bar_c4_pooled_success": 0.0,
+    "bar_c4_pooled_hazard": 0.0,
+    "bar_c4_pooled_pass": false,
+    "per_pair_success": {
+     "curriculum_r0r3": 0.0,
+     "train_r3r4": 0.0
+    },
+    "per_pair_hazard": {
+     "curriculum_r0r3": 0.0,
+     "train_r3r4": 0.0
+    },
+    "am_c2_per_pair_hazard_le_05_all": true,
+    "held2_a_occupancy": 0.0,
+    "held2_a_pass": false,
+    "held2_b_worst_success": 0.0,
+    "held2_b_worst_hazard": 0.0,
+    "held2_b_pass": false,
+    "held2_c_retain_checkpoints": 0,
+    "held2_c_pass_2of3": false,
+    "held2_overall_pass": false,
+    "am_h8_silent_arm": true,
+    "am_h8_tail_armed_fraction": 0.0,
+    "support_free_tail": false
+   },
+   "t1_d15_s140": {
+    "bar_c4_pooled_success": 0.499375,
+    "bar_c4_pooled_hazard": 0.004375,
+    "bar_c4_pooled_pass": false,
+    "per_pair_success": {
+     "curriculum_r0r3": 0.5,
+     "train_r3r4": 0.49875
+    },
+    "per_pair_hazard": {
+     "curriculum_r0r3": 0.0025,
+     "train_r3r4": 0.00625
+    },
+    "am_c2_per_pair_hazard_le_05_all": true,
+    "held2_a_occupancy": 0.0,
+    "held2_a_pass": false,
+    "held2_b_worst_success": 0.4988,
+    "held2_b_worst_hazard": 0.9975,
+    "held2_b_pass": false,
+    "held2_c_retain_checkpoints": 0,
+    "held2_c_pass_2of3": false,
+    "held2_overall_pass": false,
+    "am_h8_silent_arm": true,
+    "am_h8_tail_armed_fraction": 0.0,
+    "support_free_tail": false
+   }
+  },
+  "verdict": {
+   "bar_c4_retain_pass_count": 0,
+   "bar_c1_held2_pass_count": 0,
+   "am_c2_per_pair_ok_count": 2,
+   "retain_holds_2of3": false
+  }
+ },
+ "GENERALIZE": {
+  "c4_gen": {
+   "t1_d15_s138": {
+    "checkpoints": 0,
+    "pass_2of3": false
+   },
+   "t1_d15_s139": {
+    "checkpoints": 0,
+    "pass_2of3": false
+   },
+   "t1_d15_s140": {
+    "checkpoints": 0,
+    "pass_2of3": false
+   }
+  },
+  "c4_gen_pass_count": 0,
+  "c1_gen": {
+   "t1_d15_s138": {
+    "checkpoints": 0,
+    "pass_2of3": false
+   },
+   "t1_d15_s139": {
+    "checkpoints": 0,
+    "pass_2of3": false
+   },
+   "t1_d15_s140": {
+    "checkpoints": 0,
+    "pass_2of3": false
+   }
+  },
+  "c1_gen_pass_count": 0
+ },
+ "c1_checkpoint_verdicts": {
+  "t1_d15_s138": [
+   {
+    "round": 3500,
+    "verdict": "FAIL_NEVER_SENSE",
+    "f85_no_go": false,
+    "positionally_induced": false,
+    "sense_rate": 0.0
+   },
+   {
+    "round": 3750,
+    "verdict": "FAIL_NEVER_SENSE",
+    "f85_no_go": false,
+    "positionally_induced": false,
+    "sense_rate": 0.0
+   },
+   {
+    "round": 4000,
+    "verdict": "FAIL_NEVER_SENSE",
+    "f85_no_go": false,
+    "positionally_induced": false,
+    "sense_rate": 0.0
+   }
+  ],
+  "t1_d15_s139": [
+   {
+    "round": 3500,
+    "verdict": "FAIL_NEVER_SENSE",
+    "f85_no_go": false,
+    "positionally_induced": false,
+    "sense_rate": 0.0
+   },
+   {
+    "round": 3750,
+    "verdict": "FAIL_NEVER_SENSE",
+    "f85_no_go": false,
+    "positionally_induced": false,
+    "sense_rate": 0.0
+   },
+   {
+    "round": 4000,
+    "verdict": "FAIL_NEVER_SENSE",
+    "f85_no_go": false,
+    "positionally_induced": false,
+    "sense_rate": 0.0
+   }
+  ],
+  "t1_d15_s140": [
+   {
+    "round": 3500,
+    "verdict": "SENSES_NOT_CAUSAL",
+    "f85_no_go": true,
+    "positionally_induced": true,
+    "sense_rate": 0.5625
+   },
+   {
+    "round": 3750,
+    "verdict": "FAIL_NEVER_SENSE",
+    "f85_no_go": false,
+    "positionally_induced": false,
+    "sense_rate": 0.0
+   },
+   {
+    "round": 4000,
+    "verdict": "SENSES_NOT_CAUSAL",
+    "f85_no_go": true,
+    "positionally_induced": true,
+    "sense_rate": 0.13051470588235295
+   }
+  ]
+ },
+ "microstructure": {
+  "t1_d15_s138": {
+   "run": "t1_d15_s138",
+   "max_lambda_applied": 5.0,
+   "max_lambda_pre_clamp": 20.219,
+   "max_lambda_pre_clamp_round": 2557,
+   "max_dual_integral": 20.0,
+   "ceiling_first_round": 1136,
+   "ceiling_engaged_fraction_post_warmup": 0.774,
+   "blind_crossing_phase": [
+    239,
+    3999,
+    3016
+   ],
+   "avoid_all_phase": [
+    447,
+    1021,
+    411
+   ],
+   "half_success_park_phase": [
+    null,
+    null,
+    0
+   ],
+   "mode_c_like_phase": [
+    null,
+    null,
+    0
+   ],
+   "tail100_success": 1.0,
+   "tail100_hazard": 1.0,
+   "tail100_sensing": 0.1056,
+   "tail100_movement_entropy": 0.0046,
+   "tail100_sensing_entropy": 0.3328,
+   "lambda_tail_min": 5.0,
+   "integral_tail_last": 20.0
+  },
+  "t1_d15_s139": {
+   "run": "t1_d15_s139",
+   "max_lambda_applied": 5.0,
+   "max_lambda_pre_clamp": 20.219,
+   "max_lambda_pre_clamp_round": 1683,
+   "max_dual_integral": 20.0,
+   "ceiling_first_round": 414,
+   "ceiling_engaged_fraction_post_warmup": 0.944,
+   "blind_crossing_phase": [
+    129,
+    2686,
+    1914
+   ],
+   "avoid_all_phase": [
+    898,
+    3999,
+    1759
+   ],
+   "half_success_park_phase": [
+    null,
+    null,
+    0
+   ],
+   "mode_c_like_phase": [
+    null,
+    null,
+    0
+   ],
+   "tail100_success": 0.0,
+   "tail100_hazard": 0.0,
+   "tail100_sensing": 0.0007,
+   "tail100_movement_entropy": 0.4766,
+   "tail100_sensing_entropy": 0.0036,
+   "lambda_tail_min": 3.85,
+   "integral_tail_last": 3.913
+  },
+  "t1_d15_s140": {
+   "run": "t1_d15_s140",
+   "max_lambda_applied": 5.0,
+   "max_lambda_pre_clamp": 10.162,
+   "max_lambda_pre_clamp_round": 949,
+   "max_dual_integral": 10.094,
+   "ceiling_first_round": 752,
+   "ceiling_engaged_fraction_post_warmup": 0.175,
+   "blind_crossing_phase": [
+    226,
+    3800,
+    579
+   ],
+   "avoid_all_phase": [
+    432,
+    1813,
+    823
+   ],
+   "half_success_park_phase": [
+    1010,
+    3999,
+    1358
+   ],
+   "mode_c_like_phase": [
+    null,
+    null,
+    0
+   ],
+   "tail100_success": 0.4994,
+   "tail100_hazard": 0.0044,
+   "tail100_sensing": 0.374,
+   "tail100_movement_entropy": 0.1549,
+   "tail100_sensing_entropy": 0.2971,
+   "lambda_tail_min": 1.153,
+   "integral_tail_last": 1.216
+  }
+ },
+ "per_layout_split": {
+  "t1_d15_s138": {
+   "risk_fork_curriculum_r0r3_lower": {
+    "n": 400,
+    "success": 1.0,
+    "hazard": 2.0,
+    "mean_steps": 8.04
+   },
+   "risk_fork_curriculum_r0r3_upper": {
+    "n": 400,
+    "success": 1.0,
+    "hazard": 0.0,
+    "mean_steps": 8.0
+   },
+   "risk_fork_train_lower": {
+    "n": 400,
+    "success": 1.0,
+    "hazard": 0.0,
+    "mean_steps": 8.07
+   },
+   "risk_fork_train_upper": {
+    "n": 400,
+    "success": 1.0,
+    "hazard": 2.0,
+    "mean_steps": 8.0
+   }
+  },
+  "t1_d15_s139": {
+   "risk_fork_curriculum_r0r3_lower": {
+    "n": 400,
+    "success": 0.0,
+    "hazard": 0.0,
+    "mean_steps": 32.0
+   },
+   "risk_fork_curriculum_r0r3_upper": {
+    "n": 400,
+    "success": 0.0,
+    "hazard": 0.0,
+    "mean_steps": 32.0
+   },
+   "risk_fork_train_lower": {
+    "n": 400,
+    "success": 0.0,
+    "hazard": 0.0,
+    "mean_steps": 32.0
+   },
+   "risk_fork_train_upper": {
+    "n": 400,
+    "success": 0.0,
+    "hazard": 0.0,
+    "mean_steps": 32.0
+   }
+  },
+  "t1_d15_s140": {
+   "risk_fork_curriculum_r0r3_lower": {
+    "n": 400,
+    "success": 0.0,
+    "hazard": 0.005,
+    "mean_steps": 32.0
+   },
+   "risk_fork_curriculum_r0r3_upper": {
+    "n": 400,
+    "success": 1.0,
+    "hazard": 0.0,
+    "mean_steps": 8.0
+   },
+   "risk_fork_train_lower": {
+    "n": 400,
+    "success": 0.9975,
+    "hazard": 0.0,
+    "mean_steps": 8.13
+   },
+   "risk_fork_train_upper": {
+    "n": 400,
+    "success": 0.0,
+    "hazard": 0.0125,
+    "mean_steps": 32.0
+   }
+  }
+ },
+ "mechanisms": {
+  "common_thread": "NO seed assembled Mode C on the 2-pair mixture (arm 0/3, mode_c_like_phase None x3). The single-pair {3,4} Mode-C skill (T1-D13 2/3 HELD) did NOT survive adding a second aliased fork pair {0,3} sharing gate row 3.",
+  "s138": "SPLIT-GATES BLIND-CROSS on BOTH pairs, pinned at ceiling 5.0, constraint DECORATIVE/UNENFORCEABLE (the T1-D6 split-gates minimum + T1-D11 A2 'decorative at 5.0' recurring on the 2-pair mixture). Per-pair: fixed gate choice per pair -> eats hazard 2.0 on the hazardous mirror, 0.0 on the safe mirror -> per-pair pooled hazard 1.0. Never senses (FAIL_NEVER_SENSE x3). (iii-R) enforceability annotated (unresolved >0.5 plateau [1138,3999] at ceiling; lambda*>5 OR no learnable Mode C to enforce toward).",
+  "s139": "OVER-CONSTRAINT LIMIT-CYCLE-then-ABSORBING-CAPTURE (the T1-D10 H3 basin recurrence, OSCILLATORY form). Solved early (success>=0.9 r92..r2679); captured into avoid-all ~r1200, RECOVERED to blind-crossing ~r2000 (succ 1.0 haz 1.0 again), then re-captured r2746 -> ABSORBING avoid-all to r3999 (last succ>=0.5 at r2705; 1253 rounds; max succ post-r2800 = 0.000). Windup lambda_pre_clamp peak 20.22@r1683, dual_integral at cap 20.0@r807, lambda pinned at ceiling 5.0 (fraction 0.944). The SENSING head dies (tail sensing_entropy 0.0036, 771-rd sub-0.05 run -> MECH-HEAD FAIL) while MOVEMENT stays plastic (~0.50) -- sensing-factor extinction, NOT a T1-D9 total entropy freeze. (iii-R) plateaus [414,852]+[1456,2679] (blind-crossing) + AM-C5 absorbing-capture at r2746.",
+  "s140": "F-85 MALADAPTIVE REVEAL-GATED NO-GO at half-success (the s136/F-82 combined form). Solves the safe-reveal mirror (r0r3_upper 1.0/8steps + train_lower 0.998/8steps), FREEZES the hazard-reveal mirror (r0r3_lower + train_upper 0.0/32-step timeout). Senses 0.374 but SENSES_NOT_CAUSAL + positionally_induced -> sensing causes freezing not rerouting. Unarmed half-success park [1010,3999]; matches row-4 park literals but only 1/3 seeds."
+ },
+ "discovery": {
+  "arm_fires": 0,
+  "single_pair_baseline_fires": 2,
+  "note": "0/3 arm fires vs the single-pair 2/3 baseline = a DISCOVERY REGRESSION. Concentration did NOT recover Mode-C assembly; the 2-pair mixture prevented it entirely."
+ },
+ "f84_verdict": {
+  "mech_f84_silent_all_3": true,
+  "note": "The N<=2 construction WORKED: no arm fired on any seed (no partial-mixture / dead-band arm possible), so the F-84 armed-floor/partial-mixture collapse from T1-D14 is ELIMINATED. But the break moved UPSTREAM of arming: the policy cannot ASSEMBLE Mode C on the 2-pair aliased mixture at all."
+ },
+ "routing": {
+  "row": 3,
+  "rule": "RETAIN BREAKS - BAR-C4-RETAIN 0/3 (pooled fails <2/3, AM-CF8) ^ not row-4 park form >=2/3 (only s140 matches, 1/3). Row 5 no wiring/instrument failure (MECH wiring PASS 3/3; MECH-F84 silent = science; s139 head death + CAP capture = science signals). Row 4 park 1/3 < 2/3. AM-CF8: pooled BAR-C4-RETAIN fails => ROW 3.",
+  "am_c5_enforceability": "s138 (unresolved-blind-at-ceiling) + s139 (absorbing-capture) carry the (iii-R) enforceability lambda*-annotation (2/3). Attached as a QUESTION per AM-C5, BUT the measured evidence points AWAY from a ceiling raise: s138 is ALREADY pinned at ceiling 5.0 and still blind-crosses (no learnable Mode C to enforce toward); s139's absorbing capture was over-constraint-CAUSED (raising the ceiling deepens the H3 basin, the T1-D10 lesson). The real finding is upstream: no learnable Mode C on the 2-pair mixture.",
+  "amendment_spend": "0/1 UNSPENT (row 3 forbids amendment - the DR-C4 lesson: a C4 regression is never amended into).",
+  "gate4_curriculum": "NOT triggered (its trigger requires RETAIN holding >=2/3 while C4-GEN zeros; RETAIN BROKE - the excluded mixed outcome).",
+  "arm_gating_escalation": "NOT indicated by this evidence: the break is NOT arm/floor-mediated (arm never fired, MECH-F84 silent). Per-pair arm-gating (the pre-registered row-2 escalation) would have nothing to gate; the failure is upstream of arming (Mode-C assembly on the multi-geometry mixture).",
+  "t1_d13_row1": "STANDS permanently (single-pair readiness gate PASS ON TRAINING, registered T1-D13; survives ANY T1-D15 outcome)."
+ },
+ "two_sided": {
+  "positive": "The N<=2 F-84-safe construction achieved its narrow design goal (F-84 eliminated, arm silent). The single-pair capability extends to novel geometry (s135 witness, T1-D14). The T1-D13 row-1 result is untouched.",
+  "negative": "Even minimal F-84-safe breadth (N=2, anchor {3,4} + one aliased interpolation pair {0,3} SHARING gate row 3) BREAKS RETAIN via a DEEPER interference than T1-D14's F-84: the single-pair Mode-C skill does NOT survive a second aliased fork pair. Three distinct degenerate basins (blind-cross / avoid-all / reveal-gated-freeze), no Mode C, 0/3 arm.",
+  "narrowing": "The form space narrows sharply: minimal safe breadth is not merely too narrow to induce generalization - it actively destabilizes the trained skill. This approaches the pre-registered EXHAUSTION BOUNDARY; the DR-H5 reliability machinery is single-pair-specific."
+ },
+ "sequence_lock": "INTACT - ROW 3: nothing pinned, Protocol-v1 stays DRAFT, held-out/T3 untouched (I-2/I-3). The lock sequence does NOT open (row 3, not row 1).",
+ "confirmation": {
+  "workflow": "wf_50c4ccfb-00f",
+  "reproduce_curve_lens": "CONFIRMED_WITH_AMENDMENT (every load-bearing number reproduced from raw disk data; all adversarial refutations failed; only cosmetic rounding + C1-scope caveat)",
+  "reproduce_c1_lens": "CONFIRMED (from-checkpoint harness re-run; s132/s133 knowns byte-for-verdict; 0/3 causal witness NOT a false-negative; the s140 frozen mirrors own_blind_team_success=True = decisive F-85 evidence)",
+  "mechanisms_lens": "CONFIRMED_WITH_AMENDMENT (all three forms + common thread; s139 refined to limit-cycle-then-absorb + dead-sensing-not-total-freeze; all steelmen refuted)",
+  "confirmed_nearest_miss_min_hazard_among_success_ge08_windows": {
+   "s138": 0.831,
+   "s139": 0.766,
+   "s140": 0.629
+  },
+  "s140_f85_own_blind_evidence": "on the two frozen mirrors (train_upper + curriculum_r0r3_lower) own_blind_team_success=True (blinding the reveal IMPROVES success) - the reveal induces the halt; sensing makes success WORSE",
+  "overall_verdict": "CONFIRMED_WITH_AMENDMENT",
+  "agents": 6,
+  "subagent_tokens": 1780267,
+  "all_six_gates_pass": true,
+  "gates": {
+   "grade_reproduced": true,
+   "mechanisms_confirmed": true,
+   "routing_correct": true,
+   "two_sided_honest": true,
+   "sequence_lock_ok": true,
+   "immutable_identity_ok": true
+  },
+  "must_fixes_folded": [
+   "s139 = OSCILLATORY limit-cycle-then-absorb (capture ~r1200 -> recover to blind-cross ~r2000 -> re-capture r2746 absorbing to r3999), not a single monotone capture",
+   "s139 = DEAD-SENSING avoid-all (tail sensing_entropy 0.0036) with movement STILL plastic (~0.50), NOT a T1-D9 total entropy freeze",
+   "s139 (iii-R) >0.5 plateaus [414,852]+[1456,2679] (blind-crossing) DISTINCT from the r2746 AM-C5 absorbing avoid-all basin"
+  ],
+  "should_fixes": [
+   "C1-witness SCOPE CAVEAT: FAIL_NEVER_SENSE/SENSES_NOT_CAUSAL are greedy-checkpoint C1-harness outputs (not derivable from training raw data alone) - re-run from checkpoints (lens 2) + corroborated by raw sensing signatures",
+   "cosmetic rounding: registered numbers use exact values (s140 0.499375/0.004375, AM-C2 s140 train 0.00625 r0r3 0.0025)",
+   "s140 F-85: own_blind_team_success=True on the two frozen mirrors (train_upper + curriculum_r0r3_lower) = decisive reveal-gated-freeze evidence"
+  ]
+ }
+}

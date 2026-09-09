@@ -1,0 +1,99 @@
+# -----------------------------------------------------------------------------
+# Citation metadata (Citation File Format 1.2.0).
+#
+# Every field was READ from source: the title and the author block from
+# the SOURCE repository's docs/paper/template/main.tex, the venue facts from its
+# docs/paper/VENUE_KIT.md. Neither of those two files is shipped in this artifact.
+# -----------------------------------------------------------------------------
+cff-version: 1.2.0
+message: "If you use this software or its data, please cite the paper below."
+type: software
+title: "Observational Aliasing Bounds Generalization in Constrained Active-Sensing Multi-Agent Reinforcement Learning"
+version: 1.0.0
+license: MIT
+abstract: >-
+  Code, grading instruments, run provenance and a claim-to-source traceability
+  register for the IEEE ICET 2026 paper of the same title. All four authors share
+  the affiliation: School of Computing Sciences, Pak-Austria Fachhochschule
+  Institute of Applied Sciences and Technology, Haripur, Pakistan.
+
+# Only the CORRESPONDING author's address appears here. The other three are
+# student roll-number addresses tied to enrolment; a citation record is
+# permanent, and a dead contact address in it is worse than no address at all.
+# The corresponding author is Musadaq Mansoor, who carries the \textsuperscript{*}
+# marker and the "(*corresponding author)" tag in the paper's author block.
+#
+# ORCID identifiers are OMITTED: none is available yet. This file is valid
+# without them, and each can later be added as one `orcid:` line under the
+# relevant author without restructuring anything.
+authors:
+  - given-names: "Muhammad Umair"
+    family-names: "Waseem"
+    affiliation: "School of Computing Sciences, Pak-Austria Fachhochschule Institute of Applied Sciences and Technology, Haripur, Pakistan"
+  # Mononymous author. CFF models this as an `entity`, which is the only
+  # schema-valid way to carry a single name -- and the entity schema has no
+  # `affiliation` key, so the shared affiliation is carried here as the
+  # entity-legal `city`/`country` pair and is stated in full in the abstract above.
+  - name: "Abdullah"
+    city: "Haripur"
+    country: "PK"
+  - given-names: "Shayan"
+    family-names: "Khan"
+    affiliation: "School of Computing Sciences, Pak-Austria Fachhochschule Institute of Applied Sciences and Technology, Haripur, Pakistan"
+  - given-names: "Musadaq"
+    family-names: "Mansoor"
+    affiliation: "School of Computing Sciences, Pak-Austria Fachhochschule Institute of Applied Sciences and Technology, Haripur, Pakistan"
+    email: "musadaq.mansoor@paf-iast.edu.pk"
+
+keywords:
+  - reinforcement learning
+  - multi-agent systems
+  - constrained reinforcement learning
+  - active sensing
+  - partial observability
+  - generalization
+
+# Filled in at publication. The URL below is the one printed in the
+# camera-ready ("The implementation and per-run configuration records are
+# available at ..."), and must stay character-identical to it.
+repository-code: "https://github.com/Umair-Waseem/observational-aliasing-marl"
+url: "https://github.com/Umair-Waseem/observational-aliasing-marl"
+date-released: "2026-09-08"
+
+# The state the paper describes is the tag v1.0-icet2026.
+#
+# A Zenodo DOI for the raw training-log data record is NOT minted as of this
+# release, so none is claimed here. When it is minted, add it as:
+#   identifiers:
+#     - type: doi
+#       value: "10.5281/zenodo.XXXXXXX"
+#       description: "Raw training logs (episode logs, training curves, probe logs)"
+
+preferred-citation:
+  type: conference-paper
+  title: "Observational Aliasing Bounds Generalization in Constrained Active-Sensing Multi-Agent Reinforcement Learning"
+  authors:
+    - given-names: "Muhammad Umair"
+      family-names: "Waseem"
+      affiliation: "School of Computing Sciences, Pak-Austria Fachhochschule Institute of Applied Sciences and Technology, Haripur, Pakistan"
+    - name: "Abdullah"
+      city: "Haripur"
+      country: "PK"
+    - given-names: "Shayan"
+      family-names: "Khan"
+      affiliation: "School of Computing Sciences, Pak-Austria Fachhochschule Institute of Applied Sciences and Technology, Haripur, Pakistan"
+    - given-names: "Musadaq"
+      family-names: "Mansoor"
+      affiliation: "School of Computing Sciences, Pak-Austria Fachhochschule Institute of Applied Sciences and Technology, Haripur, Pakistan"
+      email: "musadaq.mansoor@paf-iast.edu.pk"
+  year: 2026
+  month: 11
+  collection-title: "2026 21st International Conference on Emerging Technologies (ICET)"
+  conference:
+    name: "21st IEEE International Conference on Emerging Technologies (IEEE ICET 2026)"
+    alias: "IEEE ICET 2026"
+    location: "GIK Institute of Engineering Sciences & Technology"
+    city: "Topi"
+    country: "PK"
+    date-start: "2026-11-18"
+    date-end: "2026-11-19"

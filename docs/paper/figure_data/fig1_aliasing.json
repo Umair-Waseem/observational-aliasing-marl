@@ -1,0 +1,129 @@
+{
+  "cell_(3,3)": [
+    3,
+    3
+  ],
+  "anchor_scenario": "risk_fork_train_upper",
+  "other_scenario": "risk_fork_curriculum_r0r3_lower",
+  "dim": 22,
+  "legacy_feature_count": 10,
+  "radius2_patch_index_for_cell_(4,4)": 20,
+  "features_0to8_radius_independent_byte_identical": true,
+  "original_radius1_obstacle_count_feature9": {
+    "risk_fork_train_upper": 0,
+    "risk_fork_curriculum_r0r3_lower": 0
+  },
+  "original_radius1_count_identical": true,
+  "ORIGINAL_dim10_byte_identical_at_(3,3)": true,
+  "enriched_obs_dim22": {
+    "risk_fork_train_upper": [
+      0.428571,
+      0.428571,
+      0.0,
+      0.571429,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.076923,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "risk_fork_curriculum_r0r3_lower": [
+      0.428571,
+      0.428571,
+      0.0,
+      0.571429,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.153846,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0
+    ]
+  },
+  "enriched_features_0to8": [
+    0.428571,
+    0.428571,
+    0.0,
+    0.571429,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "enriched_radius2_count_feature9": {
+    "risk_fork_train_upper": 0.076923,
+    "risk_fork_curriculum_r0r3_lower": 0.153846
+  },
+  "enriched_differing_indices": [
+    9,
+    20
+  ],
+  "patch_cell_(4,4)_value": {
+    "risk_fork_train_upper_OPEN": 0.0,
+    "risk_fork_curriculum_r0r3_lower_WALL": 1.0
+  },
+  "reroute_geometry": {
+    "risk_fork_train_upper": {
+      "gate_rows": [
+        3,
+        4
+      ],
+      "hidden_hazard_cells": [
+        [
+          3,
+          4
+        ]
+      ],
+      "safe_gate_col4": [
+        [
+          4,
+          4
+        ]
+      ]
+    },
+    "risk_fork_curriculum_r0r3_lower": {
+      "gate_rows": [
+        0,
+        3
+      ],
+      "hidden_hazard_cells": [
+        [
+          3,
+          4
+        ]
+      ],
+      "safe_gate_col4": [
+        [
+          0,
+          4
+        ]
+      ]
+    }
+  }
+}

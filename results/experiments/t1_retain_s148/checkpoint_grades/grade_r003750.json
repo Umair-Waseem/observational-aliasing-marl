@@ -1,0 +1,904 @@
+{
+ "grade": {
+  "label": "t1_retain_s148@r3750",
+  "seed": 9001,
+  "family": "fork",
+  "per_surface": {
+   "risk_fork_train_lower": {
+    "group": "training",
+    "hidden_hazard_cells": [
+     [
+      4,
+      4
+     ]
+    ],
+    "steps": 8,
+    "team_success": true,
+    "hazard_entry_count": 0,
+    "sensing_cost_sum": 0.15000000000000002,
+    "adapt_fired": true,
+    "own_blind_hazard_entry_count": 1,
+    "own_blind_team_success": true,
+    "own_blind_hazard_avoided": 1,
+    "no_sense_hazard_entry_count": 0,
+    "no_sense_team_success": true,
+    "hazard_avoided_vs_no_sense": 0,
+    "selectivity": {
+     "n_decisions": 16,
+     "total_sense": 3,
+     "overall_sense_rate": 0.1875,
+     "contrast_near_far": {
+      "n_relevant": 11,
+      "n_nonrelevant": 5,
+      "sense_relevant": 3,
+      "sense_nonrelevant": 0,
+      "p_sense_relevant": 0.2727272727272727,
+      "p_sense_nonrelevant": 0.0,
+      "delta": 0.2727272727272727
+     },
+     "contrast_strict_in_zone": {
+      "n_relevant": 7,
+      "n_nonrelevant": 9,
+      "sense_relevant": 1,
+      "sense_nonrelevant": 2,
+      "p_sense_relevant": 0.14285714285714285,
+      "p_sense_nonrelevant": 0.2222222222222222,
+      "delta": -0.07936507936507936
+     },
+     "contrast_near_hazard": {
+      "n_relevant": 3,
+      "n_nonrelevant": 13,
+      "sense_relevant": 0,
+      "sense_nonrelevant": 3,
+      "p_sense_relevant": 0.0,
+      "p_sense_nonrelevant": 0.23076923076923078,
+      "delta": -0.23076923076923078
+     },
+     "point_biserial_r_zone": 0.15097027121927944,
+     "point_biserial_r_hazard": 0.12017278061240778,
+     "perm_p_near_far": 0.29325,
+     "mean_dist_at_sense": 0.6666666666666666,
+     "mean_dist_at_nonsense": 1.0769230769230769,
+     "far_axis_estimable": true,
+     "verdict": "SELECTIVE"
+    }
+   },
+   "risk_fork_train_upper": {
+    "group": "training",
+    "hidden_hazard_cells": [
+     [
+      3,
+      4
+     ]
+    ],
+    "steps": 9,
+    "team_success": true,
+    "hazard_entry_count": 0,
+    "sensing_cost_sum": 0.1,
+    "adapt_fired": true,
+    "own_blind_hazard_entry_count": 1,
+    "own_blind_team_success": true,
+    "own_blind_hazard_avoided": 1,
+    "no_sense_hazard_entry_count": 2,
+    "no_sense_team_success": true,
+    "hazard_avoided_vs_no_sense": 2,
+    "selectivity": {
+     "n_decisions": 18,
+     "total_sense": 2,
+     "overall_sense_rate": 0.1111111111111111,
+     "contrast_near_far": {
+      "n_relevant": 11,
+      "n_nonrelevant": 7,
+      "sense_relevant": 2,
+      "sense_nonrelevant": 0,
+      "p_sense_relevant": 0.18181818181818182,
+      "p_sense_nonrelevant": 0.0,
+      "delta": 0.18181818181818182
+     },
+     "contrast_strict_in_zone": {
+      "n_relevant": 7,
+      "n_nonrelevant": 11,
+      "sense_relevant": 0,
+      "sense_nonrelevant": 2,
+      "p_sense_relevant": 0.0,
+      "p_sense_nonrelevant": 0.18181818181818182,
+      "delta": -0.18181818181818182
+     },
+     "contrast_near_hazard": {
+      "n_relevant": 3,
+      "n_nonrelevant": 15,
+      "sense_relevant": 0,
+      "sense_nonrelevant": 2,
+      "p_sense_relevant": 0.0,
+      "p_sense_nonrelevant": 0.13333333333333333,
+      "delta": -0.13333333333333333
+     },
+     "point_biserial_r_zone": 0.037476584449793085,
+     "point_biserial_r_hazard": 0.06859943405700354,
+     "perm_p_near_far": 0.353,
+     "mean_dist_at_sense": 1.0,
+     "mean_dist_at_nonsense": 1.125,
+     "far_axis_estimable": true,
+     "verdict": "SELECTIVE"
+    }
+   },
+   "risk_fork_curriculum_r0r3_lower": {
+    "group": "curriculum",
+    "hidden_hazard_cells": [
+     [
+      3,
+      4
+     ]
+    ],
+    "steps": 9,
+    "team_success": true,
+    "hazard_entry_count": 2,
+    "sensing_cost_sum": 0.05,
+    "adapt_fired": true,
+    "own_blind_hazard_entry_count": 2,
+    "own_blind_team_success": true,
+    "own_blind_hazard_avoided": 0,
+    "no_sense_hazard_entry_count": 2,
+    "no_sense_team_success": true,
+    "hazard_avoided_vs_no_sense": 0,
+    "selectivity": {
+     "n_decisions": 18,
+     "total_sense": 1,
+     "overall_sense_rate": 0.05555555555555555,
+     "contrast_near_far": {
+      "n_relevant": 13,
+      "n_nonrelevant": 5,
+      "sense_relevant": 1,
+      "sense_nonrelevant": 0,
+      "p_sense_relevant": 0.07692307692307693,
+      "p_sense_nonrelevant": 0.0,
+      "delta": 0.07692307692307693
+     },
+     "contrast_strict_in_zone": {
+      "n_relevant": 9,
+      "n_nonrelevant": 9,
+      "sense_relevant": 0,
+      "sense_nonrelevant": 1,
+      "p_sense_relevant": 0.0,
+      "p_sense_nonrelevant": 0.1111111111111111,
+      "delta": -0.1111111111111111
+     },
+     "contrast_near_hazard": {
+      "n_relevant": 7,
+      "n_nonrelevant": 11,
+      "sense_relevant": 0,
+      "sense_nonrelevant": 1,
+      "p_sense_relevant": 0.0,
+      "p_sense_nonrelevant": 0.09090909090909091,
+      "delta": -0.09090909090909091
+     },
+     "point_biserial_r_zone": -0.025708724836453048,
+     "point_biserial_r_hazard": 0.009959744388432293,
+     "perm_p_near_far": 0.70425,
+     "mean_dist_at_sense": 1.0,
+     "mean_dist_at_nonsense": 0.8823529411764706,
+     "far_axis_estimable": true,
+     "verdict": "SELECTIVE"
+    }
+   },
+   "risk_fork_curriculum_r0r3_upper": {
+    "group": "curriculum",
+    "hidden_hazard_cells": [
+     [
+      0,
+      4
+     ]
+    ],
+    "steps": 8,
+    "team_success": true,
+    "hazard_entry_count": 0,
+    "sensing_cost_sum": 0.05,
+    "adapt_fired": false,
+    "own_blind_hazard_entry_count": 0,
+    "own_blind_team_success": true,
+    "own_blind_hazard_avoided": 0,
+    "no_sense_hazard_entry_count": 0,
+    "no_sense_team_success": true,
+    "hazard_avoided_vs_no_sense": 0,
+    "selectivity": {
+     "n_decisions": 16,
+     "total_sense": 1,
+     "overall_sense_rate": 0.0625,
+     "contrast_near_far": {
+      "n_relevant": 11,
+      "n_nonrelevant": 5,
+      "sense_relevant": 1,
+      "sense_nonrelevant": 0,
+      "p_sense_relevant": 0.09090909090909091,
+      "p_sense_nonrelevant": 0.0,
+      "delta": 0.09090909090909091
+     },
+     "contrast_strict_in_zone": {
+      "n_relevant": 7,
+      "n_nonrelevant": 9,
+      "sense_relevant": 0,
+      "sense_nonrelevant": 1,
+      "p_sense_relevant": 0.0,
+      "p_sense_nonrelevant": 0.1111111111111111,
+      "delta": -0.1111111111111111
+     },
+     "contrast_near_hazard": {
+      "n_relevant": 0,
+      "n_nonrelevant": 16,
+      "sense_relevant": 0,
+      "sense_nonrelevant": 1,
+      "p_sense_relevant": null,
+      "p_sense_nonrelevant": 0.0625,
+      "delta": null
+     },
+     "point_biserial_r_zone": 0.0,
+     "point_biserial_r_hazard": 0.02291144655411569,
+     "perm_p_near_far": 0.68075,
+     "mean_dist_at_sense": 1.0,
+     "mean_dist_at_nonsense": 1.0,
+     "far_axis_estimable": true,
+     "verdict": "SELECTIVE"
+    }
+   },
+   "risk_fork_curriculum_r4r7_lower": {
+    "group": "curriculum",
+    "hidden_hazard_cells": [
+     [
+      7,
+      4
+     ]
+    ],
+    "steps": 9,
+    "team_success": true,
+    "hazard_entry_count": 0,
+    "sensing_cost_sum": 0.05,
+    "adapt_fired": false,
+    "own_blind_hazard_entry_count": 0,
+    "own_blind_team_success": true,
+    "own_blind_hazard_avoided": 0,
+    "no_sense_hazard_entry_count": 0,
+    "no_sense_team_success": true,
+    "hazard_avoided_vs_no_sense": 0,
+    "selectivity": {
+     "n_decisions": 18,
+     "total_sense": 1,
+     "overall_sense_rate": 0.05555555555555555,
+     "contrast_near_far": {
+      "n_relevant": 11,
+      "n_nonrelevant": 7,
+      "sense_relevant": 1,
+      "sense_nonrelevant": 0,
+      "p_sense_relevant": 0.09090909090909091,
+      "p_sense_nonrelevant": 0.0,
+      "delta": 0.09090909090909091
+     },
+     "contrast_strict_in_zone": {
+      "n_relevant": 7,
+      "n_nonrelevant": 11,
+      "sense_relevant": 0,
+      "sense_nonrelevant": 1,
+      "p_sense_relevant": 0.0,
+      "p_sense_nonrelevant": 0.09090909090909091,
+      "delta": -0.09090909090909091
+     },
+     "contrast_near_hazard": {
+      "n_relevant": 0,
+      "n_nonrelevant": 18,
+      "sense_relevant": 0,
+      "sense_nonrelevant": 1,
+      "p_sense_relevant": null,
+      "p_sense_nonrelevant": 0.05555555555555555,
+      "delta": null
+     },
+     "point_biserial_r_zone": 0.025708724836453048,
+     "point_biserial_r_hazard": 0.04789790616963794,
+     "perm_p_near_far": 0.618,
+     "mean_dist_at_sense": 1.0,
+     "mean_dist_at_nonsense": 1.1176470588235294,
+     "far_axis_estimable": true,
+     "verdict": "SELECTIVE"
+    }
+   },
+   "risk_fork_curriculum_r4r7_upper": {
+    "group": "curriculum",
+    "hidden_hazard_cells": [
+     [
+      4,
+      4
+     ]
+    ],
+    "steps": 10,
+    "team_success": true,
+    "hazard_entry_count": 2,
+    "sensing_cost_sum": 0.05,
+    "adapt_fired": true,
+    "own_blind_hazard_entry_count": 2,
+    "own_blind_team_success": true,
+    "own_blind_hazard_avoided": 0,
+    "no_sense_hazard_entry_count": 2,
+    "no_sense_team_success": true,
+    "hazard_avoided_vs_no_sense": 0,
+    "selectivity": {
+     "n_decisions": 20,
+     "total_sense": 1,
+     "overall_sense_rate": 0.05,
+     "contrast_near_far": {
+      "n_relevant": 13,
+      "n_nonrelevant": 7,
+      "sense_relevant": 1,
+      "sense_nonrelevant": 0,
+      "p_sense_relevant": 0.07692307692307693,
+      "p_sense_nonrelevant": 0.0,
+      "delta": 0.07692307692307693
+     },
+     "contrast_strict_in_zone": {
+      "n_relevant": 9,
+      "n_nonrelevant": 11,
+      "sense_relevant": 0,
+      "sense_nonrelevant": 1,
+      "p_sense_relevant": 0.0,
+      "p_sense_nonrelevant": 0.09090909090909091,
+      "delta": -0.09090909090909091
+     },
+     "contrast_near_hazard": {
+      "n_relevant": 7,
+      "n_nonrelevant": 13,
+      "sense_relevant": 0,
+      "sense_nonrelevant": 1,
+      "p_sense_relevant": 0.0,
+      "p_sense_nonrelevant": 0.07692307692307693,
+      "delta": -0.07692307692307693
+     },
+     "point_biserial_r_zone": 0.0,
+     "point_biserial_r_hazard": 0.03364315551262445,
+     "perm_p_near_far": 0.64775,
+     "mean_dist_at_sense": 1.0,
+     "mean_dist_at_nonsense": 1.0,
+     "far_axis_estimable": true,
+     "verdict": "SELECTIVE"
+    }
+   },
+   "risk_fork_curriculum_r0r7_lower": {
+    "group": "curriculum",
+    "hidden_hazard_cells": [
+     [
+      7,
+      4
+     ]
+    ],
+    "steps": 32,
+    "team_success": false,
+    "hazard_entry_count": 0,
+    "sensing_cost_sum": 0.0,
+    "adapt_fired": false,
+    "own_blind_hazard_entry_count": 0,
+    "own_blind_team_success": false,
+    "own_blind_hazard_avoided": 0,
+    "no_sense_hazard_entry_count": 0,
+    "no_sense_team_success": true,
+    "hazard_avoided_vs_no_sense": 0,
+    "selectivity": {
+     "n_decisions": 64,
+     "total_sense": 0,
+     "overall_sense_rate": 0.0,
+     "contrast_near_far": {
+      "n_relevant": 60,
+      "n_nonrelevant": 4,
+      "sense_relevant": 0,
+      "sense_nonrelevant": 0,
+      "p_sense_relevant": 0.0,
+      "p_sense_nonrelevant": 0.0,
+      "delta": 0.0
+     },
+     "contrast_strict_in_zone": {
+      "n_relevant": 58,
+      "n_nonrelevant": 6,
+      "sense_relevant": 0,
+      "sense_nonrelevant": 0,
+      "p_sense_relevant": 0.0,
+      "p_sense_nonrelevant": 0.0,
+      "delta": 0.0
+     },
+     "contrast_near_hazard": {
+      "n_relevant": 0,
+      "n_nonrelevant": 64,
+      "sense_relevant": 0,
+      "sense_nonrelevant": 0,
+      "p_sense_relevant": null,
+      "p_sense_nonrelevant": 0.0,
+      "delta": null
+     },
+     "point_biserial_r_zone": null,
+     "point_biserial_r_hazard": null,
+     "perm_p_near_far": 1.0,
+     "mean_dist_at_sense": null,
+     "mean_dist_at_nonsense": 0.1875,
+     "far_axis_estimable": true,
+     "verdict": "FAIL_NEVER_SENSE"
+    }
+   },
+   "risk_fork_curriculum_r0r7_upper": {
+    "group": "curriculum",
+    "hidden_hazard_cells": [
+     [
+      0,
+      4
+     ]
+    ],
+    "steps": 32,
+    "team_success": false,
+    "hazard_entry_count": 0,
+    "sensing_cost_sum": 0.0,
+    "adapt_fired": false,
+    "own_blind_hazard_entry_count": 0,
+    "own_blind_team_success": false,
+    "own_blind_hazard_avoided": 0,
+    "no_sense_hazard_entry_count": 2,
+    "no_sense_team_success": true,
+    "hazard_avoided_vs_no_sense": 2,
+    "selectivity": {
+     "n_decisions": 64,
+     "total_sense": 0,
+     "overall_sense_rate": 0.0,
+     "contrast_near_far": {
+      "n_relevant": 60,
+      "n_nonrelevant": 4,
+      "sense_relevant": 0,
+      "sense_nonrelevant": 0,
+      "p_sense_relevant": 0.0,
+      "p_sense_nonrelevant": 0.0,
+      "delta": 0.0
+     },
+     "contrast_strict_in_zone": {
+      "n_relevant": 58,
+      "n_nonrelevant": 6,
+      "sense_relevant": 0,
+      "sense_nonrelevant": 0,
+      "p_sense_relevant": 0.0,
+      "p_sense_nonrelevant": 0.0,
+      "delta": 0.0
+     },
+     "contrast_near_hazard": {
+      "n_relevant": 0,
+      "n_nonrelevant": 64,
+      "sense_relevant": 0,
+      "sense_nonrelevant": 0,
+      "p_sense_relevant": null,
+      "p_sense_nonrelevant": 0.0,
+      "delta": null
+     },
+     "point_biserial_r_zone": null,
+     "point_biserial_r_hazard": null,
+     "perm_p_near_far": 1.0,
+     "mean_dist_at_sense": null,
+     "mean_dist_at_nonsense": 0.1875,
+     "far_axis_estimable": true,
+     "verdict": "FAIL_NEVER_SENSE"
+    }
+   },
+   "risk_fork_readiness_lower": {
+    "group": "readiness",
+    "hidden_hazard_cells": [
+     [
+      2,
+      4
+     ]
+    ],
+    "steps": 32,
+    "team_success": false,
+    "hazard_entry_count": 0,
+    "sensing_cost_sum": 0.0,
+    "adapt_fired": false,
+    "own_blind_hazard_entry_count": 0,
+    "own_blind_team_success": false,
+    "own_blind_hazard_avoided": 0,
+    "no_sense_hazard_entry_count": 2,
+    "no_sense_team_success": true,
+    "hazard_avoided_vs_no_sense": 2,
+    "selectivity": {
+     "n_decisions": 64,
+     "total_sense": 0,
+     "overall_sense_rate": 0.0,
+     "contrast_near_far": {
+      "n_relevant": 59,
+      "n_nonrelevant": 5,
+      "sense_relevant": 0,
+      "sense_nonrelevant": 0,
+      "p_sense_relevant": 0.0,
+      "p_sense_nonrelevant": 0.0,
+      "delta": 0.0
+     },
+     "contrast_strict_in_zone": {
+      "n_relevant": 57,
+      "n_nonrelevant": 7,
+      "sense_relevant": 0,
+      "sense_nonrelevant": 0,
+      "p_sense_relevant": 0.0,
+      "p_sense_nonrelevant": 0.0,
+      "delta": 0.0
+     },
+     "contrast_near_hazard": {
+      "n_relevant": 0,
+      "n_nonrelevant": 64,
+      "sense_relevant": 0,
+      "sense_nonrelevant": 0,
+      "p_sense_relevant": null,
+      "p_sense_nonrelevant": 0.0,
+      "delta": null
+     },
+     "point_biserial_r_zone": null,
+     "point_biserial_r_hazard": null,
+     "perm_p_near_far": 1.0,
+     "mean_dist_at_sense": null,
+     "mean_dist_at_nonsense": 0.25,
+     "far_axis_estimable": true,
+     "verdict": "FAIL_NEVER_SENSE"
+    }
+   },
+   "risk_fork_readiness_upper": {
+    "group": "readiness",
+    "hidden_hazard_cells": [
+     [
+      1,
+      4
+     ]
+    ],
+    "steps": 32,
+    "team_success": false,
+    "hazard_entry_count": 0,
+    "sensing_cost_sum": 0.0,
+    "adapt_fired": false,
+    "own_blind_hazard_entry_count": 0,
+    "own_blind_team_success": false,
+    "own_blind_hazard_avoided": 0,
+    "no_sense_hazard_entry_count": 0,
+    "no_sense_team_success": true,
+    "hazard_avoided_vs_no_sense": 0,
+    "selectivity": {
+     "n_decisions": 64,
+     "total_sense": 0,
+     "overall_sense_rate": 0.0,
+     "contrast_near_far": {
+      "n_relevant": 59,
+      "n_nonrelevant": 5,
+      "sense_relevant": 0,
+      "sense_nonrelevant": 0,
+      "p_sense_relevant": 0.0,
+      "p_sense_nonrelevant": 0.0,
+      "delta": 0.0
+     },
+     "contrast_strict_in_zone": {
+      "n_relevant": 57,
+      "n_nonrelevant": 7,
+      "sense_relevant": 0,
+      "sense_nonrelevant": 0,
+      "p_sense_relevant": 0.0,
+      "p_sense_nonrelevant": 0.0,
+      "delta": 0.0
+     },
+     "contrast_near_hazard": {
+      "n_relevant": 0,
+      "n_nonrelevant": 64,
+      "sense_relevant": 0,
+      "sense_nonrelevant": 0,
+      "p_sense_relevant": null,
+      "p_sense_nonrelevant": 0.0,
+      "delta": null
+     },
+     "point_biserial_r_zone": null,
+     "point_biserial_r_hazard": null,
+     "perm_p_near_far": 1.0,
+     "mean_dist_at_sense": null,
+     "mean_dist_at_nonsense": 0.25,
+     "far_axis_estimable": true,
+     "verdict": "FAIL_NEVER_SENSE"
+    }
+   }
+  },
+  "pooled_selectivity": {
+   "n_decisions": 362,
+   "total_sense": 9,
+   "overall_sense_rate": 0.024861878453038673,
+   "contrast_near_far": {
+    "n_relevant": 308,
+    "n_nonrelevant": 54,
+    "sense_relevant": 9,
+    "sense_nonrelevant": 0,
+    "p_sense_relevant": 0.02922077922077922,
+    "p_sense_nonrelevant": 0.0,
+    "delta": 0.02922077922077922
+   },
+   "contrast_strict_in_zone": {
+    "n_relevant": 276,
+    "n_nonrelevant": 86,
+    "sense_relevant": 1,
+    "sense_nonrelevant": 8,
+    "p_sense_relevant": 0.0036231884057971015,
+    "p_sense_nonrelevant": 0.09302325581395349,
+    "delta": -0.08940006740815638
+   },
+   "contrast_near_hazard": {
+    "n_relevant": 20,
+    "n_nonrelevant": 342,
+    "sense_relevant": 0,
+    "sense_nonrelevant": 9,
+    "p_sense_relevant": 0.0,
+    "p_sense_nonrelevant": 0.02631578947368421,
+    "delta": -0.02631578947368421
+   },
+   "point_biserial_r_zone": -0.07674230253648953,
+   "point_biserial_r_hazard": 0.07473868257160697,
+   "perm_p_near_far": 0.22975,
+   "mean_dist_at_sense": 0.8888888888888888,
+   "mean_dist_at_nonsense": 0.44192634560906513,
+   "far_axis_estimable": true,
+   "verdict": "SELECTIVE"
+  },
+  "c2_adapt_episode_fraction": 0.4,
+  "surfaces_with_success": 6,
+  "surface_count": 10,
+  "composite": {
+   "composite_verdict": "SELECTIVE_COMPOSITE",
+   "total_sense": 9,
+   "n_decisions": 362,
+   "overall_sense_rate": 0.024861878453038673,
+   "policy_hazard_entries": 4,
+   "no_sense_hazard_entries": 10,
+   "informative": true,
+   "c2_adapt_episode_fraction": 0.4,
+   "surfaces_with_success": 6,
+   "surface_count": 10
+  },
+  "tightened_composite": {
+   "tightened_verdict": "SELECTIVE_COMPOSITE",
+   "witness_surfaces": [
+    {
+     "surface": "risk_fork_train_lower",
+     "group": "training",
+     "sense": 3,
+     "sense_rate": 0.1875,
+     "adapt_fired": true,
+     "own_blind_hazard_avoided": 1,
+     "hazard_avoided_vs_no_sense": 0
+    },
+    {
+     "surface": "risk_fork_train_upper",
+     "group": "training",
+     "sense": 2,
+     "sense_rate": 0.1111111111111111,
+     "adapt_fired": true,
+     "own_blind_hazard_avoided": 1,
+     "hazard_avoided_vs_no_sense": 2
+    }
+   ],
+   "witness_count": 2,
+   "witness_groups": [
+    "training"
+   ],
+   "causal_surfaces": [
+    {
+     "surface": "risk_fork_train_lower",
+     "group": "training",
+     "sense": 3,
+     "sense_rate": 0.1875,
+     "adapt_fired": true,
+     "own_blind_hazard_avoided": 1,
+     "hazard_avoided_vs_no_sense": 0
+    },
+    {
+     "surface": "risk_fork_train_upper",
+     "group": "training",
+     "sense": 2,
+     "sense_rate": 0.1111111111111111,
+     "adapt_fired": true,
+     "own_blind_hazard_avoided": 1,
+     "hazard_avoided_vs_no_sense": 2
+    }
+   ],
+   "causal_surface_count": 2,
+   "selectivity_ceiling": 0.5,
+   "surfaces_sensed_on": 6,
+   "surfaces_sensed_on_with_success": 6,
+   "total_sense": 9,
+   "n_decisions": 362,
+   "overall_sense_rate": 0.024861878453038673,
+   "legacy_pooled_composite": "SELECTIVE_COMPOSITE",
+   "eval_ablation": "greedy policy on UNSHAPED env; DR-D1/L1-b sensing credit absent at eval",
+   "causal_conjunct": "own do(reveal:=0) full-trajectory ablation raises hazard (AM-1)",
+   "per_component_report": [
+    {
+     "surface": "risk_fork_train_lower",
+     "group": "training",
+     "success": true,
+     "senses": true,
+     "sense_rate": 0.1875,
+     "within_ceiling": true,
+     "adapt_fired": true,
+     "own_blind_hazard_avoided": 1,
+     "causal": true,
+     "in_zone_sense_rate": 0.14285714285714285,
+     "is_witness": true,
+     "failed_conjuncts": []
+    },
+    {
+     "surface": "risk_fork_train_upper",
+     "group": "training",
+     "success": true,
+     "senses": true,
+     "sense_rate": 0.1111111111111111,
+     "within_ceiling": true,
+     "adapt_fired": true,
+     "own_blind_hazard_avoided": 1,
+     "causal": true,
+     "in_zone_sense_rate": 0.0,
+     "is_witness": true,
+     "failed_conjuncts": []
+    },
+    {
+     "surface": "risk_fork_curriculum_r0r3_lower",
+     "group": "curriculum",
+     "success": true,
+     "senses": true,
+     "sense_rate": 0.05555555555555555,
+     "within_ceiling": true,
+     "adapt_fired": true,
+     "own_blind_hazard_avoided": 0,
+     "causal": false,
+     "in_zone_sense_rate": 0.0,
+     "is_witness": false,
+     "failed_conjuncts": [
+      "causal"
+     ]
+    },
+    {
+     "surface": "risk_fork_curriculum_r0r3_upper",
+     "group": "curriculum",
+     "success": true,
+     "senses": true,
+     "sense_rate": 0.0625,
+     "within_ceiling": true,
+     "adapt_fired": false,
+     "own_blind_hazard_avoided": 0,
+     "causal": false,
+     "in_zone_sense_rate": 0.0,
+     "is_witness": false,
+     "failed_conjuncts": [
+      "adapt",
+      "causal"
+     ]
+    },
+    {
+     "surface": "risk_fork_curriculum_r4r7_lower",
+     "group": "curriculum",
+     "success": true,
+     "senses": true,
+     "sense_rate": 0.05555555555555555,
+     "within_ceiling": true,
+     "adapt_fired": false,
+     "own_blind_hazard_avoided": 0,
+     "causal": false,
+     "in_zone_sense_rate": 0.0,
+     "is_witness": false,
+     "failed_conjuncts": [
+      "adapt",
+      "causal"
+     ]
+    },
+    {
+     "surface": "risk_fork_curriculum_r4r7_upper",
+     "group": "curriculum",
+     "success": true,
+     "senses": true,
+     "sense_rate": 0.05,
+     "within_ceiling": true,
+     "adapt_fired": true,
+     "own_blind_hazard_avoided": 0,
+     "causal": false,
+     "in_zone_sense_rate": 0.0,
+     "is_witness": false,
+     "failed_conjuncts": [
+      "causal"
+     ]
+    },
+    {
+     "surface": "risk_fork_curriculum_r0r7_lower",
+     "group": "curriculum",
+     "success": false,
+     "senses": false,
+     "sense_rate": 0.0,
+     "within_ceiling": false,
+     "adapt_fired": false,
+     "own_blind_hazard_avoided": 0,
+     "causal": false,
+     "in_zone_sense_rate": 0.0,
+     "is_witness": false,
+     "failed_conjuncts": [
+      "success",
+      "senses",
+      "adapt",
+      "causal"
+     ]
+    },
+    {
+     "surface": "risk_fork_curriculum_r0r7_upper",
+     "group": "curriculum",
+     "success": false,
+     "senses": false,
+     "sense_rate": 0.0,
+     "within_ceiling": false,
+     "adapt_fired": false,
+     "own_blind_hazard_avoided": 0,
+     "causal": false,
+     "in_zone_sense_rate": 0.0,
+     "is_witness": false,
+     "failed_conjuncts": [
+      "success",
+      "senses",
+      "adapt",
+      "causal"
+     ]
+    },
+    {
+     "surface": "risk_fork_readiness_lower",
+     "group": "readiness",
+     "success": false,
+     "senses": false,
+     "sense_rate": 0.0,
+     "within_ceiling": false,
+     "adapt_fired": false,
+     "own_blind_hazard_avoided": 0,
+     "causal": false,
+     "in_zone_sense_rate": 0.0,
+     "is_witness": false,
+     "failed_conjuncts": [
+      "success",
+      "senses",
+      "adapt",
+      "causal"
+     ]
+    },
+    {
+     "surface": "risk_fork_readiness_upper",
+     "group": "readiness",
+     "success": false,
+     "senses": false,
+     "sense_rate": 0.0,
+     "within_ceiling": false,
+     "adapt_fired": false,
+     "own_blind_hazard_avoided": 0,
+     "causal": false,
+     "in_zone_sense_rate": 0.0,
+     "is_witness": false,
+     "failed_conjuncts": [
+      "success",
+      "senses",
+      "adapt",
+      "causal"
+     ]
+    }
+   ],
+   "component_pass_counts": {
+    "success": 6,
+    "senses": 6,
+    "within_ceiling": 6,
+    "adapt": 4,
+    "causal": 2,
+    "witness": 2,
+    "surface_count": 10
+   },
+   "reconciliation": {
+    "rederived_verdict": "SELECTIVE_COMPOSITE",
+    "reconciles": true,
+    "note": "verdict re-derived from the per-component aggregate (equivalent-by-construction drift-guard, not an independent signal -- the harness RAISES on desync). The F7 'independently reportable' obligation is discharged by per_component_report / component_pass_counts. Composite is the C1 CERTIFICATION gate; C2 (adapt), C3 (hazard), C4 (success) are also graded/reported independently upstream."
+   },
+   "positionally_induced": {
+    "suspected": false,
+    "max_in_zone_sense_rate_on_success": 0.14285714285714285,
+    "causal_witness_count": 2,
+    "causal_surface_count": 2,
+    "floor": 0.1,
+    "reason": "not flagged (either a causal witness exists, no in-zone sensing on a succeeding surface, or in-zone rate below the diagnostic floor)"
+   }
+  }
+ }
+}

@@ -1,0 +1,138 @@
+{
+  "run_set": "T1-D11 (DR-H3 corridor pair: lambda ceiling 5.0 + armed conditional floor 3.0)",
+  "graded": "2026-07-09 SHIFT 22",
+  "runs": ["t1_d11_s126", "t1_d11_s127", "t1_d11_s128"],
+  "seeds": [126, 127, 128],
+  "git_head_launch": "2fe4067",
+  "git_head_resume": "9e277d6 (src byte-identical to launch; CLAUDE.md-only diff)",
+  "operational_note": {
+    "external_kill": "all three runs died ~03:45 local at rounds 1699/1299/1749 via an external session-linked kill (0-byte err logs, near-simultaneous PID death, manifests stuck running) - the second occurrence of the T1-D7 SHIFT-11 pattern; NOT a code fault",
+    "recovery": "RESUMED (not restarted) from checkpoints r1500/r1250/r1750 with identical argv + --resume; V-4 fingerprint accepted; V-3 log reconciliation truncated re-run rounds; the post-grade controller/arm replication crosses the resume seam at 0.0 error on every round - AM-H15 resume integrity CONFIRMED in production"
+  },
+  "instruments_validated_first": {
+    "held2_bar_validate": "ALL CHECKS PASS (26/26 incl. the real-T1-D10 vacuity regression + AM-H12 partial-curve guard)",
+    "c1_harness_validate_fork": "all_passed true",
+    "mech_grader": "scratchpad/t1d11_mech_grade.py - replicates the full PI recursion (warmup bypass, integral cap 20, ceiling 5.0, armed floor 3.0) + the _ArmedFloorState latch from curve keys; validated at 0.0 error on all three in-flight curves before the grade"
+  },
+  "completion": {
+    "all_three": "status=complete, last_completed_round=3999, state_round_004000.pt present (the T1-D11 manifests carry no kill_reason key; no kill event recorded)",
+    "config_mismatches": "none (manifests exact at both config levels on all DR-H3 + retained levers)"
+  },
+  "MECH_G": {
+    "verdict": "PASS 3/3",
+    "ceiling_violations": {"s126": 0, "s127": 0, "s128": 0},
+    "warmup_lambda_violations": {"s126": 0, "s127": 0, "s128": 0},
+    "recursion_replication_max_err": {
+      "lambda_applied": 0.0, "lambda_pre_clamp": 0.0, "dual_integral": 0.0,
+      "ceiling_engaged_flag_mismatches": 0, "armed_flag_mismatches": 0, "arm_window_mean_mismatches": 0,
+      "note": "replicated from curve keys over all 12,000 round-records incl. across the resume seam"
+    },
+    "ceiling_engaged_round_counts": {"s126": 3159, "s127": 2686, "s128": 123},
+    "note": "0 engaged rounds would have been legal; all three engaged - reported per DR-H3 section 5"
+  },
+  "MECH_H": {
+    "verdict": "PASS 3/3 (wiring)",
+    "s128_events": [
+      {"event": "arm", "round": 952, "window_success": 0.9875, "window_hazard": 0.34875, "window_sensing": 0.6146},
+      {"event": "dearm", "round": 2270, "window_success": 0.0991},
+      {"event": "arm", "round": 2330, "window_success": 0.80375, "window_hazard": 0.0025, "window_sensing": 0.1441},
+      {"event": "dearm", "round": 2543, "window_success": 0.0959},
+      {"event": "arm", "round": 2589, "window_success": 0.81125, "window_hazard": 0.00125, "window_sensing": 0.2909},
+      {"event": "dearm", "round": 2818, "window_success": 0.0953},
+      {"event": "arm", "round": 2867, "window_success": 0.8125, "window_hazard": 0.0, "window_sensing": 0.2084},
+      {"event": "dearm", "round": 3057, "window_success": 0.0991},
+      {"event": "arm", "round": 3116, "window_success": 0.80125, "window_hazard": 0.03625, "window_sensing": 0.3382}
+    ],
+    "s128_event_bytechecks": "every fire/de-arm window [k-49,k] / [k-199,k] recomputed from the curve satisfies its conjuncts byte-exactly AND matches the checkpoint-persisted event record byte-exactly (state_round_004000.pt arm_state.events identical to the curve-replicated event list); all fire timings legitimate (earliest 952 >= 349); zero rounds with floor applied while unarmed; zero armed rounds with lambda_applied < 3.0-1e-6",
+    "s126_s127_arm_never_fired": "SCIENCE outcome, not wiring: exhaustive scan of every post-warmup trailing 50-round window found ZERO qualifying windows on either seed (s126 nearest miss ends r955: success 1.0, hazard 1.00375, sensing 0.0560 - hazard ~2.9x over the 0.35 bound; s127 nearest miss ends r1343: success 0.61625, hazard 0.34875, sensing 0.0767 - success fails)"
+  },
+  "MECH_E2": {
+    "verdict": "PASS 3/3 (no H2 recurrence under the shortened anneal 1200; the budget-exempt revert is NOT triggered)",
+    "worst_50rd_movement_entropy_window_before_r1000": {"s126": 0.2442, "s127": 0.0738, "s128": 0.2698}
+  },
+  "MECH_CAP": {
+    "verdict": "PASS 3/3 (no TAIL paralysis-capture signature; the H3 LOCK is gone under the corridor)",
+    "tails": "s126/s127 blind tails (success 1.0); s128 Mode-C tail",
+    "transient_diagnostic": "s128 had one ~200-round UNARMED transient avoid-all episode (r570-769, success 0.000) that SELF-RELEASED via integral discharge under the ceiling (lambda 5.0 -> 0.99 by r769) - reported per the pre-registered MECH-CAP diagnostic obligation; recoverable-in-principle confirmed recoverable-in-fact"
+  },
+  "BAR_C4": {
+    "verdict": "FAIL 1/3 (>=2/3 required)",
+    "tail100": {
+      "s126": {"success": 1.0, "hazard": 1.0, "pass": false},
+      "s127": {"success": 1.0, "hazard": 1.0, "pass": false},
+      "s128": {"success": 0.9988, "hazard": 0.0031, "pass": true}
+    },
+    "note": "s126/s127 fail on the hazard conjunct exactly (blind split-gates crossing at 2x budget); the ceiling made the constraint decorative at 5.0 for these seeds - the pre-named A2 outcome (enforcement lives in this external grade, which correctly fails them)"
+  },
+  "BAR_C1_HELD2": {
+    "verdict": "FAIL 1/3 (>=2/3 required) - but s128 is the project's FIRST seed to pass the complete per-seed HELD bar",
+    "s128": {
+      "a_joint_occupancy": 0.99, "a_pass": true,
+      "b_worst_window_success": 0.9738, "b_worst_window_hazard": 0.0063, "b_pass": true,
+      "c_checkpoint_witnesses": {
+        "r3500": "SELECTIVE_COMPOSITE (1 causal witness: risk_fork_train_lower, own_blind_hazard_avoided=2, rate 0.111)",
+        "r3750": "SELECTIVE_COMPOSITE (1 causal witness: risk_fork_train_lower, own_blind_hazard_avoided=2, rate 0.111)",
+        "r4000": "SELECTIVE_COMPOSITE (1 causal witness: risk_fork_train_lower, own_blind_hazard_avoided=2, rate 0.111)"
+      },
+      "c_pass": "3 of 3 checkpoints (>=2 required; also satisfies the stricter 3/3 multi-checkpoint agreement PROPOSED as rule R5 in ED-Stage26_c1_metric_revision.md section 11)",
+      "positionally_induced": false,
+      "component_pass_counts_r4000": {"success": 2, "senses": 4, "within_ceiling": 4, "adapt": 1, "causal": 1, "witness": 1, "surface_count": 4},
+      "honesty_notes": [
+        "success is 2/4 surfaces at every checkpoint - both READINESS surfaces fail (32-step timeout): the KNOWN memorized-gate generalization problem (tracked-but-separate; gate-row curriculum dossier ready); the witness rule is >=1 by design (BAR-A guarantees >=1 witnessable surface; the aliased twin train_upper is the policy's lucky-guess layout, no witness needed)",
+        "the r4000 greedy sense rate on training surfaces is 0.111 (2 senses / 18 decisions per surface) - sparse, within ceiling 0.5"
+      ]
+    },
+    "s126": {"a_joint_occupancy": 0.0, "b_worst_window_hazard": 1.0012, "c": "FAIL_NEVER_SENSE at all 3 checkpoints", "pass": false},
+    "s127": {"a_joint_occupancy": 0.0, "b_worst_window_hazard": 1.0012, "c": "FAIL_NEVER_SENSE at all 3 checkpoints", "pass": false}
+  },
+  "AM_H8_annotation_s128": {
+    "terminal_armed": true,
+    "arm_state": "latched via the logged re-arm at r3116 (the last de-arm r3057 IS followed by re-arm + a clean tail - the accepted row-1 per-seed form)",
+    "tail_lambda_applied_min": 3.0,
+    "tail_dual_integral": "0.0 flat (first=last=0.0) - the unfloored lambda would be ~0; the ARMED floor alone holds 3.0, i.e. the exact measured relapse precondition (integral discharge -> lambda~0 -> drift-to-blind, s120 6/6) is REMOVED and measured working for the final 884 rounds",
+    "phase_parking_signature": false,
+    "tail_sensing_mean": 0.1074
+  },
+  "AM_H9_ceiling_engagement_3000_4000": {"s126": 1.0, "s127": 1.0, "s128": 0.0},
+  "entropy_side_read": {
+    "s126_tail_3000_4000": {"sensing_entropy_mean": 0.00108, "sensing_entropy_max": 0.0182, "sensing_rate_mean": 0.00014, "movement_entropy_mean": 0.0089, "lambda_pre_clamp_mean": 20.13},
+    "s127_tail_3000_4000": {"sensing_entropy_mean": 0.00088, "sensing_entropy_max": 0.0238, "sensing_rate_mean": 0.00017, "movement_entropy_mean": 0.0506, "lambda_pre_clamp_mean": 20.13},
+    "s128_tail_3000_4000": {"sensing_entropy_mean": 0.01238, "sensing_rate_mean": 0.12405, "movement_entropy_mean": 0.1015},
+    "sensing_extinction_timeline": {
+      "threshold_convention": "dead-streak = first round opening 200+ consecutive rounds with sensing_rate < 0.01 (declared; <0.005 gives r1659/r1612)",
+      "s126": "last sensing_rate>=0.05 at r1019; 200-rd dead streak from r1480 (died UNDER sustained ceiling pressure, well after keep-alive release r500; the ceiling first engaged at r841 - one continuous segment r841-3999 = the 3159 engaged rounds - with sensing still alive at 0.0699 when it engaged)",
+      "s127": "last sensing_rate>=0.05 at r1340; dead from r1361 (~20 rounds after the r1343 nearest-miss window where hazard AND sensing conjuncts passed)",
+      "s128": "never died (sensing_rate>=0.05 through r3999)"
+    }
+  },
+  "mechanism": {
+    "headline": "The corridor pair's HOLDING claim is VALIDATED on the seed that discovered Mode C; the remaining wall is PRE-DISCOVERY SENSING-HEAD EXTINCTION on the other two seeds - extinction AFTER extended near-miss coupling phases, not a never-coupled story. The hold half of the reliability problem is solved at n=1; the discovery half is unchanged (1/3 lottery, consistent with s117 and s120 historical 1/3 rates).",
+    "s128_dynamics": "Early: blind crossing drove lambda to the ceiling (applied pinned 5.0 by ~r500); the policy then fell into the T1-D10 avoid-all signature for ~200 UNARMED rounds (r570-769, success 0.000) and ESCAPED as the integral discharged under the ceiling (lambda 5.0 -> 0.99 by r769; resumed crossing ~r780) - the ceiling made avoid-all capture NON-ABSORBING (transient, self-releasing) where T1-D10's was terminal. Arm fired r952 on a genuine Mode-C-assembly window (success 0.9875, hazard 0.349, sensing 0.615): lambda over the qualifying window [903,952] was 3.39-4.04 (3.388 at fire; behavioral ramp ~2.3 at r820 to 4.04) - breaking the prior lambda-18-20/700+-round collinearity at a level far below the historical 18-20 band, the 5.0 ceiling, and the 6.58 ejection onset. Then a damped over-constraint hunting cycle: 4 armed paralysis episodes (200-rd success<=0.1; first armed round at success<=0.1 is r2090) each RELEASED by the AM-H4 de-arm hatch, each recovered via SENSING (re-arm windows: success ~0.80-0.81, hazard ~0-0.036, sensing 0.14-0.34), re-armed; armed phases 1318/213/229/190 rounds, then the r3116 re-arm HELD for the final 884 rounds in Mode C with the integral fully discharged and the armed floor carrying lambda=3.0. The AM-H4 hatch was LOAD-BEARING: without it the first paralysis episode is an armed-capture. No tail fragility: last-100 trends flat, no residual periodicity.",
+    "s126_s127_dynamics": "NOT a never-coupled story (the MUST-FIX correction from the confirmation audit): both blind seeds transited extended post-warmup LOW-hazard phases with sensing alive before reverting to blind crossing and extinguishing. s127: r572-868 (~297 rds, hazard 0.078, sensing 0.136) and r1203-1329 (~127 rds, hazard 0.104, success 0.426, sensing 0.081), culminating in the nearest-miss window ending r1343 where hazard (0.34875) AND sensing (0.0767) conjuncts PASSED and only success (0.61625) failed - ~20 rounds before head death (~r1361). s126: extended sensing-alive phases to r1019 (ceiling first engaged r841, continuously to r3999, with sensing still alive at 0.0699 when it engaged); head dead from ~r1480. In both, the coupling never converted to a full arm-qualifying window (zero qualifying windows, exhaustive scan) and the un-rewarded sensing head extinguished under sustained applied-5.0 pressure (tail entropy ~0.001); the raw controller DEMAND sat at the integral cap (pre_clamp ~20.13) but applied lambda never exceeded 5.0. Tail movement: s127 weakly plastic (0.0506), s126 near-frozen (0.0089, T1-D9-s121-like). Both rode blind hazard 1.0 = 2x budget for ~2600-3100 rounds, never ejected (the ceiling converted T1-D10's catastrophic avoid-all ejection into stable blind-riding, the pre-named A2 'constraint decorative' outcome - ED-H3 refutation table row A2). Bifurcation vs s128: whether the near-miss coupling converts to a full Mode-C window BEFORE the head extinguishes.",
+    "prior_heads": "H1 limit cycle: GONE (s128's cycle is an over-constraint hunting cycle RESOLVED by the hatch, terminating in a held equilibrium; s126/s127 show no cycle). H2 movement freeze: GONE as a pre-r1000 collapse (MECH-E2 3/3; s126's tail movement entropy 0.0089 is a LATE convergence to a deterministic blind route, not the pre-lambda-onset freeze H2 named). H3 avoid-all LOCK: GONE - transient capture recurred ONCE (s128 r570-769, unarmed) and self-released via integral discharge under the ceiling; no terminal capture anywhere (MECH-CAP 3/3). The corridor pair eliminated every previously named TERMINAL failure mode; what remains is upstream of all of them.",
+    "critic_diagnostics": "tail [3000,4000) hazard-cost explained variance: s128 (the constraint-ACTIVE Mode-C seed) mean -88.1 / median -90.7 with 90% of rounds < 0.5 on NON-degenerate targets (the s117 precedent ~20x worse) - the DR-D10 reopen-trigger quantity, material to the 6.1 re-diagnosis (bears on the held M-5/DR-D10/L6 enrichment line); s126/s127 0.330/0.321 (also < 0.5, near-degenerate blind-tail targets). Reward EV 0.910/0.905/0.699."
+  },
+  "routing": {
+    "row_1": "NOT met at the run-set level (HELD-2 1/3, C4 1/3; >=2/3 required). s128 individually satisfies the accepted row-1 per-seed form (AM-H8 verified: arm latched via logged re-arm + clean tail + lambda>=3.0 + no phase-parking).",
+    "row_2a": "not matched (no armed relapse-to-blind in any tail)",
+    "row_2b": "not matched on the HELD-2 tail window (s128's mid-run armed success-collapses at r2070-3057 are pre-tail and were resolved by the pre-registered AM-H4 hatch; tail clean)",
+    "row_3": "s126+s127 match the three-conjunct starvation signature (arm never fired AND blind tail AND AM-H9 ceiling-engaged 100% >= 90%) BUT both fall into the row's pre-registered EXCEPTION sub-route: 'if instead sensing ~0 in the tail (entropy-side read) -> re-diagnose, no amendment spent'. The entropy-side read is unambiguous: tail sensing entropy 0.0011/0.0009 (~0.15% of ln2=0.693) with rates ~1.5e-4 - the sensing head is DEAD, not starved-under-plasticity (the exception's spendable complement - alive-head-blind-at-ceiling - is realizable and s126 itself occupied it at r469-1019 before extinguishing). A ceiling raise 5.0->6.0 has no mechanism against a dead head: pi(sense)~0 kills the policy-gradient path and post-anneal entropy floors are 0; the pressure-level hypothesis is independently answered by T1-D10's pressure-only cell (APPLIED lambda 6.9-13.3 against plastic policies with sensing ALIVE -> 0/40 Mode-C windows, avoid-all capture) and by s128 assembling at applied 3.4-4.0 - level is not the binding variable. (The confirmation audit corrected an earlier draft citation: T1-D9's lambda~20 seeds were movement-FROZEN, so that cell is confounded for this argument; and pre_clamp ~20.13 is the controller's unclamped DEMAND - these policies only ever experienced applied lambda <= 5.0.) Spending the single ceiling slot here would contradict the exception's letter AND the measured evidence. Steelman of the spend ruled out by the confirmation workflow's routing lens (CONFIRMED).",
+    "row_4": "not matched (no unarmed sub-ceiling ejection; MECH-CAP clean 3/3)",
+    "row_5": "not matched (zero wiring defects; every byte-check passed)",
+    "ruling": "ROW 6 catch-all (AM-H5.i): the per-seed patterns are MIXED (1x row-1-form + 2x row-3-exception) and no spendable row reaches the >=2/3 threshold -> 6.1 re-diagnosis with the new curves; NO amendment spent (AM-H10 budget 0/2, intact); GATE 4 NOT triggered (its precondition is 0/3 HELD across base+amendments - T1-D11 produced 1/3 HELD, so the static-corridor family is NOT exhausted; it just produced its first held seed)."
+  },
+  "am_h2_bet_resolution": {
+    "question": "time-driven vs level-driven assembly (prior de novo assemblies confounded at lambda 18-20 AND 700+ rounds)",
+    "answer": "the collinearity is BROKEN: s128 assembled at applied lambda 3.39-4.04 over the qualifying window (fire at 3.388; behavioral ramp from ~2.3) and ~r950 (low level - far below the historical 18-20 band, the 5.0 ceiling, and the 6.58 ejection onset - and early time); s126/s127 did NOT assemble in ~3000 rounds at applied 5.0 (long time, bounded level, head extinguished ~r1361-1480). Assembly is neither time- nor level-driven per se: it is LIVE-HEAD-CONDITIONAL - it happens when reveal->reroute coupling forms while the sensing head still explores; after extinction, neither time nor bounded level produces it. AM-H2's pre-registered outcome is honored on its own letter: time-driven assembly at ceiling 5.0 IS falsified for dead-head seeds, and the committed ceiling amendment is correctly NOT spent because the same row's exception clause (sensing ~0, entropy-side) fires on both blind seeds - the two clauses of the pre-registration are applied together, not traded off."
+  },
+  "sequence_lock": "INTACT: C4 1/3 AND HELD-2 1/3 => the readiness gate does NOT pass; nothing pinned; Protocol-v1 stays DRAFT; held-out/T3 untouched (the C1 harness fork family enumerates train+readiness only; held-out hard-guarded).",
+  "adversarial_confirmation": {
+    "workflow": "wf_937d418d-ecb (~1.35M tokens: 4 refuter lenses - independent grade reproduction / routing steelman / s128 authenticity / honesty+gates - then integrity synthesis)",
+    "verdict": "CONFIRMED_WITH_AMENDMENT",
+    "gates_all_pass": ["grade_reproduced", "routing_correct", "s128_authentic", "two_sided_honest", "sequence_lock_ok", "immutable_identity_ok"],
+    "reproduction": "every graded verdict and load-bearing number recomputed from-scratch from raw curves and matched exactly (PI recursion 0.0 err over 12,000 rounds incl. resume seams; s128's 9 events byte-identical across curve replication, curve flags, and checkpoint arm_state; exhaustive zero-qualifying-window scans on s126/s127; held2_bar field-for-field agreement)",
+    "steelman": "the pro-spend row-3 reading was steelmanned and fails on both the countersigned letter (the exception's '(entropy-side read)' parenthetical; the spendable alive-head complement is realizable) and mechanism (T1-D10's pressure-only cell answers the level hypothesis at 6.9-13.3 with an alive head; s128 assembled at 3.4-4.0)",
+    "corrections_folded": "1 MUST_FIX (s126/s127 near-miss coupling phases - not never-coupled) + 6 SHOULD_FIX (assembly-lambda 3.39-4.04; s128 unarmed transient paralysis r570-769 self-released under the ceiling - H3 LOCK gone, not all capture; cost-critic EV added; row-3 T1-D9 citation re-attributed + demand/applied conflation fixed; s126 near-frozen movement split from s127; ceiling-hit r841) + notes (threshold declarations, kill_reason wording, R5 pointer, AM-H2 two-clause honoring) - ALL folded into this document before registration"
+  },
+  "next": "6.1 re-diagnosis: the isolated remaining wall is pre-discovery sensing-head survival - keeping pi(sense) explorable until the near-miss reveal->reroute coupling (measured present on ALL THREE seeds: s127 within ~0.18 success of arming at r1343) converts to a full Mode-C window. The measured extinction window is the constraint-ACTIVE phase r~1000-1500 (s126 dead ~r1480, s127 ~r1361 - both AFTER the anneal end r1200 and well after keep-alive release r500), so the re-diagnosis target is head survival through sustained applied-ceiling pressure, not the warmup/keep-alive handoff previously named. The hold-side machinery (ceiling + armed floor + AM-H4 hatch) is measured-working and should be RETAINED unchanged; the s128 cost-critic EV read (-88 on non-degenerate targets) keeps the held M-5/DR-D10/L6 enrichment line relevant to the dossier. No lever is chosen here - the ED-H4 dossier chooses under its own countersign."
+}

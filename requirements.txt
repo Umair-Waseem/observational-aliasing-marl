@@ -1,0 +1,43 @@
+# Pinned reproduction environment for the ICET 2026 artifact.
+#
+#   python -m pip install -r requirements.txt
+#
+# The index directive is in this file rather than on the command line, so the
+# one command above is correct on Linux, macOS and Windows with nothing to
+# remember. On Linux the default PyPI wheel for torch is the CUDA build, which
+# is multiple gigabytes; the recorded runs used the CPU build, and the index
+# below is where it lives.
+--index-url https://download.pytorch.org/whl/cpu
+
+# Python 3.12.10 is the interpreter the nine graded runs executed on. Every one
+# of their RUN_MANIFEST.json runtime_record blocks records
+#   python_version = "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]"
+#   torch_version  = "2.5.1+cpu"
+#   device         = "cpu"
+# identically. Nothing here is guessed; see README.md "Reproduction environment".
+#
+# WHAT NEEDS WHAT
+#
+#   Checking the paper's arithmetic needs NOTHING in this file. The three
+#   release instruments under instruments/ are standard library only:
+#       python -m instruments.reproduce_table3
+#   runs on a bare CPython 3.12 with no packages installed at all. That is
+#   tested: the release is verified from a fresh clone in an empty virtual
+#   environment before publication.
+#
+#   Re-running the environment, the training drivers, or a re-grade from the
+#   shipped policy checkpoints needs torch, below.
+#
+# WHY AN EXACT PIN
+#
+#   "+cpu" is a wheel-build local segment and is not orderable in a requirement
+#   specifier, so the pin names the public version and the index selects the CPU
+#   build. pyproject.toml declares the looser floor `torch>=2.5.1` for
+#   installing the package; this file pins what was actually run, which is the
+#   stricter and correct thing for reproduction: the suite makes bitwise,
+#   0.0-error and seeded-determinism assertions, so a drifting numerical backend
+#   is a real hazard rather than a theoretical one. Measured: the unpinned form
+#   against this index resolves to torch 2.13.0+cpu, eight minor versions past
+#   the recorded build.
+
+torch==2.5.1

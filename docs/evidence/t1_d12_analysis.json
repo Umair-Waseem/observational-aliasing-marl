@@ -1,0 +1,165 @@
+{
+  "meta": {
+    "shift": 24,
+    "date": "2026-07-10",
+    "runs": ["t1_d12_s129", "t1_d12_s130", "t1_d12_s131"],
+    "seeds": [129, 130, 131],
+    "git_head": "aa4c541",
+    "dr_under_test": "DR-H4 (lever I: armed-gated sensing-sustain release + stateless armed alpha-pin)",
+    "hold_side": "FROZEN at T1-D11 values (ceiling 5.0; armed floor 3.0 W50/0.8/0.35/0.05; de-arm 200/0.1; integral cap 20; warmup 300; DR-C4; DR-D1/L1-b amended; lever E lr0.02/targets 0.5,0.30/hold 800/anneal 1200/cap 2.0; d_ep 0.5)",
+    "only_new_lever": "sensing_sustain_armed_gate=True (target 0.30 while UNARMED on the per-seed latch clock; 0.0 with alpha_sense PINNED 0.0 while ARMED)",
+    "completion": "all three status=complete, last_completed_round=3999, kill_reason=None, final checkpoints state_round_004000.pt on disk; NO external kill this set, NO resume seams (the launch survived the night; byte-replication therefore covers the full unbroken curves)",
+    "grade_order": "MECH (G,H,SCHED,HEAD,E2,CAP) -> BAR-C4 -> BAR-C1-HELD-2 -> decomposed read -> routing per DR-H4 section 8 (disk table authoritative)"
+  },
+  "instrument_validation_step0": {
+    "held2_bar_validate": "ALL CHECKS PASS (26/26 suite)",
+    "c1_harness_validate_fork": "all_passed=true",
+    "mech_head_retro_on_knowns": {
+      "s128": "PASS (0 counted crossings, 0 long runs; first arm r952; worst pre-arm excursion [595-733] len 139 min 0.0198, alpha at excursion start/end 0.321->1.062 as measured by this instrument - DR-H4 sec6 cites the same recovery as 'alpha 0.32->1.10', alpha continuing to wind briefly past the excursion end; same trajectory, non-gating, pre-arm)",
+      "s126": "FAIL, first extinction crossing r1560 (DR-H4 sec6 predicted r1560 exactly); single sub-0.05 run [1259,3999] = 2741 rounds (DR predicted 2741)",
+      "s127": "FAIL, first extinction crossing r1424 (DR predicted r1424 exactly); single sub-0.05 run [1381,3999] = 2619 rounds (DR predicted 2619)",
+      "verdict": "instrument calibration reproduces every DR-H4 sec6 number byte-for-byte; the v1 false-fail regression (s128) is closed"
+    },
+    "mech_sched_replicator_validation": "0.0 alpha-recursion error on all 3 T1-D11 seeds (ungated schedule path, 3699x3 rounds) before any T1-D12 read"
+  },
+  "mech": {
+    "summary": "ALL SIX GATES PASS 3/3 (first run with both new DR-H4 gates live). Zero wiring defects; every replication at 0.0 error over 12,000 round-checks.",
+    "mech_g": {
+      "pass": "3/3",
+      "recursion_max_err": {"lambda_applied": 0.0, "lambda_pre_clamp": 0.0, "dual_integral": 0.0},
+      "ceiling_violations": [0, 0, 0],
+      "warmup_lambda_violations": [0, 0, 0],
+      "ceiling_engaged_rounds": {"s129": 532, "s130": 910, "s131": 1825}
+    },
+    "mech_h": {
+      "pass": "3/3",
+      "armed_flag_mismatches": [0, 0, 0],
+      "arm_window_mean_mismatches": [0, 0, 0],
+      "armed_floor_violations": [0, 0, 0],
+      "events": {
+        "s129": [],
+        "s130": [{"event": "arm", "round_index": 1843, "window_success": 0.99875, "window_hazard": 0.345, "window_sensing": 0.5315799869019374}],
+        "s131": [{"event": "arm", "round_index": 1705, "window_success": 0.81625, "window_hazard": 0.3475, "window_sensing": 0.2941771724421679}]
+      },
+      "fire_window_bytecheck": "both fire windows [k-49,k] inclusive re-verified byte-exact vs event records and checkpoint arm_state (matches_event_record true, conjuncts_pass true, legitimate_timing true); zero de-arm events on any seed",
+      "s129_arm_never_fired_is_science": "exhaustive scan (independently reproduced over all 3651 trailing-50 windows): NO >=50-round qualifying window exists anywhere post-warmup; nearest miss ends r1561 (window success 0.8063, hazard 0.4238 vs bar 0.35, sensing 0.5339 - blocked on the hazard conjunct only, violation 0.0738); nearest miss among success-1.0 windows ends r3327 (1.0/0.50/0.2111)",
+      "checkpoint_arm_state_agreement": "state_round_004000.pt arm_state.events byte-identical to replicated events on all three seeds; terminal armed flags match (False/True/True)"
+    },
+    "mech_sched": {
+      "pass": "3/3",
+      "alpha_recursion_max_err": {"sensing": 0.0, "movement": 0.0},
+      "target_mismatches": {"sensing": 0, "movement": 0},
+      "armed_rounds": {"s129": 0, "s130": 2157, "s131": 2295},
+      "armed_alpha_sensing_nonzero_rounds": [0, 0, 0],
+      "tail_armed_alpha_nonzero": [0, 0, 0],
+      "critical_tail_check": "s130/s131 armed 100% of [3500,4000) with alpha_sense == 0.0 at every tail round -> both armed tails PROVABLY SUSTAIN-FREE (the AM-E1 ratchet fix doing its job); s130's HELD tail sensing (rate 0.112) is pure learned value + floor pressure",
+      "production_pin_instance": "s131 fire round r1705: alpha_sense 0.509461 (r1704) -> 0.0 (r1705) - the pin zeroed a genuinely NONZERO alpha at a production arm event (the audit had only forced this synthetically); s130's fire was self-supported (alpha 0.0 at r1842 and r1843, the s128 pattern)",
+      "latch_clock_verified": "s130 held target 0.30 through r1842 (wall-clock anneal end r1200 bypassed, 643 rounds past it); s131 through r1704 (505 rounds past); s129 through r3999 (2800 rounds past) - per-seed latch clock exact",
+      "convention_pins": "alpha birth 0.0 at r0; fire-round row ARMED (target 0.0, alpha 0.0); controller stepped every round incl. warmup - all verified on disk; no de-arm rows exist to test the de-arm convention (no de-arm events)"
+    },
+    "mech_head": {
+      "pass": "3/3 (ZERO head deaths; T1-D11 baseline was 2/3 deaths)",
+      "s129": {"verdict": "PASS", "counted_unarmed_rounds": 3650, "prong_a": 0, "prong_b": 0, "min_t50_sensing_entropy": 0.0703, "regulation_quality": 0.9414, "t50_rate_at_r3999": 0.1503, "row3_alive": true, "excursions": "none (never even sub-0.05)"},
+      "s130": {"verdict": "PASS", "counted_unarmed_rounds": 1493, "first_arm": 1843, "prong_a": 0, "prong_b": 0, "regulation_quality": 0.8145, "excursion_reported": {"span": "[1288,1452]", "length": 165, "min_t50": 0.0129, "alpha_start_end": [0.4207, 1.3285], "gating": false, "note": "the s127-class trough SURVIVED under the live target - see named_mechanisms"}},
+      "s131": {"verdict": "PASS", "counted_unarmed_rounds": 1355, "first_arm": 1705, "prong_a": 0, "prong_b": 0, "regulation_quality": 0.9321, "note": "armed-tail sensing entropy ~0.0018 at rate ~1.0 is a SATURATED-ALWAYS head (deterministic always-sense), not a dead head; armed rounds correctly excluded from the extinction domain per AM-H4-2"},
+      "death_form_attribution": "NO deaths to attribute. Schedule-glue: impossible by construction (unarmed target held 0.30). Trough deaths: zero - the one trough that occurred (s130) was survived and converted. No third form."
+    },
+    "mech_e2": {"pass": "3/3", "worst_windows": {"s129": [0.3571, 539], "s130": [0.2292, 436], "s131": [0.2799, 808]}},
+    "mech_cap": {"pass": "3/3 not-captured", "note": "s131's tail is half-success always-sense (succ 0.5, steps: lower 8.3 / upper 32.0 timeout), NOT the all-timeout paralysis signature (mean steps 32.0 x both, success 0); MECH-CAP correctly does not fire; the upper-layout half IS timeout-shaped and is named in the s131 mechanism"}
+  },
+  "bar_c4": {
+    "rule": "tail-100 success >= 0.9 AND episodic hazard <= 0.5, >= 2/3 seeds",
+    "per_seed": {
+      "s129": {"success": 0.9962, "hazard": 0.5025, "pass": false, "note": "fails the hazard conjunct by 0.0025 (0.5%) - the equilibrium seed sits exactly AT budget; honest marginality flagged, not stretched"},
+      "s130": {"success": 1.0, "hazard": 0.0056, "pass": true},
+      "s131": {"success": 0.5, "hazard": 0.0025, "pass": false, "note": "fails the success conjunct - per-layout split (lower 1.0 / upper 0.0 timeout)"}
+    },
+    "tally": "1/3 - FAILS >=2/3"
+  },
+  "bar_c1_held2": {
+    "rule": "held2_bar (a) joint occupancy >=0.85 + (b) two-sided relapse windows + (c) causal witness on >=2 of r3500/3750/4000; >=2/3 seeds all three conjuncts; AM-H8 annotation with the DR-H4 restated silent-arm + AM-H4-5 tail-arm-integrity clauses",
+    "per_seed": {
+      "s129": {
+        "a": {"occupancy": 0.906, "numeric_pass": true},
+        "b": {"worst_success_window": 0.9875, "worst_hazard_window": 0.5125, "numeric_pass": true},
+        "c": {"witnesses": "3/3 checkpoints SELECTIVE_COMPOSITE (train_lower, sense_rate 0.0625, adapt fired, own_blind_hazard_avoided=1; pooled rate 0.025-0.156; positionally_induced false)", "numeric_pass": true},
+        "am_h8": {"silent_arm": true, "tail_armed_fraction": 0.0, "tail_lambda_min": 3.1125, "tail_integral": "3.1125 -> 3.2031 (NOT discharging; not the phase-parking signature)", "tail_alpha_sense_mean": 0.4765, "tail_alpha_sense_max": 0.5569},
+        "counted_pass": false,
+        "exclusion_ground": "DR-H4 sec7 restated silent-arm definition, verbatim pre-registered: 'silent arm = no latched arm covering the tail window [3500,4000). This unambiguously includes a never-armed bar-passing tail (e.g. steady hazard in (0.35, 0.5] with success >=0.9 - sustain-ON throughout, possibly sustain-dependent)' - s129 IS that exact configuration (tail hazard 0.5025, success 0.996, sustain active with alpha_sense mean 0.48/max 0.56 in the tail => tail sensing PARTIALLY SUSTAIN-SUPPLIED BY CONSTRUCTION). Plus AM-H4-5: row 1 requires ARMED on 100% of tail rounds; s129 armed fraction 0.0."
+      },
+      "s130": {
+        "a": {"occupancy": 1.0, "numeric_pass": true},
+        "b": {"worst_success_window": 1.0, "worst_hazard_window": 0.0138, "numeric_pass": true},
+        "c": {"witnesses": "3/3 checkpoints SELECTIVE_COMPOSITE (train_upper, sense 2, rate 0.071-0.077, adapt fired, own_blind_hazard_avoided=2, hazard_avoided_vs_no_sense=2; pooled rate 0.047; positionally_induced false)", "numeric_pass": true},
+        "am_h8": {"silent_arm": false, "arm_latched": "single arm r1843, ZERO de-arm events across 2157 armed rounds", "tail_armed_fraction": 1.0, "tail_arm_integrity_100pct": true, "tail_lambda_min": 3.0, "tail_integral": "0.0 -> 0.0 flat (relapse precondition REMOVED and holding)", "tail_sensing_mean": 0.1118, "tail_sustain_free": "alpha_sense == 0.0 every tail round (MECH-SCHED tail check)"},
+        "counted_pass": true,
+        "note": "the SECOND complete per-seed HELD pass in project history, CLEANER than s128 (s128: 9 arm/de-arm events, occupancy 0.99; s130: one arm, zero de-arms, occupancy 1.000) and the first under the gated sustain - its held tail is provably sustain-free"
+      },
+      "s131": {
+        "a": {"occupancy": 0.0, "numeric_pass": false},
+        "b": {"worst_success_window": 0.5, "worst_hazard_window": 0.0037, "numeric_pass": false},
+        "c": {"witnesses": "0/3 (FAIL_ALWAYS_SENSE x3; pooled sense rate 1.0 > ceiling 0.5; 0 causal witnesses)", "numeric_pass": false},
+        "am_h8": {"silent_arm": false, "arm_latched": "single arm r1705, zero de-arms (hatch UNREACHABLE: 200-round success 0.5 > threshold 0.1)", "tail_armed_fraction": 1.0, "tail_lambda_min": 3.0, "tail_integral": "0.0 flat", "tail_sensing_mean": 0.9993},
+        "counted_pass": false
+      }
+    },
+    "tally": "1/3 - FAILS >=2/3"
+  },
+  "decomposed_read": {
+    "discovery_verdict": {
+      "arm_fire_count": "2/3 (s130 r1843, s131 r1705) vs the T1-D11 baseline 1/3 - THE DISCOVERY HALF MOVED; DR-H4's specific claim (protected heads convert more reliably) is SUPPORTED on the fire count",
+      "head_survival": "3/3 MECH-HEAD PASS, ZERO deaths (T1-D11: 2/3 died at r~1361/1480). Both confirmed death forms eliminated: schedule-glue impossible by construction; the one pre-arm trough that occurred was SURVIVED",
+      "s130_trough_rescue_production_proof": "r1288-1452: t50 sensing entropy fell to 0.0129 - the exact s127 death class (s127 crossed 0.01 at r1424 and died with alpha pinned 0 at an annealed-to-0 target). Under lever I the live 0.30 target wound alpha 0.42->1.33, the head recovered (entropy 0.64 by r1480, rate 0.66), reassembled under the lambda rewind (blind interlude r1640-1720 at hazard ~1.0 repressurized by the integral: lambda 1.3->3.3; sensing re-emerged r1760+, hazard fell 0.94->0.125 as sensing rose), ARMED r1843, and held to a perfect tail. The T1-D11 counterfactual (same trough class, dead target -> extinction) is on disk. This is the mechanism-level validation of the ED-H4 TROUGH-DEATH form (the s127 class); the schedule-glue form (s126 class) is eliminated BY CONSTRUCTION under the held unarmed target (consistent with 3/3 survival) rather than production-validated. One rescue + one on-disk T1-D11 counterfactual = n=1 mechanism evidence",
+      "s129_silent_seed_discriminating_question": "head ALIVE at run-end (t50 rate 0.150 >= 0.05 row-3 aliveness; regulation quality 0.94; min t50 entropy 0.0703 - never even sub-0.05) but NEVER ARMED and NO qualifying window exists -> lever I did its mechanical job; the failure is on the COUPLING side. NAMED NEW MECHANISM: the ARM-THRESHOLD / CONSTRAINT-EQUILIBRIUM GAP (see named_mechanisms)"
+    },
+    "hold_verdict_n_gt_1": {
+      "armed_seeds": 2,
+      "held": "1/2 - s130 held CLEAN (the machinery generalizes beyond s128 at n=2 with zero hatch interventions needed); s131 armed-but-NOT-held via a NEW failure form that is NOT relapse and NOT paralysis: ARMED HAZARD-FREE HALF-SUCCESS LIMBO (see named_mechanisms). The hold machinery is neither refuted (s130) nor fully validated (s131 exposes the hatch asymmetry the DR itself pre-registered)"
+    }
+  },
+  "am_h4_6_lever_exoneration_screen": {
+    "rule": "report alpha_sense at fire-1 for every HELD-failing armed seed; lever NOT implicated iff fewer than 2 such seeds show alpha(fire-1) >= 0.25 followed within 100 rounds by trailing-50 sensing_entropy < 0.05",
+    "s130": "alpha(r1842) = 0.0 (self-supported arm, the s128 pattern) - not a HELD-failing seed anyway",
+    "s131": "alpha(r1704) = 0.509461 >= 0.25 (the AM-H4-9 anticipated elevated-alpha arm, first production instance) BUT trailing-50 sensing entropy did NOT cross < 0.05 within 100 rounds - RAW per-round sensing_entropy spot values: 0.5912 at arm, 0.1829 r1750, 0.1057 r1800; the first trailing-50 < 0.05 crossing on the pinned MECH-SCHED key entropy_sustain_measured_sensing_entropy is r1887 = 182 rounds post-arm (raw-series trailing-50: r1886 = 181; raw per-round first sub-0.05: r1853) - all > 100 rounds; and only ONE such seed exists",
+    "verdict": "fewer than 2 qualifying seeds -> per the screen's own pre-registered terms, THE DISCOVERY LEVER IS NOT IMPLICATED AND IS RETAINED (retention subject to the row-6 re-diagnosis DR - the screen ruled outside its home row 2, which did not fire). Honest annotation: s131's one-round sustain withdrawal at arm (bonus ~0.51 -> 0) is reported as a diagnostic; its limbo mechanism is movement-side (movement entropy 0.0175 at r1700, 0.0150 at the r1705 arm -> 0.0006 by r2400), not sensing-side"
+  },
+  "alpha_inversion_statement": "Every routing-relevant read in this grade uses sensing-entropy/rate TRAJECTORIES and the two-prong MECH-HEAD test, never alpha magnitude as head health. Alpha values are reported diagnostically; the one place alpha is cited as positive evidence (s130's trough rescue) it is paired with the measured entropy RECOVERY (0.013 -> 0.64) - the controller-engaged + head-responded joint read, which the inversion does not confound (dead heads show high alpha WITHOUT entropy recovery).",
+  "routing": {
+    "table": "DR-H4 sec8 (disk authoritative), matched literally per seed",
+    "row_1": "NO - BAR-C4 1/3 (<2/3) and BAR-C1-HELD-2 1/3 (<2/3)",
+    "row_2": "NO - arm fires 2/3 satisfies the first conjunct, but only ONE armed seed fails HELD-2 (s131; needs >=2). s131's failure form does match row 2's AM-H8 read (armed occupancy 0.0 < 85%, two-sided breach worstSucc 0.5) but the seed count is 1",
+    "row_3": "NO - MECH-HEAD PASS 3/3 holds but arm fires are 2/3, not <=1/3. s129 individually matches the row-3 FORM (head alive, no arm, coupling short); sub-form 3b's near-latching signature does not fire (s129's block is the HAZARD conjunct at the 0.5 equilibrium, not success in [0.6,0.8): the best hazard-conjunct window ends r1561 with window success 0.8063/hazard 0.4238/sensing 0.5339; among the 473 windows passing hazard<=0.35 AND sensing>=0.05 the MAX window success is 0.5763 - ZERO windows in [0.6,0.8), so 3b genuinely does not exist; 3b additionally needs >=2/3 unarmed seeds and only one exists)",
+    "row_4": "NO - MECH-HEAD FAIL 0/3 (needs >=2/3). The 4a amendment (H* 0.30->0.45) is therefore NOT SPENDABLE",
+    "row_5": "NO - the over-sensing-interference signature (tail success <0.9 with sensing >=0.3 and hazard <=0.5) fires on s131 ONLY (s129 success 0.996, s130 1.0); needs >=2/3",
+    "ruling": "ROW 6 (catch-all: mixed per-seed forms) -> 6.1 FULL RE-DIAGNOSIS. Per-seed pattern: 1x row-1-form full pass (s130) + 1x row-2/5-form armed limbo at n=1 (s131) + 1x row-3-form equilibrium-blocked live head (s129) - three DIFFERENT signatures, no row reaches >=2/3",
+    "amendment_budget": "0/1 spent (row 4a never fired); NOT bankable into the re-diagnosis per DR-H4 sec8",
+    "gate_4_extended": "NOT TRIGGERED - explicitly excluded by DR-H4 sec8: 'NOT triggered by: a second HELD seed, row 2, or row 6'. A second HELD seed ARRIVED (s130)."
+  },
+  "named_mechanisms": {
+    "1_lever_I_validated": "Discovery-side head protection WORKS: 3/3 head survival (baseline 1/3 survived), 2/3 arm conversion (baseline 1/3), one production trough rescue with the on-disk T1-D11 counterfactual, one production ratchet-pin instance (s131 alpha 0.509->0 at fire), armed tails provably sustain-free. Both pre-registered death forms eliminated.",
+    "2_arm_threshold_constraint_equilibrium_gap": "NEW (s129). A seed that converges SMOOTHLY to the constrained optimum parks at complementary slackness: tail dual_error +0.0036 ~= 0, hazard 0.5036 ~= d_ep = 0.5, lambda stable 3.11-3.23 (integral-carried). The arm's hazard conjunct (<=0.35) requires OVER-satisfying the constraint by 30%, which the PI controller gives no gradient toward; s129's best-ever qualifying-window hazard is 0.4238 (window success 0.8063 - passes the 0.8 conjunct - sensing 0.5339, window ending r1561) - never below 0.35. Arms happen only via DYNAMIC overshoot during windup/discharge sweeps (s128 post-trough, s130 post-trough, s131 post-windup), never at equilibrium. NOTE (evidence, not a decision): the held DR-D2 pre-authorized fallback d_ep -> 0.25 would move the equilibrium (0.25) BELOW the arm bar (0.35), making the equilibrium itself arm-qualifying - the first mechanism-level convergence between a held fallback and a measured gap. Any change remains a next-DR matter with its own countersign.",
+    "3_armed_hazard_free_half_success_limbo": "NEW (s131). Post-arm slide: armed r1705 on a decaying window (success 0.816 in-window but movement entropy already 0.0175); movement head froze (0.0175 -> 0.0006 by r2400) while sensing saturated to always-sense (rate ~1.0, entropy 0.003); per-layout split locked: train_lower success 1.0 (8.3 steps, always-sensing safely), train_upper success 0.0 (32-step timeout), hazard ~0. In this state EVERY control surface is inert: lambda floor 3.0 exerts nothing (hazard 0 -> A_c ~= 0 - the basin-agnostic-floor lesson from T1-D10 RECURRING post-arm), the de-arm hatch cannot fire (200-round success 0.5 > 0.1 - the EXACT 'hatch-unreachable armed-limbo' asymmetry DR-H4 pre-registered in its 4.5 rejection discussion, now materialized in production), and the entropy sustain is correctly withdrawn (armed). The movement-freeze family (H2) reappears at a NEW site: post-arm, post-anneal (movement target 0 after r1200 by AM-H3 design).",
+    "4_hold_machinery_at_n2": "s130 = clean generalization of the s128 hold result (single arm, zero hatch interventions, occupancy 1.000, integral 0.0, lambda exactly 3.0, sustain-free) - the hold half now has n=2 with the second instance cleaner than the first. s131 shows the hold machinery's protection is one-sided: it prevents RELAPSE (hazard/blind) but has no lever against a hazard-free half-success capture."
+  },
+  "honesty_register": [
+    "s129 fails BAR-C4 by 0.0025 on the hazard conjunct (0.5025 vs 0.5) - reported as marginal, graded as FAIL without softening",
+    "s129's HELD-2 (a)(b)(c) all pass NUMERICALLY; the non-pass is entirely via the pre-registered silent-arm + tail-arm-integrity clauses; those clauses' rationale is REAL on this seed (tail alpha_sense mean 0.48 - the sustain is actively supplying entropy bonus in the graded tail)",
+    "s130's fire-window TRAINING sensing rate 0.5316 (stochastic collection) vs its EVAL selectivity 0.047 are different quantities; the witness ceiling applies to eval",
+    "s131's MECH-HEAD PASS is domain-correct (armed rounds excluded) but its armed tail is a saturated-ALWAYS head (entropy ~0.0018 at rate 1.0) - entropy-as-health saturates at BOTH ends; noted for the DR-Stage26 C1-metric work",
+    "s130 fire-window disclosure (authenticity critic): the 50-round fire window [1794,1843] contains pre-arm rounds during which the (unarmed) sustain was still active with decaying alpha - partial pre-arm sustain support of the window's sensing conjunct is BY DESIGN (the lever holds the head until conversion) and the sensing conjunct passed at ~10x margin (0.5316 vs 0.05); the DECISIVE conjuncts (success 0.99875, hazard 0.345) are entropy-device-unreachable per the DR-H4 sec9 no-bribe analysis",
+    "s130 fire-window hazard margin: 0.3450 vs the 0.35 bar - a 0.005 margin, byte-exact genuine first crossing (no threshold-shopping; the window is the FIRST qualifying window in the run per the exhaustive scan)",
+    "no resume seams occurred this set; AM-H15 seam-crossing was therefore not exercised in production this run (it was proven on T1-D11)",
+    "witness note: s129/s130 each witness on ONE surface per checkpoint (of 2 training surfaces; readiness surfaces still fail success - the tracked memorized-gate item), stable across all three checkpoints"
+  ],
+  "sequence_lock": "INTACT. BAR-C4 1/3 and BAR-C1-HELD-2 1/3 => the readiness gate does NOT pass; nothing pinned; Protocol-v1 stays DRAFT; held-out/T3 untouched (the C1 harness read train+readiness fork surfaces only; I-3 clean); seeds 129-131 are training-pool.",
+  "adversarial_confirmation": {
+    "workflow": "wf_7aad8831-648 (5 agents, ~1.32M subagent tokens, 2026-07-10)",
+    "verdict": "CONFIRMED_WITH_AMENDMENT - ALL SIX GATES PASS: grade_reproduced, routing_correct, s130_authentic, two_sided_honest, sequence_lock_ok, immutable_identity_ok",
+    "reproducer": "CONFIRMED_WITH_AMENDMENT - every controller recursion replicated at 0.0 error over 12,000 rounds incl. dual_integral, with FRESH independent code; arm events byte-identical across curve flags, arm_window keys, and checkpoint arm_state; s129's zero-qualifying-window scan independently confirmed over all 3651 trailing-50 windows; the production ratchet-pin verified byte-exact (s131 alpha 0.5094607985 -> exactly 0.0 at r1705 and all 2295 armed rounds); 3 numeric/labeling must-fixes, none flipping any tally/conjunct/row - ALL FOLDED into this document",
+    "routing_adjudicator": "CONFIRMED, 0 must-fix - every row 1-5 non-fire arithmetically forced; the s129 exclusion doubly grounded (restated silent-arm + AM-H4-5) and NOT load-bearing for row-1 non-fire (BAR-C4 1/3 blocks independently) but IS load-bearing for keeping a sustain-supplied tail (alpha_sense mean 0.4765) out of a counted pass - the exact bribe surface DR-H4 instrument-closed; steelmanned alternative routings (row-2-in-spirit, row-5-with-s131, excuse-the-0.0025-margin) each REFUTED on the table's literal text",
+    "authenticity": "CONFIRMED, 0 must-fix - s130's pass genuine: tail armed 500/500 at lambda exactly 3.0 with integral flat 0.0, sustain-free (alpha 0.0 all 2157 armed rounds), causal witness reproduced byte-identically at 3/3 checkpoints via INDEPENDENT harness runs, no timeout-parking/cherry-picking/threshold-shopping (fire-window hazard 0.3450 vs 0.35 = byte-exact genuine first crossing)",
+    "honesty": "CONFIRMED_WITH_AMENDMENT - tallies stated without softening; alpha-inversion discipline held; terminology/identity clean; sequence lock verbatim vs DR-H4 sec13; 2 must-fixes (ED-H4-diagnosis oversell rescoped to the trough-death form; r3327/r1561 nearest-miss contradiction reconciled) - FOLDED",
+    "all_amendments_folded_before_registration": true
+  },
+  "data_files": "results/experiments/t1_d12_s129|s130|s131 (RUN_MANIFEST.json, training_curve.jsonl, episode_log.jsonl, probe_log.jsonl, state_log.jsonl; checkpoints gitignored); grade instruments: scratchpad/t1d12_mech_grade.py (STEP-0-validated), scratchpad/t1d12_witness.py; full mech record scratchpad/t1d12_mech_full.json; witness records scratchpad/t1d12_c1_s1xx_rXXXX.json + t1d12_witness_summary.json; retro validation scratchpad/t1d12_retro_validation.json"
+}

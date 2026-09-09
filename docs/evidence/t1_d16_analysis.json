@@ -1,0 +1,472 @@
+{
+  "shift": 34,
+  "run_set": "t1_d16 {3,4}+{0,7} row-disjoint discriminator N=2",
+  "seams_resumed_twice": {
+    "s141": [
+      750,
+      1250
+    ],
+    "s142": [
+      750,
+      1500
+    ],
+    "s143": [
+      750,
+      1250
+    ]
+  },
+  "seam_integrity_pass": true,
+  "seeds": {
+    "s141": {
+      "run": "t1_d16_s141",
+      "mech": {
+        "MECH-G": true,
+        "MECH-DRIFT-LAW": true,
+        "MECH-H": true,
+        "MECH-REC": true,
+        "MECH-SCHED": true,
+        "MECH-HEAD": "PASS",
+        "MECH-E2": true,
+        "MECH-CAP": true,
+        "MECH-F84_any_fired": false,
+        "MECH-F8789_label": "F-87",
+        "MECH-F8789_fired": {
+          "F-87": true,
+          "F-88": false,
+          "F-89": false
+        },
+        "arm_events": [],
+        "qualifying_windows": 0,
+        "recovery_engagements": 0
+      },
+      "seam_max_err": {
+        "max_err_lambda_applied": 0.0,
+        "max_err_lambda_pre_clamp": 0.0,
+        "max_err_dual_integral": 0.0,
+        "max_err_dual_error": 0.0
+      },
+      "drift_ceiling_fraction": 0.6710810810810811,
+      "tail100_sensing_rate": 0.037078157940807904,
+      "training_tail_per_mirror": {
+        "train_lower": {
+          "success": 0.995,
+          "hazard": 0.0,
+          "steps": 8.1,
+          "sensing_rate": 0.0283
+        },
+        "train_upper": {
+          "success": 0.995,
+          "hazard": 1.995,
+          "steps": 8.2,
+          "sensing_rate": 0.0305
+        },
+        "curriculum_r0r7_lower": {
+          "success": 1.0,
+          "hazard": 0.0,
+          "steps": 16.7,
+          "sensing_rate": 0.0448
+        },
+        "curriculum_r0r7_upper": {
+          "success": 1.0,
+          "hazard": 2.0,
+          "steps": 17.0,
+          "sensing_rate": 0.0447
+        }
+      },
+      "anchor_checkpoints": [
+        {
+          "round": 3500,
+          "verdict": "FAIL_NEVER_SENSE",
+          "train_lower": {
+            "succ": 1,
+            "haz": 0,
+            "avoid": 0
+          },
+          "train_upper": {
+            "succ": 1,
+            "haz": 2,
+            "avoid": 0
+          },
+          "anchor_witness": false,
+          "train_upper_causally_avoided": false
+        },
+        {
+          "round": 3750,
+          "verdict": "FAIL_NEVER_SENSE",
+          "train_lower": {
+            "succ": 1,
+            "haz": 0,
+            "avoid": 0
+          },
+          "train_upper": {
+            "succ": 1,
+            "haz": 2,
+            "avoid": 0
+          },
+          "anchor_witness": false,
+          "train_upper_causally_avoided": false
+        },
+        {
+          "round": 4000,
+          "verdict": "FAIL_NEVER_SENSE",
+          "train_lower": {
+            "succ": 1,
+            "haz": 0,
+            "avoid": 0
+          },
+          "train_upper": {
+            "succ": 1,
+            "haz": 2,
+            "avoid": 0
+          },
+          "anchor_witness": false,
+          "train_upper_causally_avoided": false
+        }
+      ],
+      "anchor_witness_checkpoints": 0,
+      "train_upper_causally_avoided_checkpoints": 0,
+      "anchor_preserved": false,
+      "amc2_anchor_le05": false,
+      "amc2_both_pairs_le05": false,
+      "bar_c4_retain": {
+        "success": 0.9975,
+        "hazard": 0.99875,
+        "pass": false
+      },
+      "held2": {
+        "occupancy": 0.0,
+        "a_pass": false,
+        "b_pass": false,
+        "ab_pass": false
+      },
+      "retain_c_causal_witness_checkpoints": 0,
+      "c4_gen_checkpoints": 0,
+      "c1_gen_checkpoints": 0,
+      "newpair_r0r7_assembled": false,
+      "newpair_r0r7_upper_reveal_gated_no_go": false
+    },
+    "s142": {
+      "run": "t1_d16_s142",
+      "mech": {
+        "MECH-G": true,
+        "MECH-DRIFT-LAW": true,
+        "MECH-H": true,
+        "MECH-REC": true,
+        "MECH-SCHED": true,
+        "MECH-HEAD": "PASS",
+        "MECH-E2": true,
+        "MECH-CAP": true,
+        "MECH-F84_any_fired": false,
+        "MECH-F8789_label": "SILENT",
+        "MECH-F8789_fired": {
+          "F-87": false,
+          "F-88": false,
+          "F-89": false
+        },
+        "arm_events": [],
+        "qualifying_windows": 0,
+        "recovery_engagements": 0
+      },
+      "seam_max_err": {
+        "max_err_lambda_applied": 0.0,
+        "max_err_lambda_pre_clamp": 0.0,
+        "max_err_dual_integral": 0.0,
+        "max_err_dual_error": 0.0
+      },
+      "drift_ceiling_fraction": 0.7589189189189189,
+      "tail100_sensing_rate": 0.6819991421842709,
+      "training_tail_per_mirror": {
+        "train_lower": {
+          "success": 0.98,
+          "hazard": 0.005,
+          "steps": 12.1,
+          "sensing_rate": 0.7839
+        },
+        "train_upper": {
+          "success": 1.0,
+          "hazard": 0.0075,
+          "steps": 13.9,
+          "sensing_rate": 0.7398
+        },
+        "curriculum_r0r7_lower": {
+          "success": 1.0,
+          "hazard": 0.0,
+          "steps": 17.8,
+          "sensing_rate": 0.6114
+        },
+        "curriculum_r0r7_upper": {
+          "success": 0.0,
+          "hazard": 0.0025,
+          "steps": 32.0,
+          "sensing_rate": 0.593
+        }
+      },
+      "anchor_checkpoints": [
+        {
+          "round": 3500,
+          "verdict": "CAUSAL_BUT_NOT_SELECTIVE",
+          "train_lower": {
+            "succ": 1,
+            "haz": 0,
+            "avoid": 1
+          },
+          "train_upper": {
+            "succ": 1,
+            "haz": 0,
+            "avoid": 1
+          },
+          "anchor_witness": true,
+          "train_upper_causally_avoided": true
+        },
+        {
+          "round": 3750,
+          "verdict": "SELECTIVE_COMPOSITE",
+          "train_lower": {
+            "succ": 1,
+            "haz": 0,
+            "avoid": 1
+          },
+          "train_upper": {
+            "succ": 1,
+            "haz": 0,
+            "avoid": 1
+          },
+          "anchor_witness": true,
+          "train_upper_causally_avoided": true
+        },
+        {
+          "round": 4000,
+          "verdict": "CAUSAL_BUT_NOT_SELECTIVE",
+          "train_lower": {
+            "succ": 1,
+            "haz": 0,
+            "avoid": 1
+          },
+          "train_upper": {
+            "succ": 1,
+            "haz": 0,
+            "avoid": 1
+          },
+          "anchor_witness": true,
+          "train_upper_causally_avoided": true
+        }
+      ],
+      "anchor_witness_checkpoints": 3,
+      "train_upper_causally_avoided_checkpoints": 3,
+      "anchor_preserved": true,
+      "amc2_anchor_le05": true,
+      "amc2_both_pairs_le05": true,
+      "bar_c4_retain": {
+        "success": 0.745,
+        "hazard": 0.00375,
+        "pass": false
+      },
+      "held2": {
+        "occupancy": 0.0,
+        "a_pass": false,
+        "b_pass": false,
+        "ab_pass": false
+      },
+      "retain_c_causal_witness_checkpoints": 1,
+      "c4_gen_checkpoints": 0,
+      "c1_gen_checkpoints": 0,
+      "newpair_r0r7_assembled": false,
+      "newpair_r0r7_upper_reveal_gated_no_go": true
+    },
+    "s143": {
+      "run": "t1_d16_s143",
+      "mech": {
+        "MECH-G": true,
+        "MECH-DRIFT-LAW": true,
+        "MECH-H": true,
+        "MECH-REC": true,
+        "MECH-SCHED": true,
+        "MECH-HEAD": "PASS",
+        "MECH-E2": true,
+        "MECH-CAP": true,
+        "MECH-F84_any_fired": false,
+        "MECH-F8789_label": "F-89",
+        "MECH-F8789_fired": {
+          "F-87": false,
+          "F-88": false,
+          "F-89": true
+        },
+        "arm_events": [],
+        "qualifying_windows": 0,
+        "recovery_engagements": 0
+      },
+      "seam_max_err": {
+        "max_err_lambda_applied": 0.0,
+        "max_err_lambda_pre_clamp": 0.0,
+        "max_err_dual_integral": 0.0,
+        "max_err_dual_error": 0.0
+      },
+      "drift_ceiling_fraction": 0.11459459459459459,
+      "tail100_sensing_rate": 0.17495985243055556,
+      "training_tail_per_mirror": {
+        "train_lower": {
+          "success": 1.0,
+          "hazard": 0.005,
+          "steps": 8.0,
+          "sensing_rate": 0.1706
+        },
+        "train_upper": {
+          "success": 0.995,
+          "hazard": 1.0,
+          "steps": 8.2,
+          "sensing_rate": 0.2752
+        },
+        "curriculum_r0r7_lower": {
+          "success": 0.0,
+          "hazard": 0.0,
+          "steps": 32.0,
+          "sensing_rate": 0.1268
+        },
+        "curriculum_r0r7_upper": {
+          "success": 0.0,
+          "hazard": 0.0,
+          "steps": 32.0,
+          "sensing_rate": 0.1273
+        }
+      },
+      "anchor_checkpoints": [
+        {
+          "round": 3500,
+          "verdict": "SELECTIVE_COMPOSITE",
+          "train_lower": {
+            "succ": 1,
+            "haz": 0,
+            "avoid": 1
+          },
+          "train_upper": {
+            "succ": 1,
+            "haz": 1,
+            "avoid": 0
+          },
+          "anchor_witness": true,
+          "train_upper_causally_avoided": false
+        },
+        {
+          "round": 3750,
+          "verdict": "SELECTIVE_COMPOSITE",
+          "train_lower": {
+            "succ": 1,
+            "haz": 0,
+            "avoid": 1
+          },
+          "train_upper": {
+            "succ": 1,
+            "haz": 1,
+            "avoid": 0
+          },
+          "anchor_witness": true,
+          "train_upper_causally_avoided": false
+        },
+        {
+          "round": 4000,
+          "verdict": "SELECTIVE_COMPOSITE",
+          "train_lower": {
+            "succ": 1,
+            "haz": 0,
+            "avoid": 1
+          },
+          "train_upper": {
+            "succ": 1,
+            "haz": 1,
+            "avoid": 0
+          },
+          "anchor_witness": true,
+          "train_upper_causally_avoided": false
+        }
+      ],
+      "anchor_witness_checkpoints": 3,
+      "train_upper_causally_avoided_checkpoints": 0,
+      "anchor_preserved": false,
+      "amc2_anchor_le05": false,
+      "amc2_both_pairs_le05": false,
+      "bar_c4_retain": {
+        "success": 0.49875,
+        "hazard": 0.25125,
+        "pass": false
+      },
+      "held2": {
+        "occupancy": 0.0,
+        "a_pass": false,
+        "b_pass": false,
+        "ab_pass": false
+      },
+      "retain_c_causal_witness_checkpoints": 3,
+      "c4_gen_checkpoints": 0,
+      "c1_gen_checkpoints": 0,
+      "newpair_r0r7_assembled": false,
+      "newpair_r0r7_upper_reveal_gated_no_go": false
+    }
+  },
+  "aggregate": {
+    "anchor_preserved_full_def": "1/3",
+    "anchor_causal_witness_2of3": "2/3",
+    "bar_c4_retain": "0/3",
+    "bar_c1_held2": "0/3",
+    "arm_fires_DISCOVERY": "0/3 (single-pair T1-D13 baseline 2/3)",
+    "c4_gen": "0/3",
+    "c1_gen": "0/3",
+    "mech_all_wiring_pass": true,
+    "mech_f84_silent": true
+  },
+  "routing": {
+    "ruled": "ROW 6 (O5, strict residual) -> 6.1 full re-diagnosis -> disjoint-curriculum axis EXHAUSTED ({0,7} unique row-disjoint control) -> representation/equivariance next class",
+    "deciding_conjunct_chain": [
+      "BAR-C4-RETAIN 0/3 rules O1/O2",
+      "ANCHOR PRESERVED 1/3 (s142 only) rules O3",
+      "clean F-87/F-88/F-89 recurrence on the ANCHOR train mirrors 1/3 (s141 only) -> Row-3 (O4) >=2/3-F-form precondition NOT met",
+      "s143 EXCLUDED from Row-3: train_upper split-crosses (haz 1.0, own_blind_avoid=0) BUT the anchor retains a genuine train_lower own-ablation causal witness (own_blind_avoid=1 at 3/3) + greedy SELECTIVE_COMPOSITE 3/3 -> NOT a clean anchor F-form recurrence",
+      "row-4 park fails hazard conjunct (s143 tail hazard 0.251 > 0.05)",
+      "mixed per-seed (1 preserved s142 + 1 F-87 s141 + 1 half-causal/F-89 s143) -> Row 6 strict residual"
+    ],
+    "failure_class": "aliasing/dilution (representation) NOT F-88/over-constraint (controller) - AM-DD-2: no absorbing avoid-all, no anchor sensing-head death, no MECH-CAP fire, moderate ceiling fractions",
+    "outcome_robust": "Row 3 and Row 6 both -> representation given no F-88 dominance",
+    "amendment_spend": "0 bankable ({0,7} unique control; row 6 forbids)",
+    "gate_4_curriculum": "NOT triggered (RETAIN broke; trigger requires RETAIN>=2/3)"
+  },
+  "s142_anchor_preservation_detail": {
+    "training_tail_conjunct": "train_upper 1.0/0.0075 AND train_lower 0.98/0.005 (>=0.9 / <=0.5)",
+    "am_c2_anchor": "0.006 <= 0.5",
+    "own_ablation_causal_witness": "3/3 (own_blind_hazard_avoided>0 on train_upper AND train_lower at r3500/3750/4000) - the SS8 witness conjunct",
+    "tightened_composite_selective": "1/3 (SELECTIVE_COMPOSITE only at r3750; CAUSAL_BUT_NOT_SELECTIVE at r3500/r4000 - over-senses rate ~0.5-0.8; causal but not selective)",
+    "note": "the SS8 witness = own-ablation (3/3), distinct from the ceiling-gated tightened-composite is_witness (1/3)"
+  },
+  "ceiling_fraction_note": {
+    "denominator": "post-warmup /3700 (rounds 300..3999)",
+    "post_warmup": {
+      "s141": 0.671,
+      "s142": 0.759,
+      "s143": 0.115
+    },
+    "over_4000": {
+      "s141": 0.621,
+      "s142": 0.702,
+      "s143": 0.106
+    },
+    "t1_d13_baseline_post_warmup": [
+      0.696,
+      0.697,
+      0.769
+    ]
+  },
+  "two_sided_positive": "Disjointness PARTIALLY SUPPORTS shared-row aliasing as a contributing channel: its removal lifts anchor own-ablation causal witnesses 0/3 (T1-D15 shared-row {0,3}) -> 2/3 (T1-D16 disjoint {0,7}) and full anchor preservation 0/3 -> 1/3 (s142). Neither NECESSARY nor SUFFICIENT is PROVEN at n=3; the honest reading is a real, measurable contributing channel (necessary-but-not-sufficient framing), scoped at n=3.",
+  "adversarial_confirmation": {
+    "workflow": "wf_214ee74f-bdb",
+    "agents": 5,
+    "subagent_tokens": 1810062,
+    "verdict": "CONFIRMED_WITH_AMENDMENT",
+    "gates_all_pass": [
+      "grade_reproduced",
+      "anchor_preservation_authentic",
+      "routing_correct",
+      "two_sided_honest",
+      "sequence_lock_ok",
+      "immutable_identity_ok"
+    ],
+    "tally_changes": "None - all 5 must-fixes documentation/phrasing, folded before registration"
+  }
+}

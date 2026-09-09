@@ -1,0 +1,858 @@
+{
+ "shift": 43,
+ "date": "2026-07-13",
+ "experiment": "T1-SEEDSCALE (n=3->n=9): 6 fresh seeds (153-158) at the countersigned T1-RETAIN config (BYTE-IDENTICAL modulo {seed,run_id}); enriched dim-22 encoding. Sets the base rates for C4-GEN transfer, RETAIN reliability, and the basin-selection mechanism.",
+ "src_git_head": "batch1 873bfce / batch2 2d3ffa6 -- src BYTE-IDENTICAL between them AND == 3591d61 (enriched encoding); git diff 3591d61 <both> -- src/ EMPTY (SHIFT 42 was design-only)",
+ "replication_provenance": "all six seedscale configs differ from t1_retain_s147 ONLY in {seed, run_id} (byte-identical replications; verified from manifests).",
+ "completion": "all six status=complete last_round=3999 kill_reason=None resumed=None (NO external kill, NO resume seams -- the cleanest possible set). Batch 2 (156/157/158) launched cleanly.",
+ "step0": {
+  "instruments_green_dim22": "held2_bar --validate ALL PASS; C1 --validate --fork all_passed; r2_null 11/11; drh5 ALL PASS; suite 1539.",
+  "ba5_floor_confirmed_not_repinned": "own_blind>=1 AND rate>=0.05; s132/s133 knowns clear it; applied VERBATIM.",
+  "mech_grader_retro_validated": "reproduced s147 (arm [1195,1712,1862,2132,2824], C4 1.0/0.0, held2 occ 1.0, drift 0.0792/onset 421, recov 2, F84 fired, HEAD FAIL), s148 (arm [848,1055,1396,3427], C4 0.9975/0.508, occ 0.66, HEAD FAIL), s149 (arm [960,1209,1619], C4 1.0/0.003, occ 1.0, HEAD PASS) BYTE-FOR-VERDICT vs registered.",
+  "recompute_cross_check": "independent per-mirror recompute reproduced the registered anchor BAR-C4 EXACTLY (s147 1.0/0.0, s148 0.9975/0.508125, s149 1.0/0.003125) -- MATCH all three.",
+  "basin_classifier_validated": "reproduced the SHIFT-41 knowns traces EXACTLY (s147 EQUIVARIANT, s149 OVERSHOOT, s148 FREEZE)."
+ },
+ "per_seed": {
+  "153": {
+   "run": "t1_seedscale_s153",
+   "batch": 1,
+   "bar_c4_retain": {
+    "succ": 1.0,
+    "haz": 0.00125,
+    "pass": true
+   },
+   "per_mirror": {
+    "train_lower": {
+     "succ": 1.0,
+     "haz": 0.0,
+     "steps": 10.23,
+     "sr": 0.153
+    },
+    "train_upper": {
+     "succ": 1.0,
+     "haz": 0.0,
+     "steps": 12.26,
+     "sr": 0.174
+    },
+    "curriculum_r0r3_lower": {
+     "succ": 1.0,
+     "haz": 0.0,
+     "steps": 16.93,
+     "sr": 0.125
+    },
+    "curriculum_r0r3_upper": {
+     "succ": 1.0,
+     "haz": 0.005,
+     "steps": 10.24,
+     "sr": 0.124
+    }
+   },
+   "am_c2_per_mirror_haz_le05": true,
+   "anchor_haz_le05": true,
+   "anchor_causal_witness": true,
+   "anchor_clean_class": true,
+   "held2_full": true,
+   "support_free_tail": true,
+   "tail_lambda_min": 3.0,
+   "tail_armed_frac": 1.0,
+   "c4_gen_2of3": false,
+   "c4_gen_checkpoints": 0,
+   "c1_gen": false,
+   "reroute_basin_readiness_lower": "EQUIVARIANT",
+   "readiness_lower_outcome": {
+    "succ": true,
+    "haz": 0,
+    "steps": 14,
+    "any_row0": false,
+    "cross_rows": {
+     "agent_0": 1,
+     "agent_1": 1
+    }
+   },
+   "readiness_upper_outcome": {
+    "team_success": true,
+    "hazard_entries": 2,
+    "steps": 14
+   },
+   "recovery_engagements": 0,
+   "mech_f84_fired": false,
+   "arm_events": [
+    [
+     "arm",
+     571
+    ],
+    [
+     "dearm",
+     1198
+    ],
+    [
+     "arm",
+     1401
+    ]
+   ],
+   "mech_head": "PASS",
+   "drift_ceiling_fraction": 0.1654,
+   "tail_sensing_rate": 0.143922091184881
+  },
+  "154": {
+   "run": "t1_seedscale_s154",
+   "batch": 1,
+   "bar_c4_retain": {
+    "succ": 0.02,
+    "haz": 0.003125,
+    "pass": false
+   },
+   "per_mirror": {
+    "train_lower": {
+     "succ": 0.075,
+     "haz": 0.0,
+     "steps": 30.24,
+     "sr": 0.848
+    },
+    "train_upper": {
+     "succ": 0.005,
+     "haz": 0.0025,
+     "steps": 31.89,
+     "sr": 0.835
+    },
+    "curriculum_r0r3_lower": {
+     "succ": 0.0,
+     "haz": 0.0,
+     "steps": 32.0,
+     "sr": 0.686
+    },
+    "curriculum_r0r3_upper": {
+     "succ": 0.0,
+     "haz": 0.01,
+     "steps": 32.0,
+     "sr": 0.853
+    }
+   },
+   "am_c2_per_mirror_haz_le05": true,
+   "anchor_haz_le05": true,
+   "anchor_causal_witness": false,
+   "anchor_clean_class": false,
+   "held2_full": false,
+   "support_free_tail": false,
+   "tail_lambda_min": 0.0,
+   "tail_armed_frac": 0.87,
+   "c4_gen_2of3": false,
+   "c4_gen_checkpoints": 0,
+   "c1_gen": false,
+   "reroute_basin_readiness_lower": "OVERSHOOT",
+   "readiness_lower_outcome": {
+    "succ": false,
+    "haz": 0,
+    "steps": 32,
+    "any_row0": true,
+    "cross_rows": {
+     "agent_0": null,
+     "agent_1": 1
+    }
+   },
+   "readiness_upper_outcome": {
+    "team_success": false,
+    "hazard_entries": 0,
+    "steps": 32
+   },
+   "recovery_engagements": 1,
+   "mech_f84_fired": false,
+   "arm_events": [
+    [
+     "arm",
+     2359
+    ],
+    [
+     "dearm",
+     3494
+    ],
+    [
+     "arm",
+     3725
+    ],
+    [
+     "dearm",
+     3987
+    ]
+   ],
+   "mech_head": "PASS",
+   "drift_ceiling_fraction": 0.0,
+   "tail_sensing_rate": 0.8056631944444445
+  },
+  "155": {
+   "run": "t1_seedscale_s155",
+   "batch": 1,
+   "bar_c4_retain": {
+    "succ": 0.748125,
+    "haz": 0.004375,
+    "pass": false
+   },
+   "per_mirror": {
+    "train_lower": {
+     "succ": 1.0,
+     "haz": 0.0025,
+     "steps": 8.32,
+     "sr": 0.431
+    },
+    "train_upper": {
+     "succ": 1.0,
+     "haz": 0.0025,
+     "steps": 11.18,
+     "sr": 0.425
+    },
+    "curriculum_r0r3_lower": {
+     "succ": 0.0,
+     "haz": 0.0125,
+     "steps": 32.0,
+     "sr": 0.084
+    },
+    "curriculum_r0r3_upper": {
+     "succ": 0.9925,
+     "haz": 0.0,
+     "steps": 8.73,
+     "sr": 0.347
+    }
+   },
+   "am_c2_per_mirror_haz_le05": true,
+   "anchor_haz_le05": true,
+   "anchor_causal_witness": true,
+   "anchor_clean_class": true,
+   "held2_full": false,
+   "support_free_tail": true,
+   "tail_lambda_min": 3.0,
+   "tail_armed_frac": 1.0,
+   "c4_gen_2of3": false,
+   "c4_gen_checkpoints": 0,
+   "c1_gen": false,
+   "reroute_basin_readiness_lower": "FREEZE",
+   "readiness_lower_outcome": {
+    "succ": false,
+    "haz": 0,
+    "steps": 32,
+    "any_row0": false,
+    "cross_rows": {
+     "agent_0": null,
+     "agent_1": null
+    }
+   },
+   "readiness_upper_outcome": {
+    "team_success": false,
+    "hazard_entries": 0,
+    "steps": 32
+   },
+   "recovery_engagements": 2,
+   "mech_f84_fired": false,
+   "arm_events": [
+    [
+     "arm",
+     1230
+    ],
+    [
+     "dearm",
+     1779
+    ],
+    [
+     "arm",
+     1979
+    ]
+   ],
+   "mech_head": "PASS",
+   "drift_ceiling_fraction": 0.0997,
+   "tail_sensing_rate": 0.32190629534412296
+  },
+  "156": {
+   "run": "t1_seedscale_s156",
+   "batch": 2,
+   "bar_c4_retain": {
+    "succ": 0.99375,
+    "haz": 0.003125,
+    "pass": true
+   },
+   "per_mirror": {
+    "train_lower": {
+     "succ": 1.0,
+     "haz": 0.0,
+     "steps": 9.84,
+     "sr": 0.213
+    },
+    "train_upper": {
+     "succ": 1.0,
+     "haz": 0.0,
+     "steps": 12.12,
+     "sr": 0.293
+    },
+    "curriculum_r0r3_lower": {
+     "succ": 0.975,
+     "haz": 0.0,
+     "steps": 21.0,
+     "sr": 0.369
+    },
+    "curriculum_r0r3_upper": {
+     "succ": 1.0,
+     "haz": 0.0125,
+     "steps": 9.14,
+     "sr": 0.159
+    }
+   },
+   "am_c2_per_mirror_haz_le05": true,
+   "anchor_haz_le05": true,
+   "anchor_causal_witness": true,
+   "anchor_clean_class": true,
+   "held2_full": false,
+   "support_free_tail": true,
+   "tail_lambda_min": 3.0,
+   "tail_armed_frac": 1.0,
+   "c4_gen_2of3": false,
+   "c4_gen_checkpoints": 0,
+   "c1_gen": false,
+   "reroute_basin_readiness_lower": "FREEZE",
+   "readiness_lower_outcome": {
+    "succ": false,
+    "haz": 0,
+    "steps": 32,
+    "any_row0": false,
+    "cross_rows": {
+     "agent_0": null,
+     "agent_1": null
+    }
+   },
+   "readiness_upper_outcome": {
+    "team_success": true,
+    "hazard_entries": 0,
+    "steps": 11
+   },
+   "recovery_engagements": 2,
+   "mech_f84_fired": true,
+   "arm_events": [
+    [
+     "arm",
+     1003
+    ],
+    [
+     "dearm",
+     1599
+    ],
+    [
+     "arm",
+     2668
+    ],
+    [
+     "dearm",
+     2907
+    ],
+    [
+     "arm",
+     2970
+    ]
+   ],
+   "mech_head": "PASS",
+   "drift_ceiling_fraction": 0.0,
+   "tail_sensing_rate": 0.2585322413634847
+  },
+  "157": {
+   "run": "t1_seedscale_s157",
+   "batch": 2,
+   "bar_c4_retain": {
+    "succ": 0.750625,
+    "haz": 0.560625,
+    "pass": false
+   },
+   "per_mirror": {
+    "train_lower": {
+     "succ": 0.9975,
+     "haz": 0.0025,
+     "steps": 8.07,
+     "sr": 0.263
+    },
+    "train_upper": {
+     "succ": 0.62,
+     "haz": 1.2475,
+     "steps": 17.54,
+     "sr": 0.225
+    },
+    "curriculum_r0r3_lower": {
+     "succ": 0.395,
+     "haz": 0.9925,
+     "steps": 22.62,
+     "sr": 0.18
+    },
+    "curriculum_r0r3_upper": {
+     "succ": 0.99,
+     "haz": 0.0,
+     "steps": 8.38,
+     "sr": 0.23
+    }
+   },
+   "am_c2_per_mirror_haz_le05": false,
+   "anchor_haz_le05": false,
+   "anchor_causal_witness": false,
+   "anchor_clean_class": false,
+   "held2_full": false,
+   "support_free_tail": false,
+   "tail_lambda_min": 0.0875,
+   "tail_armed_frac": 0.0,
+   "c4_gen_2of3": false,
+   "c4_gen_checkpoints": 0,
+   "c1_gen": false,
+   "reroute_basin_readiness_lower": "EQUIVARIANT",
+   "readiness_lower_outcome": {
+    "succ": false,
+    "haz": 0,
+    "steps": 32,
+    "any_row0": false,
+    "cross_rows": {
+     "agent_0": 1,
+     "agent_1": 1
+    }
+   },
+   "readiness_upper_outcome": {
+    "team_success": false,
+    "hazard_entries": 0,
+    "steps": 32
+   },
+   "recovery_engagements": 1,
+   "mech_f84_fired": false,
+   "arm_events": [
+    [
+     "arm",
+     950
+    ],
+    [
+     "dearm",
+     1163
+    ],
+    [
+     "arm",
+     1530
+    ],
+    [
+     "dearm",
+     2271
+    ],
+    [
+     "arm",
+     2458
+    ],
+    [
+     "dearm",
+     2716
+    ]
+   ],
+   "mech_head": "FAIL",
+   "drift_ceiling_fraction": 0.0803,
+   "tail_sensing_rate": 0.22462829856909408
+  },
+  "158": {
+   "run": "t1_seedscale_s158",
+   "batch": 2,
+   "bar_c4_retain": {
+    "succ": 1.0,
+    "haz": 0.000625,
+    "pass": true
+   },
+   "per_mirror": {
+    "train_lower": {
+     "succ": 1.0,
+     "haz": 0.0,
+     "steps": 8.03,
+     "sr": 0.453
+    },
+    "train_upper": {
+     "succ": 1.0,
+     "haz": 0.0025,
+     "steps": 9.03,
+     "sr": 0.341
+    },
+    "curriculum_r0r3_lower": {
+     "succ": 1.0,
+     "haz": 0.0,
+     "steps": 14.74,
+     "sr": 0.295
+    },
+    "curriculum_r0r3_upper": {
+     "succ": 1.0,
+     "haz": 0.0,
+     "steps": 8.04,
+     "sr": 0.403
+    }
+   },
+   "am_c2_per_mirror_haz_le05": true,
+   "anchor_haz_le05": true,
+   "anchor_causal_witness": true,
+   "anchor_clean_class": true,
+   "held2_full": true,
+   "support_free_tail": true,
+   "tail_lambda_min": 3.0,
+   "tail_armed_frac": 1.0,
+   "c4_gen_2of3": true,
+   "c4_gen_checkpoints": 2,
+   "c1_gen": true,
+   "reroute_basin_readiness_lower": "EQUIVARIANT",
+   "readiness_lower_outcome": {
+    "succ": true,
+    "haz": 0,
+    "steps": 12,
+    "any_row0": false,
+    "cross_rows": {
+     "agent_0": 1,
+     "agent_1": 1
+    }
+   },
+   "readiness_upper_outcome": {
+    "team_success": true,
+    "hazard_entries": 0,
+    "steps": 10
+   },
+   "recovery_engagements": 1,
+   "mech_f84_fired": false,
+   "arm_events": [
+    [
+     "arm",
+     1495
+    ]
+   ],
+   "mech_head": "PASS",
+   "drift_ceiling_fraction": 0.0127,
+   "tail_sensing_rate": 0.3728020862127746
+  },
+  "147": {
+   "run": "t1_retain_s147",
+   "batch": 1,
+   "bar_c4_retain": {
+    "succ": 1.0,
+    "haz": 0.0,
+    "pass": true
+   },
+   "per_mirror": {
+    "train_lower": {
+     "succ": 1.0,
+     "haz": 0.0,
+     "steps": 8.06,
+     "sr": 0.485
+    },
+    "train_upper": {
+     "succ": 1.0,
+     "haz": 0.0,
+     "steps": 9.24,
+     "sr": 0.42
+    },
+    "curriculum_r0r3_lower": {
+     "succ": 1.0,
+     "haz": 0.0,
+     "steps": 14.94,
+     "sr": 0.336
+    },
+    "curriculum_r0r3_upper": {
+     "succ": 1.0,
+     "haz": 0.0,
+     "steps": 8.05,
+     "sr": 0.385
+    }
+   },
+   "am_c2_per_mirror_haz_le05": true,
+   "anchor_haz_le05": true,
+   "anchor_causal_witness": true,
+   "anchor_clean_class": true,
+   "held2_full": true,
+   "support_free_tail": true,
+   "tail_lambda_min": 3.0,
+   "tail_armed_frac": 1.0,
+   "c4_gen_2of3": true,
+   "c4_gen_checkpoints": 2,
+   "c1_gen": true,
+   "reroute_basin_readiness_lower": "EQUIVARIANT",
+   "readiness_lower_outcome": {
+    "succ": true,
+    "haz": 0,
+    "steps": 12,
+    "any_row0": false,
+    "cross_rows": {
+     "agent_0": 1,
+     "agent_1": 1
+    }
+   },
+   "readiness_upper_outcome": {
+    "team_success": true,
+    "hazard_entries": 0,
+    "steps": 10
+   },
+   "recovery_engagements": 2,
+   "mech_f84_fired": true,
+   "arm_events": [
+    [
+     "arm",
+     1195
+    ],
+    [
+     "dearm",
+     1712
+    ],
+    [
+     "arm",
+     1862
+    ],
+    [
+     "dearm",
+     2132
+    ],
+    [
+     "arm",
+     2824
+    ]
+   ],
+   "mech_head": "FAIL",
+   "drift_ceiling_fraction": 0.0792,
+   "tail_sensing_rate": null
+  },
+  "148": {
+   "run": "t1_retain_s148",
+   "batch": 1,
+   "bar_c4_retain": {
+    "succ": 0.9975,
+    "haz": 0.508125,
+    "pass": false
+   },
+   "per_mirror": {
+    "train_lower": {
+     "succ": 0.995,
+     "haz": 0.0075,
+     "steps": 8.15,
+     "sr": 0.237
+    },
+    "train_upper": {
+     "succ": 0.9975,
+     "haz": 0.025,
+     "steps": 9.31,
+     "sr": 0.181
+    },
+    "curriculum_r0r3_lower": {
+     "succ": 0.9975,
+     "haz": 2.0,
+     "steps": 8.82,
+     "sr": 0.17
+    },
+    "curriculum_r0r3_upper": {
+     "succ": 1.0,
+     "haz": 0.0,
+     "steps": 8.23,
+     "sr": 0.168
+    }
+   },
+   "am_c2_per_mirror_haz_le05": false,
+   "anchor_haz_le05": true,
+   "anchor_causal_witness": true,
+   "anchor_clean_class": true,
+   "held2_full": false,
+   "support_free_tail": false,
+   "tail_lambda_min": 5.0,
+   "tail_armed_frac": 0.0,
+   "c4_gen_2of3": false,
+   "c4_gen_checkpoints": 0,
+   "c1_gen": false,
+   "reroute_basin_readiness_lower": "FREEZE",
+   "readiness_lower_outcome": {
+    "succ": false,
+    "haz": 0,
+    "steps": 32,
+    "any_row0": false,
+    "cross_rows": {
+     "agent_0": null,
+     "agent_1": null
+    }
+   },
+   "readiness_upper_outcome": {
+    "team_success": false,
+    "hazard_entries": 0,
+    "steps": 32
+   },
+   "recovery_engagements": 1,
+   "mech_f84_fired": false,
+   "arm_events": [
+    [
+     "arm",
+     848
+    ],
+    [
+     "dearm",
+     1055
+    ],
+    [
+     "arm",
+     1396
+    ],
+    [
+     "dearm",
+     3427
+    ]
+   ],
+   "mech_head": "FAIL",
+   "drift_ceiling_fraction": 0.0873,
+   "tail_sensing_rate": null
+  },
+  "149": {
+   "run": "t1_retain_s149",
+   "batch": 1,
+   "bar_c4_retain": {
+    "succ": 1.0,
+    "haz": 0.003125,
+    "pass": true
+   },
+   "per_mirror": {
+    "train_lower": {
+     "succ": 1.0,
+     "haz": 0.0,
+     "steps": 8.01,
+     "sr": 0.199
+    },
+    "train_upper": {
+     "succ": 1.0,
+     "haz": 0.0125,
+     "steps": 9.12,
+     "sr": 0.165
+    },
+    "curriculum_r0r3_lower": {
+     "succ": 1.0,
+     "haz": 0.0,
+     "steps": 14.78,
+     "sr": 0.147
+    },
+    "curriculum_r0r3_upper": {
+     "succ": 1.0,
+     "haz": 0.0,
+     "steps": 8.02,
+     "sr": 0.125
+    }
+   },
+   "am_c2_per_mirror_haz_le05": true,
+   "anchor_haz_le05": true,
+   "anchor_causal_witness": true,
+   "anchor_clean_class": true,
+   "held2_full": true,
+   "support_free_tail": true,
+   "tail_lambda_min": 3.0,
+   "tail_armed_frac": 1.0,
+   "c4_gen_2of3": false,
+   "c4_gen_checkpoints": 0,
+   "c1_gen": false,
+   "reroute_basin_readiness_lower": "OVERSHOOT",
+   "readiness_lower_outcome": {
+    "succ": true,
+    "haz": 2,
+    "steps": 17,
+    "any_row0": true,
+    "cross_rows": {
+     "agent_0": 2,
+     "agent_1": 2
+    }
+   },
+   "readiness_upper_outcome": {
+    "team_success": true,
+    "hazard_entries": 0,
+    "steps": 11
+   },
+   "recovery_engagements": 1,
+   "mech_f84_fired": false,
+   "arm_events": [
+    [
+     "arm",
+     960
+    ],
+    [
+     "dearm",
+     1209
+    ],
+    [
+     "arm",
+     1619
+    ]
+   ],
+   "mech_head": "PASS",
+   "drift_ceiling_fraction": 0.0643,
+   "tail_sensing_rate": null
+  }
+ },
+ "retain_reliability_tallies_n9": {
+  "bar_c4_retain": "5/9",
+  "am_c2_per_mirror_haz_le05_WEAK": "7/9",
+  "anchor_haz_le05": "8/9",
+  "anchor_clean_class_haz_AND_witness": "7/9",
+  "bar_c1_held2_full": "4/9",
+  "c4_gen_2of3ckpts": "2/9"
+ },
+ "retain_reliability_finding": {
+  "n3_vs_n9": "n=3 RETAIN was THIN (BAR-C4 2/3=0.67, HELD-2 2/3=0.67, anchor clean-class 3/3=1.0). n=9: BAR-C4 5/9=0.56, HELD-2 4/9=0.44, anchor clean-class 7/9=0.78, C4-GEN 2/9=0.22.",
+  "first_class_finding": "RETAIN does NOT robustly hold at n=9. The tail is HEAVIER and MORE DIVERSE than the thin n=3 suggested: (F-97) s154 TOTAL FREEZE-COLLAPSE (succ 0.02, saturated always-sense sr 0.85, 32-step timeout -- a training-mixture reveal-gated no-go not seen in RETAIN n=3); (F-98) s157 ANCHOR BLIND-CROSS (train_upper haz 1.25 > 0.5 -- the FIRST anchor break in the enriched-encoding family; RETAIN anchor was 3/3); (F-99) s155 FAR-REROUTE TIMEOUT (train 1.0 but {0,3}_lower succ 0.0/32-step -- froze on the far reroute, safe but unsuccessful); s156 RETAIN-PASS-but-FREEZE-on-transfer.",
+  "representational_conclusion_still_holds_directionally": "the enriched encoding still enables anchor consolidation on the MAJORITY (7/9 anchor clean-class; blind is NOT the default), so the representation class is VALIDATED as representationally-ENABLED. But the RELIABILITY margin is thin (BAR-C4 5/9, HELD-2 4/9) and the load-bearing anchor clean-class dropped 3/3 -> 7/9 with one hard anchor break (s157). This SHARPENS (does not overturn) the thin-margin n=3 caveat already registered.",
+  "what_it_changes_for_the_lock": "a protocol pinning a >=2/3-seed RELIABILITY gate would pin on 5/9-ish reliability -- materially below the n=3 2/3. This STRENGTHENS the case that a reliability gate is NOT the right lock and that VALIDATION-BASED MODEL SELECTION (select a generalizing checkpoint) is the methodologically correct response."
+ },
+ "step2_reads": {
+  "read1_c4gen_base_rate_PRIMARY": {
+   "c4_gen_base_rate": "2/9",
+   "transferring_seeds": [
+    "158",
+    "147"
+   ],
+   "vs_null_1_3": "2/9 = 0.222 vs 1/3 = 0.333",
+   "strictly_above_null": false,
+   "seedscale_only_base_rate": "1/6 = 0.167 (s158 only, the 6 FRESH seeds 153-158) -- reported ALONGSIDE the pooled n=9 2/9=0.222 so the routing denominator does not reuse the s147 anchor that motivated the seedscale. BOTH estimators <= 1/3 => BRANCH (a) holds under either."
+  },
+  "read2_f84_x_recovery_deconfound_PRIMARY": {
+   "f84_fired_seeds": [
+    "156",
+    "147"
+   ],
+   "f84_fired_AND_transfer": [
+    "147"
+   ],
+   "f84_fired_AND_fail": [
+    "156"
+   ],
+   "transfer_recovery_counts": {
+    "158": 1,
+    "147": 2
+   },
+   "verdict": "NO LIFT -- s156 fired F84 but FAILS (freeze); s158 transfers with NO F84 + recov=1 + early single-arm; s147's 5-signature collinearity is BROKEN by s158; F84-fire and recovery-count neither predict transfer."
+  },
+  "read3_temporal_overlap": {
+   "s147_recoveries": "r1400-1712 (dearm) + r3001-3123 (recovered); at r3001 s147 is ARMED (last arm r2824, no dearm) => armed-driven, NOT the non-armed Rank-1 signature",
+   "s158_recoveries": "r1711-2242 (recovered); s158 armed from r1495 (single arm) => armed-driven; s158 transfers via EARLY clean convergence, NO late re-exploration arc",
+   "verdict": "NO non-armed late re-exploration overlapping either transfer arc => the latch-gated movement-plasticity tie-breaker (Rank 1) is NOT INDICATED; the driver is not plasticity."
+  },
+  "read4_sensing_exoneration": {
+   "high_sensing_non_transfer": "s154 tail-sensing 0.806 (saturated) FAILS (freeze)",
+   "moderate_sensing_transfer": "s158 tail-sensing 0.373 TRANSFERS",
+   "s149": "senses + reveals + adapt=True and still OVERSHOOTS (haz 2)",
+   "verdict": "sensing is an EFFECT not a cause => EXONERATED from every candidate mechanism."
+  },
+  "basin_classification_MOST_VALUABLE": {
+   "n9": {
+    "EQUIVARIANT": 4,
+    "OVERSHOOT": 2,
+    "FREEZE": 3
+   },
+   "seedscale_153_158": {
+    "EQUIVARIANT": 3,
+    "OVERSHOOT": 1,
+    "FREEZE": 2
+   },
+   "equivariant_base_rate_n9": "4/9 = 0.444",
+   "note": "The GOOD BASIN (equivariant reroute) 4/9=0.44 is MORE common than the good OUTCOME (C4-GEN 2/9=0.22): the equivariant reroute is NECESSARY-NOT-SUFFICIENT -- s153 is equivariant on readiness_lower but blind-OVERSHOOTS readiness_UPPER (haz 2); s157 crosses the safe gate equivariantly but fails downstream goal-navigation (stuck at (1,7)). Classified by TRAJECTORY (reroute decision), not outcome, per ed_c4gen_mechanism.json.",
+   "anchor_validation": "classifier reproduced the SHIFT-41 mechanism traces on the knowns EXACTLY: s147 EQUIVARIANT (stops row 1), s149 OVERSHOOT (row 0 then blind-cross row-2 hazard, haz 2), s148 FREEZE (32-step timeout at (3,3)).",
+   "provenance_note": "The intermediate scratchpad/seedscale_basin.json emits basin=OTHER for s154 and s157 (naive field read = EQ3/OS1/FR3/OTHER2). The FINAL by-TRAJECTORY tally re-buckets s154 -> OVERSHOOT (agent_0 climbs to the walled boundary row 0 at (0,3) then freezes = the memorized-absolute up-detour) and s157 -> EQUIVARIANT (both agents cross only at row 1, never row 0, then stall at (1,7) = the equivariant reroute FAILING downstream goal-nav) -- verified from the raw trajectories, disclosed, and re-confirmed by the adversarial reproduce lens. The OTHER intermediate label is NOT a discrepancy."
+  }
+ },
+ "step3_fork": {
+  "adversarial_confirmation": "CONFIRMED_WITH_AMENDMENT (wf_3da3409a-ce7, 3 from-raw-disk reproduction/attack lenses + integrity synthesis, ~1.74M tokens, 4 agents 0 errors). LENS-1 reproduce=REPRODUCED_WITH_NOTES (every tally reproduced from raw disk + a LIVE fresh-checkpoint roll confirmed s158 C4-GEN 2/3 + s153 negative control; anchors to 6 dp). LENS-2 de-confound=NO_LIFT_CONFIRMED (exhaustive single/paired-feature search finds NO separator for {147,158}; F84 collinearity BROKEN by s156 fire-and-fail vs s158 transfer-without-fire, Fisher p=0.417; strongest lift basin&held2 p=0.083 dies under Bonferroni and is not a lever; recovery non-causal; base rate 2/9 CI [0.028,0.600] contains 1/3, no enrichment). LENS-3 routing=ROUTING_CONFIRMED_WITH_AMENDMENT (branch (a) correct, sequence lock ok, row-1 not overturned). The SOLE binding amendment (boundary re-scope) is FOLDED above; 3 should-fixes (seedscale-only rate, basin provenance, registration gate) folded. ZERO tally change; BRANCH (a) UNCHANGED.",
+  "branch": "(a) NO LIFT",
+  "why": "ALL FOUR pre-registered reads point to NO LIFT: (1) C4-GEN 2/9=0.22 <= ~1/3 null; (2) F84xrecovery de-confound NO lift (s156 fired+FAILS, s158 no-fire+TRANSFERS -- collinearity BROKEN); (3) NO non-armed late-re-exploration temporal overlap (both transfer recoveries armed-driven; s158 transfers via early convergence) => Rank-1 NOT indicated; (4) sensing EXONERATED. The basin base rate (4/9 equivariant) confirms the flat-manifold prediction: a systematic default reached by underdetermined re-roll, NOT selected by any measured dynamics signature.",
+  "boundary_HARDENS": "The equivariant rule is REPRESENTABLE and LEARNABLE (Test Y.2; s147 AND s158 with causal witnesses on the readiness geometry) but its SELECTION is NOT inducible by any RETAIN-safe LOW-BURDEN lever in the two SEARCHED families: the CURRICULUM/DATA family (T1-D14/D15/D16) AND the DYNAMICS/EXPLORATION family (ED-basin-lever-search + this n=9 de-confound) are BOTH searched-and-empty. The STRUCTURAL reason no low-burden lever works: no trained SURFACE distinguishes the equivariant rule from the memorized-absolute rule (on the only trained up-reroute {0,3}_lower they emit IDENTICAL trajectories+loss; the sole distinguishing surface, readiness_lower intermediate row-1 gate, is structurally reserved -- rows {1,2}/AM-C4/I-3, N<=2, 2-gate fork, fixed goal), so a DATA/DYNAMICS lever can only bias which zero-error basin SGD reaches -- and n=9 shows none does reliably. HONEST SCOPE (per DR-C4GEN 9.1, NOT an impossibility proof): this does NOT show the basins are undistinguishable in principle -- the HIGH-BURDEN representation/equivariant-encoder route is UNTESTED: a representation change can add a distinguishing inductive BIAS even though it cannot add a distinguishing training SURFACE. Test-Y.1 (encoding relativization, refuted on evidence) and Test-Y.2 (the current representation ALREADY permits the equivariant rule) make the representation route NOT-CLEARLY-INDICATED, NOT excluded (COND-3-disciplined). So the finding is: no RETAIN-safe LOW-BURDEN lever in the two searched families -- materially stronger than a soft \"we did not find a lever\", and the earned response is model selection, with representation held as an untested high-burden contingency.",
+  "hard_limit_rule": "Even a positive lift would have been NECESSARY-NOT-SUFFICIENT (n=9 cannot separate F-84 from any late lambda-discharge/basin-escape event; that needs a controlled A/B). A lift licenses a FURTHER EXPERIMENT, never a lever. Here there is NO lift, so the axis is empty.",
+  "route": "DR-Stage26 VALIDATION-BASED MODEL SELECTION is the EARNED path (next shift's first unit), with the FOUR HONESTY CONDITIONS discharged: (1) claim text CHANGES to 'the method CAN produce a policy with property P, selectable on validation, which generalizes to held-out' (WEAKER on reliability, stated as such); (2) selection rule + seed budget PINNED AT LOCK blind to held-out (best-of-9 reported as best-of-9); (3) the C4-GEN base rate REPORTED as a result; (4) the boundary scoped to what was searched (both families)."
+ },
+ "two_sided_honesty": {
+  "positive": "the representation class is VALIDATED directionally (7/9 anchor consolidation, blind not the default); C4-GEN transfer is REAL and REACHABLE (2/9 with genuine causal witnesses -- s158 own_blind_avoid=2 on readiness_lower at r3750/r4000, a SECOND transfer beyond s147 confirming s147 was not a unique fluke); the basin base rate (4/9 equivariant) shows the good rule is reached ~half the time.",
+  "negative": "RETAIN reliability is thinner than n=3 (BAR-C4 5/9, HELD-2 4/9, C4-GEN 2/9); the anchor clean-class broke once (s157); a NEW total-freeze-collapse form appeared (s154). The transfer is NOT reliably inducible and NOT selectable by any measured training-dynamics signature.",
+  "the_de_confound_cuts_both_ways": "s158 is the DECISIVE de-confounding seed -- it confirms transfer is REAL (a second independent witness) AND that it is a DYNAMICS-BLIND re-roll (no F84, early convergence). Both facts are load-bearing and both are reported."
+ },
+ "sequence_lock": "INTACT: nothing pinned; Protocol-v1 stays DRAFT; held-out/T3 untouched (I-2/I-3); rows {5,6} NEVER READ (the seedscale runs + C1/basin graders read train + curriculum + readiness ONLY). The T1-D13 + anchor + RETAIN(n=3) row-1 results stand under every branch."
+}

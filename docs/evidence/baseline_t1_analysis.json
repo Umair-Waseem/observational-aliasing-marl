@@ -1,0 +1,490 @@
+{
+ "b101_stoch": {
+  "any_probe_pattern_met_ever": false,
+  "checkpoints": {
+   "0": {
+    "evC": 0.0277,
+    "evR": 0.2679,
+    "haz": 2.0,
+    "lam": 0.08625,
+    "movH": 1.6012,
+    "rew": -0.64,
+    "sensH": 0.6913,
+    "senseR": 0.5781,
+    "succ": 0.0
+   },
+   "1000": {
+    "evC": -0.0,
+    "evR": 0.0397,
+    "haz": 2.25,
+    "lam": 0.0,
+    "movH": 1.5855,
+    "rew": -0.64,
+    "sensH": 0.1861,
+    "senseR": 0.0625,
+    "succ": 0.0
+   },
+   "1500": {
+    "evC": 0.0402,
+    "evR": 0.0843,
+    "haz": 2.0,
+    "lam": 0.0,
+    "movH": 1.5381,
+    "rew": -0.64,
+    "sensH": 0.3238,
+    "senseR": 0.1211,
+    "succ": 0.0
+   },
+   "1999": {
+    "evC": 0.0,
+    "evR": 0.0322,
+    "haz": 2.75,
+    "lam": 0.0,
+    "movH": 1.5981,
+    "rew": -0.64,
+    "sensH": 0.2721,
+    "senseR": 0.0664,
+    "succ": 0.0
+   },
+   "250": {
+    "evC": 0.0025,
+    "evR": 0.1313,
+    "haz": 0.75,
+    "lam": 0.0,
+    "movH": 1.6085,
+    "rew": -0.64,
+    "sensH": 0.2415,
+    "senseR": 0.0508,
+    "succ": 0.0
+   },
+   "500": {
+    "evC": 0.0005,
+    "evR": 0.1058,
+    "haz": 2.0,
+    "lam": 0.0,
+    "movH": 1.6011,
+    "rew": -0.64,
+    "sensH": 0.2792,
+    "senseR": 0.1016,
+    "succ": 0.0
+   }
+  },
+  "entropy_collapse_flag_rounds": 0,
+  "episodes_successful": 31,
+  "episodes_total": 8000,
+  "final_probe": {
+   "risk_gate_readiness_shifted": {
+    "adapts": false,
+    "hazard_entries": 1,
+    "pattern_met": false,
+    "sensing_cost": 0.0,
+    "sensing_rate": 0.0,
+    "success": false
+   },
+   "risk_gate_train_center": {
+    "adapts": false,
+    "hazard_entries": 1,
+    "pattern_met": false,
+    "sensing_cost": 0.0,
+    "sensing_rate": 0.0,
+    "success": false
+   },
+   "scenario": {
+    "adapts": false,
+    "hazard_entries": 1,
+    "pattern_met": false,
+    "sensing_cost": 0.0,
+    "sensing_rate": 0.0,
+    "success": false
+   }
+  },
+  "lambda": {
+   "final": 0.0,
+   "first_zero_round": 5,
+   "initial_after_round0": 0.08625000000000001,
+   "max": 0.08625,
+   "zero_fraction": 0.996
+  },
+  "rounds": 2000,
+  "status": "complete",
+  "tail100": {
+   "cost_ev": 0.0004,
+   "hazard_cost": 1.955,
+   "movement_entropy": 1.603,
+   "observed_hazard_cost": 0.03056,
+   "param_delta": 3.0142,
+   "reward_ev": 0.0094,
+   "sensing_entropy": 0.2648,
+   "sensing_rate": 0.0731,
+   "success_rate": 0.0025,
+   "task_reward": -0.6344
+  },
+  "wall_time_total_s": 1498.8
+ },
+ "b102_stoch": {
+  "any_probe_pattern_met_ever": false,
+  "checkpoints": {
+   "0": {
+    "evC": 0.0011,
+    "evR": -0.4619,
+    "haz": 1.25,
+    "lam": 0.08391,
+    "movH": 1.6037,
+    "rew": -0.64,
+    "sensH": 0.6847,
+    "senseR": 0.5664,
+    "succ": 0.0
+   },
+   "1000": {
+    "evC": -0.0011,
+    "evR": 0.1727,
+    "haz": 0.25,
+    "lam": 0.0,
+    "movH": 1.6066,
+    "rew": -0.64,
+    "sensH": 0.2132,
+    "senseR": 0.0625,
+    "succ": 0.0
+   },
+   "1500": {
+    "evC": -0.0,
+    "evR": 0.0251,
+    "haz": 3.0,
+    "lam": 0.0,
+    "movH": 1.6084,
+    "rew": -0.64,
+    "sensH": 0.2773,
+    "senseR": 0.0859,
+    "succ": 0.0
+   },
+   "1999": {
+    "evC": -0.001,
+    "evR": -0.0593,
+    "haz": 2.5,
+    "lam": 0.0,
+    "movH": 1.6044,
+    "rew": -0.64,
+    "sensH": 0.2697,
+    "senseR": 0.0703,
+    "succ": 0.0
+   },
+   "250": {
+    "evC": -0.0041,
+    "evR": 0.0731,
+    "haz": 2.25,
+    "lam": 0.0,
+    "movH": 1.6086,
+    "rew": -0.64,
+    "sensH": 0.239,
+    "senseR": 0.0469,
+    "succ": 0.0
+   },
+   "500": {
+    "evC": -0.0022,
+    "evR": 0.132,
+    "haz": 2.0,
+    "lam": 0.0,
+    "movH": 1.5926,
+    "rew": -0.64,
+    "sensH": 0.2391,
+    "senseR": 0.082,
+    "succ": 0.0
+   }
+  },
+  "entropy_collapse_flag_rounds": 0,
+  "episodes_successful": 41,
+  "episodes_total": 8000,
+  "final_probe": {
+   "risk_gate_readiness_shifted": {
+    "adapts": false,
+    "hazard_entries": 0,
+    "pattern_met": false,
+    "sensing_cost": 0.0,
+    "sensing_rate": 0.0,
+    "success": false
+   },
+   "risk_gate_train_center": {
+    "adapts": false,
+    "hazard_entries": 0,
+    "pattern_met": false,
+    "sensing_cost": 0.0,
+    "sensing_rate": 0.0,
+    "success": false
+   },
+   "scenario": {
+    "adapts": false,
+    "hazard_entries": 0,
+    "pattern_met": false,
+    "sensing_cost": 0.0,
+    "sensing_rate": 0.0,
+    "success": false
+   }
+  },
+  "lambda": {
+   "final": 0.0,
+   "first_zero_round": 6,
+   "initial_after_round0": 0.08390625,
+   "max": 0.08391,
+   "zero_fraction": 0.997
+  },
+  "rounds": 2000,
+  "status": "complete",
+  "tail100": {
+   "cost_ev": 0.0,
+   "hazard_cost": 1.9625,
+   "movement_entropy": 1.5991,
+   "observed_hazard_cost": 0.03074,
+   "param_delta": 2.4234,
+   "reward_ev": 0.0414,
+   "sensing_entropy": 0.2757,
+   "sensing_rate": 0.0782,
+   "success_rate": 0.0075,
+   "task_reward": -0.6237
+  },
+  "wall_time_total_s": 1493.4
+ },
+ "b103_stoch": {
+  "any_probe_pattern_met_ever": false,
+  "checkpoints": {
+   "0": {
+    "evC": 0.0714,
+    "evR": 0.212,
+    "haz": 0.75,
+    "lam": 0.08234,
+    "movH": 1.6016,
+    "rew": -0.64,
+    "sensH": 0.627,
+    "senseR": 0.4492,
+    "succ": 0.0
+   },
+   "1000": {
+    "evC": 0.397,
+    "evR": -0.0159,
+    "haz": 1.0,
+    "lam": 0.11402,
+    "movH": 0.1973,
+    "rew": 1.9,
+    "sensH": 0.0299,
+    "senseR": 0.0,
+    "succ": 1.0
+   },
+   "1500": {
+    "evC": 0.3855,
+    "evR": 0.9952,
+    "haz": 1.0,
+    "lam": 0.00438,
+    "movH": 0.1908,
+    "rew": 1.9,
+    "sensH": 0.0027,
+    "senseR": 0.0,
+    "succ": 1.0
+   },
+   "1999": {
+    "evC": 0.2853,
+    "evR": 0.9582,
+    "haz": 1.0,
+    "lam": 0.0,
+    "movH": 0.3508,
+    "rew": 1.895,
+    "sensH": 0.155,
+    "senseR": 0.0458,
+    "succ": 1.0
+   },
+   "250": {
+    "evC": 0.0275,
+    "evR": 0.0159,
+    "haz": 2.75,
+    "lam": 0.0,
+    "movH": 1.6047,
+    "rew": -0.64,
+    "sensH": 0.3203,
+    "senseR": 0.0742,
+    "succ": 0.0
+   },
+   "500": {
+    "evC": -0.0054,
+    "evR": 0.0065,
+    "haz": 0.5,
+    "lam": 0.0,
+    "movH": 1.6025,
+    "rew": -0.64,
+    "sensH": 0.2551,
+    "senseR": 0.082,
+    "succ": 0.0
+   }
+  },
+  "entropy_collapse_flag_rounds": 0,
+  "episodes_successful": 4560,
+  "episodes_total": 8000,
+  "final_probe": {
+   "risk_gate_readiness_shifted": {
+    "adapts": false,
+    "hazard_entries": 2,
+    "pattern_met": false,
+    "sensing_cost": 0.0,
+    "sensing_rate": 0.0,
+    "success": true
+   },
+   "risk_gate_train_center": {
+    "adapts": false,
+    "hazard_entries": 1,
+    "pattern_met": false,
+    "sensing_cost": 0.0,
+    "sensing_rate": 0.0,
+    "success": true
+   },
+   "scenario": {
+    "adapts": false,
+    "hazard_entries": 1,
+    "pattern_met": false,
+    "sensing_cost": 0.0,
+    "sensing_rate": 0.0,
+    "success": true
+   }
+  },
+  "lambda": {
+   "final": 0.0,
+   "first_zero_round": 5,
+   "initial_after_round0": 0.08234375000000001,
+   "max": 0.13227,
+   "zero_fraction": 0.4935
+  },
+  "rounds": 2000,
+  "status": "complete",
+  "tail100": {
+   "cost_ev": 0.3238,
+   "hazard_cost": 1.0575,
+   "movement_entropy": 0.3362,
+   "observed_hazard_cost": 0.09667,
+   "param_delta": 6.2948,
+   "reward_ev": 0.9103,
+   "sensing_entropy": 0.0827,
+   "sensing_rate": 0.0221,
+   "success_rate": 1.0,
+   "task_reward": 1.8894
+  },
+  "wall_time_total_s": 847.5
+ },
+ "b104_greedy": {
+  "any_probe_pattern_met_ever": false,
+  "checkpoints": {
+   "0": {
+    "evC": -0.0449,
+    "evR": 0.012,
+    "haz": 0.0,
+    "lam": 0.08,
+    "movH": 1.6034,
+    "rew": -0.64,
+    "sensH": 0.6876,
+    "senseR": 0.0,
+    "succ": 0.0
+   },
+   "1000": {
+    "evC": 0.6475,
+    "evR": -2.0982,
+    "haz": 0.0,
+    "lam": 0.0,
+    "movH": 1.6092,
+    "rew": -0.64,
+    "sensH": 0.6931,
+    "senseR": 0.0,
+    "succ": 0.0
+   },
+   "1500": {
+    "evC": -16.9614,
+    "evR": 0.5126,
+    "haz": 0.0,
+    "lam": 0.0,
+    "movH": 1.6091,
+    "rew": -0.64,
+    "sensH": 0.6931,
+    "senseR": 0.0,
+    "succ": 0.0
+   },
+   "1999": {
+    "evC": -9.7616,
+    "evR": 0.5544,
+    "haz": 0.0,
+    "lam": 0.0,
+    "movH": 1.5983,
+    "rew": -0.64,
+    "sensH": 0.685,
+    "senseR": 0.0312,
+    "succ": 0.0
+   },
+   "250": {
+    "evC": -4.4366,
+    "evR": 0.0959,
+    "haz": 0.0,
+    "lam": 0.0,
+    "movH": 1.5936,
+    "rew": -0.64,
+    "sensH": 0.6663,
+    "senseR": 0.0469,
+    "succ": 0.0
+   },
+   "500": {
+    "evC": 0.6754,
+    "evR": 0.0478,
+    "haz": 0.0,
+    "lam": 0.0,
+    "movH": 1.5244,
+    "rew": -0.64,
+    "sensH": 0.6076,
+    "senseR": 0.0312,
+    "succ": 0.0
+   }
+  },
+  "entropy_collapse_flag_rounds": 0,
+  "episodes_successful": 20,
+  "episodes_total": 8000,
+  "final_probe": {
+   "risk_gate_readiness_shifted": {
+    "adapts": false,
+    "hazard_entries": 0,
+    "pattern_met": false,
+    "sensing_cost": 0.1,
+    "sensing_rate": 0.0312,
+    "success": false
+   },
+   "risk_gate_train_center": {
+    "adapts": false,
+    "hazard_entries": 0,
+    "pattern_met": false,
+    "sensing_cost": 0.1,
+    "sensing_rate": 0.0312,
+    "success": false
+   },
+   "scenario": {
+    "adapts": false,
+    "hazard_entries": 0,
+    "pattern_met": false,
+    "sensing_cost": 0.1,
+    "sensing_rate": 0.0312,
+    "success": false
+   }
+  },
+  "lambda": {
+   "final": 0.0,
+   "first_zero_round": 4,
+   "initial_after_round0": 0.08,
+   "max": 0.08,
+   "zero_fraction": 0.989
+  },
+  "rounds": 2000,
+  "status": "complete",
+  "tail100": {
+   "cost_ev": -0.1825,
+   "hazard_cost": 1.3,
+   "movement_entropy": 1.5847,
+   "observed_hazard_cost": 0.02032,
+   "param_delta": 6.2916,
+   "reward_ev": 0.1938,
+   "sensing_entropy": 0.6629,
+   "sensing_rate": 0.0584,
+   "success_rate": 0.01,
+   "task_reward": -0.6196
+  },
+  "wall_time_total_s": 1114.2
+ }
+}

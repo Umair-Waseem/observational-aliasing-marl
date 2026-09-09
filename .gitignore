@@ -1,0 +1,71 @@
+# Python bytecode. Never ship: the compiled caches in the source repository
+# embed the absolute build path (Phase-1 finding G-3).
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Tool caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# Packaging build products
+*.egg-info/
+build/
+dist/
+
+# ---------------------------------------------------------------------------
+# Raw training artifacts. These are the Zenodo-class data, not repository data:
+# the nine graded runs alone are ~0.74 GB of episode logs, curves and probe
+# logs, and all 55 runs are ~4.1 GB. See the README's data-availability section.
+#
+# The DELIBERATE EXCEPTIONS below are what this repository does ship:
+#   * every run's RUN_MANIFEST.json (the per-run configuration record), and
+#   * the 27 graded policy checkpoints (3.35 MB) for rounds 3500/3750/4000 of
+#     the nine replication seeds, which make the release re-gradeable in place.
+# ---------------------------------------------------------------------------
+results/experiments/*/episode_log.jsonl
+results/experiments/*/training_curve.jsonl
+results/experiments/*/probe_log.jsonl
+results/experiments/*/state_log.jsonl
+results/experiments/*/*.log
+results/experiments/*/*.out
+results/experiments/*/*.err
+
+# Model weights: ignore by default, then re-admit exactly the three graded
+# rounds. A checkpoint from any other round belongs in the data record.
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+!results/experiments/*/state_round_003500.pt
+!results/experiments/*/state_round_003750.pt
+!results/experiments/*/state_round_004000.pt
+
+# Credentials and local environment. Nothing of the kind has ever existed in
+# this repository (the full history scans clean); these entries keep it so.
+.env
+.env.*
+*.pem
+*.key
+credentials.json
+secrets.*
+
+# Editor and OS clutter
+.idea/
+.vscode/
+*.swp
+*~
+.DS_Store
+Thumbs.db
+desktop.ini

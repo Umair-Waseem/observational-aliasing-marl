@@ -1,0 +1,213 @@
+{
+ "run_set": "T1-D14 (seeds 135/136/137, DR-READINESS-CURRICULUM first run)",
+ "graded": "2026-07-11 (SHIFT 28)",
+ "git_head_of_runs": "61b7f95",
+ "decision_record": "docs/decisions/DR-readiness-curriculum.md",
+ "one_change": "training scenario distribution only - the 8-scenario 4-pair curriculum family; every lever frozen at T1-D13 values (verified per-manifest, zero mismatches, scenario tuple exact all three)",
+ "completion": {
+  "all_complete_r3999": true,
+  "external_kill": false,
+  "resume_seams": false,
+  "note": "third consecutive clean overnight set; the ~03:45 session-logoff window passed with all three alive"
+ },
+ "step0_instruments": {
+  "suite": "1498 passed (matches last green)",
+  "held2_bar_validate": "ALL CHECKS PASS",
+  "drh5_trigger_regression": "ALL PASS ({s128 none, s130 none, s131 r1884 exit (exhausted,2683,800), s129 vacuous})",
+  "c1_harness_validate_fork_extended": "all_passed on the 10-surface enumeration",
+  "knowns_reproduction": "s132/s133 per-surface fields BYTE-IDENTICAL on the 4 original surfaces at all 6 checkpoints; verdicts SELECTIVE_COMPOSITE unchanged",
+  "iii_r_retro_check": "SILENT on all three T1-D13 seeds (annotation 0/3; registered plateaus reproduced exactly; s134 shows LOUD+UNCONTRADICTED true but TERMINAL false -> no annotation)",
+  "per_pair_machinery": "episode-log per-pair reads byte-consistent with the registered T1-D13 pooled numbers (all three seeds)",
+  "per_pair_fork_verification": "forces_sensing_and_winnable=true on all 5 pairs (4 training + readiness) on the real catalog at budget 0.25",
+  "t1d14_grader_retro_validation": "full wrapper reproduces the registered T1-D13 grade on all three knowns (MECH verdicts, arm events, bar numbers, held2 conjuncts, s134 failure form)"
+ },
+ "mech": {
+  "MECH-G": "PASS 3/3 (zero ceiling violations; warmup lambda=0 exact)",
+  "MECH-DRIFT-LAW": "PASS 3/3 (PI recursion 0.0-err from curve keys at budget 0.25 incl. dual_error = hazard - 0.25; ceiling-engagement flags byte-exact)",
+  "MECH-H": "PASS 3/3 (s135 events [(arm,3157),(dearm,3704),(arm,3837)] byte-exact vs curve keys AND checkpoint arm_state; fire windows byte-exact, conjuncts pass, timing legitimate; s136/s137 arm-never-fired = SCIENCE outcome - exhaustive scans find ZERO qualifying windows; nearest misses r3021 {0.4175,0.35,0.119} / r2972 {0.41625,0.34875,0.187})",
+  "MECH-REC": "PASS 3/3 (zero engagements, zero qualifying containment windows; recovery keys replicate 0.0-mismatch; LEVER K REMAINS UNTESTED)",
+  "MECH-SCHED": "PASS 3/3 (both alpha recursions 0.0-err; alpha_sense pinned exactly 0.0 at all armed rounds; lever-K gated movement path clean)",
+  "MECH-HEAD": "PASS 3/3 - ZERO head deaths (second consecutive 3/3 set; tail-100 sensing rates 0.127/0.237/0.230 alive; min t50 sensing entropy r>=350: 0.121/0.083/0.065 - above both extinction prongs)",
+  "MECH-E2": "PASS 3/3",
+  "MECH-CAP": "PASS 3/3 (no tail paralysis-capture signature)",
+  "MECH-EQ": "no FAIL signature on any seed; ZERO standing-violation plateaus exist (lambda_pre_clamp never reached 5.0 on any seed) => (iii-R) VACUOUSLY SILENT 0/3 in its first production use; no discharge needed",
+  "MECH-LIMBO": "zero engagements (vacuously clean)",
+  "MECH-DRIFT": {
+   "ceiling_engaged_fractions": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "t1d13_baselines": [
+    0.769,
+    0.697,
+    0.696
+   ],
+   "lambda_max": [
+    3.24,
+    4.54,
+    4.4
+   ],
+   "read": "a large DOWNWARD drift vs the T1-D13 single-pair baselines - NOT a pre-registered named-finding direction (those fire on >0.85 fraction / <r350 onset) but reported: the mixture's blind-crossing pooled-hazard plateau is <=0.5 (vs 1.0 single-pair), halving the windup error; lambda never reached the 5.0 ceiling on any seed - the corridor machinery ran in a permanently sub-ceiling regime",
+   "captures": "s137 [587,890] recovered r903 (316 rds, within convention); no other >=300-rd captures",
+   "armed_era_relapse": "none (s135 armed-era t50 hazard never >=0.75)"
+  }
+ },
+ "retain": {
+  "bar_c4_retain": {
+   "verdict": "FAIL 0/3",
+   "t1_d14_s135": {
+    "tail100_success": 0.103125,
+    "tail100_hazard": 0.013125
+   },
+   "t1_d14_s136": {
+    "tail100_success": 0.25,
+    "tail100_hazard": 0.00875
+   },
+   "t1_d14_s137": {
+    "tail100_success": 0.414375,
+    "tail100_hazard": 0.35375
+   },
+   "honesty": "not near-misses; precise values reported per section 8 (no rounding)"
+  },
+  "per_pair_read_am_c2": {
+   "t1_d14_s135": {
+    "success": {
+     "curriculum_r0r3": 0.005,
+     "curriculum_r0r7": 0.0,
+     "curriculum_r4r7": 0.0725,
+     "train_r3r4": 0.335
+    },
+    "hazard": {
+     "curriculum_r0r3": 0.005,
+     "curriculum_r0r7": 0.01,
+     "curriculum_r4r7": 0.0275,
+     "train_r3r4": 0.01
+    },
+    "hazard_le_05_all_pairs": true
+   },
+   "t1_d14_s136": {
+    "success": {
+     "curriculum_r0r3": 0.5,
+     "curriculum_r0r7": 0.0,
+     "curriculum_r4r7": 0.0,
+     "train_r3r4": 0.5
+    },
+    "hazard": {
+     "curriculum_r0r3": 0.015,
+     "curriculum_r0r7": 0.0,
+     "curriculum_r4r7": 0.0,
+     "train_r3r4": 0.02
+    },
+    "hazard_le_05_all_pairs": true
+   },
+   "t1_d14_s137": {
+    "success": {
+     "curriculum_r0r3": 0.83,
+     "curriculum_r0r7": 0.0,
+     "curriculum_r4r7": 0.0,
+     "train_r3r4": 0.8275
+    },
+    "hazard": {
+     "curriculum_r0r3": 0.7075,
+     "curriculum_r0r7": 0.0,
+     "curriculum_r4r7": 0.005,
+     "train_r3r4": 0.7025
+    },
+    "hazard_le_05_all_pairs": false,
+    "note": "train 0.7025 and r0r3 0.7075 both >0.5 - partial blind-crossing signature (not the committed-blind 1.0)"
+   }
+  },
+  "held2": {
+   "verdict": "FAIL 0/3",
+   "t1_d14_s135": "occupancy 0.000; worst windows 0.0013/0.2487; conjunct (c) ALONE met at 2/3 checkpoints (SELECTIVE_COMPOSITE r3500+r3750 with trained-surface witnesses incl. the campaign's FIRST curriculum-surface witnesses); AM-H4-5 fails (tail armed fraction 0.734, de-arm gap [3704,3837] intersects tail); unarmed-gap alpha_sense active 133 tail rounds",
+   "t1_d14_s136": "fails (a)(b)(c); never-armed tail sustain-supplied by construction (alpha_sense nonzero 473/500 tail rounds) - AM-H8 discipline: never a pass",
+   "t1_d14_s137": "fails (a)(b)(c); never-armed tail sustain-supplied (alpha_sense nonzero 500/500)"
+  }
+ },
+ "generalize": {
+  "c4_gen": {
+   "verdict": "FAIL 0/3 (0/9 checkpoints, 0/18 surface-passes)",
+   "decisive_detail": "at s135's PEAK checkpoint (r3500: 7/8 trained surfaces succeeding at zero hazard except the blind pair; causal witnesses on 3 surfaces across 2 pairs) BOTH readiness mirrors still FAIL (32-step timeout-avoid, 0 hazard) - readiness interpolation did not emerge even at the healthiest multi-geometry policy the campaign has produced",
+   "probe_corroboration": {
+    "t1_d14_s135": 0,
+    "t1_d14_s136": 0,
+    "t1_d14_s137": 0
+   }
+  },
+  "c1_gen": {
+   "verdict": "0/3 (zero readiness-surface witnesses anywhere)"
+  }
+ },
+ "decomposed_read": {
+  "discovery": "1/3 arm fires at the mixture (s135 r3157; T1-D13 single-pair baseline 2/3; discovery moved LATER as DR section 10 anticipated - the mixture needs a 50-rd >=0.8-success window over all 8 scenarios); s136/s137 never reached pooled 0.42 window success",
+  "hold": "0/1 armed seeds held - the armed phase collapsed after ~350 rounds (see mechanism F-84)",
+  "recovery": "lever K: zero engagements again - RETAINED-UNTESTED",
+  "witness_locations": {
+   "s135_r3500": [
+    "risk_fork_train_lower",
+    "risk_fork_train_upper",
+    "risk_fork_curriculum_r4r7_upper"
+   ],
+   "s135_r3750": [
+    "risk_fork_curriculum_r4r7_upper"
+   ],
+   "original_pair_continuity": "witnesses on BOTH original train surfaces at s135 r3500 (the row-1 continuity read holds at that checkpoint); zero witnesses on s136/s137 anywhere",
+   "first_curriculum_surface_witness": "risk_fork_curriculum_r4r7_upper (s135, r3500 AND r3750, own_blind_hazard_avoided=2) - the campaign's first causal witness on a novel gate geometry"
+  }
+ },
+ "named_findings": {
+  "F-84_armed_floor_mixture_collapse_cycle": "s135 armed at r3157 on the section-3.2-ANTICIPATED one-pair-blind pooled configuration (fire window [3108,3157] per-pair hazard: train 0.095 / r4r7 0.12 / r0r3 0.22 / r0r7 0.95 BLIND => pooled 0.346 <= 0.35 arm conjunct) - the AM-C2 leak form IN PRODUCTION, caught exactly as designed by the per-pair read (held-phase r0r7 hazard 0.99). The armed floor then held lambda=3.0 over a 3-selective+1-blind mixture regime for ~350 rounds (held phase [3157,3450]: train 0.99/0.044, r4r7 0.98/0.054, r0r3 0.45/0.19, r0r7 0.95/0.99) whose pooled hazard ~0.32 sits ABOVE budget 0.25 => sustained positive dual error under the floor; at ~r3500 the policy resolved the pressure by GLOBAL crossing-abandonment across ALL FOUR pairs within ~75 rounds (r3500 succ 0.688 -> r3550 0.000; hazard -> 0; sensing rate BURSTS to 0.53-0.74 without conversion; lambda pinned exactly 3.0; integral discharging 2.73 -> 0.69) - cross-pair interference via shared parameters chose avoid-all over blind-pair repair (the T1-D10 basin-agnostic-floor lesson recurring at one-third the lambda, with the hatch present). Hatch de-armed r3704 (load-bearing again); recovery to a second qualifying window; re-arm r3837; second collapse; terminal armed at lambda=3.0 with tail success 0.10. An arm/collapse CYCLE on the mixture - the single-pair-calibrated arm threshold (pooled 0.8/0.35) is reachable while a pair is still blind, and the floor's sustained pressure on the unassembled remainder is destabilizing rather than repairing.",
+  "F-85_shared_gate_subset_fixation": "s136/s137 (never-armed) engaged ONLY the two pairs containing a row-3 gate (train {3,4} + r0r3 {0,3}) and NEVER crossed the two pairs lacking one (r4r7, r0r7: per-pair hazard ~0.000-0.005 from r500 onward - never explored post-warmup). Checkpoint form (s136, stable r3500-r4000): a REVEAL-GATED GO/NO-GO at the row-3 gate - senses at rate 0.375, crosses in 8 steps when the row-3 gate is revealed safe (train_lower, r0r3_upper), FREEZES to 32-step timeout instead of rerouting when revealed hazardous (train_upper, r0r3_lower). REVEAL-CAUSATION PROVEN via the own_blind columns: on the hazardous mirror train_upper the INTACT (sensing) policy freezes and FAILS (32-step timeout) while the reveal-zeroed own_blind rollout CROSSES and SUCCEEDS (8 steps, through 2 hazard) - so the reveal directly induces the halt, and sensing makes the outcome WORSE (success->failure). This is a MALADAPTIVE reveal-gated NO-GO: the F-82 'half of Mode C' form (sense->detect->halt WITHOUT the reroute half) reproduced at the mixture; SENSES_NOT_CAUSAL because no SUCCEEDING surface's success causally depends on the reveal (the reveal-dependent behavior is a task-failing freeze, not a task-preserving reroute). s137's tail form differs: mostly-blind row-3 crossing (per-pair hazard ~0.70 on both engaged pairs, success 0.83; own_avoided=0 on the hazardous mirrors - the sensing does not change the route). The memorized-gate wall reproduced INSIDE the training distribution: gate-position diversity alone did not induce position-general crossing - the policy restricted engagement to the fixated gate row instead.",
+  "F-86_assembly_gradient": "pair-assembly ordering followed the anchor structure: the two pairs anchored on trained rows assembled first where assembly happened at all (s135: train + r4r7 fully selective, with r4r7_upper carrying causal witnesses); the fully-novel maximum-span pair r0r7 NEVER became selective anywhere (blind-crossed on s135, avoided on s136/s137); r0r3 half-assembled at best. Consistent with the DR's implicit easy->hard gradient and with quartered per-pair experience (4 eps/pair/round)."
+ },
+ "adversarial_confirmation": {
+  "workflow": "wf_73b63c81-18c (5 agents; Fable-5 credit pool exhausted mid-run - lens 2 completed CONFIRMED, lenses 1/3/4 + synthesis credit-killed and re-verified MANUALLY on Opus 4.8 per the workflow-credit-exhaustion rule: degraded findings are UNVERIFIED not refuted)",
+  "verdict": "CONFIRMED_WITH_AMENDMENT",
+  "gates": {
+   "grade_reproduced": "PASS - lens 2 independently recomputed tail-100 success/hazard (byte-exact all 3), arm events, lambda_pre_clamp maxima (3.2437/4.5375/4.3969, zero >=5.0), C1 checkpoint verdicts, C4-GEN 0/9, per-pair hazard leak (s137 train 0.7025 + r0r3 0.7075), MECH flags all true; manual completion confirmed MECH controller replication 0.0-err on ALL fields x3 (lambda/pre_clamp/integral/dual_error), zero violations/mismatches, s135 arm events byte-exact vs checkpoint arm_state (arm 3157 haz 0.34625 / dearm 3704 / arm 3837, terminal armed True); the grader itself was retro-validated on the T1-D13 knowns this shift",
+   "routing_correct": "PASS (lens 2) - ROW 3 confirmed against the literal section-9 table under AM-C1 precedence; row-4 park tally 0/3 with the opposite-steelman refuted; row-6 heterogeneity-steelman ruled against (row 3 is a tally-level condition satisfied regardless of per-seed form heterogeneity); AM-C5/(iii-R) inapplicable (zero plateaus); GATE-4-CURRICULUM not triggered; amendment 0/1 unspent not bankable",
+   "mechanisms_confirmed": "PASS (manual) - F-84 STRENGTHENED: floor binding 100% over armed [3157,3704] (raw PI candidate 0.59-2.76, mean 2.10, NEVER reaching 3.0 - the 'lambda ~3 anyway' steelman DECISIVELY refuted), pre-arm t50 success RISING 0.74->0.84 (not collapsing) when the arm fired, r3525->3550 collapse is clean avoid-all onset (hazard->0, sensing bursting 0.31->0.60 unconverted, no anomalous KL); F-85 SHARPENED: the own_blind columns PROVE the s136 freeze is reveal-CAUSED (on train_upper the intact policy senses->sees-hazard->freezes/fails while the reveal-zeroed rollout CROSSES and SUCCEEDS through 2 hazard - a maladaptive reveal-gated NO-GO, sensing makes the outcome WORSE); F-86 anchor-gradient confirmed via per-pair phase windows",
+   "two_sided_honest": "PASS (manual) - bars at registered values, near-misses reported precisely (no rounding); the positive facts (first mixed-family arm, first curriculum-surface causal witness) given full weight AND the negative result (RETAIN broke, generalization absent at peak) not buried; AM-H8 discipline held (never-armed s136/s137 tails flagged sustain-supplied, alpha_sense nonzero 473/500 and 500/500)",
+   "sequence_lock_ok": "PASS (manual) - nothing pinned; all pin/held-out mentions are DRAFT-only or future-lock-sequence; the C1 harness enumerates exactly the 10 train+curriculum+readiness surfaces (no held-out); _assert_not_held_out live",
+   "immutable_identity_ok": "PASS (manual) - terminology scan clean (no Bayesian-belief/formal-VOI/C-RC-MAPPO-VOI/info-gain framings in any draft); no claim-status overreach; capability statements scoped per AM-C2(iv) to witnessed surfaces (never 'four geometries')"
+  },
+  "folded_amendments": [
+   "should-fix 1 (lens 2): the row-3 park-literal note states BOTH disqualifiers for s135 (never-armed AND the success band), not just one",
+   "should-fix 2 (lens 2): s136 and s137 recorded as PARTIAL park-form near-misses (2/4 literals each; the verdict-disjunct half fired on both never-armed seeds) under the section-10 s134-park watch item",
+   "manual F-85 sharpening: the reveal-caused maladaptive NO-GO characterization (own_blind proof) folded into the F-85 finding text"
+  ]
+ },
+ "park_form_near_misses_am_c3": {
+  "note": "row-4 park tally 0/3 (no seed satisfies all four AM-C3 literals); recorded per the section-10 s134-park watch item",
+  "s135": "1/4 (hazard <=0.05 only; fails never-armed [armed, 710 rounds], success band [0.103 outside [0.4,0.6]], disjunct [sensing 0.127<=0.5, verdicts SEL/SEL/NOT_CAUSAL=1/3])",
+  "s136": "2/4 (never-armed + verdict-disjunct [SENSES_NOT_CAUSAL 3/3]; fails success band [0.25] which alone kills the conjunction, and the hazard literal is met but the band is not)",
+  "s137": "2/4 (success band [0.414 inside] + verdict-disjunct [SENSES_NOT_CAUSAL 3/3]; fails never-armed? no it is never-armed - so 3/4 on {never-armed, band, disjunct} but FAILS hazard [0.354 >> 0.05, 7x over] which is the decisive miss)",
+  "reconciled": "s137 satisfies never-armed + band + disjunct (3 literals) but fails hazard 0.354 (7x the 0.05 bar); s136 satisfies never-armed + disjunct + hazard (3 literals) but fails the success band 0.25; neither reaches 4/4; the park form did not fire; watch item carried"
+ },
+ "routing": {
+  "tally": {
+   "row5_wiring": false,
+   "wiring_bad_seeds": [],
+   "retain_both_bars_2of3": false,
+   "bar_c4_retain_count": 0,
+   "retain_counted_count": 0,
+   "held_counted_count": 0,
+   "c4_gen_count": 0,
+   "c1_gen_count": 0,
+   "park_form_count": 0,
+   "iii_r_annotated_count": 0,
+   "iii_r_routes_row6": false,
+   "row": 3
+  },
+  "row": 3,
+  "row_3_text": "RETAIN BREAKS - BAR-C4-RETAIN <2/3 (0/3) on the curriculum family, pattern not row 4's park form (park literals fire on ZERO seeds: s135 fails BOTH never-armed [armed r3157, 710 rounds] AND the success band [0.103 outside [0.4,0.6]]; s136 fails the success band [0.25]; s137 fails hazard [0.354 > 0.05, 7x over]) -> A NAMED, SERIOUS finding (diversity traded away the row-1 training result) -> 6.1 re-diagnosis toward a curriculum-FORM change (schedule L-B, breadth reduction, or anchor-weighted mixture) via a FRESH countersigned DR; NO amendment spend (a C4 regression is never amended into - the DR-C4 lesson); the bars never weaken; the T1-D13 row-1 result itself stands (a registered grade on the single-pair family)",
+  "row_3_am_c5_check": "the AM-C5 enforceability variant does NOT apply: zero (iii-R)-reported plateaus exist (pre_clamp never >=5.0), no resolved-by-capture-absorbing resolutions",
+  "precedence_walk": "row 5: no wiring/instrument failures (all MECH pass, STEP-0 all green). row 4: park form 0/3 (<2/3). rows 1/2 precondition (RETAIN both bars >=2/3): NOT met (0/3). row 3: BAR-C4-RETAIN 0/3 <2/3 and not park form -> FIRES. row 6: not reached (row 3 resolves). (iii-R) reroute: 0/3 annotated, never fires",
+  "amendment": "0/1 UNSPENT (row 3 explicitly forbids the spend); not bankable",
+  "gate_4_curriculum": "NOT TRIGGERED (its trigger requires BAR-C4-RETAIN holding >=2/3 while C4-GEN passes zero seeds; RETAIN broke - the mixed outcome is explicitly excluded by section 9)"
+ },
+ "two_sided_value": "The run answered its question decisively in the negative direction while producing three genuinely new positive facts: (1) the multi-geometry selective-sensing CAPABILITY is real - s135 held a causally-witnessed selective regime on 2 pairs simultaneously (3 surfaces, incl. the first curriculum-surface witness) for ~350 rounds; (2) the AM-C2 one-pair-blind leak form materialized in production and the countersigned per-pair read caught it exactly as designed; (3) the wall is sharper than 'more data': even at the healthiest multi-geometry checkpoint ever measured, readiness interpolation was absent - and two seeds reproduced the memorized-gate fixation INSIDE the training distribution. The T1-D13 row-1 readiness-gate passage on the single-pair family is untouched.",
+ "sequence_lock": "INTACT - nothing pinned; Protocol-v1 stays DRAFT; held-out/T3 untouched (the harness enumerates train+curriculum+readiness only, _assert_not_held_out live); seeds 135-137 training-pool; the lock sequence does NOT open (row 3, not row 1)",
+ "next_unit": "6.1 re-diagnosis dossier (curriculum-form: the F-84 arm/mixture interaction + F-85 fixation + F-86 gradient evidence) -> fresh countersigned DR per row 3"
+}

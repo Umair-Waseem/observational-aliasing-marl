@@ -1,0 +1,1152 @@
+{
+ "shift": 26,
+ "date": "2026-07-10",
+ "run_set": "T1-D13 (DR-H5 levers J+K: hazard_budget 0.25 + limbo-scoped armed movement-plasticity re-engagement)",
+ "seeds": [
+  132,
+  133,
+  134
+ ],
+ "git_head": "303dbe9",
+ "status": "ADVERSARIALLY_CONFIRMED",
+ "adversarial_confirmation": {
+  "workflow": "wf_fbe21971-422",
+  "ruling": "CONFIRMED_WITH_AMENDMENT",
+  "agents": 6,
+  "subagent_tokens": "~1.78M",
+  "gates": {
+   "grade_reproduced": true,
+   "routing_correct": true,
+   "s132_s133_authentic": true,
+   "two_sided_honest": true,
+   "sequence_lock_ok": true,
+   "immutable_identity_ok": true
+  },
+  "notes": "five lenses + synthesis independently recomputed every load-bearing number; all 9 C1 checkpoint grades BYTE-IDENTICAL on independent harness re-runs; every s132/s133 authenticity attack refuted \u2014 strongest evidence: s133's armed floor measurably load-bearing (212 tail rounds where the raw PI value ~0.41 while lambda held at exactly 3.0); lever K provably inert; 1 documentation-level must-fix (the MECH-EQ(iii) discharge below, zero tally change) + 5 precision amendments, ALL FOLDED before registration"
+ },
+ "mech_eq_iii_discharge": {
+  "finding": "DR-H5 s6 MECH-EQ(iii)'s routing half ('a >0.5-band plateau on >=2/3 seeds routes row 6 WITH the lambda*>5.0-evidenced annotation') has its literal antecedent MET on 3/3 seeds (>0.5-band ceiling-pinned sensing-alive >=300-rd plateaus on every seed).",
+  "ruling": "ROUTING ROW 1 STANDS (synthesis-ruled, four independent grounds): (a) s7 is the authoritative literal routing table \u2014 s6 reads FEED rows, they do not independently route, and row 6's own signature ('any pattern not matching rows 1-5') cannot fire when the pattern matches row 1; (b) the clause's embedded premise '(it fails BAR-C4 loudly)' is UNMET \u2014 all plateaus resolved mid-run and BAR-C4 passed 2/3; (c) the mandated lambda*>5.0 annotation is factually CONTRADICTED on these seeds \u2014 both armed seeds completed controller-driven descents THROUGH the 0.35 arm bar at applied lambda <= 5.0 immediately after their plateaus (arm windows hazard 0.34875@r2540 / 0.345@r2390, byte-verified) and hold hazard ~0.004-0.006 at lambda ~3.0 in the tail \u2014 direct evidence lambda* <= 5.0; (d) a strict-literal reading makes row 1 unreachable-by-construction at the halved 0.25-budget discharge (every blind-crossing windup arc generates the antecedent), contradicting s9 ('>=2/3 armed-and-held = the breakthrough') and s12 ('only a future clean row-1 at >=2/3 does'). Zero tally change.",
+  "plateau_window_convention": "the grader uses FULL post-warmup trailing-200 windows (consistent with the lever-K trigger's full-window precedent in the same DR); under the alternative warmup-overlapping convention two additional early capture-era plateaus qualify (s132 [413,772] med t50 sensing 0.0987; s134 [408,746] 0.0603) and the reported plateau intervals shift to [1918,2608]/[1294,2384]/[1897,2462] \u2014 ZERO tally impact under either convention: the row-2 (0.35,0.5] band stays 0/3 and the (iii) antecedent was already met"
+ },
+ "step0_instrument_validation": {
+  "suite": "1469 passed",
+  "drh5_trigger_regression": "ALL PASS ({s128: no engage, s130: no engage, s131: r1884 exit (exhausted,2683,800), s129: vacuous})",
+  "held2_bar_validate": "26/26 ALL CHECKS PASS",
+  "c1_harness_fork_validate": "all_passed: true",
+  "grader_retro_validation": "RETRO-D12 ALL PASS: controller+alpha replication 0.0-err on t1_d12_s129/s130/s131, events byte-exact, MECH-HEAD PASS 3/3, independent recovery mirror reproduces the countersigned regression target incl. the forced s131 engage r1884 / exit (exhausted, 2683, 800)"
+ },
+ "grade_summary": {
+  "mech": {
+   "MECH-G": "PASS 3/3 (0 ceiling violations; recursion 0.0-err at budget 0.25 incl. dual_error = hazard - 0.25 exact)",
+   "MECH-H": "PASS 3/3 (arm events byte-exact vs curve + checkpoint arm_state; fire windows byte-exact; zero unarmed floor rounds; zero armed rounds < 3.0-1e-6; s134 arm-never-fired = SCIENCE outcome, zero qualifying windows exist)",
+   "MECH-DRIFT-LAW": "PASS 3/3 (PI recursion 0.0-err at the new budget over all 12,000 rounds)",
+   "MECH-REC": "PASS 3/3 wiring (zero engage events, zero qualifying containment windows anywhere - byte-checked; recovery curve keys replicate 0.0-mismatch; checkpoint recovery state consistent; MECH-REC-T clean: never active while unarmed, alpha_move exactly 0.0 at every non-recovery round >= anneal-end)",
+   "MECH-SCHED": "PASS 3/3 (both alpha recursions 0.0-err incl. the lever-K gated movement path; targets exact; alpha_sense pinned 0.0 at all armed rounds; alpha_move pinned 0.0 post-anneal outside recovery)",
+   "MECH-HEAD": "2/3 (s132 PASS, s133 PASS; s134 FAIL - transient capture-phase trough [1120,1427] min t50 0.0088 during the over-constraint capture [660,1459], head RECOVERED and alive at run end rate 0.708, regQ 0.817 - NOT the terminal extinction form)",
+   "MECH-E2": "PASS 3/3 (worst pre-r1000 50-rd windows 0.290/0.343/0.357)",
+   "MECH-CAP": "PASS 3/3 (no tail paralysis signature)",
+   "MECH-EQ": "no FAIL signature on any seed (zero (0.35,0.5]-band standing-violation plateaus; zero near-zero-error parked phases - no seed rode the 0.25 budget; >0.5-band blind-crossing plateaus reported per (iii): s132 [1918,2642] / s133 [1294,2444] / s134 [1897,2492], all RESOLVED by controller-driven descents or the s134 split)",
+   "MECH-LIMBO": "zero engagements on all seeds - LEVER K UNTESTED (inert means untested, NOT validated; s134's limbo-form state was UNARMED so the armed-gated trigger was vacuously silent - an R5-ADJACENT / F-82-form UNARMED split: R5 as defined sits at the new equilibrium hazard ~0.25 inside a near-zero-error phase, while s134 parks at hazard ~0.001 with zero near-zero-error phases)",
+   "MECH-DRIFT": "ceiling fractions 0.769/0.697/0.696 (onsets r413/408/408) vs the T1-D12 row {0.144,0.246,0.493} - elevated as the EXPECTED drift signature at 1.5x windup / 0.5x discharge; pre-arm over-constraint captures on all three (s132 [686,1708] recovered r1715 = 1029 rds; s133 [834,1169] recovered r1170 = 336 rds sub-ceiling onset 3.09; s134 [660,1459] recovered r1464 = 804 rds) - two exceed the 800-rd absorbing convention and are counted absorbing BY CONVENTION per the AM-4 disclosure while BOTH factually recovered; zero armed-era hazard relapse (armed t50 hazard max 0.349/0.345/n-a)"
+  },
+  "bar_c4": {
+   "s132": {
+    "success": 1.0,
+    "hazard": 0.004375,
+    "pass": true
+   },
+   "s133": {
+    "success": 1.0,
+    "hazard": 0.00375,
+    "pass": true
+   },
+   "s134": {
+    "success": 0.499375,
+    "hazard": 0.00125,
+    "pass": false
+   },
+   "tally": "2/3 PASS"
+  },
+  "bar_c1_held2": {
+   "s132": {
+    "a_joint_occupancy": 1.0,
+    "b_worst_windows": [
+     1.0,
+     0.01375
+    ],
+    "c_witness": "SELECTIVE_COMPOSITE at 3/3 checkpoints (r3500/3750/4000): own_blind_hazard_avoided=2 on risk_fork_train_upper, rate 0.077, adapt fired",
+    "pass": true
+   },
+   "s133": {
+    "a_joint_occupancy": 1.0,
+    "b_worst_windows": [
+     1.0,
+     0.01625
+    ],
+    "c_witness": "SELECTIVE_COMPOSITE at 3/3 checkpoints: witnesses on BOTH training surfaces (train_lower avoided=1 + train_upper avoided=1, rates 0.09-0.31, adapt fired) - the first two-surface witness in the campaign",
+    "pass": true
+   },
+   "s134": {
+    "a_joint_occupancy": 0.0,
+    "b_worst_windows": [
+     0.4925,
+     0.00375
+    ],
+    "c_witness": "SENSES_NOT_CAUSAL x3 (0 witnesses; positionally-induced flagged)",
+    "pass": false
+   },
+   "tally": "2/3 PASS"
+  },
+  "row1_cleanliness": {
+   "s132": {
+    "am_h8": "arm r2540 LATCHED, zero de-arms, tail armed 500/500, tail lambda min 3.059375000000482 (exact), integral 9.19->3.12 (armed floor active), silent_arm False, phase_parking False",
+    "am_h4_5_tail_arm_integrity": "100%",
+    "restated_silent_arm": "latched arm covers [3500,4000)",
+    "movement_side_tail_clause": "recovery INACTIVE and alpha_move = 0.0 on 100% of [3500,4000)",
+    "k_tail_cleanliness": "K never fired on this seed - tail trivially support-free"
+   },
+   "s133": {
+    "am_h8": "arm r2390 LATCHED, zero de-arms, tail armed 500/500, tail lambda min EXACTLY 3.0, integral 6.58->0.48 discharging with the armed floor HOLDING and measurably LOAD-BEARING (212 tail rounds where the raw PI value ~0.41 while lambda held at exactly 3.0 - confirmation-workflow finding; the measured relapse precondition removed - the s130 form)",
+    "am_h4_5_tail_arm_integrity": "100%",
+    "restated_silent_arm": "latched arm covers [3500,4000)",
+    "movement_side_tail_clause": "recovery INACTIVE and alpha_move = 0.0 on 100% of [3500,4000)",
+    "k_tail_cleanliness": "K never fired on this seed - tail trivially support-free"
+   }
+  }
+ },
+ "decomposed_read": {
+  "discovery": "arm fires 2/3 (s132 r2540 window {succ 0.99875, haz 0.34875, sens 0.579}; s133 r2390 window {succ 0.9925, haz 0.345, sens 0.280}) vs the T1-D12 baseline 2/3; both arms fired at the FIRST qualifying window (no silent-arm defect); qualifying-round counts 1146/1610 vs T1-D12's transit-only qualification; s134 never armed - ZERO qualifying windows exist (nearest miss r1785: succ 0.629, haz 0.354, sens 0.260 \u2014 under the grader's composite-score ranking; a hazard-closeness-among-conjunct-passers ranking selects r2395 \u2014 convention detail, both confirm zero qualifying windows); head survival 3/3 alive at run end (s134's formal MECH-HEAD fail is a recovered transient)",
+  "j_verdict_mech_eq": "The F-81 parked-equilibrium blocking configuration DID NOT RECUR at budget 0.25: zero near-zero-error parked phases (no seed rode the budget), zero (0.35,0.5]-band standing-violation plateaus (enforceability at the 5.0 ceiling NOT falsified - both armed seeds completed controller-driven descents THROUGH the 0.35 bar), and post-arm equilibria sit at hazard ~0.004 << 0.25 (full Mode C, not budget-riding). Honest classification: both arms are descent arms (the known channel), not literal parked-phase arms - the J mechanism worked by eliminating the park-above-the-bar configuration structurally (equilibrium < arm bar), not by converting a live park into an arm. The s129-class seed cannot exist at this budget by construction; none appeared.",
+  "k_verdict": "LEVER K UNTESTED - zero engagements, zero qualifying containment windows anywhere (byte-checked). s134 reproduced an F-82-FORM split (success 0.5, hazard ~0, per-layout lower-success/upper-timeout, steps ~20.8, sensing saturated - tail-100 rate [0.635, 0.778], excursions to ~0.96 over the settled park) but UNARMED - R5-ADJACENT (R5 proper is defined at hazard ~0.25 in a near-zero-error phase; s134 parks at hazard ~0.001 with none): an armed-gated device is vacuously silent on an unarmed limbo. Recorded as untested, never as validated.",
+  "hold_at_n4": "2/2 armed seeds HELD this run; campaign hold record now 4 of 5 armed seeds held (s128, s130, s132, s133; s131 was the armed limbo). The frozen hold machinery (ceiling 5.0 + armed floor 3.0 + hatch 200/0.1) held both new arms with ZERO hatch interventions - cleaner than s128 (9 events) and equal to s130 (single latched arm)."
+ },
+ "routing": {
+  "row": 1,
+  "ruling": "ROW 1 - RELIABILITY BREAKTHROUGH: BAR-C4 2/3 AND BAR-C1-HELD-2 2/3, every counted pass AM-H8-clean + restated-silent-arm-clean + AM-H4-5-clean + movement-side-support-free-tail-clean. THE READINESS GATE (6.5) PASSES ON TRAINING for the first time in the campaign.",
+  "rows_not_firing": {
+   "row2": "MECH-EQ FAIL 0/3 (no standing-violation plateau in the danger band)",
+   "row3": "row 3's FIRST conjunct (arm fires >=2/3) IS met (2/3); the SECOND conjunct fails - ZERO armed seeds fail HELD-2 in T1-D13 (both armed seeds pass; s134 never armed; the campaign's only armed HELD-failing seed remains T1-D12's s131)",
+   "row4": "fires on at most 1/3 (s132: absorbing-by-convention capture + head PASS + drift elevated; s133 capture non-absorbing; s134 head FAIL) - below the >=2/3 tally; both absorbing-by-convention captures factually recovered (1029/804 rds - the AM-4 top-of-range disclosure); amendment NOT spent (0/1)",
+   "row5": "BAR-C4 fails only on s134 (1/3 < 2/3) and no engagement exists anywhere - no lever-attributable signature",
+   "row6": "the s134 R5-ADJACENT / F-82-form UNARMED split is nearest the pre-named row-6 form (iv) at n=1 - subsumed by the row-1 >=2/3 pass; the MECH-EQ(iii) >0.5-band-plateau routing clause's literal antecedent is discharged AGAINST row-6 routing per the synthesis ruling recorded in mech_eq_iii_discharge (four grounds, zero tally change)"
+  },
+  "gate4_extended2": "NOT triggered (two NEW HELD seeds arrived - the opposite of the exhaustion pattern)",
+  "amendment_budget": "0/1 UNSPENT (not bankable)",
+  "sequence_lock": "intact THIS SHIFT: nothing pinned, Protocol-v1 stays DRAFT, held-out/T3 untouched; the gate passage is REGISTERED (row 1) and next actions are the readiness-C4 curriculum DR (its trigger now FIRES: training C4 recovered >=2/3) + the C1-metric revision landing at the DR-Stage26 lock - both BEFORE any protocol lock or T3"
+ },
+ "honest_negatives_and_watch_items": {
+  "readiness_surfaces": "both HELD seeds still fail the two shifted-gate READINESS surfaces (success 2/4 surfaces in every C1 read) - the memorized-gate generalization item is now THE T3-gating obstacle; the ED-readiness-curriculum s7 trigger FIRES in its full three-conjunct form: (a) training C4 recovered >=2/3 [2/3 holds] AND (b) the C1 causal-sensing line is not the binding blocker [HELD-2 2/3 holds - C1 passes] AND (c) readiness generalization still absent [both HELD seeds fail both shifted-gate readiness surfaces] - all three verified",
+  "s134_form": "the unarmed half-success park (R5-ADJACENT / F-82-form UNARMED split) is real at 1/3 and lever K cannot reach it by design (armed-gated); if it recurs at >=2/3 in any future run it is a named row-6 re-diagnosis target, possibly the DR-H4 row-3b arm-success-threshold candidate",
+  "lever_k": "wired-and-proven mechanically (regression + MECH-REC) but UNTESTED in production - no reliability claim attaches to it",
+  "drift": "budget-0.25 side effects measured: ceiling fractions ~0.70-0.77 (vs 0.14-0.49 at 0.5), capture-recovery slowed to 336-1029 rds (discharge halved) - within the pre-registered law expectations; ZERO armed-era hazard relapse",
+  "mech_head_s134": "formal FAIL under the pre-registered two-prong test; form honestly named: capture-coincident transient trough, recovered (alpha-inversion discipline applied - alpha at cap 2.0 during the trough read as diagnostic only)"
+ },
+ "per_seed": {
+  "t1_d13_s132": {
+   "manifest": {
+    "status": "complete",
+    "last_completed_round": 3999,
+    "git_head": "303dbe9",
+    "config_mismatches": {},
+    "budget": 0.25
+   },
+   "mech_wiring": {
+    "pi_replication_max_err": {
+     "lambda_applied": 0.0,
+     "lambda_pre_clamp": 0.0,
+     "dual_integral": 0.0,
+     "dual_error_at_budget_0_25": 0.0
+    },
+    "mech_g": {
+     "ceiling_violations": 0,
+     "ceiling_engaged_rounds": 2845,
+     "ceiling_engaged_fraction_post_warmup": 0.768918918918919,
+     "ceiling_engaged_onset": 413,
+     "warmup_lambda_violations": 0
+    },
+    "mech_h": {
+     "armed_floor_violations": 0,
+     "armed_flag_mismatches": 0,
+     "arm_window_mean_mismatches": 0,
+     "events": [
+      {
+       "event": "arm",
+       "round_index": 2540,
+       "window_success": 0.99875,
+       "window_hazard": 0.34875,
+       "window_sensing": 0.5786771691626701
+      }
+     ],
+     "fire_window_bytecheck": [
+      {
+       "event": "arm",
+       "round_index": 2540,
+       "legitimate_timing": true,
+       "window_success": 0.99875,
+       "window_hazard": 0.34875,
+       "window_sensing": 0.5786771691626701,
+       "conjuncts_pass": true,
+       "matches_event_record": true
+      }
+     ],
+     "checkpoint_events_match": true,
+     "terminal_armed": true
+    },
+    "mech_rec": {
+     "enabled": true,
+     "engagements": 0,
+     "exhausted": false,
+     "terminal_active": false,
+     "terminal_rounds_used": 0,
+     "active_mismatches": 0,
+     "rounds_used_mismatches": 0,
+     "exhausted_mismatches": 0,
+     "gate_curve_key_false_rounds": 0,
+     "events": [],
+     "engage_window_bytecheck": [],
+     "checkpoint_recovery_state": {
+      "active": false,
+      "rounds_used": 0,
+      "engagements": 0,
+      "exhausted": false
+     }
+    },
+    "mech_sched": {
+     "sense_gate": true,
+     "move_gate": true,
+     "max_err_alpha_movement": 0.0,
+     "max_err_alpha_sensing": 0.0,
+     "movement_target_mismatches": 0,
+     "sensing_target_mismatches": 0,
+     "armed_rounds": 1460,
+     "armed_alpha_sensing_nonzero_rounds": 0,
+     "gate_curve_key_false_rounds": 0,
+     "alpha_movement_max": 0.2526846086978911,
+     "nonrecovery_postanneal_alpha_movement_nonzero": 0,
+     "tail_alpha_movement_nonzero_rounds": 0,
+     "tail_recovery_active_rounds": 0,
+     "movement_tail_clause_pass": true,
+     "pass": true
+    },
+    "mech_head": {
+     "counted_unarmed_rounds": 2190,
+     "first_arm_round": 2540,
+     "prong_a_crossings_counted": [],
+     "prong_a_crossing_count_counted": 0,
+     "prong_a_crossings_reported_pre_arm": [],
+     "prong_b_long_runs_counted": [],
+     "prong_b_long_runs_reported_pre_arm": [
+      [
+       989,
+       1343
+      ]
+     ],
+     "verdict": "PASS",
+     "alpha_inversion_note": "alpha magnitude NOT read as head health (dead heads simulate highest alpha)",
+     "regulation_quality_fraction": 0.7579908675799086,
+     "t50_sensing_rate_at_end": 0.16513281249999995,
+     "row3_alive_at_end": true,
+     "t50_sensing_entropy_min_counted": 0.014862389471381902
+    },
+    "mech_head_sub005_excursions": [
+     {
+      "start": 989,
+      "end": 1343,
+      "length": 355,
+      "min_t50_sensing_entropy": 0.014862389471381902,
+      "alpha_sensing_at_start": 0.5772894609868522,
+      "alpha_sensing_at_end": 2.0,
+      "gating": false,
+      "pre_first_arm": true
+     }
+    ],
+    "mech_e2": {
+     "worst_window_mean": 0.2903546491265297,
+     "worst_window_start": 904,
+     "pass": true
+    }
+   },
+   "mech_eq": {
+    "near_zero_error_phases": [],
+    "standing_violation_plateaus": [
+     {
+      "start": 1918,
+      "end": 2642,
+      "length": 725,
+      "t200_hazard_mean_over_plateau": 0.9088064655172414,
+      "band": ">0.5 reached",
+      "plateau_median_t50_sensing": 0.10356272292507498,
+      "sensing_alive": true,
+      "mech_eq_fail_signature": false
+     }
+    ],
+    "mech_eq_fail": false
+   },
+   "mech_limbo": {
+    "engagement_count": 0,
+    "engagements": [],
+    "lever_k_untested": true
+   },
+   "mech_drift": {
+    "ceiling_engaged_fraction_post_warmup": 0.768918918918919,
+    "ceiling_engaged_onset_round": 413,
+    "d12_calibration_row_sorted": [
+     0.144,
+     0.246,
+     0.493
+    ],
+    "row4_elevated_absolute": true,
+    "capture_events": [
+     {
+      "onset": 686,
+      "run_end": 1708,
+      "run_length": 1023,
+      "recovered_round": 1715,
+      "rounds_to_recovery": 1029,
+      "lambda_at_onset": 5.0,
+      "sub_ceiling_onset": false,
+      "absorbing": true,
+      "censored": false
+     }
+    ],
+    "absorbing_capture_count": 1,
+    "censored_capture_count": 0,
+    "armed_rounds": 1460,
+    "armed_t50_hazard_max": 0.34875,
+    "armed_rounds_t50_hazard_ge_075": 0,
+    "armed_rounds_t50_hazard_gt_035": 0,
+    "arm_dwells": [
+     {
+      "arm": 2540,
+      "dearm": null,
+      "dwell": 1459
+     }
+    ]
+   },
+   "qualifying_window": {
+    "exists": true,
+    "first_qualifying_end_round": 2540,
+    "count": 1146,
+    "nearest_miss": null
+   },
+   "bar_c4": {
+    "tail100_success": 1.0,
+    "tail100_hazard": 0.004375,
+    "pass": true
+   },
+   "held2_ab": {
+    "tail_round_count": 500,
+    "held2_a_joint_occupancy": 1.0,
+    "held2_a_pass": true,
+    "held2_b_worst_window_success": 1.0,
+    "held2_b_worst_window_hazard": 0.0138,
+    "held2_b_pass": true,
+    "held2_ab_pass": true,
+    "held2_c_note": "causal witness graded externally (tightened own-ablation composite, >=2 of r3500/3750/4000)",
+    "mech_cap_tail_paralysis_captured": false,
+    "bar_c4_tail100_success": 1.0,
+    "bar_c4_tail100_hazard": 0.0044,
+    "bar_c4_pass": true
+   },
+   "am_h8": {
+    "available": true,
+    "event_history": [
+     {
+      "event": "arm",
+      "round_index": 2540,
+      "window_success": 0.99875,
+      "window_hazard": 0.34875,
+      "window_sensing": 0.5786771691626701
+     }
+    ],
+    "terminal_armed": true,
+    "tail_armed_rounds": 500,
+    "tail_rounds": 500,
+    "tail_armed_fraction": 1.0,
+    "tail_arm_integrity_100pct": true,
+    "tail_intersecting_events": [],
+    "dearm_gap_or_hatch_intersects_tail": [],
+    "tail_lambda_min": 3.059375000000482,
+    "tail_integral_first": 9.1906250000005,
+    "tail_integral_last": 3.121875000000482,
+    "tail_integral_first_third_mean": 8.19770331325355,
+    "tail_integral_last_third_mean": 4.1321724397595325,
+    "tail_sensing_mean": 0.16607024851921814,
+    "silent_arm": false,
+    "phase_parking_signature": false
+   },
+   "am_h9": {
+    "available": true,
+    "engaged_fraction": 0.841,
+    "pinned_ge_90pct": false,
+    "rounds": 1000
+   },
+   "c1_checkpoints": {
+    "r3500": {
+     "tightened_verdict": "SELECTIVE_COMPOSITE",
+     "witness_count": 1,
+     "causal_surfaces": [
+      {
+       "surface": "risk_fork_train_upper",
+       "group": "training",
+       "sense": 2,
+       "sense_rate": 0.07692307692307693,
+       "adapt_fired": true,
+       "own_blind_hazard_avoided": 2,
+       "hazard_avoided_vs_no_sense": 2
+      }
+     ],
+     "component_pass_counts": {
+      "success": 2,
+      "senses": 4,
+      "within_ceiling": 4,
+      "adapt": 1,
+      "causal": 1,
+      "witness": 1,
+      "surface_count": 4
+     },
+     "positionally_induced_suspected": false,
+     "witnesses": [
+      {
+       "surface": "risk_fork_train_upper",
+       "own_blind_hazard_avoided": 2,
+       "sense_rate": 0.07692307692307693,
+       "adapt_fired": true
+      }
+     ]
+    },
+    "r3750": {
+     "tightened_verdict": "SELECTIVE_COMPOSITE",
+     "witness_count": 1,
+     "causal_surfaces": [
+      {
+       "surface": "risk_fork_train_upper",
+       "group": "training",
+       "sense": 2,
+       "sense_rate": 0.07692307692307693,
+       "adapt_fired": true,
+       "own_blind_hazard_avoided": 2,
+       "hazard_avoided_vs_no_sense": 2
+      }
+     ],
+     "component_pass_counts": {
+      "success": 2,
+      "senses": 4,
+      "within_ceiling": 4,
+      "adapt": 1,
+      "causal": 1,
+      "witness": 1,
+      "surface_count": 4
+     },
+     "positionally_induced_suspected": false,
+     "witnesses": [
+      {
+       "surface": "risk_fork_train_upper",
+       "own_blind_hazard_avoided": 2,
+       "sense_rate": 0.07692307692307693,
+       "adapt_fired": true
+      }
+     ]
+    },
+    "r4000": {
+     "tightened_verdict": "SELECTIVE_COMPOSITE",
+     "witness_count": 1,
+     "causal_surfaces": [
+      {
+       "surface": "risk_fork_train_upper",
+       "group": "training",
+       "sense": 2,
+       "sense_rate": 0.07692307692307693,
+       "adapt_fired": true,
+       "own_blind_hazard_avoided": 2,
+       "hazard_avoided_vs_no_sense": 2
+      }
+     ],
+     "component_pass_counts": {
+      "success": 2,
+      "senses": 4,
+      "within_ceiling": 4,
+      "adapt": 1,
+      "causal": 1,
+      "witness": 1,
+      "surface_count": 4
+     },
+     "positionally_induced_suspected": false,
+     "witnesses": [
+      {
+       "surface": "risk_fork_train_upper",
+       "own_blind_hazard_avoided": 2,
+       "sense_rate": 0.07692307692307693,
+       "adapt_fired": true
+      }
+     ]
+    }
+   }
+  },
+  "t1_d13_s133": {
+   "manifest": {
+    "status": "complete",
+    "last_completed_round": 3999,
+    "git_head": "303dbe9",
+    "config_mismatches": {},
+    "budget": 0.25
+   },
+   "mech_wiring": {
+    "pi_replication_max_err": {
+     "lambda_applied": 0.0,
+     "lambda_pre_clamp": 0.0,
+     "dual_integral": 0.0,
+     "dual_error_at_budget_0_25": 0.0
+    },
+    "mech_g": {
+     "ceiling_violations": 0,
+     "ceiling_engaged_rounds": 2578,
+     "ceiling_engaged_fraction_post_warmup": 0.6967567567567567,
+     "ceiling_engaged_onset": 408,
+     "warmup_lambda_violations": 0
+    },
+    "mech_h": {
+     "armed_floor_violations": 0,
+     "armed_flag_mismatches": 0,
+     "arm_window_mean_mismatches": 0,
+     "events": [
+      {
+       "event": "arm",
+       "round_index": 2390,
+       "window_success": 0.9925,
+       "window_hazard": 0.345,
+       "window_sensing": 0.27999646490662117
+      }
+     ],
+     "fire_window_bytecheck": [
+      {
+       "event": "arm",
+       "round_index": 2390,
+       "legitimate_timing": true,
+       "window_success": 0.9925,
+       "window_hazard": 0.345,
+       "window_sensing": 0.27999646490662117,
+       "conjuncts_pass": true,
+       "matches_event_record": true
+      }
+     ],
+     "checkpoint_events_match": true,
+     "terminal_armed": true
+    },
+    "mech_rec": {
+     "enabled": true,
+     "engagements": 0,
+     "exhausted": false,
+     "terminal_active": false,
+     "terminal_rounds_used": 0,
+     "active_mismatches": 0,
+     "rounds_used_mismatches": 0,
+     "exhausted_mismatches": 0,
+     "gate_curve_key_false_rounds": 0,
+     "events": [],
+     "engage_window_bytecheck": [],
+     "checkpoint_recovery_state": {
+      "active": false,
+      "rounds_used": 0,
+      "engagements": 0,
+      "exhausted": false
+     }
+    },
+    "mech_sched": {
+     "sense_gate": true,
+     "move_gate": true,
+     "max_err_alpha_movement": 0.0,
+     "max_err_alpha_sensing": 0.0,
+     "movement_target_mismatches": 0,
+     "sensing_target_mismatches": 0,
+     "armed_rounds": 1610,
+     "armed_alpha_sensing_nonzero_rounds": 0,
+     "gate_curve_key_false_rounds": 0,
+     "alpha_movement_max": 0.18414392203092586,
+     "nonrecovery_postanneal_alpha_movement_nonzero": 0,
+     "tail_alpha_movement_nonzero_rounds": 0,
+     "tail_recovery_active_rounds": 0,
+     "movement_tail_clause_pass": true,
+     "pass": true
+    },
+    "mech_head": {
+     "counted_unarmed_rounds": 2040,
+     "first_arm_round": 2390,
+     "prong_a_crossings_counted": [],
+     "prong_a_crossing_count_counted": 0,
+     "prong_a_crossings_reported_pre_arm": [],
+     "prong_b_long_runs_counted": [],
+     "prong_b_long_runs_reported_pre_arm": [],
+     "verdict": "PASS",
+     "alpha_inversion_note": "alpha magnitude NOT read as head health (dead heads simulate highest alpha)",
+     "regulation_quality_fraction": 0.8740196078431373,
+     "t50_sensing_rate_at_end": 0.1115366565623914,
+     "row3_alive_at_end": true,
+     "t50_sensing_entropy_min_counted": 0.04199596509337425
+    },
+    "mech_head_sub005_excursions": [
+     {
+      "start": 586,
+      "end": 635,
+      "length": 50,
+      "min_t50_sensing_entropy": 0.04199596509337425,
+      "alpha_sensing_at_start": 0.4142961897999048,
+      "alpha_sensing_at_end": 0.6598487139940258,
+      "gating": false,
+      "pre_first_arm": true
+     }
+    ],
+    "mech_e2": {
+     "worst_window_mean": 0.34317207396030425,
+     "worst_window_start": 208,
+     "pass": true
+    }
+   },
+   "mech_eq": {
+    "near_zero_error_phases": [],
+    "standing_violation_plateaus": [
+     {
+      "start": 1294,
+      "end": 2444,
+      "length": 1151,
+      "t200_hazard_mean_over_plateau": 0.8133533340573414,
+      "band": ">0.5 reached",
+      "plateau_median_t50_sensing": 0.14352517518905336,
+      "sensing_alive": true,
+      "mech_eq_fail_signature": false
+     }
+    ],
+    "mech_eq_fail": false
+   },
+   "mech_limbo": {
+    "engagement_count": 0,
+    "engagements": [],
+    "lever_k_untested": true
+   },
+   "mech_drift": {
+    "ceiling_engaged_fraction_post_warmup": 0.6967567567567567,
+    "ceiling_engaged_onset_round": 408,
+    "d12_calibration_row_sorted": [
+     0.144,
+     0.246,
+     0.493
+    ],
+    "row4_elevated_absolute": true,
+    "capture_events": [
+     {
+      "onset": 834,
+      "run_end": 1169,
+      "run_length": 336,
+      "recovered_round": 1170,
+      "rounds_to_recovery": 336,
+      "lambda_at_onset": 3.087499999999936,
+      "sub_ceiling_onset": true,
+      "absorbing": false,
+      "censored": false
+     }
+    ],
+    "absorbing_capture_count": 0,
+    "censored_capture_count": 0,
+    "armed_rounds": 1610,
+    "armed_t50_hazard_max": 0.345,
+    "armed_rounds_t50_hazard_ge_075": 0,
+    "armed_rounds_t50_hazard_gt_035": 0,
+    "arm_dwells": [
+     {
+      "arm": 2390,
+      "dearm": null,
+      "dwell": 1609
+     }
+    ]
+   },
+   "qualifying_window": {
+    "exists": true,
+    "first_qualifying_end_round": 2390,
+    "count": 1610,
+    "nearest_miss": null
+   },
+   "bar_c4": {
+    "tail100_success": 1.0,
+    "tail100_hazard": 0.00375,
+    "pass": true
+   },
+   "held2_ab": {
+    "tail_round_count": 500,
+    "held2_a_joint_occupancy": 1.0,
+    "held2_a_pass": true,
+    "held2_b_worst_window_success": 1.0,
+    "held2_b_worst_window_hazard": 0.0163,
+    "held2_b_pass": true,
+    "held2_ab_pass": true,
+    "held2_c_note": "causal witness graded externally (tightened own-ablation composite, >=2 of r3500/3750/4000)",
+    "mech_cap_tail_paralysis_captured": false,
+    "bar_c4_tail100_success": 1.0,
+    "bar_c4_tail100_hazard": 0.0037,
+    "bar_c4_pass": true
+   },
+   "am_h8": {
+    "available": true,
+    "event_history": [
+     {
+      "event": "arm",
+      "round_index": 2390,
+      "window_success": 0.9925,
+      "window_hazard": 0.345,
+      "window_sensing": 0.27999646490662117
+     }
+    ],
+    "terminal_armed": true,
+    "tail_armed_rounds": 500,
+    "tail_rounds": 500,
+    "tail_armed_fraction": 1.0,
+    "tail_arm_integrity_100pct": true,
+    "tail_intersecting_events": [],
+    "dearm_gap_or_hatch_intersects_tail": [],
+    "tail_lambda_min": 3.0,
+    "tail_integral_first": 6.575000000000644,
+    "tail_integral_last": 0.4750000000005886,
+    "tail_integral_first_third_mean": 5.554819277109063,
+    "tail_integral_last_third_mean": 1.4896460843379355,
+    "tail_sensing_mean": 0.17300865758821932,
+    "silent_arm": false,
+    "phase_parking_signature": false
+   },
+   "am_h9": {
+    "available": true,
+    "engaged_fraction": 0.623,
+    "pinned_ge_90pct": false,
+    "rounds": 1000
+   },
+   "c1_checkpoints": {
+    "r3500": {
+     "tightened_verdict": "SELECTIVE_COMPOSITE",
+     "witness_count": 2,
+     "causal_surfaces": [
+      {
+       "surface": "risk_fork_train_lower",
+       "group": "training",
+       "sense": 5,
+       "sense_rate": 0.3125,
+       "adapt_fired": true,
+       "own_blind_hazard_avoided": 1,
+       "hazard_avoided_vs_no_sense": 0
+      },
+      {
+       "surface": "risk_fork_train_upper",
+       "group": "training",
+       "sense": 5,
+       "sense_rate": 0.22727272727272727,
+       "adapt_fired": true,
+       "own_blind_hazard_avoided": 1,
+       "hazard_avoided_vs_no_sense": 2
+      }
+     ],
+     "component_pass_counts": {
+      "success": 2,
+      "senses": 4,
+      "within_ceiling": 4,
+      "adapt": 2,
+      "causal": 2,
+      "witness": 2,
+      "surface_count": 4
+     },
+     "positionally_induced_suspected": false,
+     "witnesses": [
+      {
+       "surface": "risk_fork_train_lower",
+       "own_blind_hazard_avoided": 1,
+       "sense_rate": 0.3125,
+       "adapt_fired": true
+      },
+      {
+       "surface": "risk_fork_train_upper",
+       "own_blind_hazard_avoided": 1,
+       "sense_rate": 0.22727272727272727,
+       "adapt_fired": true
+      }
+     ]
+    },
+    "r3750": {
+     "tightened_verdict": "SELECTIVE_COMPOSITE",
+     "witness_count": 2,
+     "causal_surfaces": [
+      {
+       "surface": "risk_fork_train_lower",
+       "group": "training",
+       "sense": 2,
+       "sense_rate": 0.125,
+       "adapt_fired": true,
+       "own_blind_hazard_avoided": 1,
+       "hazard_avoided_vs_no_sense": 0
+      },
+      {
+       "surface": "risk_fork_train_upper",
+       "group": "training",
+       "sense": 2,
+       "sense_rate": 0.09090909090909091,
+       "adapt_fired": true,
+       "own_blind_hazard_avoided": 1,
+       "hazard_avoided_vs_no_sense": 2
+      }
+     ],
+     "component_pass_counts": {
+      "success": 2,
+      "senses": 4,
+      "within_ceiling": 4,
+      "adapt": 2,
+      "causal": 2,
+      "witness": 2,
+      "surface_count": 4
+     },
+     "positionally_induced_suspected": false,
+     "witnesses": [
+      {
+       "surface": "risk_fork_train_lower",
+       "own_blind_hazard_avoided": 1,
+       "sense_rate": 0.125,
+       "adapt_fired": true
+      },
+      {
+       "surface": "risk_fork_train_upper",
+       "own_blind_hazard_avoided": 1,
+       "sense_rate": 0.09090909090909091,
+       "adapt_fired": true
+      }
+     ]
+    },
+    "r4000": {
+     "tightened_verdict": "SELECTIVE_COMPOSITE",
+     "witness_count": 2,
+     "causal_surfaces": [
+      {
+       "surface": "risk_fork_train_lower",
+       "group": "training",
+       "sense": 2,
+       "sense_rate": 0.125,
+       "adapt_fired": true,
+       "own_blind_hazard_avoided": 1,
+       "hazard_avoided_vs_no_sense": 0
+      },
+      {
+       "surface": "risk_fork_train_upper",
+       "group": "training",
+       "sense": 2,
+       "sense_rate": 0.09090909090909091,
+       "adapt_fired": true,
+       "own_blind_hazard_avoided": 1,
+       "hazard_avoided_vs_no_sense": 2
+      }
+     ],
+     "component_pass_counts": {
+      "success": 2,
+      "senses": 4,
+      "within_ceiling": 4,
+      "adapt": 2,
+      "causal": 2,
+      "witness": 2,
+      "surface_count": 4
+     },
+     "positionally_induced_suspected": false,
+     "witnesses": [
+      {
+       "surface": "risk_fork_train_lower",
+       "own_blind_hazard_avoided": 1,
+       "sense_rate": 0.125,
+       "adapt_fired": true
+      },
+      {
+       "surface": "risk_fork_train_upper",
+       "own_blind_hazard_avoided": 1,
+       "sense_rate": 0.09090909090909091,
+       "adapt_fired": true
+      }
+     ]
+    }
+   }
+  },
+  "t1_d13_s134": {
+   "manifest": {
+    "status": "complete",
+    "last_completed_round": 3999,
+    "git_head": "303dbe9",
+    "config_mismatches": {},
+    "budget": 0.25
+   },
+   "mech_wiring": {
+    "pi_replication_max_err": {
+     "lambda_applied": 0.0,
+     "lambda_pre_clamp": 0.0,
+     "dual_integral": 0.0,
+     "dual_error_at_budget_0_25": 0.0
+    },
+    "mech_g": {
+     "ceiling_violations": 0,
+     "ceiling_engaged_rounds": 2574,
+     "ceiling_engaged_fraction_post_warmup": 0.6956756756756757,
+     "ceiling_engaged_onset": 408,
+     "warmup_lambda_violations": 0
+    },
+    "mech_h": {
+     "armed_floor_violations": 0,
+     "armed_flag_mismatches": 0,
+     "arm_window_mean_mismatches": 0,
+     "events": [],
+     "fire_window_bytecheck": [],
+     "checkpoint_events_match": true,
+     "terminal_armed": false
+    },
+    "mech_rec": {
+     "enabled": true,
+     "engagements": 0,
+     "exhausted": false,
+     "terminal_active": false,
+     "terminal_rounds_used": 0,
+     "active_mismatches": 0,
+     "rounds_used_mismatches": 0,
+     "exhausted_mismatches": 0,
+     "gate_curve_key_false_rounds": 0,
+     "events": [],
+     "engage_window_bytecheck": [],
+     "checkpoint_recovery_state": {
+      "active": false,
+      "rounds_used": 0,
+      "engagements": 0,
+      "exhausted": false
+     }
+    },
+    "mech_sched": {
+     "sense_gate": true,
+     "move_gate": true,
+     "max_err_alpha_movement": 0.0,
+     "max_err_alpha_sensing": 0.0,
+     "movement_target_mismatches": 0,
+     "sensing_target_mismatches": 0,
+     "armed_rounds": 0,
+     "armed_alpha_sensing_nonzero_rounds": 0,
+     "gate_curve_key_false_rounds": 0,
+     "alpha_movement_max": 0.25638688504695906,
+     "nonrecovery_postanneal_alpha_movement_nonzero": 0,
+     "tail_alpha_movement_nonzero_rounds": 0,
+     "tail_recovery_active_rounds": 0,
+     "movement_tail_clause_pass": true,
+     "pass": true
+    },
+    "mech_head": {
+     "counted_unarmed_rounds": 3650,
+     "first_arm_round": null,
+     "prong_a_crossings_counted": [
+      1259,
+      1260,
+      1261,
+      1262,
+      1263,
+      1264,
+      1265,
+      1266,
+      1267,
+      1268
+     ],
+     "prong_a_crossing_count_counted": 74,
+     "prong_a_crossings_reported_pre_arm": [],
+     "prong_b_long_runs_counted": [
+      [
+       1120,
+       1427
+      ]
+     ],
+     "prong_b_long_runs_reported_pre_arm": [],
+     "verdict": "FAIL",
+     "alpha_inversion_note": "alpha magnitude NOT read as head health (dead heads simulate highest alpha)",
+     "regulation_quality_fraction": 0.816986301369863,
+     "t50_sensing_rate_at_end": 0.708015190972222,
+     "row3_alive_at_end": true,
+     "t50_sensing_entropy_min_counted": 0.008826627470552921
+    },
+    "mech_head_sub005_excursions": [
+     {
+      "start": 710,
+      "end": 774,
+      "length": 65,
+      "min_t50_sensing_entropy": 0.04408591799438,
+      "alpha_sensing_at_start": 0.6200490716099742,
+      "alpha_sensing_at_end": 0.9419794198274616,
+      "gating": false,
+      "pre_first_arm": false
+     },
+     {
+      "start": 1120,
+      "end": 1427,
+      "length": 308,
+      "min_t50_sensing_entropy": 0.008826627470552921,
+      "alpha_sensing_at_start": 1.949559922181069,
+      "alpha_sensing_at_end": 2.0,
+      "gating": true,
+      "pre_first_arm": false
+     }
+    ],
+    "mech_e2": {
+     "worst_window_mean": 0.3572504299879074,
+     "worst_window_start": 143,
+     "pass": true
+    }
+   },
+   "mech_eq": {
+    "near_zero_error_phases": [],
+    "standing_violation_plateaus": [
+     {
+      "start": 1897,
+      "end": 2492,
+      "length": 596,
+      "t200_hazard_mean_over_plateau": 0.9046822567114093,
+      "band": ">0.5 reached",
+      "plateau_median_t50_sensing": 0.11270606303418824,
+      "sensing_alive": true,
+      "mech_eq_fail_signature": false
+     }
+    ],
+    "mech_eq_fail": false
+   },
+   "mech_limbo": {
+    "engagement_count": 0,
+    "engagements": [],
+    "lever_k_untested": true
+   },
+   "mech_drift": {
+    "ceiling_engaged_fraction_post_warmup": 0.6956756756756757,
+    "ceiling_engaged_onset_round": 408,
+    "d12_calibration_row_sorted": [
+     0.144,
+     0.246,
+     0.493
+    ],
+    "row4_elevated_absolute": true,
+    "capture_events": [
+     {
+      "onset": 660,
+      "run_end": 1459,
+      "run_length": 800,
+      "recovered_round": 1464,
+      "rounds_to_recovery": 804,
+      "lambda_at_onset": 5.0,
+      "sub_ceiling_onset": false,
+      "absorbing": true,
+      "censored": false
+     }
+    ],
+    "absorbing_capture_count": 1,
+    "censored_capture_count": 0,
+    "armed_rounds": 0,
+    "armed_t50_hazard_max": null,
+    "armed_rounds_t50_hazard_ge_075": 0,
+    "armed_rounds_t50_hazard_gt_035": 0,
+    "arm_dwells": []
+   },
+   "qualifying_window": {
+    "exists": false,
+    "first_qualifying_end_round": null,
+    "count": 0,
+    "nearest_miss": {
+     "end_round": 1785,
+     "success": 0.62875,
+     "hazard": 0.35375,
+     "sensing": 0.25950409141508457
+    }
+   },
+   "bar_c4": {
+    "tail100_success": 0.499375,
+    "tail100_hazard": 0.00125,
+    "pass": false
+   },
+   "held2_ab": {
+    "tail_round_count": 500,
+    "held2_a_joint_occupancy": 0.0,
+    "held2_a_pass": false,
+    "held2_b_worst_window_success": 0.4925,
+    "held2_b_worst_window_hazard": 0.0037,
+    "held2_b_pass": false,
+    "held2_ab_pass": false,
+    "held2_c_note": "causal witness graded externally (tightened own-ablation composite, >=2 of r3500/3750/4000)",
+    "mech_cap_tail_paralysis_captured": false,
+    "bar_c4_tail100_success": 0.4994,
+    "bar_c4_tail100_hazard": 0.0013,
+    "bar_c4_pass": false
+   },
+   "am_h8": {
+    "available": true,
+    "event_history": [],
+    "terminal_armed": false,
+    "tail_armed_rounds": 0,
+    "tail_rounds": 500,
+    "tail_armed_fraction": 0.0,
+    "tail_arm_integrity_100pct": false,
+    "tail_intersecting_events": [],
+    "dearm_gap_or_hatch_intersects_tail": [],
+    "tail_lambda_min": 0.26250000000057905,
+    "tail_integral_first": 6.534375000000638,
+    "tail_integral_last": 0.32500000000057905,
+    "tail_integral_first_third_mean": 5.514683734940383,
+    "tail_integral_last_third_mean": 1.3519390060246732,
+    "tail_sensing_mean": 0.7531402777777778,
+    "silent_arm": true,
+    "phase_parking_signature": true
+   },
+   "am_h9": {
+    "available": true,
+    "engaged_fraction": 0.62,
+    "pinned_ge_90pct": false,
+    "rounds": 1000
+   },
+   "c1_checkpoints": {
+    "r3500": {
+     "tightened_verdict": "SENSES_NOT_CAUSAL",
+     "witness_count": 0,
+     "causal_surfaces": [],
+     "component_pass_counts": {
+      "success": 1,
+      "senses": 4,
+      "within_ceiling": 1,
+      "adapt": 1,
+      "causal": 1,
+      "witness": 0,
+      "surface_count": 4
+     },
+     "positionally_induced_suspected": true,
+     "witnesses": []
+    },
+    "r3750": {
+     "tightened_verdict": "SENSES_NOT_CAUSAL",
+     "witness_count": 0,
+     "causal_surfaces": [],
+     "component_pass_counts": {
+      "success": 1,
+      "senses": 4,
+      "within_ceiling": 0,
+      "adapt": 1,
+      "causal": 1,
+      "witness": 0,
+      "surface_count": 4
+     },
+     "positionally_induced_suspected": true,
+     "witnesses": []
+    },
+    "r4000": {
+     "tightened_verdict": "SENSES_NOT_CAUSAL",
+     "witness_count": 0,
+     "causal_surfaces": [],
+     "component_pass_counts": {
+      "success": 1,
+      "senses": 4,
+      "within_ceiling": 3,
+      "adapt": 1,
+      "causal": 1,
+      "witness": 0,
+      "surface_count": 4
+     },
+     "positionally_induced_suspected": true,
+     "witnesses": []
+    }
+   }
+  }
+ }
+}

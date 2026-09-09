@@ -1,0 +1,387 @@
+{
+ "unit": "T1-D13 ANCHOR RE-RUN (DR-REPRESENTATION candidate A go/no-go gate)",
+ "shift": 38,
+ "date": "2026-07-12",
+ "encoding": "egocentric radius-2 obstacle patch, actor_observation_dim 10->22 (actor_input_dim 26), NHR/Phi indices 0,1,5 fixed",
+ "config": "single-pair {3,4} (risk_fork_train_lower/upper), budget 0.25, EVERY corridor lever frozen at T1-D13; git d15630c/src==3591d61; NO resume seams",
+ "step0_behavioral_battery": {
+  "verdict": "PASS",
+  "suite": "1539 passed",
+  "section_drrep": "23 passed (MECH-MIRROR + M3 (3,3) positive control + MECH-SWAP + teeth + NHR/recover_cell + BAR-A radius-2 + BA-6 enriched-wall never-sense control + coupling guard)",
+  "composed_phi_telescoping_dim22": "20 passed",
+  "standalone": {
+   "held2_bar_validate": "ALL PASS",
+   "c1_validate_fork": "all_passed=true",
+   "r2_null": "11/11 PASS",
+   "drh5_trigger": "ALL PASS",
+   "verify_fork_34": "forces_sensing_and_winnable=True; BAR-A no-sense mean hazard 1.0=2x budget; train_upper wrong-guess mirror 2.0"
+  },
+  "dim22_training_confirmed": "actor_encoder.weight=(32,26) => actor_input_dim 26 => enriched dim-22 obs (dim-10 would be (32,14))",
+  "grader_validated_on_knowns": "MECH grader reproduces registered T1-D13 grade EXACTLY (s132 arm r2540 BAR-C4 1.0/0.004375 PASS ceiling 0.769; s133 arm r2390 1.0/0.00375 PASS 0.697; s134 no-arm 0.499/0.00125 FAIL 0.696; 0.0-err ctrl; config_mismatches NONE)",
+  "ba5_floor": "PINNED pre-anchor (own_blind>=1 AND sense_rate>=0.05); CONFIRMED not re-pinned; s132/s133 knowns clear it"
+ },
+ "per_seed": {
+  "anchor_rerun_s144": {
+   "MECH": {
+    "config_mismatches": {},
+    "ctrl_max_err_L_PC_I_DE": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "mech_g_ceiling_viol": 0,
+    "mech_h_floor_viol": 0,
+    "armed_flag_mism": 0,
+    "warmup_viol": 0,
+    "arm_events": [
+     [
+      "arm",
+      583
+     ]
+    ],
+    "mech_head": "PASS",
+    "mech_sched_pass": true,
+    "armed_alpha_sense_nonzero": 0,
+    "mech_e2_pass": true,
+    "mech_eq_fail": false,
+    "mech_rec_engagements": 0,
+    "lever_k_untested": true,
+    "ceiling_frac": 0.0822,
+    "absorbing_captures": 0
+   },
+   "BAR_C4_per_mirror": {
+    "pooled": {
+     "tail100_success": 1.0,
+     "tail100_hazard": 0.001875,
+     "pass": true
+    },
+    "train_lower": {
+     "success": 1.0,
+     "hazard": 0.00125,
+     "sens_rate": 0.4008
+    },
+    "train_upper": {
+     "success": 1.0,
+     "hazard": 0.0025,
+     "sens_rate": 0.2957
+    },
+    "both_mirrors_hazard_le_half": true,
+    "both_mirrors_success_ge_09": true,
+    "PASS": true
+   },
+   "BAR_C1_HELD2": {
+    "a_occupancy": 1.0,
+    "a_pass": true,
+    "b_worst_success": 1.0,
+    "b_worst_hazard": 0.0025,
+    "b_pass": true,
+    "c_ba5_anchor_witness_checkpoints": 3,
+    "c_pass_2of3": true,
+    "witness_surfaces_by_ckpt": [
+     [
+      "risk_fork_train_lower"
+     ],
+     [
+      "risk_fork_train_lower"
+     ],
+     [
+      "risk_fork_train_lower"
+     ]
+    ],
+    "below_ba5_floor": [
+     [],
+     [],
+     []
+    ],
+    "positionally_induced": [
+     false,
+     false,
+     false
+    ],
+    "reveal_gated_no_go_anchor": [
+     [],
+     [],
+     []
+    ],
+    "amh8_silent_arm": false,
+    "amh8_tail_arm_integrity": true,
+    "amh8_tail_lambda_min": 3.0,
+    "amh8_phase_parking": false,
+    "support_free_tail": true,
+    "HELD2_PASS": true
+   },
+   "C4_GEN": {
+    "checkpoints_pass": 0,
+    "pass_2of3": false,
+    "note": "readiness memorized-gate failure; REPORTED/staged, NEVER gates"
+   }
+  },
+  "anchor_rerun_s145": {
+   "MECH": {
+    "config_mismatches": {},
+    "ctrl_max_err_L_PC_I_DE": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "mech_g_ceiling_viol": 0,
+    "mech_h_floor_viol": 0,
+    "armed_flag_mism": 0,
+    "warmup_viol": 0,
+    "arm_events": [
+     [
+      "arm",
+      1106
+     ]
+    ],
+    "mech_head": "PASS",
+    "mech_sched_pass": true,
+    "armed_alpha_sense_nonzero": 0,
+    "mech_e2_pass": true,
+    "mech_eq_fail": false,
+    "mech_rec_engagements": 0,
+    "lever_k_untested": true,
+    "ceiling_frac": 0.0,
+    "absorbing_captures": 0
+   },
+   "BAR_C4_per_mirror": {
+    "pooled": {
+     "tail100_success": 1.0,
+     "tail100_hazard": 0.000625,
+     "pass": true
+    },
+    "train_lower": {
+     "success": 1.0,
+     "hazard": 0.0,
+     "sens_rate": 0.2195
+    },
+    "train_upper": {
+     "success": 1.0,
+     "hazard": 0.00125,
+     "sens_rate": 0.1669
+    },
+    "both_mirrors_hazard_le_half": true,
+    "both_mirrors_success_ge_09": true,
+    "PASS": true
+   },
+   "BAR_C1_HELD2": {
+    "a_occupancy": 1.0,
+    "a_pass": true,
+    "b_worst_success": 1.0,
+    "b_worst_hazard": 0.0037,
+    "b_pass": true,
+    "c_ba5_anchor_witness_checkpoints": 3,
+    "c_pass_2of3": true,
+    "witness_surfaces_by_ckpt": [
+     [
+      "risk_fork_train_lower",
+      "risk_fork_train_upper"
+     ],
+     [
+      "risk_fork_train_lower",
+      "risk_fork_train_upper"
+     ],
+     [
+      "risk_fork_train_lower",
+      "risk_fork_train_upper"
+     ]
+    ],
+    "below_ba5_floor": [
+     [],
+     [],
+     []
+    ],
+    "positionally_induced": [
+     false,
+     false,
+     false
+    ],
+    "reveal_gated_no_go_anchor": [
+     [],
+     [],
+     []
+    ],
+    "amh8_silent_arm": false,
+    "amh8_tail_arm_integrity": true,
+    "amh8_tail_lambda_min": 3.0,
+    "amh8_phase_parking": false,
+    "support_free_tail": true,
+    "HELD2_PASS": true
+   },
+   "C4_GEN": {
+    "checkpoints_pass": 0,
+    "pass_2of3": false,
+    "note": "readiness memorized-gate failure; REPORTED/staged, NEVER gates"
+   }
+  },
+  "anchor_rerun_s146": {
+   "MECH": {
+    "config_mismatches": {},
+    "ctrl_max_err_L_PC_I_DE": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "mech_g_ceiling_viol": 0,
+    "mech_h_floor_viol": 0,
+    "armed_flag_mism": 0,
+    "warmup_viol": 0,
+    "arm_events": [
+     [
+      "arm",
+      1145
+     ]
+    ],
+    "mech_head": "PASS",
+    "mech_sched_pass": true,
+    "armed_alpha_sense_nonzero": 0,
+    "mech_e2_pass": true,
+    "mech_eq_fail": false,
+    "mech_rec_engagements": 0,
+    "lever_k_untested": true,
+    "ceiling_frac": 0.1232,
+    "absorbing_captures": 0
+   },
+   "BAR_C4_per_mirror": {
+    "pooled": {
+     "tail100_success": 1.0,
+     "tail100_hazard": 0.001875,
+     "pass": true
+    },
+    "train_lower": {
+     "success": 1.0,
+     "hazard": 0.00375,
+     "sens_rate": 0.191
+    },
+    "train_upper": {
+     "success": 1.0,
+     "hazard": 0.0,
+     "sens_rate": 0.2225
+    },
+    "both_mirrors_hazard_le_half": true,
+    "both_mirrors_success_ge_09": true,
+    "PASS": true
+   },
+   "BAR_C1_HELD2": {
+    "a_occupancy": 1.0,
+    "a_pass": true,
+    "b_worst_success": 1.0,
+    "b_worst_hazard": 0.0037,
+    "b_pass": true,
+    "c_ba5_anchor_witness_checkpoints": 3,
+    "c_pass_2of3": true,
+    "witness_surfaces_by_ckpt": [
+     [
+      "risk_fork_train_lower",
+      "risk_fork_train_upper"
+     ],
+     [
+      "risk_fork_train_lower",
+      "risk_fork_train_upper"
+     ],
+     [
+      "risk_fork_train_lower",
+      "risk_fork_train_upper"
+     ]
+    ],
+    "below_ba5_floor": [
+     [],
+     [],
+     []
+    ],
+    "positionally_induced": [
+     false,
+     false,
+     false
+    ],
+    "reveal_gated_no_go_anchor": [
+     [],
+     [],
+     []
+    ],
+    "amh8_silent_arm": false,
+    "amh8_tail_arm_integrity": true,
+    "amh8_tail_lambda_min": 3.0,
+    "amh8_phase_parking": false,
+    "support_free_tail": true,
+    "HELD2_PASS": true
+   },
+   "C4_GEN": {
+    "checkpoints_pass": 0,
+    "pass_2of3": false,
+    "note": "readiness memorized-gate failure; REPORTED/staged, NEVER gates"
+   }
+  }
+ },
+ "tally": {
+  "BAR_C4_per_mirror": "3/3",
+  "BAR_C1_HELD2": "3/3",
+  "C4_GEN": "0/3 (staged)"
+ },
+ "mech_drift_reads": {
+  "ceiling_fractions": [
+   0.0822,
+   0.0,
+   0.1232
+  ],
+  "t1d13_baselines": [
+   0.696,
+   0.697,
+   0.769
+  ],
+  "direction": "LARGE DOWNWARD (benign: enriched policy needs less constraint pressure); NOT an alarm per DR (drift EXPECTED, report vs baselines)",
+  "arm_rounds": [
+   [
+    583
+   ],
+   [
+    1106
+   ],
+   [
+    1145
+   ]
+  ],
+  "t1d13_arm_rounds": [
+   2390,
+   2540
+  ],
+  "arm_note": "MUCH EARLIER (r583/1106/1145) => disambiguating wall percept accelerates Mode-C assembly by ~1200-1900 rds",
+  "no_f88": "zero absorbing captures on all 3; s145 one pre-arm capture r461 recovered r1010 (549 rds, non-absorbing); armed relapse>=0.75: 0/3"
+ },
+ "ruling": {
+  "verdict": "GO",
+  "row": "ROW 1 (GO)",
+  "precedence_checked": "ROW 2 (wiring/leak): NO wiring failure (all MECH 0-err, MECH-MIRROR/SWAP-teeth pass) -> not row 2. ROW 5 (NO-GO): both bars >=2/3 -> not row 5. ROW 1 (GO).",
+  "meaning": "encoding NON-DESTRUCTIVE single-pair; T1-D13 row-1 RE-ESTABLISHES (proven re-runnable, not merely historical); NOT a mechanism result (the mechanism is tested by the RETAIN mixture that follows)",
+  "task_easing_ruled_out": "sensing ALIVE (per-mirror rates 0.17-0.40) AND CAUSAL (own_blind>=1 anchor witnesses at 9/9 checkpoints, below_floor=[]); the OPPOSITE of the high-success/low-hazard/low-witness task-easing signature",
+  "stronger_than_t1d13": "BAR-C4 3/3 (T1-D13 2/3) and HELD-2 3/3 (T1-D13 2/3); s146 (the s134-analog) ARMED (r1145) and PASSED where s134 was the half-success no-arm park",
+  "next": "GO => LAUNCH primary multi-geometry RETAIN {3,4}+{0,3} seeds 147/148/149 (SAME frozen levers + enriched obs, per-mirror AM-C2, C4-GEN staged); the mechanism (F-87 dilution) is tested there"
+ },
+ "ba4_reading_verbatim": "The PRIMARY radius-2-attributable readable positive for the RETAIN run is ANCHOR-MIRROR CONSOLIDATION UNDER MIXING (both {3,4} mirrors <=0.5 per-mirror hazard WITH a causal witness while trained alongside {0,3}) -- the CLEAN class test, because radius-2 FULLY resolves the {3,4} reroute (safe gate Manhattan-2). The all-four-mirror row-1 pass is the STRETCH outcome: additionally gated on {0,3}_lower far reroute whose safe gate (0,4) is Manhattan-4, OUTSIDE radius-2 (BA-1/2/3). A {0,3}_lower-only failure is ROW 4 -> candidate B, NOT row 3, and NOT a representation-CLASS refutation.",
+ "adversarial_confirmation": {
+  "workflow": "wf_744c3a7b-910",
+  "overall_verdict": "CONFIRMED",
+  "ruling": "GO",
+  "gates_all_pass": true,
+  "gates": [
+   "grade_reproduced",
+   "witness_authentic",
+   "task_easing_ruled_out",
+   "dim22_confirmed",
+   "mech_correct",
+   "routing_correct",
+   "sequence_lock_ok",
+   "immutable_identity_ok"
+  ],
+  "lenses": "4/4 CONFIRMED, 0 attacks landed, 0 must-fixes; every load-bearing number independently re-derived from raw disk (PI recursion re-implemented from scratch 0.0-err; per-mirror from raw episode_log; own-ablation C1 re-run on raw checkpoints; MECH grader passes T1-D13 knowns-validation)",
+  "amendments": [
+   "SCOPE (folded): the GO certifies NON-DESTRUCTIVE single-pair {3,4} ONLY, NOT generalization; C4-GEN 0/3 honestly staged/non-gating; the generalization question is the downstream RETAIN {3,4}+{0,3}.",
+   "MECH-DRIFT REGIME (folded): a genuine regime SHIFT from T1-D13 (arms ~1200-1900 rds earlier r583/1106/1145 vs r2390/2540; ceiling 0.082/0.000/0.123 vs 0.696/0.697/0.769) = the enriched wall-percept accelerating Mode-C assembly under less pressure; carry into RETAIN interpretation as a DIFFERENT dynamical regime, not mere re-establishment.",
+   "COSMETIC (errata, no grade impact): unify the two arm-event accessor surfaces (controller_replication.replicated_events vs checkpoint_arm_state.events) in the grade harness; arm rounds reproduce exactly via both the behavioral window scan and the checkpoint arm_state log."
+  ]
+ },
+ "countersign_record": "docs/evidence/anchor_rerun_countersign.json"
+}

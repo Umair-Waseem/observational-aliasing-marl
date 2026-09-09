@@ -1,0 +1,133 @@
+{
+  "shift": 12,
+  "run_set": "T1-D7",
+  "seeds": [114, 115, 116],
+  "git_head_of_runs": "059676a",
+  "src_byte_identical_to": "c873197 (SHIFT-10 DR-D1/L1-b implementing commit; git diff = CLAUDE.md only)",
+  "dr_under_test": "DR-D1/L1-b (decision-relevant sensing credit Phi_sense + warmup-scoped sensing keep-alive)",
+  "completion_verified_from_disk": {
+    "t1_d7_s114": {"status": "complete", "last_completed_round": 3999, "final_checkpoint": "state_round_004000.pt", "out_log": "STAGE25 RUN COMPLETE"},
+    "t1_d7_s115": {"status": "complete", "last_completed_round": 3999, "final_checkpoint": "state_round_004000.pt", "out_log": "STAGE25 RUN COMPLETE"},
+    "t1_d7_s116": {"status": "complete", "last_completed_round": 3999, "final_checkpoint": "state_round_004000.pt", "out_log": "STAGE25 RUN COMPLETE"}
+  },
+  "i3_clean": "curves + C1 harness + probes are training+readiness fork surfaces only; held-out fork gates 5/6 never instantiated (fork_hazard_layout_families() returns only training+readiness; harness _assert_not_held_out guard).",
+
+  "precheck0_ablation_sanity": {
+    "verdict": "PASS — the C1 causal instrument is trustworthy on the current code path",
+    "scripted_comparators_fork": "all_passed; selective_sense->SELECTIVE_COMPOSITE (2 witnesses, own_avoided=2 on the surfaces where hazard is on the policy route, own_avoided=0 where the route is safe regardless), no_sense->FAIL_NEVER_SENSE, always_sense->FAIL_ALWAYS_SENSE",
+    "scripted_comparators_legacy": "all_passed (same structure)",
+    "adversarial_F3_F4": "F3 privileged-safe->SENSES_NOT_CAUSAL (own_avoided=0 everywhere; sensing-on==sensing-off hazard), F4->SENSES_NOT_CAUSAL, selective_sense->SELECTIVE_COMPOSITE. AM-1 own-ablation kills the F3 memorized-safe gaming vector.",
+    "model_path_blinding_proof": "on a real fork env the exact revealed_information_batch path greedy_model_policy_fn uses went NONZERO (max_abs 1.0, 3 features) -> ALL-ZERO under _blind_reveal_observations. The ablation genuinely blinds the LEARNED model, not just the scripted _update_revealed_memory path. Code trace: greedy_model_policy_fn -> revealed_information_batch -> revealed_information_from_stage23 reads actor_visible.revealed_local_hazards; empty list -> [0,0,0,0]."
+  },
+
+  "precheck1_mechanical": {
+    "note": "settled (warmup window [0,300) complete before grading); disambiguates the routing.",
+    "sensing_collapse_round_below_0p01": {"s114": 179, "s115": 227, "s116": 343},
+    "min_sensing_rate_over_warmup": {"s114": 0.0, "s115": 0.0, "s116": 0.0521},
+    "bar_c1a_survival_pass_2of3": false,
+    "credit_fired_frac_warmup": {"s114": 0.787, "s115": 0.873, "s116": 1.0},
+    "credit_magnitude_mean": "~1e-5 (Phi_sense fires only on previous_sensed AND in-fork-zone; telescopes ~0 after round 300)",
+    "keepalive_first_engaged_round": {"s114": 13, "s115": 24, "s116": 13},
+    "interpretation": "credit FIRED but negligible; keep-alive engaged early yet FAILED to hold sensing >=0.05 through warmup (2/3 collapsed <0.01 INSIDE warmup). Not outcome-3 (credit missed): the credit fired; sensing collapsed anyway."
+  },
+
+  "C4_task_success": {
+    "graded": "FIRST and INDEPENDENTLY on the TRUE sparse success_rate (fork training curves)",
+    "tail100_success_rate": {"s114": 1.0, "s115": 1.0, "s116": 0.699},
+    "first_success_round": {"s114": 13, "s115": 7, "s116": 11},
+    "first_sustained_0p9_round": {"s114": 123, "s115": 149, "s116": 207},
+    "successful_rounds_of_4000": {"s114": 3987, "s115": 3989, "s116": 3957},
+    "max_success_ever": {"s114": 1.0, "s115": 1.0, "s116": 1.0},
+    "s116_note": "s116 held success 1.0 through [3000,3900) then dropped to 0.699 in the final [3900,4000) window — a LATE training instability (tail reward_explained_variance -0.117 = reward critic diverged), NOT a fundamental C4 failure. All three learned success by round ~130-210.",
+    "verdict": "C4 SUCCESS PRESERVED on training on 2/3 seeds (s114/s115 at 1.0; s116 degraded to 0.699 by a late wobble). Task learning was NOT broken by the DR-D1/L1-b levers."
+  },
+
+  "C3_hazard": {
+    "tail100_hazard_cost_sum_mean": {"s114": 1.0, "s115": 1.0, "s116": 1.0},
+    "budget_d_ep": 0.5,
+    "interpretation": "hazard pinned at 1.0 = 2x budget = the SPLIT-GATES blind minimum from round 300 onward; never drops toward 0.5.",
+    "lambda_tail100": {"s114": 91.506, "s115": 91.503, "s116": 91.519},
+    "lambda_max": {"s114": 92.744, "s115": 92.741, "s116": 92.756},
+    "dual_error_tail100": {"s114": 0.5, "s115": 0.5, "s116": 0.5},
+    "verdict": "C3 FAIL 3/3. lambda wound to ~92.7 impotently; the constraint has no live sensing/exploration to redirect, so hazard stays at the blind minimum."
+  },
+
+  "C1_selective_sensing": {
+    "instrument": "docs/evidence/c1_selectivity_harness.py --grade-run --fork (tightened_composite_c1_verdict; credit OFF at eval by construction — greedy on the unshaped env)",
+    "tightened_composite_by_run": {"t1_d7_s114": "SENSES_ON_FAILURE_ONLY", "t1_d7_s115": "FAIL_NEVER_SENSE", "t1_d7_s116": "FAIL_NEVER_SENSE"},
+    "pooled_composite_by_run": {"t1_d7_s114": "SELECTIVE_COMPOSITE (FALSE POSITIVE, correctly killed by the tightened metric)", "t1_d7_s115": "FAIL_NEVER_SENSE", "t1_d7_s116": "FAIL_NEVER_SENSE"},
+    "c1_aggregate_pass_2of3_tightened": false,
+    "witness_count": {"s114": 0, "s115": 0, "s116": 0},
+    "total_sense_per_seed": {"s114": "2/160", "s115": "0/160", "s116": "0/256"},
+    "own_blind_hazard_avoided": "0 on EVERY surface of EVERY seed (no causally-protective sensing anywhere)",
+    "s114_false_positive": "s114 senses 2/160, BOTH on readiness surfaces where it FAILS (team_success=False, own_avoid=0) — the s113-class vector; the tightened metric -> SENSES_ON_FAILURE_ONLY (correct rejection).",
+    "verdict": "C1 FAIL 3/3 via the validated tightened causal composite, credit OFF at eval. No genuine causal witness on any surface/seed."
+  },
+
+  "C2_adapt": {"c2_adapt_episode_fraction": {"s114": 0.0, "s115": 0.0, "s116": 0.0}, "verdict": "FAIL 3/3 (moot — no meaningful sensing)"},
+
+  "bar_result": {
+    "bar_c1_survival_2of3": false,
+    "bar_c1_selective_2of3": false,
+    "bar_c4_success_and_hazard_2of3": false,
+    "two_part_bar": "FAILS on BOTH parts (BAR-C1 survival 2/3 fail + selective 3/3 fail; BAR-C4 hazard 3/3 over budget)."
+  },
+
+  "mechanism": {
+    "summary": "IDENTICAL to T1-D6. The DR-D1/L1-b credit+keep-alive did NOT change the outcome: sensing still collapsed, hazard still pinned at the split-gates blind minimum.",
+    "split_gates_confirmed": "agent_0 ALWAYS takes the upper gate (row 3), agent_1 ALWAYS the lower gate (row 4), on BOTH aliased layouts. On train_lower (hazard (4,4)) agent_1 eats it; on train_upper (hazard (3,4)) agent_0 eats it -> exactly hazard 1.0. Neither senses; neither adapts. Deterministic memorized route.",
+    "actor_side_sensing_collapse": "the -0.5*sensing_cost reward penalty drives the sensing head to deterministic never-sense by round ~180-350. The keep-alive (0.10 entropy bonus) too weak to hold it.",
+    "credit_bootstrap_failure": "Phi_sense fires only on previous_sensed AND in-fork-zone -> as sensing dies the credit dies (~1e-5 mean). Chicken-and-egg: the credit rewards sensing-then-in-zone but needs sensing already happening; it cannot create the gradient to START sensing.",
+    "critic_side_M5_aliasing": "cost-critic EV tail 0.366/0.366/0.422 (<0.5). central_state_from_stage23 is torch.equal-identical for the two aliased fork layouts (schema encodes hazard_cell_count NOT location) -> the cost-GAE cannot credit 'sensed->avoided the ACTUAL hazard'. Even a sensing actor could not learn sense->avoid, so the tightened causal witness (own_avoid>0) could not fire.",
+    "sharpest": "The credit is a REWARD-channel PBRS potential that rewards sensing-then-in-zone but NOT sense->avoid; the only channel that rewards avoidance is the CONSTRAINT (cost via lambda), whose critic is aliased (M-5). So M-5 is now the deeper (likely primary) blocker for a CAUSAL selective-sensing witness — no actor-side sensing incentive can produce sense->AVOID while the cost critic cannot see which gate is hazardous. The keep-alive/credit are necessary to keep sensing in the repertoire but insufficient alone."
+  },
+
+  "routing": {
+    "readiness_gate_outcome": "C4-success preserved (2/3) AND C1 flat/composite FAIL (3/3, credit OFF at eval) AND C3 hazard fail (3/3) — the pre-registered DR-D1/L1-b row: 'C4 preserved AND C1 flat/composite FAIL/vanishes under ablation' -> fallback triggers. Blend of readiness-gate outcome 4 (keep-alive failed to hold sensing) + outcome 2 (M-5 cost-critic).",
+    "fallback_triggers": {
+      "keepalive_strengthen": {"fires": true, "trigger": "sensing_rate_mean crossed <0.01 before round 300 with credit ON (s114 r179, s115 r227)", "action": "raise sensing keep-alive coeff toward 0.20 / target toward 0.50 (sensing factor only; movement head untouched)"},
+      "M5_DR_D10_cost_critic_enrichment": {"fires": true, "trigger": "constraint active (lambda ~91.5) AND tail cost EV <0.5 (0.37-0.42) AND C1 flat", "action": "add hazard-cell coordinates to the CENTRAL state ONLY (privileged critic, CTDE-legal, code-enforced no actor leak, AM-2). Independently ablatable from the credit."},
+      "d_ep_to_0p25": {"fires": false, "reason": "tail hazard is 1.0, NOT in the marginal [0.4,0.6] band; the failure is total blindness, not a marginal budget. d_ep tightening would not help."}
+    },
+    "route": "6.1 named re-diagnosis -> DR-D1/L1-b amendment (keep-alive strengthen, pre-authorized envelope re-run) COMBINED with the M-5/DR-D10 cost-critic hazard-location enrichment (DR-D10 pre-authorized reopen, cost-EV<0.5 trigger), independently ablatable. Re-run as T1-D8. The analysis suggests M-5 (critic-side) should be the PRIMARY lever this round, not just a secondary one.",
+    "separate_track": "the T1-D6/T1-D7 readiness-C4 generalization failure (greedy fails both readiness surfaces on all seeds = memorized training gate) is a gate-row-curriculum problem for the eventual held-out eval; do NOT conflate with the C1 fix."
+  },
+
+  "sequence_lock": "INTACT — readiness gate NOT passed (C1 fails 3/3); no Protocol-v1 threshold/eval-seed pinned; DR-Stage26 un-countersigned; held-out/T3 untouched (I-2/I-3). Protocol-v1 stays DRAFT.",
+
+  "shift13_grade_reconfirmation": {
+    "independent_recompute": "SHIFT 13 re-ran the C1 composite (--grade-run --fork) and the curve analysis from scratch; ALL metrics match SHIFT 12 EXACTLY: C1 tightened {SENSES_ON_FAILURE_ONLY, FAIL_NEVER_SENSE, FAIL_NEVER_SENSE} 0/3 witnesses; C4 success {1.0,1.0,0.699}; C3 hazard {1.0,1.0,1.0}; C2 {0,0,0}; collapse rounds {179,227,343}; warmup-min sensing {0.0,0.0,0.052}. Instrument --validate --fork all 13 checks green.",
+    "official_verdict": "T1-D7 FAILS the two-part DR-D1/L1-b BAR. C1 COLLAPSED (0/3 causal witnesses), C3 hazard FAIL (split-gates 1.0), C2 moot, C4 success 2/3 (hazard conjunct fails). Composite AGREES with the mechanical pre-check (no disagreement to investigate)."
+  },
+
+  "shift13_unit2_tail_shape": {
+    "purpose": "size the amendment (one-lever vs two-lever)",
+    "mode_A_keepalive_too_weak": {
+      "seeds": ["s114", "s115"],
+      "evidence": "sensing collapses WITHIN the warmup window (first_below_0.01 r179/r227) DESPITE the keep-alive firing on ~79%/87% of warmup rounds. Snapshots: s114 r150=0.068->r200=0.014->r250=0.003; s115 r150=0.140->r200=0.058->r250=0.019. The 0.10 sensing-entropy keep-alive is too weak to hold sensing against the DR-D1 -0.5*sensing_cost gradient.",
+      "implies": "STRENGTHEN the keep-alive."
+    },
+    "mode_B_no_sustain_after_release": {
+      "seeds": ["s116"],
+      "evidence": "keep-alive HOLDS sensing through the ENTIRE window (min 0.052, ~0.15 at r299) then sensing collapses within ~50 rounds of RELEASE: r300=0.116 -> r350=0.012 -> r400=0.004 (first_below_0.01 r343). No learned value sustains it after the bonus lifts.",
+      "implies": "the credit cannot provide a sustaining/restoring force (PBRS net-zero) => DECOUPLE the credit; AND a TIMING MISMATCH must be resolved."
+    },
+    "timing_mismatch": "During warmup [0,300) lambda=0 so hazard is FREE => sensing has NO discoverable value (pure -sensing_cost cost). Its value (avoiding lambda-penalized hazard; lambda reaches 92 => a ~92-per-episode cost-advantage benefit for sense->both-safe-gate) only exists at lambda>0 (r~330+). The keep-alive holds sensing during exactly the window where it is valueless, then releases just before the value appears. The design MUST create an overlap between (sensing held alive) and (lambda>0) so the agent EXPERIENCES the low-hazard sensing trajectory and the huge lambda*A_c signal locks it in.",
+    "dominant": "MIXED / BOTH modes present => TWO-LEVER amendment confirmed (strengthen keep-alive AND decouple credit), with the timing-overlap question the sharpest design input.",
+    "M5_note": "SHIFT-12 argued M-5 cost-critic aliasing may be the PRIMARY blocker. SHIFT-13 re-derivation: M-5 aliases the cost critic BASELINE V_c (same for both aliased layouts) but the cost RETURN is the real trajectory hazard (NOT aliased), so the cost ADVANTAGE A_c = return - V_c still reflects that sense->avoid has ~1 lower cost; with lambda=92 that difference contributes ~92 to the objective, far above the aliased-baseline variance floor. => M-5 raises variance / worsens credit assignment but is NOT a hard block on learning sense->avoid. Therefore the SHIFT-13 sustain-first ordering is correct: fix the sustain problem first (get sensing to SURVIVE into the lambda>0 regime), then fire M-5/DR-D10 ONLY if selectivity still fails with sensing alive. Firing both at once would confound them."
+  },
+
+  "adversarial_confirmation": "SHIFT 13 ran an independent adversarial confirmation workflow (grade-refute C1, C3/C4 recompute, mechanism + M-5-vs-sustain-first pressure test) — result recorded in shift13_adversarial_result below.",
+  "shift13_adversarial_result": {
+    "verdict": "CONFIRMED — grade_confirmed=true, mechanism_confirmed=true, m5_is_hard_block=FALSE. THREE independent adversarial verifiers all returned refuted=false / confidence=high, ZERO dissent (~669K tokens).",
+    "grade_reproduced_independently": "C1 collapse reproduced on a separate code path (0/3 tightened witnesses; s114 SENSES_ON_FAILURE_ONLY correctly downgraded from the pooled false positive; own_blind_hazard_avoided=0 on every surface/seed); instrument --validate --fork 13/13 (genuine selective_sense emits SELECTIVE_COMPOSITE witnesses=2, so 0-witness is real signal not artifact). C3 hazard 1.0/1.0/1.0 VERIFIED BY DIRECT CHECKPOINT ROLL of s114 state_round_004000.pt: agent_0 row-3 (upper gate), agent_1 row-4 (lower gate) on BOTH aliased layouts; exactly one eats the hazard; NEITHER senses (0/16); adapt False. C4 success 1.0/1.0/0.699 confirmed.",
+    "M5_is_variance_not_block": "CONFIRMED false as a hard block. V_c aliases only the cost BASELINE; the cost RETURN is the real trajectory hazard, so A_c=return-V_c is UNBIASED — aliasing only raises variance and caps cost EV at ~0.37, does NOT bias the gradient away from sense->avoid. Moreover 0 sense->avoid trajectories were ever sampled across 3 seeds x ~3700 lambda>0 rounds, so M-5 was never even exercised. => sustain-first is correct; M-5 HELD.",
+    "schedule_handoff_refinement": "DECISIVE new design input: the defect is a SCHEDULE/HANDOFF misalignment, not merely lever strength. lambda_applied first >1 at r330/r331/r330 and lambda>=5 only at ~r490, but the keep-alive RELEASES at the warmup boundary r300 where lambda~0.25 => a ~30-190 round DEAD GAP where sensing is unprotected AND still valueless. The real (legitimate, non-net-zero) sensing incentive is -lambda*A_c, which exists only once lambda>0 AND sensing survives. The keep-alive must be strengthened AND re-scheduled to keep sensing alive INTO the lambda-appreciable regime (~r490); raising the coefficient inside [0,300) alone fixes mode A (s114/s115) but leaves mode B (s116 post-release death into a lambda 0.25-0.96 regime) untouched.",
+    "movement_side_guard_flag": "V3 raised: movement entropy also collapses (~0.001-0.007 tail); s116's surviving senses at r300-328 produced ZERO hazard reduction (margin-0 lead-time). For a CAUSAL witness (own_avoided>0) the agent must sense->reveal->REROUTE, a movement change; if movement exploration has collapsed the reroute is never sampled and selectivity fails EVEN WITH live sensing. Consider protecting conditional reroute-movement exploration at the approach cell, or verify movement entropy is non-negligible in the sustained window. (Weigh against the parsimonious-pair discipline — do not over-expand.)"
+  },
+  "shift13_corrections_applied": {
+    "M5_note_softened": "The mechanism.critic_side_M5_aliasing clause 'Even a sensing actor could not learn sense->avoid' was over-strong. CORRECTED: M-5 aliases the cost baseline V_c and caps cost EV at ~0.37, raising cost-advantage VARIANCE, but does NOT bias the policy gradient away from sense->avoid; it was never exercised because sensing collapsed before lambda became appreciable (~r330).",
+    "M5_fallback_trigger": "SHIFT-12 routing.fallback_triggers.M5_DR_D10_cost_critic_enrichment.fires: True -> FALSE (HOLD). The SHIFT-12 trigger ('lambda active AND cost EV<0.5 AND C1 flat') is under-specified and contradicts sustain-first. PRECISE re-registration (fire M-5 only if a future run shows ALL of): (a) sensing_rate>0.05 sustained into lambda>=~5, (b) >=1 sense->avoid trajectory actually sampled (a round with sensing>0.05 AND hazard<budget), (c) selectivity still fails with cost EV<0.5. Today (a)+(b) are UNMET => M-5 untestable => HOLD.",
+    "collapse_round_labels": "first-crossing r179/r227/r343 (record); sustained detectors give r297/r314/r459 (10-round<0.01) or r205/r236/r418 (persistent). The two-mode decomposition (s114/s115 die WITHIN warmup; s116 survives window then dies AFTER release) is INVARIANT across all thresholds. s116 warmup-window min 0.052 reproduces exactly."
+  }
+}

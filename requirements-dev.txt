@@ -1,0 +1,19 @@
+# Development and checking tools, on top of the pinned runtime.
+#
+#   python -m pip install -r requirements-dev.txt
+#
+# None of this is needed to reproduce any reported number; it is needed to run
+# the test suite and the linters.
+-r requirements.txt
+
+# requirements.txt sets --index-url to the PyTorch CPU index, which REPLACES
+# PyPI rather than adding to it -- and that index carries torch and little else.
+# Without the line below, `pip install -r requirements-dev.txt` fails with
+# "No matching distribution found for pytest". Adding PyPI back as an extra
+# index lets torch keep resolving from the CPU index while these three resolve
+# from PyPI. (Found by running the release's own fresh-clone test.)
+--extra-index-url https://pypi.org/simple
+
+pytest>=8
+ruff>=0.5
+mypy>=1.8

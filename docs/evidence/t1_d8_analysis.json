@@ -1,0 +1,65 @@
+{
+  "run_set": "T1-D8 (DR-D1/L1-b AMENDMENT): decoupled Phi_dz decision-region positioning credit (zone_w 0.05) + re-timed keep-alive (coeff 0.15, rounds 500, target 0.40) over warmup 300, d_ep=0.5, fork training family (risk_fork_train_lower/upper). Prev-sensed credit OFF (pure positioning).",
+  "seeds": [117, 118, 119],
+  "git_head_train": "25441ea",
+  "status": "all three COMPLETE at round 4000 (status=complete, last_completed_round=3999, state_round_004000.pt saved, kill_reason=None; verified FROM DISK). Test suite 1371 passed; git clean at d349eba.",
+  "grade_verdict": "C4 1/3, C1 1/3 — BOTH FAIL the >=2/3 bar. Adversarially CONFIRMED by a 5-agent workflow (wf_b77da955-fcf, ~935K tokens): all four lenses independently reproduced the grade from raw curves + independent harness re-runs + own probes; the integrity synthesis (high effort) CONFIRMED the grade.",
+
+  "mechanical_precheck_sensing_survival": {
+    "bar": "sensing_rate_mean >= 0.05 at r>=360 on >=2/3 (did sensing survive the lambda-handoff)",
+    "result": "FAIL. At r360 all three < 0.05 (s117 0.0, s118 0.0061, s119 0.0078); r360-500 sensing ~0.008-0.016 on all seeds. HONEST FRAMING (must-fix): the re-timed 0.15/500 keep-alive did NOT bridge the lambda handoff. Sensing RE-EMERGED later driven by HIGH LAMBDA (once lambda>=5, the legitimate -lambda*A_c sensing incentive becomes appreciable), NOT by the keep-alive. This bears on whether keep-alive escalation is even the right lever vs controller stabilization.",
+    "sensing_revival_NEW": "Non-monotonic, qualitatively different from T1-D7 (where sensing stayed dead). s118 tail 0.86; s119 transient 0.79@r1000 then dies; s117 oscillates 0.05-0.16. The constraint machinery drives sensing BACK UP under high lambda."
+  },
+
+  "C4": {
+    "bar": "tail-100 team success>=0.9 AND episodic hazard<=0.5, >=2/3 (TRUE sparse fork metric)",
+    "per_seed": {
+      "s117": {"success": 1.0, "hazard": 0.487, "lambda_tail": 1.06, "sensing_tail": 0.045, "pass": true,
+               "caveat": "MARGINAL/bimodal: tail per-round hazard oscillates 0.0<->1.0 (mean 0.487 just under the 0.5 budget), sensing ~0.045 (below the pre-check floor). The tail-mean C4 pass co-occurs with near-zero sensing (tail hazard reduction is not sensing-driven), though the FINAL greedy checkpoint on train_upper does produce a causal witness (see C1)."},
+      "s118": {"success": 0.0, "hazard": 0.006, "lambda_tail": 19.24, "sensing_tail": 0.859, "pass": false,
+               "mode": "SUCCESS-COLLAPSE via DR-D3 PI integral WINDUP. lambda wound to ~37 (floor-only projection, NO anti-windup) -> over-constraint -> degenerate policy that senses (0.86) AND avoids everything, never reaching the goal. The high sensing rate is NOT selective sensing; it is over-sensing under a runaway lambda."},
+      "s119": {"success": 0.994, "hazard": 0.999, "lambda_tail": 3.10, "sensing_tail": 0.0, "pass": false,
+               "mode": "BLIND SPLIT-GATES. hazard 0.999 = 2x budget = split-gates blind minimum (agent_0 one gate, agent_1 the other, one eats the hazard on each aliased layout). sensing exactly 0.0. lambda DECAYED to ~3 (under-constrained; the integral rebuilt too slowly after an earlier sense-active decay to force sensing)."}
+    },
+    "aggregate": "1/3 pass => C4 FAILS the >=2/3 bar. (success>=0.9 alone is 2/3; hazard<=0.5 alone is 2/3; the COMBINED conjunct is 1/3.)"
+  },
+
+  "C1": {
+    "harness": "docs/evidence/c1_selectivity_harness.py --grade-run t1_d8_s117 t1_d8_s118 t1_d8_s119 --fork (tightened AM-1 own-ablation causal composite + AM-3 per-component reporting; eval-ablation = credit/keep-alive absent at eval). Harness --validate --fork all_passed=true.",
+    "tightened_composite_by_run": {"s117": "SELECTIVE_COMPOSITE", "s118": "SENSES_ON_FAILURE_ONLY", "s119": "FAIL_NEVER_SENSE"},
+    "c1_aggregate_pass_2of3": false,
+    "positionally_induced_by_run": {"s117": false, "s118": false, "s119": false},
+    "s117_causal_witness_GENUINE": {
+      "surface": "risk_fork_train_upper (hazard (3,4))",
+      "team_success": true, "sense_rate": 0.077, "within_ceiling": true, "adapt_fired": true,
+      "own_blind_hazard_avoided": 2, "causal": true, "is_witness": true,
+      "independent_reproduction": "A verifier re-derived this from a FULL-trajectory do(reveal:=0) ablation (every step blinded, policy still senses/pays), NOT just the harness one-step counterfactual: INTACT policy senses at (2,3), receives the reveal of hazard (3,4), reroutes DOWN at (3,3) -> (4,3)->(4,4)->(4,5)->goal for 0 hazard; BLINDED policy walks RIGHT into (3,4) for +2 hazard. Dispositive.",
+      "significance": "The FIRST genuine causal selective-sensing witness in the entire D5->D8 sequence (T1-D7 had 0/3), and it is on the SAME seed that passes C4. Proves the sense->reveal->reroute->avoid->still-succeed chain (pillars 1+2) is a LEARNABLE CAPABILITY (trades 2 extra steps for hazard avoidance)."
+    },
+    "s117_asymmetry": "Witness on train_upper but NOT train_lower (hazard (4,4); sensed 9% but own_avoided=0). CORRECT: on train_lower the greedy row-3 route already avoids (4,4) with or without the reveal, so sensing has nothing to protect. train_upper is rightly the sole witness (protective exactly where the hazard blocks the default route).",
+    "aggregate": "1/3 tightened selective => C1 FAILS the >=2/3 bar."
+  },
+
+  "M5_confirmation_and_scoping": {
+    "input_aliasing_CONFIRMED": "torch.equal(central_upper, central_lower) = True, 0/20 differing features (risk_fork_train_upper hazard (3,4) vs lower (4,4); same starts/goal/obstacles, hazard_cell_count=1). The 20-feature central schema encodes hazard_cell_count but NEVER location.",
+    "decision_window_value_aliasing_CONFIRMED": "On all three trained cost critics, a trajectory SAFE on one layout and HAZARD-EATING on the other gets BYTE-IDENTICAL cost-value at EVERY pre-entry cell incl. the approach cell (3,3); first value-divergence only at t=4 (post hazard-entry), driven SOLELY by the post-hoc cumulative_hazard_cost total (too late to route). At the decision cell the cost baseline gives ZERO layout-discriminating signal. (For the split-gates route where both agents eat, the tensors stay identical at ALL steps.)",
+    "CRITICAL_SCOPING_must_fix": "M-5 aliases the cost BASELINE V_c, NOT the cost RETURN. The MC cost-to-go genuinely differs (upper 1.0 / lower 0.0), so A_c = R_c - V_c stays UNBIASED, only higher-variance. => M-5 is a variance-inflating COMPOUNDING/secondary limiter, NOT a hard block. It is NOT correct that critic de-aliasing alone recovers C1 or C4.",
+    "behavioral_anti_correlation_2of3_must_fix": "corr(sense,hazard) negative 3/3 (hazard crashes on sense-revival). corr(sense,success) is NOT universal: strong on s118 (-0.68) and s119 (-0.32), but ABSENT on s117 (-0.05, sense-active success 0.999) — s117 is a CLEAN counterexample where sensing revives, hazard crashes to ~0.07, and success is PRESERVED at ~1.0 (the co-existence the project wants). Report as 2/3, not universal collapse.",
+    "cost_EV_must_fix": "tail cost EV s117 -3.9 (target_var 0.080, non-degenerate — the GENUINE aliasing signal), s119 +0.335 (target_var real), s118 +0.538 (DEGENERATE-target artifact, target_var ~0.0004, hazard~=0 — must NOT be read as de-aliasing). The DR-D10 reopen trigger (cost EV<0.5) is met on the real-variance seeds.",
+    "s117_refutes_M5_necessity": "s117 achieved the genuine causal C1 witness AND passed C4 WITH the aliased critic present AND the WORST cost EV (-3.9). If de-aliasing were the necessary enabler of selectivity, the worst-cost-EV seed could not be the C1-passing seed. The differentiator between s117 (pass) and s118/s119 (fail) is the LAMBDA OPERATING POINT, not the critic representation (identical across seeds)."
+  },
+
+  "mechanism_final": "The incentive+amendment side now WORKS (s117 = existence proof of genuine selective sensing + preserved success). The problem is REPRODUCIBILITY / seed variance driven by the DR-D3 lambda-controller operating point: s118 integral windup (no anti-windup cap) -> over-constraint -> success collapse; s119 lambda decay -> under-constraint -> blind split-gates; s117 a moderate-lambda basin near Mode C. M-5 cost-critic layout-aliasing is a real COMPOUNDING limiter (inflates cost-baseline variance, caps cost EV ~0.33-0.37, makes the good basin harder to find/less stable) but is NOT the primary blocker and NOT a hard block. The actor CAN sense->reroute (s117) => NOT an actor-side failure.",
+
+  "route": {
+    "decision": "WEIGHT/SCOPE AMENDMENT FIRST — DR-D3 lambda-controller STABILIZATION (integral anti-windup/clamp + gain/timing retune) + the DR-D2 pre-authorized d_ep->0.25 for the under-constrained seed. Run as a CLEAN, UNBUNDLED test (T1-D9, seeds 120/121/122).",
+    "why_not_enrichment_first": "(1) PRE-REGISTRATION: every M-5/enrichment routing row in DR-D1-L1-b-amendment.md is GATED on 'C4 ok'; C4 is 1/3 (not ok). The actual outcome (C1 causal witness emerges AND C4 breaks) maps to the DR's Row-5 = weight/scope amendment, = QUESTION-1's 'C4 broken => weight amendment'. (2) s117 proves Mode C is reachable WITH the aliased critic. (3) enrichment does nothing for the lambda oscillation (the measured C4-breakage cause); anti-windup+retune target it directly. (4) M-5 de-aliasing is necessary-not-proven-sufficient (Lyu 2023 co-adaptation) and orthogonal to C4.",
+    "enrichment_HELD": "DR-D10/L6 (Lever 1: hazard_cells to the CRITIC input only, CTDE-legal since Rule 8 emits hazard_cells) is HELD as the pre-registered INDEPENDENTLY-ABLATABLE fallback — authored only if, after C4 stabilizes to >=2/3, selectivity still fails with sensing surviving AND cost EV<0.5 on real-variance targets. Do NOT bundle enrichment with the controller fix (the DR pre-registers M-5 as independently ablatable; bundling confounds the clean cost-EV + causal-C1 enrichment test). ED-D10-reopen dossier remains ready; enrichment de-aliasing mechanically pre-validated (adding hazard-location makes the enriched central differ at the (3,3) approach cell)."
+  },
+
+  "two_sided": "PROGRESS, not flat failure. WHAT WORKED: s117 = first genuine causal selective-sensing witness in the project (own-ablation +2 hazard, full-trajectory reproduced), on the same seed that passes C4 — the sense->reveal->reroute->avoid->succeed capability is LEARNABLE. WHAT FAILED: only 1/3 — s118 over-senses under runaway lambda while task-failing, s119 never senses (blind split-gates). The failure is learning-dynamics/controller-operating-point VARIANCE, not architectural incapacity and not (primarily) critic aliasing.",
+
+  "sequence_lock": "INTACT. Neither the recommended controller amendment nor a future enrichment DR pins a Stage 26 threshold, reads held-out (I-3), or advances the readiness gate (C1/C4 both fail). Protocol-v1 stays DRAFT.",
+  "tracked_but_separate": "readiness-C4 memorized-gate generalization (gate-row curriculum) — still owed; gates the eventual held-out eval; NOT this shift's C1/C4 fix.",
+  "adversarial_provenance": "5-agent workflow wf_b77da955-fcf (~935K tokens): c4-regrade CONFIRMED, c1-regrade CONFIRMED (independent full-trajectory ablation), m5-mechanism PARTIAL (aliasing airtight; anti-correlation 2/3; baseline-not-return caveat), routing-adversary REFUTED enrichment-first (4 grounds), integrity-synth (high effort) => weight_amendment_first, sequence_lock_ok, immutable_identity_ok, 7 framing must-fixes (all incorporated above)."
+}

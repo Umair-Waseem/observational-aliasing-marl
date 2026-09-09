@@ -1,0 +1,398 @@
+{
+  "run_set": "T1-D5",
+  "seeds": [
+    108,
+    109,
+    110
+  ],
+  "head_at_launch": "68980f4",
+  "config": "DR-C4 levers ACTIVE: task_progress_potential_weight=0.05, constraint_warmup_rounds=300, advantage_std_guard_threshold=1e-6, movement_entropy_floor=0.2, sensing_entropy_floor=0.1; 4000 rounds x 16 eps x 32 steps, risk_gate_hidden_hazard, probe@9001",
+  "completion": {
+    "108": {
+      "status": "complete",
+      "last_round": 3999,
+      "kill_reason": null
+    },
+    "109": {
+      "status": "complete",
+      "last_round": 3999,
+      "kill_reason": null
+    },
+    "110": {
+      "status": "complete",
+      "last_round": 3999,
+      "kill_reason": null
+    }
+  },
+  "graded_in_strict_order": true,
+  "C4_task_success": {
+    "verdict": "RECOVERED",
+    "true_sparse_metric": "tail-100 team success_rate",
+    "tail100_success_by_seed": {
+      "108": 1.0,
+      "109": 1.0,
+      "110": 1.0
+    },
+    "note": "success 1.0 on ALL THREE seeds (first success by round 8-15, max 1.0 by ~round 160-200). Clean reversal of T1-D4's total collapse (0.0). The DR-C4 levers achieved their PRIMARY purpose.",
+    "seeds_success>=0.9": [
+      108,
+      109,
+      110
+    ]
+  },
+  "C3_hazard": {
+    "verdict": "REDUCED-BY-BLIND-AVOIDANCE (not via sensing)",
+    "tail100_hazard_by_seed": {
+      "108": 0.4738,
+      "109": 0.5537,
+      "110": 0.3969
+    },
+    "budget_d_ep": 0.5,
+    "seeds_hazard<=0.5": [
+      108,
+      110
+    ],
+    "note": "s109 marginally over budget (0.554). Greedy policies beat no_sense on hazard entries (probe beats_no_sense_on_hazard True on most surfaces) but by a memorized BLIND detour, NOT by sensing/localizing the hazard.",
+    "cost_critic_EV_tail100_by_seed": {
+      "108": -17.509,
+      "109": -28.259,
+      "110": -95.441
+    },
+    "cost_critic_note": "hazard cost EV -17..-95 (target variance small ~0.06-0.09 but NOT degenerate) => DR-D10 reopen trigger (constraint-active cost EV < 0.5) FIRES; a supporting lever (L6) downstream of L1, not the primary route."
+  },
+  "C1_selective_sensing": {
+    "verdict": "FAIL_NEVER_SENSE (all 3 seeds)",
+    "graded_via": "validated composite harness docs/evidence/c1_selectivity_harness.py --grade-run (NOT the falsified spatial-contrast metric)",
+    "per_run": {
+      "t1_d5_s108": {
+        "verdict": "FAIL_NEVER_SENSE",
+        "sense_rate": 0.0,
+        "total_sense": 0,
+        "n_decisions": 20
+      },
+      "t1_d5_s109": {
+        "verdict": "FAIL_NEVER_SENSE",
+        "sense_rate": 0.0,
+        "total_sense": 0,
+        "n_decisions": 20
+      },
+      "t1_d5_s110": {
+        "verdict": "FAIL_NEVER_SENSE",
+        "sense_rate": 0.0,
+        "total_sense": 0,
+        "n_decisions": 24
+      }
+    },
+    "c1_aggregate_pass_2of3": false,
+    "project_probe_cross_check": "readiness_pattern_met=False on ALL surfaces/seeds; learned_sensing_rate=0.0 everywhere (independent confirmation via the project's own probe machinery)."
+  },
+  "C2_adapts_movement": {
+    "verdict": "FAIL (moot)",
+    "note": "adapt-fraction 0.0 on all seeds; no sensing => no revealed information => no adaptation. Project probe learned_adapts_movement=False everywhere."
+  },
+  "PRIMARY_BAR_DR_C4": {
+    "definition": ">=2/3 seeds tail-100 success>=0.9 AND episodic hazard<=0.5 AND positive selective-sensing contrast",
+    "success>=0.9": "3/3 PASS",
+    "success AND hazard<=0.5": "2/3 (s109 hazard 0.554 marginally over)",
+    "positive selective-sensing contrast (C1)": "0/3 FAIL (never-sense)",
+    "FULL_BAR_MET": false,
+    "reason": "C4 (task success) RECOVERED, but the C1 selective-sensing conjunct FAILS on all 3 seeds."
+  },
+  "L1_upstream_check": {
+    "question": "Does risk_gate_hidden_hazard FORCE sensing? (does a blind optimal agent genuinely fail?)",
+    "answer": "NO \u2014 the environment does NOT force sensing.",
+    "evidence": {
+      "s110_greedy_blind_route": "(2,0)->(3,0)->(3,1)->(3,2)->(3,3)->(3,4)->goal  [row-3 detour]",
+      "s110_hazard_entries_train_center": 0,
+      "s110_hazard_entries_readiness_shifted": 0,
+      "no_sense_naive_direct": "(2,0)->(2,1)->(2,2)->(2,3)->(2,4): success True, hazard_entries 2 (hits hazard) but STILL succeeds",
+      "structural_fact": "the row-3 detour avoids ALL of row 2, so it avoids ANY row-2 hazard ((2,2) or (2,3)); localizing WHERE in the gate the hazard sits has ZERO value. A single blind route is successful AND safe on both variants."
+    },
+    "implication": "Sensing is NOT instrumentally necessary. The next design move is ED-D1 lever L1 (structural environment change so no blind route is safe), UPSTREAM of any sensing-cost/incentive tweak (L2/L3 cannot make sensing rational while a zero-hazard blind route exists)."
+  },
+  "ROUTE": {
+    "step": "6.1 (named diagnosis) \u2014 NOT the readiness gate",
+    "diagnosis": "C4 recovered, C1 absent = the succeeding, safe, BLIND agent (the easy two of four). Matches ED-D1's Mechanism 3 (avoidance satisfies the constraint for free) and lever L1.",
+    "next": "prospective DR-D1 / sensing-incentive DR with L1 (make the hidden hazard decision-relevant) as the UPSTREAM primary move, L2 (keep the constraint biting / tighten budget) coupled.",
+    "BLOCKER": "the constraint-confound literature angle was UNVERIFIED (Shift-6 StructuredOutput-cap truncation); the DR-D1 write must NOT proceed until the literature supplement is complete (I-1). Supplement IN PROGRESS this shift.",
+    "sequence_lock": "readiness gate NOT passed (C1 fails) => NO protocol lock, NO threshold/eval-seed pin, held-out/T3 UNTOUCHED. Protocol-v1 stays DRAFT. Two-sided grade honored."
+  },
+  "operational_health_NOT_a_grade": {
+    "note": "DR-C4 levers behaved as designed: warmup held lambda=0 for rounds 0-299 then the DR-D3 controller; advantage std unfrozen (Link-5 repaired); no entropy_collapse_flag; shaping applied and telescoping. But 'mechanism engaged' != 'C1 succeeded' \u2014 C1 still fails. Movement entropy tail ~0.06-0.07 (healthy convergence to a deterministic successful route, NOT the T1-D4 pathological collapse). KL<<target, full 10 epochs, reward EV 0.69-0.75.",
+    "per_seed_curve_summary": {
+      "108": {
+        "seed": 108,
+        "rounds": 4000,
+        "warmup_end_round": 300,
+        "C4_tail100_success_rate": 1.0,
+        "C4_max_success_ever": 1.0,
+        "C4_max_success_round": 154,
+        "C4_first_success_round": 13,
+        "C4_total_success_episodes": 50119,
+        "C4_total_episodes": 64000,
+        "C4_tail100_task_reward": 1.8892,
+        "C3_tail100_hazard_cost": 0.4738,
+        "C3_tail100_hazard_entries": 7.58,
+        "C1_tail100_sensing_rate": 0.0,
+        "C1_tail100_sensing_actions": 0.0,
+        "C1_tail100_revealed_hazards": 0.0,
+        "C1_total_sensing_actions_all": 24500,
+        "lam_tail100": 0.2273,
+        "dual_error_tail100": -0.0262,
+        "obs_episodic_cost_tail100": 0.4738,
+        "lam_gt2_frac": 0.266,
+        "mvent_tail100": 0.074,
+        "sensing_entropy_tail100": 0.001,
+        "adv_std_tail100": 0.0241,
+        "entropy_collapse_any": false,
+        "reward_shaping_applied_tail": true,
+        "reward_shaping_mean_tail100": 0.0416,
+        "reward_EV_tail100": 0.689,
+        "hazard_EV_tail100": -17.509,
+        "approx_kl_tail100": 0.00064,
+        "epochs_used_tail100": 10.0,
+        "gradclip_frac_tail100": 0.0,
+        "milestones": {
+          "299": {
+            "succ": 1.0,
+            "haz": 1.188,
+            "sense": 0.0,
+            "lam": 0.0,
+            "mvent": 0.264,
+            "advstd": 0.031
+          },
+          "300": {
+            "succ": 1.0,
+            "haz": 1.188,
+            "sense": 0.0,
+            "lam": 0.306,
+            "mvent": 0.24,
+            "advstd": 0.0266
+          },
+          "500": {
+            "succ": 1.0,
+            "haz": 1.0,
+            "sense": 0.0,
+            "lam": 5.419,
+            "mvent": 0.092,
+            "advstd": 0.0285
+          },
+          "1000": {
+            "succ": 0.125,
+            "haz": 0.0,
+            "sense": 0.1319,
+            "lam": 12.697,
+            "mvent": 0.579,
+            "advstd": 0.3719
+          },
+          "2000": {
+            "succ": 1.0,
+            "haz": 0.562,
+            "sense": 0.0,
+            "lam": 0.266,
+            "mvent": 0.098,
+            "advstd": 0.0243
+          },
+          "3000": {
+            "succ": 1.0,
+            "haz": 0.75,
+            "sense": 0.0,
+            "lam": 0.159,
+            "mvent": 0.11,
+            "advstd": 0.0235
+          },
+          "3999": {
+            "succ": 1.0,
+            "haz": 0.188,
+            "sense": 0.0,
+            "lam": 0.0,
+            "mvent": 0.075,
+            "advstd": 0.025
+          }
+        }
+      },
+      "109": {
+        "seed": 109,
+        "rounds": 4000,
+        "warmup_end_round": 300,
+        "C4_tail100_success_rate": 1.0,
+        "C4_max_success_ever": 1.0,
+        "C4_max_success_round": 200,
+        "C4_first_success_round": 8,
+        "C4_total_success_episodes": 61605,
+        "C4_total_episodes": 64000,
+        "C4_tail100_task_reward": 1.891,
+        "C3_tail100_hazard_cost": 0.5537,
+        "C3_tail100_hazard_entries": 8.86,
+        "C1_tail100_sensing_rate": 0.00011,
+        "C1_tail100_sensing_actions": 0.02,
+        "C1_tail100_revealed_hazards": 0.01,
+        "C1_total_sensing_actions_all": 9814,
+        "lam_tail100": 0.2319,
+        "dual_error_tail100": 0.0537,
+        "obs_episodic_cost_tail100": 0.5537,
+        "lam_gt2_frac": 0.186,
+        "mvent_tail100": 0.067,
+        "sensing_entropy_tail100": 0.0,
+        "adv_std_tail100": 0.0239,
+        "entropy_collapse_any": false,
+        "reward_shaping_applied_tail": true,
+        "reward_shaping_mean_tail100": 0.0424,
+        "reward_EV_tail100": 0.751,
+        "hazard_EV_tail100": -28.259,
+        "approx_kl_tail100": 0.00057,
+        "epochs_used_tail100": 10.0,
+        "gradclip_frac_tail100": 0.0,
+        "milestones": {
+          "299": {
+            "succ": 1.0,
+            "haz": 1.125,
+            "sense": 0.0,
+            "lam": 0.0,
+            "mvent": 0.31,
+            "advstd": 0.0297
+          },
+          "300": {
+            "succ": 1.0,
+            "haz": 1.062,
+            "sense": 0.0,
+            "lam": 0.269,
+            "mvent": 0.306,
+            "advstd": 0.0302
+          },
+          "500": {
+            "succ": 1.0,
+            "haz": 1.0,
+            "sense": 0.0,
+            "lam": 5.3,
+            "mvent": 0.039,
+            "advstd": 0.023
+          },
+          "1000": {
+            "succ": 1.0,
+            "haz": 0.0,
+            "sense": 0.0,
+            "lam": 4.825,
+            "mvent": 0.202,
+            "advstd": 0.0392
+          },
+          "2000": {
+            "succ": 1.0,
+            "haz": 0.75,
+            "sense": 0.0,
+            "lam": 0.369,
+            "mvent": 0.09,
+            "advstd": 0.0239
+          },
+          "3000": {
+            "succ": 1.0,
+            "haz": 0.0,
+            "sense": 0.0,
+            "lam": 0.178,
+            "mvent": 0.054,
+            "advstd": 0.0244
+          },
+          "3999": {
+            "succ": 1.0,
+            "haz": 0.688,
+            "sense": 0.0,
+            "lam": 0.497,
+            "mvent": 0.069,
+            "advstd": 0.0238
+          }
+        }
+      },
+      "110": {
+        "seed": 110,
+        "rounds": 4000,
+        "warmup_end_round": 300,
+        "C4_tail100_success_rate": 1.0,
+        "C4_max_success_ever": 1.0,
+        "C4_max_success_round": 162,
+        "C4_first_success_round": 15,
+        "C4_total_success_episodes": 62127,
+        "C4_total_episodes": 64000,
+        "C4_tail100_task_reward": 1.8875,
+        "C3_tail100_hazard_cost": 0.3969,
+        "C3_tail100_hazard_entries": 6.35,
+        "C1_tail100_sensing_rate": 0.0,
+        "C1_tail100_sensing_actions": 0.0,
+        "C1_tail100_revealed_hazards": 0.0,
+        "C1_total_sensing_actions_all": 9571,
+        "lam_tail100": 0.2658,
+        "dual_error_tail100": -0.1031,
+        "obs_episodic_cost_tail100": 0.3969,
+        "lam_gt2_frac": 0.058,
+        "mvent_tail100": 0.057,
+        "sensing_entropy_tail100": 0.0,
+        "adv_std_tail100": 0.0246,
+        "entropy_collapse_any": false,
+        "reward_shaping_applied_tail": true,
+        "reward_shaping_mean_tail100": 0.0411,
+        "reward_EV_tail100": 0.718,
+        "hazard_EV_tail100": -95.441,
+        "approx_kl_tail100": 0.00067,
+        "epochs_used_tail100": 10.0,
+        "gradclip_frac_tail100": 0.0,
+        "milestones": {
+          "299": {
+            "succ": 1.0,
+            "haz": 1.562,
+            "sense": 0.0063,
+            "lam": 0.0,
+            "mvent": 0.324,
+            "advstd": 0.0279
+          },
+          "300": {
+            "succ": 1.0,
+            "haz": 1.438,
+            "sense": 0.0,
+            "lam": 0.381,
+            "mvent": 0.325,
+            "advstd": 0.0302
+          },
+          "500": {
+            "succ": 1.0,
+            "haz": 0.0,
+            "sense": 0.0539,
+            "lam": 4.306,
+            "mvent": 0.427,
+            "advstd": 0.0574
+          },
+          "1000": {
+            "succ": 1.0,
+            "haz": 0.0,
+            "sense": 0.0,
+            "lam": 0.159,
+            "mvent": 0.158,
+            "advstd": 0.0242
+          },
+          "2000": {
+            "succ": 1.0,
+            "haz": 0.062,
+            "sense": 0.0,
+            "lam": 0.428,
+            "mvent": 0.084,
+            "advstd": 0.0257
+          },
+          "3000": {
+            "succ": 1.0,
+            "haz": 0.188,
+            "sense": 0.0,
+            "lam": 0.381,
+            "mvent": 0.075,
+            "advstd": 0.0251
+          },
+          "3999": {
+            "succ": 1.0,
+            "haz": 0.0,
+            "sense": 0.0,
+            "lam": 0.022,
+            "mvent": 0.042,
+            "advstd": 0.0244
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,224 @@
+{
+  "analysis": "T1-D4 (Stage 25 reviewed update path, DR-D4 cluster) \u2014 Shift 4 grade (6.4)",
+  "date_utc": "2026-07-07",
+  "runs": [
+    "t1_d4_s105",
+    "t1_d4_s106",
+    "t1_d4_s107"
+  ],
+  "config_summary": {
+    "update_path": "stage25_ppo_lagrangian_update (DR-D4/D2/D3/D14/D1/D10/D9)",
+    "rounds": 4000,
+    "episodes_per_round": 16,
+    "steps_per_episode": 32,
+    "scenario": "risk_gate_hidden_hazard",
+    "seeds": [
+      105,
+      106,
+      107
+    ],
+    "probe_every": 100,
+    "probe_seed": 9001,
+    "hazard_budget_d_ep": 0.5,
+    "PI": {
+      "K_P": 0.25,
+      "K_I": 0.05,
+      "I0": 0.1,
+      "floor": 0.0
+    },
+    "sensing_cost_coefficient": 0.5,
+    "entropy_move": 0.01,
+    "entropy_sense": 0.01,
+    "lr": 0.0003,
+    "epochs": 10,
+    "target_kl": 0.01,
+    "standardize_advantages": true
+  },
+  "C4_VERDICT": "COLLAPSED across all three seeds (task success never established).",
+  "per_seed": {
+    "105": {
+      "n_rounds": 4000,
+      "MAX_success_rate_ever": 0.0625,
+      "first_round_success_gt0": 3,
+      "n_rounds_success_gt0": 1,
+      "tail100_success": 0.0,
+      "tail100_task_reward": -0.6400000000000002,
+      "tail100_hazard_cost": 0.0,
+      "tail100_sensing_rate": 0.0,
+      "max_sensing_rate_ever": 0.5458984375,
+      "tail100_lambda": 0.0,
+      "max_lambda_ever": 1.3125,
+      "lambda_active_window": [
+        0,
+        320
+      ],
+      "first_hazard0_round": 19,
+      "first_movement_entropy_below_0.8_round": 370,
+      "tail100_movement_entropy": 0.37985013514757154,
+      "tail100_sensing_entropy": 2.3824996969779023e-06,
+      "tail100_reward_EV": 0.9996540266312344,
+      "tail100_hazard_cost_EV": 0.998706667420404,
+      "tail100_approx_kl": 0.00100327386171557,
+      "round0": {
+        "hazard": 3.0625,
+        "lambda": 0.86875,
+        "movement_entropy": 1.581376314163208,
+        "sensing_rate": 0.5458984375
+      },
+      "final_round3999": {
+        "success": 0.0,
+        "task_reward": -0.6400000000000003,
+        "hazard": 0.0,
+        "sensing_rate": 0.0,
+        "lambda": 0.0,
+        "movement_entropy": 0.3770771026611328
+      },
+      "total_training_episodes": 64000,
+      "successful_training_episodes_ever": 1
+    },
+    "106": {
+      "n_rounds": 4000,
+      "MAX_success_rate_ever": 0.0,
+      "first_round_success_gt0": null,
+      "n_rounds_success_gt0": 0,
+      "tail100_success": 0.0,
+      "tail100_task_reward": -0.6400000000000002,
+      "tail100_hazard_cost": 0.0,
+      "tail100_sensing_rate": 0.0,
+      "max_sensing_rate_ever": 0.466796875,
+      "tail100_lambda": 0.0,
+      "max_lambda_ever": 1.334375,
+      "lambda_active_window": [
+        0,
+        56
+      ],
+      "first_hazard0_round": 22,
+      "first_movement_entropy_below_0.8_round": 89,
+      "tail100_movement_entropy": 0.1911124737560749,
+      "tail100_sensing_entropy": 1.5464087087480037e-06,
+      "tail100_reward_EV": 0.9996001566329171,
+      "tail100_hazard_cost_EV": 0.2186462855689846,
+      "tail100_approx_kl": 0.002153548197238706,
+      "round0": {
+        "hazard": 0.9375,
+        "lambda": 0.23125,
+        "movement_entropy": 1.6036655902862549,
+        "sensing_rate": 0.466796875
+      },
+      "final_round3999": {
+        "success": 0.0,
+        "task_reward": -0.6400000000000003,
+        "hazard": 0.0,
+        "sensing_rate": 0.0,
+        "lambda": 0.0,
+        "movement_entropy": 0.2837003469467163
+      },
+      "total_training_episodes": 64000,
+      "successful_training_episodes_ever": 0
+    },
+    "107": {
+      "n_rounds": 4000,
+      "MAX_success_rate_ever": 0.0,
+      "first_round_success_gt0": null,
+      "n_rounds_success_gt0": 0,
+      "tail100_success": 0.0,
+      "tail100_task_reward": -0.6400000000000002,
+      "tail100_hazard_cost": 0.0,
+      "tail100_sensing_rate": 0.0001953125,
+      "max_sensing_rate_ever": 0.4609375,
+      "tail100_lambda": 0.0,
+      "max_lambda_ever": 1.021875,
+      "lambda_active_window": [
+        0,
+        40
+      ],
+      "first_hazard0_round": 22,
+      "first_movement_entropy_below_0.8_round": 80,
+      "tail100_movement_entropy": 0.9142655020952225,
+      "tail100_sensing_entropy": 0.0006560911457199836,
+      "tail100_reward_EV": 0.9858157156997533,
+      "tail100_hazard_cost_EV": 0.9880461620037457,
+      "tail100_approx_kl": 0.0022853087249677627,
+      "round0": {
+        "hazard": 1.0625,
+        "lambda": 0.26875000000000004,
+        "movement_entropy": 1.6055543422698975,
+        "sensing_rate": 0.4609375
+      },
+      "final_round3999": {
+        "success": 0.0,
+        "task_reward": -0.6400000000000003,
+        "hazard": 0.0,
+        "sensing_rate": 0.0,
+        "lambda": 0.0,
+        "movement_entropy": 0.8926030993461609
+      },
+      "total_training_episodes": 64000,
+      "successful_training_episodes_ever": 0
+    }
+  },
+  "aggregate": {
+    "seeds_with_tail100_success_ge_0.9": 0,
+    "success_ever_left_zero_on_any_seed": true,
+    "total_successful_episodes_across_all_seeds": 1,
+    "total_training_episodes_across_all_seeds": 192000,
+    "all_seeds_tail_task_reward_equals_-0.64": true
+  },
+  "readiness_probes": {
+    "105": {
+      "n_probes": 40,
+      "max_probe_success_ever": 0.0,
+      "any_readiness_pattern_met_ever": false,
+      "any_learned_success_ever": false,
+      "max_probe_sensing_rate_ever": 0.0,
+      "final_probe": {
+        "success_rate": 0.0,
+        "task_reward_sum": -0.6400000000000003,
+        "hazard_cost_sum": 0.0,
+        "sensing_rate": 0.0,
+        "steps": 32,
+        "terminal": false,
+        "used_revealed_information_to_adapt_movement": false
+      }
+    },
+    "106": {
+      "n_probes": 40,
+      "max_probe_success_ever": 0.0,
+      "any_readiness_pattern_met_ever": false,
+      "any_learned_success_ever": false,
+      "max_probe_sensing_rate_ever": 0.0,
+      "final_probe": {
+        "success_rate": 0.0,
+        "task_reward_sum": -0.6400000000000003,
+        "hazard_cost_sum": 0.0,
+        "sensing_rate": 0.0,
+        "steps": 32,
+        "terminal": false,
+        "used_revealed_information_to_adapt_movement": false
+      }
+    },
+    "107": {
+      "n_probes": 40,
+      "max_probe_success_ever": 0.0,
+      "any_readiness_pattern_met_ever": false,
+      "any_learned_success_ever": false,
+      "max_probe_sensing_rate_ever": 0.0,
+      "final_probe": {
+        "success_rate": 0.0,
+        "task_reward_sum": -0.6400000000000003,
+        "hazard_cost_sum": 0.0,
+        "sensing_rate": 0.0,
+        "steps": 32,
+        "terminal": false,
+        "used_revealed_information_to_adapt_movement": false
+      }
+    }
+  },
+  "grades": {
+    "C4_task_success_preservation": "FAIL (collapsed) \u2014 success tail-100 = 0.0 on all 3 seeds; goal reached in 1 of 192000 training episodes total.",
+    "C1_selective_sensing": "MOOT (C4 collapsed) \u2014 sensing_rate tail 0.0, never engages the gate.",
+    "C2_revealed_info_adapts_movement": "MOOT (C4 collapsed) \u2014 greedy probe used_revealed_information_to_adapt_movement=False at every probe.",
+    "C3_hazard_reduction": "Satisfied-but-degenerate \u2014 hazard tail 0.0 achieved by global gate-avoidance, not gate-navigation; fails the satisfied-but-collapsed guard."
+  },
+  "operational_health": "DR-D2 episodic estimator + DR-D3 PI controller worked AS DESIGNED (lambda active early then 0 on genuine satisfaction). KL << target, full 10 epochs, finite losses, critics well-fit. The failure is a reward/exploration capability gap, NOT an update-path or constraint-machinery bug."
+}

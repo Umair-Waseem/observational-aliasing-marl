@@ -1,0 +1,132 @@
+{
+  "shift": "SHIFT 9 (2026-07-07)",
+  "run_set": "T1-D6 \u2014 DR-D1/L1 risk-fork family; seeds 111/112/113; 4000 rounds; DR-C4 levers ON (w_Phi 0.05, warmup 300, std-guard 1e-6, entropy floors 0.2/0.1); d_ep=0.5; git_head_launch=23f695e",
+  "all_complete_round_4000": true,
+  "grade_order": "C4 first/independently on the TRUE sparse metric (fork training curves); C1 via the VALIDATED fork-pointed composite harness (never the falsified spatial contrast)",
+  "two_part_bar": "FAILS \u2014 the two-part DR-D1/L1 BAR (C1 real AND C4 preserved) is not met; this is the pre-registered 'C4 ok + C1 flat' branch",
+  "C4_task_success": {
+    "verdict": "PRESERVED on TRAINING, FAILS on READINESS (generalization/memorized-gate failure \u2014 a SEPARATE problem from C1)",
+    "per_seed": {
+      "t1_d6_s111": {
+        "tail100_success_rate": 1.0,
+        "tail100_hazard_cost_sum_mean": 1.0006,
+        "tail100_task_reward_sum_mean": 1.8397,
+        "successful_episodes_of_64000": 62624,
+        "first_round_success_ge_0.99": 133
+      },
+      "t1_d6_s112": {
+        "tail100_success_rate": 1.0,
+        "tail100_hazard_cost_sum_mean": 1.0,
+        "tail100_task_reward_sum_mean": 1.8395,
+        "successful_episodes_of_64000": 62736,
+        "first_round_success_ge_0.99": 122
+      },
+      "t1_d6_s113": {
+        "tail100_success_rate": 0.9981,
+        "tail100_hazard_cost_sum_mean": 1.0,
+        "tail100_task_reward_sum_mean": 1.8354,
+        "successful_episodes_of_64000": 62524,
+        "first_round_success_ge_0.99": 159
+      }
+    },
+    "readiness": "greedy policy fails BOTH shifted-gate readiness surfaces (0/2 success, 32-step timeout, robust across reset seeds {9001,101,202,500} and 2x horizon); it memorized a blind route for the training gate rows (3,4), not a sensing skill",
+    "note": "the fork did NOT break task learning; C4-train is fully preserved"
+  },
+  "C3_hazard": {
+    "verdict": "FAILED \u2014 tail-100 hazard ~1.0 = 2x the d_ep=0.5 budget = SPLIT-GATES blind minimum, not reduced by sensing",
+    "split_gates_confirmed": "greedy trajectory (independently reproduced): agent_0 ALWAYS upper gate (row 3), agent_1 ALWAYS lower gate (row 4); exactly one agent eats the hazard on each layout (train_lower->agent_1 hits (4,4); train_upper->agent_0 hits (3,4)); neither ever senses",
+    "lambda_windup": "lambda wound to tail ~91.5 (max 92.8) via integral windup on the persistent 0.5 dual_error, but hazard is pinned at 1.0 +/- 0.003 with ZERO response \u2014 no live exploration for the constraint to redirect"
+  },
+  "C1_selective_sensing": {
+    "verdict": "FAILED, 3/3 seeds \u2014 independently reproduced on a separate code path",
+    "instrument": "docs/evidence/c1_selectivity_harness.py --grade-run ... --fork (REPOINTED + RE-VALIDATED this shift: all 9 comparator checks PASS on the fork family; legacy regression clean)",
+    "composite_by_run": {
+      "t1_d6_s111": "FAIL_NEVER_SENSE",
+      "t1_d6_s112": "FAIL_NEVER_SENSE",
+      "t1_d6_s113": "SELECTIVE_COMPOSITE"
+    },
+    "greedy_senses_per_run": {
+      "t1_d6_s111": "0/160",
+      "t1_d6_s112": "0/160",
+      "t1_d6_s113": "6/160"
+    },
+    "c1_aggregate_pass_2of3": false,
+    "s113_false_positive": "s113 scores SELECTIVE_COMPOSITE but DEGENERATELY: all 6 senses are on the two READINESS surfaces where it WANDERS and FAILS (success=False, 32-step timeout, adapt_fired=False, pinned at (3,3)); 0/16 on the training surfaces it succeeds on. Its 'informative' flag is via task-FAILURE (never reaching the gate), not sense->avoid. NOT a genuine selective-sensing signal."
+  },
+  "C2_adapt": {
+    "verdict": "MOOT/FAIL \u2014 never meaningfully senses; c2_adapt_episode_fraction 0.0 all seeds"
+  },
+  "mechanism": {
+    "primary_single_causal_chain": "warmup-induced exploration collapse -> blind split-gates lock-in -> impotent lambda windup. During the 300-round lambda=0 warmup, hazard cost is invisible to the gradient so sensing is PURE reward-cost (DR-D1 -0.5*sensing_cost, ~-0.025/sense with sensing_cost_value=0.05) with NO benefit channel; the reward-only objective trains sensing OUT before the constraint activates. The DR-D1 penalty is the INSTRUMENT through which warmup kills sensing (inseparable), not an independent cause. The 0.01 gated entropy 'floor' (a conditional bonus, NOT a hard clamp) is far too weak to hold it.",
+    "compounding_M5": "cost-critic layout-aliasing CONFIRMED \u2014 central_state_from_stage23 is byte-identical (torch.equal True) for the two aliased fork layouts (schema encodes hazard_cell_count, NOT location); cost EV stuck ~0.37. Even with live sensing the cost advantage cannot cleanly credit sense->safe. Compounding limiter, NOT primary (a perfect critic cannot help a policy that never senses).",
+    "secondary_accelerant_PBRS_UNVERIFIED": "task_progress_potential_weight=0.05 adds a dense goal-distance gradient that likely SPEEDS lock-in of the blind route; not primary (sensing died round ~40, well before sustained success); magnitude UNVERIFIED.",
+    "per_seed_markers": {
+      "t1_d6_s111": {
+        "sensing_rate_round0": 0.322,
+        "sensing_rate_rounds25_50": 0.0275,
+        "revealed_hazard_round0": 16,
+        "sensing_collapse_below_0.01_round": 217,
+        "lambda_first_gt1_round": 329,
+        "sustained_success_round": 133,
+        "tail100_lambda_applied": 91.58,
+        "tail100_movement_entropy": 0.0045,
+        "tail100_sensing_entropy": 0.0006,
+        "tail100_hazard_cost_EV": 0.3663,
+        "tail100_reward_EV": 0.9142
+      },
+      "t1_d6_s112": {
+        "sensing_rate_round0": 0.402,
+        "sensing_rate_rounds25_50": 0.0317,
+        "revealed_hazard_round0": 12,
+        "sensing_collapse_below_0.01_round": 245,
+        "lambda_first_gt1_round": 331,
+        "sustained_success_round": 122,
+        "tail100_lambda_applied": 91.51,
+        "tail100_movement_entropy": 0.0379,
+        "tail100_sensing_entropy": 0.0035,
+        "tail100_hazard_cost_EV": 0.367,
+        "tail100_reward_EV": 0.9114
+      },
+      "t1_d6_s113": {
+        "sensing_rate_round0": 0.548,
+        "sensing_rate_rounds25_50": 0.0316,
+        "revealed_hazard_round0": 30,
+        "sensing_collapse_below_0.01_round": 297,
+        "lambda_first_gt1_round": 330,
+        "sustained_success_round": 159,
+        "tail100_lambda_applied": 91.52,
+        "tail100_movement_entropy": 0.0035,
+        "tail100_sensing_entropy": 0.0012,
+        "tail100_hazard_cost_EV": 0.367,
+        "tail100_reward_EV": 0.9014
+      }
+    },
+    "timing_smoking_gun": "sensing collapses below 0.01 at rounds 217/245/297 (all DURING the 300-round warmup); lambda first exceeds 1.0 at rounds 329/331/330 (just AFTER warmup). Sensing was dead before the constraint that would reward it turned on, and before sustained success (rounds ~136/121/174)."
+  },
+  "confounds": {
+    "a_actor_reveal_actionability_RESOLVED": "The actor's reveal->movement pathway is ARCHITECTURALLY INTACT and weakly active but under-trained. Forcing sensing produced real reveals; the learned actor's movement argmax NEVER flips under do(reveal:=0) (movement_flips_on_reveal=False all seeds/layouts), BUT the reveal DOES move the movement logits (max delta 0.68-0.78 s111, 0.14-0.21 s113) \u2014 the GRU passes the reveal signal, it is just too weak to override the deterministic route. This does NOT moot the route (no actor rebuild needed); it CONFIRMS L3 (reward sense->movement-change) is NECESSARY to reinforce the existing-but-weak pathway. Contrast M-5, which IS a genuine architecture gap on the CRITIC side.",
+    "b_warmup0_intervention_OWED": "single cleanest falsifier of warmup-vs-DR-D1 attribution: re-run one seed with constraint_warmup_rounds=0 (DR-C4 shaping/floors ON). Sensing survives -> warmup causal; sensing still dies -> DR-D1 reward-channel treatment is primary. OWED before the next DR is committed.",
+    "c_geometry_lead_time_OWED": "reveal-offset: sensing must fire one cell before the gate on a short approach; if too tight, no keep-alive lever helps. Cheap BFS/comparator sensing-lead-time check OWED."
+  },
+  "adversarial_verification": {
+    "workflow": "4-agent (grade-auditor + mechanism-skeptic + route-critic + synthesis); ~666K subagent tokens",
+    "grade": "SURVIVED IN FULL \u2014 independently reproduced on a separate code path (0/0/6 senses, split-gates, C4 train-pass/readiness-fail, C3 2x budget, M-5 byte-identical central state); refuted:false, high confidence x2",
+    "mechanism": "SURVIVED \u2014 refined to a single causal chain (warmup collapse + split-gates lock-in are the same mechanism at two time points); DR-D1 penalty = instrument not independent cause",
+    "route": "CORRECTED (route-critic refuted:true on the ROUTE only, confirming the grade+mechanism) \u2014 see route below"
+  },
+  "route": {
+    "decision": "6.1 named re-diagnosis -> prospective DR-D1/L1-b (next shift; DESIGN). NOT the readiness gate.",
+    "parsimonious_pair_first_DR": [
+      "(1) STRONG sensing-exploration KEEP-ALIVE that survives the warmup \u2014 target-entropy or a warmup-scoped, substantially-larger entropy coefficient on the SENSING factor ONLY (movement handled separately so the DR-C4 task-first window is preserved). The confirmed MISSING NECESSARY lever (the 0.01 gated floor is provably too weak).",
+      "(2) L3 decision-change sensing credit \u2014 the pre-registered core (DR-D1-L1.md). MUST be PBRS/advice-wrapped (Ng-Harada-Russell / Wiewiora state-action potential) reusing the existing C2 do(reveal:=0) counterfactual so it stays policy-invariant and does not bribe the graded C1 metric. Frame as BEHAVIORAL decision-change credit, NEVER info-gain/VOI (terminology lock)."
+    ],
+    "withdrawn": "naive 'remove the warmup' \u2014 the warmup exists because T1-D4's round-0 constraint drove gate-AVOIDANCE and collapsed C4 to 0; the fork is HARDER, so removal risks re-collapsing C4. Protect the sensing head INSIDE a preserved warmup instead.",
+    "held_as_preregistered_fallbacks": [
+      "d_ep -> 0.25 (DR-D2 pre-authorized trigger: hazard in [0.4,0.6] with sensing < 0.02) \u2014 ED-D1 viii: a tighter scalar budget forces a harder number, not a new capability; low-value as primary",
+      "M-5 / DR-D10 cost-critic hazard-location enrichment (DR-D10 trigger: cost EV < 0.5) \u2014 CTDE-legal on the PRIVILEGED critic side (Rule 8) but must NOT leak to the actor (Rule 1); weakest-evidence lever, only helps AFTER sensing is explored"
+    ],
+    "separate_track": "the readiness-C4 generalization failure (memorized training gates) likely needs a GATE-ROW CURRICULUM, not any sensing lever \u2014 do NOT conflate with the C1 collapse"
+  },
+  "harness_composite_refinement_OWED_to_DR_Stage26": "the composite 'informative' flag is a LATENT WEAKNESS \u2014 a POOLED hazard comparison (policy < no_sense) TRUE even for non-sensing reasons (split-gates / timeout-never-reaching-gate), so SELECTIVE_COMPOSITE currently reduces to 'sensed >=1 time'. It did NOT fake a pass here (aggregate 1/3). Before the Protocol-v1 lock, tighten 'informative' to require sense->reveal->movement-adaptation (adapt_fired) on the SAME succeeding surface + a success-conditioning / non-causal-sense guard (echoes the ED-D1 (vii) spatial-contrast falsification). Fold into the DR-Stage26 C1-metric revision with INTEGRITY AUDITOR countersign. Do NOT silently change the grade harness mid-analysis.",
+  "sequence_lock": "INTACT \u2014 readiness gate NOT passed (C1 fails 3/3). No Stage-26 threshold or eval-seed pinned; held-out fork layout (gates 5,6) never instantiated (I-3, confirmed: fork_hazard_layout_families() returns exactly 4 training+readiness surfaces). Protocol-v1 stays DRAFT. Terminology locks respected."
+}

@@ -1,0 +1,41 @@
+MIT License
+
+Copyright (c) 2026 Muhammad Umair Waseem, Abdullah, Shayan Khan, Musadaq Mansoor
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+-------------------------------------------------------------------------------
+SCOPE NOTE -- this repository is dual-licensed by content type.
+
+The MIT License above covers the SOFTWARE:
+    src/raas_marl/**            the package
+    docs/evidence/*.py          the grading instruments
+    docs/paper/figure_data/*.py the figure generator
+    tests/**                    the test suite
+
+The DATA AND RECORDS are licensed CC BY 4.0 (Creative Commons Attribution 4.0
+International), whose full legal code is at LICENSES/CC-BY-4.0.txt:
+    docs/evidence/*_analysis.json          the graded per-unit run analyses
+    results/**                             per-run provenance manifests
+    docs/paper/figure_data/*.json          the Figure 1 backing data
+    CLAIMS.yaml                            the claim-to-source register
+
+GitHub's licence detector reads this root LICENSE file; the second licence is
+placed at LICENSES/ because that is the SPDX-conventional location and will not
+confuse that detection.

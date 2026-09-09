@@ -1,0 +1,32 @@
+# =============================================================================
+# LINE-ENDING POLICY: git must never rewrite a byte of this repository.
+# =============================================================================
+# This artifact ships byte-exact records. Every file was copied from the
+# research repository and verified by sha256 against its source; a checkout
+# that normalised line endings would silently defeat that guarantee while
+# leaving the working-tree checksums of the *building* machine intact.
+#
+# The hazard is live, not theoretical: the machine this artifact was built on
+# has core.autocrlf=true in its SYSTEM gitconfig (the Git-for-Windows default),
+# so a plain `git clone` already exercises the hostile case. Of the 116 files
+# copied from the research repository --
+#     78 are CRLF-only, 37 are LF-only, and 1 is BOTH --
+# so under normalisation the 37 LF-only files would be rewritten to CRLF on a
+# Windows checkout and tests/test_clean.py would lose its 51 bare-LF lines.
+# (Measured control: with this rule an LF-only file survives a clone byte-exact;
+# without it, the same file comes back CRLF with a different sha256.)
+#
+# `* -text` disables ALL line-ending conversion for every path, in every
+# clone, regardless of the cloner's core.autocrlf setting. It is the whole
+# policy; the rule below is defence in depth.
+* -text
+
+# Named explicitly because it is the one known MIXED file: it begins with a
+# UTF-8 BOM (ef bb bf) and carries 13,707 CRLF terminators alongside 51 bare
+# LF ones. Redundant under `* -text` by design -- if that blanket rule is ever
+# narrowed, this file must not be silently un-protected with it.
+tests/test_clean.py -text
+
+# Byte-exact data records: never diffed as text, never converted.
+*.pt        binary
+*.jsonl     -text -diff

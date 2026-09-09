@@ -1,0 +1,781 @@
+{
+  "run_set": "T1-D10 (seeds 123/124/125), DR-RELIABILITY paired levers E+F, HEAD 0d32483",
+  "graded": "2026-07-09 (SHIFT 20)",
+  "grade_order": "MECH-E -> MECH-F1 -> BAR-C4 -> BAR-C1-HELD (per DR-reliability.md)",
+  "completion": {
+    "123": {
+      "status": "complete",
+      "last_completed_round": 3999,
+      "kill_reason": null,
+      "git_head": "0d324831363eeb4410e3abcec8237d9e2ebfd5e9"
+    },
+    "124": {
+      "status": "complete",
+      "last_completed_round": 3999,
+      "kill_reason": null,
+      "git_head": "0d324831363eeb4410e3abcec8237d9e2ebfd5e9"
+    },
+    "125": {
+      "status": "complete",
+      "last_completed_round": 3999,
+      "kill_reason": null,
+      "git_head": "0d324831363eeb4410e3abcec8237d9e2ebfd5e9"
+    }
+  },
+  "MECH_F1": {
+    "result": "PASS 3/3 (wiring clean)",
+    "per_seed": {
+      "123": {
+        "violations_below_floor_post_warmup": 0,
+        "first_violations": [],
+        "lambda_min_post_warmup": 3.0,
+        "lambda_max_post_warmup": 6.8937500000000105,
+        "warmup_lambda_max": 0.0,
+        "rounds_exactly_at_floor": 3374,
+        "PASS": true
+      },
+      "124": {
+        "violations_below_floor_post_warmup": 0,
+        "first_violations": [],
+        "lambda_min_post_warmup": 3.0,
+        "lambda_max_post_warmup": 10.44687500000005,
+        "warmup_lambda_max": 0.0,
+        "rounds_exactly_at_floor": 3103,
+        "PASS": true
+      },
+      "125": {
+        "violations_below_floor_post_warmup": 0,
+        "first_violations": [],
+        "lambda_min_post_warmup": 3.0,
+        "lambda_max_post_warmup": 13.296875000000094,
+        "warmup_lambda_max": 0.0,
+        "rounds_exactly_at_floor": 2873,
+        "PASS": true
+      }
+    }
+  },
+  "MECH_E": {
+    "result": "FAIL 3/3 per the AM-R2 unified definition",
+    "detail": "conjunct (b) sensing-entropy floor <0.10 in [100,1000] breached on all three (0.0615/0.0033/0.0115); conjunct (a) movement floor additionally breached on s125 (0.0748); conjunct (c) pinned-at-cap-while-undershooting fired on s124 (200-rd run). All wiring conjuncts pass. HONESTY: the breaches are collapse-coupled dips that the alpha duals subsequently corrected (the controller ENGAGED and restored entropy); the movement head - the H2 target - stayed steerable on 2/3 seeds throughout the window, vs T1-D9's <0.1 by r294 and 0.0003 tails.",
+    "per_seed": {
+      "123": {
+        "min_movement_entropy_100_1000": 0.22618070244789124,
+        "min_sensing_entropy_100_1000": 0.061479926109313965,
+        "a_movement_floor_fail": false,
+        "b_sensing_floor_fail": true,
+        "first_movement_breach_round": null,
+        "first_sensing_breach_round": 610,
+        "c_longest_capped_undershoot_run_movement": 0,
+        "c_longest_capped_undershoot_run_sensing": 0,
+        "c_pinned_at_cap_while_undershooting_fail": false,
+        "wiring_alpha_move_positive_somewhere": true,
+        "wiring_alpha_bounded_by_cap": true,
+        "alpha_move_max": 0.2598891374468802,
+        "alpha_sense_max": 0.736339827418327,
+        "alpha_move_rounds_at_cap": 0,
+        "alpha_sense_rounds_at_cap": 0,
+        "PASS": false
+      },
+      "124": {
+        "min_movement_entropy_100_1000": 0.17623454332351685,
+        "min_sensing_entropy_100_1000": 0.0032913340255618095,
+        "a_movement_floor_fail": false,
+        "b_sensing_floor_fail": true,
+        "first_movement_breach_round": null,
+        "first_sensing_breach_round": 731,
+        "c_longest_capped_undershoot_run_movement": 0,
+        "c_longest_capped_undershoot_run_sensing": 200,
+        "c_pinned_at_cap_while_undershooting_fail": true,
+        "wiring_alpha_move_positive_somewhere": true,
+        "wiring_alpha_bounded_by_cap": true,
+        "alpha_move_max": 0.3269585976004599,
+        "alpha_sense_max": 2.0,
+        "alpha_move_rounds_at_cap": 0,
+        "alpha_sense_rounds_at_cap": 204,
+        "PASS": false
+      },
+      "125": {
+        "min_movement_entropy_100_1000": 0.07478497922420502,
+        "min_sensing_entropy_100_1000": 0.011540880426764488,
+        "a_movement_floor_fail": true,
+        "b_sensing_floor_fail": true,
+        "first_movement_breach_round": 810,
+        "first_sensing_breach_round": 814,
+        "c_longest_capped_undershoot_run_movement": 0,
+        "c_longest_capped_undershoot_run_sensing": 75,
+        "c_pinned_at_cap_while_undershooting_fail": false,
+        "wiring_alpha_move_positive_somewhere": true,
+        "wiring_alpha_bounded_by_cap": true,
+        "alpha_move_max": 0.8345213277339936,
+        "alpha_sense_max": 2.0,
+        "alpha_move_rounds_at_cap": 0,
+        "alpha_sense_rounds_at_cap": 78,
+        "PASS": false
+      }
+    }
+  },
+  "BAR_C4": {
+    "result": "FAIL 0/3 - tail-100 success 0.000/0.000/0.000, hazard 0.000/0.000/0.000",
+    "note": "fails on the SUCCESS conjunct with hazard fully controlled - the exact mirror of T1-D9's failure (success 1.0 / hazard 1.0). The pair flipped the failure mode. (s124 tail-100 sensing rate 0.000156, not exactly 0; s123/s125 exactly 0.0)",
+    "per_seed": {
+      "123": {
+        "tail100_success": 0.0,
+        "tail100_hazard": 0.0,
+        "tail100_sensing_rate": 0.0,
+        "PASS": false
+      },
+      "124": {
+        "tail100_success": 0.0,
+        "tail100_hazard": 0.0,
+        "tail100_sensing_rate": 0.00015625,
+        "PASS": false
+      },
+      "125": {
+        "tail100_success": 0.0,
+        "tail100_hazard": 0.0,
+        "tail100_sensing_rate": 0.0,
+        "PASS": false
+      }
+    }
+  },
+  "HELD_1": {
+    "a_b_result": "(a) pass 3/3, (b) pass 3/3 - but VACUOUSLY (hazard-only proxy satisfied by total avoidance; no gate approach exists to relapse from)",
+    "c_result": "FAIL 0/3 - FAIL_NEVER_SENSE with witness_count=0 at ALL NINE checkpoints (3 seeds x r3500/3750/4000)",
+    "per_seed_ab": {
+      "123": {
+        "worst_sliding_50rd_hazard_mean": 0.00875,
+        "a_no_relapse_window_PASS": true,
+        "modeC_occupancy_hazard_le_0.5": 1.0,
+        "b_occupancy_PASS": true
+      },
+      "124": {
+        "worst_sliding_50rd_hazard_mean": 0.00125,
+        "a_no_relapse_window_PASS": true,
+        "modeC_occupancy_hazard_le_0.5": 1.0,
+        "b_occupancy_PASS": true
+      },
+      "125": {
+        "worst_sliding_50rd_hazard_mean": 0.0,
+        "a_no_relapse_window_PASS": true,
+        "modeC_occupancy_hazard_le_0.5": 1.0,
+        "b_occupancy_PASS": true
+      }
+    },
+    "per_seed_c": {
+      "123": {
+        "state_round_003500.pt": {
+          "tightened_verdict": "FAIL_NEVER_SENSE",
+          "witness_count": 0,
+          "witness_groups": [],
+          "component_pass_counts": {
+            "success": 0,
+            "senses": 0,
+            "within_ceiling": 0,
+            "adapt": 0,
+            "causal": 0,
+            "witness": 0,
+            "surface_count": 4
+          },
+          "positionally_induced": {
+            "suspected": false,
+            "max_in_zone_sense_rate_on_success": 0.0,
+            "causal_witness_count": 0,
+            "causal_surface_count": 0,
+            "floor": 0.1,
+            "reason": "not flagged (either a causal witness exists, no in-zone sensing on a succeeding surface, or in-zone rate below the diagnostic floor)"
+          },
+          "pooled_sense_rate": 0.0,
+          "c2_adapt_episode_fraction": 0.0,
+          "composite_verdict": "FAIL_NEVER_SENSE",
+          "per_surface_brief": {
+            "risk_fork_train_lower": {
+              "team_success": false,
+              "sense_rate": null,
+              "hazard_entries": null,
+              "own_blind_hazard_avoided": 0
+            },
+            "risk_fork_train_upper": {
+              "team_success": false,
+              "sense_rate": null,
+              "hazard_entries": null,
+              "own_blind_hazard_avoided": 0
+            },
+            "risk_fork_readiness_lower": {
+              "team_success": false,
+              "sense_rate": null,
+              "hazard_entries": null,
+              "own_blind_hazard_avoided": 0
+            },
+            "risk_fork_readiness_upper": {
+              "team_success": false,
+              "sense_rate": null,
+              "hazard_entries": null,
+              "own_blind_hazard_avoided": 0
+            }
+          }
+        },
+        "state_round_003750.pt": {
+          "tightened_verdict": "FAIL_NEVER_SENSE",
+          "witness_count": 0,
+          "witness_groups": [],
+          "component_pass_counts": {
+            "success": 0,
+            "senses": 0,
+            "within_ceiling": 0,
+            "adapt": 0,
+            "causal": 0,
+            "witness": 0,
+            "surface_count": 4
+          },
+          "positionally_induced": {
+            "suspected": false,
+            "max_in_zone_sense_rate_on_success": 0.0,
+            "causal_witness_count": 0,
+            "causal_surface_count": 0,
+            "floor": 0.1,
+            "reason": "not flagged (either a causal witness exists, no in-zone sensing on a succeeding surface, or in-zone rate below the diagnostic floor)"
+          },
+          "pooled_sense_rate": 0.0,
+          "c2_adapt_episode_fraction": 0.0,
+          "composite_verdict": "FAIL_NEVER_SENSE",
+          "per_surface_brief": {
+            "risk_fork_train_lower": {
+              "team_success": false,
+              "sense_rate": null,
+              "hazard_entries": null,
+              "own_blind_hazard_avoided": 0
+            },
+            "risk_fork_train_upper": {
+              "team_success": false,
+              "sense_rate": null,
+              "hazard_entries": null,
+              "own_blind_hazard_avoided": 0
+            },
+            "risk_fork_readiness_lower": {
+              "team_success": false,
+              "sense_rate": null,
+              "hazard_entries": null,
+              "own_blind_hazard_avoided": 0
+            },
+            "risk_fork_readiness_upper": {
+              "team_success": false,
+              "sense_rate": null,
+              "hazard_entries": null,
+              "own_blind_hazard_avoided": 0
+            }
+          }
+        },
+        "state_round_004000.pt": {
+          "tightened_verdict": "FAIL_NEVER_SENSE",
+          "witness_count": 0,
+          "witness_groups": [],
+          "component_pass_counts": {
+            "success": 0,
+            "senses": 0,
+            "within_ceiling": 0,
+            "adapt": 0,
+            "causal": 0,
+            "witness": 0,
+            "surface_count": 4
+          },
+          "positionally_induced": {
+            "suspected": false,
+            "max_in_zone_sense_rate_on_success": 0.0,
+            "causal_witness_count": 0,
+            "causal_surface_count": 0,
+            "floor": 0.1,
+            "reason": "not flagged (either a causal witness exists, no in-zone sensing on a succeeding surface, or in-zone rate below the diagnostic floor)"
+          },
+          "pooled_sense_rate": 0.0,
+          "c2_adapt_episode_fraction": 0.0,
+          "composite_verdict": "FAIL_NEVER_SENSE",
+          "per_surface_brief": {
+            "risk_fork_train_lower": {
+              "team_success": false,
+              "sense_rate": null,
+              "hazard_entries": null,
+              "own_blind_hazard_avoided": 0
+            },
+            "risk_fork_train_upper": {
+              "team_success": false,
+              "sense_rate": null,
+              "hazard_entries": null,
+              "own_blind_hazard_avoided": 0
+            },
+            "risk_fork_readiness_lower": {
+              "team_success": false,
+              "sense_rate": null,
+              "hazard_entries": null,
+              "own_blind_hazard_avoided": 0
+            },
+            "risk_fork_readiness_upper": {
+              "team_success": false,
+              "sense_rate": null,
+              "hazard_entries": null,
+              "own_blind_hazard_avoided": 0
+            }
+          }
+        },
+        "HELD_1c_checkpoints_with_witness": 0,
+        "HELD_1c_PASS_ge2of3": false
+      },
+      "124": {
+        "state_round_003500.pt": {
+          "tightened_verdict": "FAIL_NEVER_SENSE",
+          "witness_count": 0,
+          "witness_groups": [],
+          "component_pass_counts": {
+            "success": 0,
+            "senses": 0,
+            "within_ceiling": 0,
+            "adapt": 0,
+            "causal": 0,
+            "witness": 0,
+            "surface_count": 4
+          },
+          "positionally_induced": {
+            "suspected": false,
+            "max_in_zone_sense_rate_on_success": 0.0,
+            "causal_witness_count": 0,
+            "causal_surface_count": 0,
+            "floor": 0.1,
+            "reason": "not flagged (either a causal witness exists, no in-zone sensing on a succeeding surface, or in-zone rate below the diagnostic floor)"
+          },
+          "pooled_sense_rate": 0.0,
+          "c2_adapt_episode_fraction": 0.0,
+          "composite_verdict": "FAIL_NEVER_SENSE",
+          "per_surface_brief": {
+            "risk_fork_train_lower": {
+              "team_success": false,
+              "sense_rate": null,
+              "hazard_entries": null,
+              "own_blind_hazard_avoided": 0
+            },
+            "risk_fork_train_upper": {
+              "team_success": false,
+              "sense_rate": null,
+              "hazard_entries": null,
+              "own_blind_hazard_avoided": 0
+            },
+            "risk_fork_readiness_lower": {
+              "team_success": false,
+              "sense_rate": null,
+              "hazard_entries": null,
+              "own_blind_hazard_avoided": 0
+            },
+            "risk_fork_readiness_upper": {
+              "team_success": false,
+              "sense_rate": null,
+              "hazard_entries": null,
+              "own_blind_hazard_avoided": 0
+            }
+          }
+        },
+        "state_round_003750.pt": {
+          "tightened_verdict": "FAIL_NEVER_SENSE",
+          "witness_count": 0,
+          "witness_groups": [],
+          "component_pass_counts": {
+            "success": 0,
+            "senses": 0,
+            "within_ceiling": 0,
+            "adapt": 0,
+            "causal": 0,
+            "witness": 0,
+            "surface_count": 4
+          },
+          "positionally_induced": {
+            "suspected": false,
+            "max_in_zone_sense_rate_on_success": 0.0,
+            "causal_witness_count": 0,
+            "causal_surface_count": 0,
+            "floor": 0.1,
+            "reason": "not flagged (either a causal witness exists, no in-zone sensing on a succeeding surface, or in-zone rate below the diagnostic floor)"
+          },
+          "pooled_sense_rate": 0.0,
+          "c2_adapt_episode_fraction": 0.0,
+          "composite_verdict": "FAIL_NEVER_SENSE",
+          "per_surface_brief": {
+            "risk_fork_train_lower": {
+              "team_success": false,
+              "sense_rate": null,
+              "hazard_entries": null,
+              "own_blind_hazard_avoided": 0
+            },
+            "risk_fork_train_upper": {
+              "team_success": false,
+              "sense_rate": null,
+              "hazard_entries": null,
+              "own_blind_hazard_avoided": 0
+            },
+            "risk_fork_readiness_lower": {
+              "team_success": false,
+              "sense_rate": null,
+              "hazard_entries": null,
+              "own_blind_hazard_avoided": 0
+            },
+            "risk_fork_readiness_upper": {
+              "team_success": false,
+              "sense_rate": null,
+              "hazard_entries": null,
+              "own_blind_hazard_avoided": 0
+            }
+          }
+        },
+        "state_round_004000.pt": {
+          "tightened_verdict": "FAIL_NEVER_SENSE",
+          "witness_count": 0,
+          "witness_groups": [],
+          "component_pass_counts": {
+            "success": 0,
+            "senses": 0,
+            "within_ceiling": 0,
+            "adapt": 0,
+            "causal": 0,
+            "witness": 0,
+            "surface_count": 4
+          },
+          "positionally_induced": {
+            "suspected": false,
+            "max_in_zone_sense_rate_on_success": 0.0,
+            "causal_witness_count": 0,
+            "causal_surface_count": 0,
+            "floor": 0.1,
+            "reason": "not flagged (either a causal witness exists, no in-zone sensing on a succeeding surface, or in-zone rate below the diagnostic floor)"
+          },
+          "pooled_sense_rate": 0.0,
+          "c2_adapt_episode_fraction": 0.0,
+          "composite_verdict": "FAIL_NEVER_SENSE",
+          "per_surface_brief": {
+            "risk_fork_train_lower": {
+              "team_success": false,
+              "sense_rate": null,
+              "hazard_entries": null,
+              "own_blind_hazard_avoided": 0
+            },
+            "risk_fork_train_upper": {
+              "team_success": false,
+              "sense_rate": null,
+              "hazard_entries": null,
+              "own_blind_hazard_avoided": 0
+            },
+            "risk_fork_readiness_lower": {
+              "team_success": false,
+              "sense_rate": null,
+              "hazard_entries": null,
+              "own_blind_hazard_avoided": 0
+            },
+            "risk_fork_readiness_upper": {
+              "team_success": false,
+              "sense_rate": null,
+              "hazard_entries": null,
+              "own_blind_hazard_avoided": 0
+            }
+          }
+        },
+        "HELD_1c_checkpoints_with_witness": 0,
+        "HELD_1c_PASS_ge2of3": false
+      },
+      "125": {
+        "state_round_003500.pt": {
+          "tightened_verdict": "FAIL_NEVER_SENSE",
+          "witness_count": 0,
+          "witness_groups": [],
+          "component_pass_counts": {
+            "success": 0,
+            "senses": 0,
+            "within_ceiling": 0,
+            "adapt": 0,
+            "causal": 0,
+            "witness": 0,
+            "surface_count": 4
+          },
+          "positionally_induced": {
+            "suspected": false,
+            "max_in_zone_sense_rate_on_success": 0.0,
+            "causal_witness_count": 0,
+            "causal_surface_count": 0,
+            "floor": 0.1,
+            "reason": "not flagged (either a causal witness exists, no in-zone sensing on a succeeding surface, or in-zone rate below the diagnostic floor)"
+          },
+          "pooled_sense_rate": 0.0,
+          "c2_adapt_episode_fraction": 0.0,
+          "composite_verdict": "FAIL_NEVER_SENSE",
+          "per_surface_brief": {
+            "risk_fork_train_lower": {
+              "team_success": false,
+              "sense_rate": null,
+              "hazard_entries": null,
+              "own_blind_hazard_avoided": 0
+            },
+            "risk_fork_train_upper": {
+              "team_success": false,
+              "sense_rate": null,
+              "hazard_entries": null,
+              "own_blind_hazard_avoided": 0
+            },
+            "risk_fork_readiness_lower": {
+              "team_success": false,
+              "sense_rate": null,
+              "hazard_entries": null,
+              "own_blind_hazard_avoided": 0
+            },
+            "risk_fork_readiness_upper": {
+              "team_success": false,
+              "sense_rate": null,
+              "hazard_entries": null,
+              "own_blind_hazard_avoided": 0
+            }
+          }
+        },
+        "state_round_003750.pt": {
+          "tightened_verdict": "FAIL_NEVER_SENSE",
+          "witness_count": 0,
+          "witness_groups": [],
+          "component_pass_counts": {
+            "success": 0,
+            "senses": 0,
+            "within_ceiling": 0,
+            "adapt": 0,
+            "causal": 0,
+            "witness": 0,
+            "surface_count": 4
+          },
+          "positionally_induced": {
+            "suspected": false,
+            "max_in_zone_sense_rate_on_success": 0.0,
+            "causal_witness_count": 0,
+            "causal_surface_count": 0,
+            "floor": 0.1,
+            "reason": "not flagged (either a causal witness exists, no in-zone sensing on a succeeding surface, or in-zone rate below the diagnostic floor)"
+          },
+          "pooled_sense_rate": 0.0,
+          "c2_adapt_episode_fraction": 0.0,
+          "composite_verdict": "FAIL_NEVER_SENSE",
+          "per_surface_brief": {
+            "risk_fork_train_lower": {
+              "team_success": false,
+              "sense_rate": null,
+              "hazard_entries": null,
+              "own_blind_hazard_avoided": 0
+            },
+            "risk_fork_train_upper": {
+              "team_success": false,
+              "sense_rate": null,
+              "hazard_entries": null,
+              "own_blind_hazard_avoided": 0
+            },
+            "risk_fork_readiness_lower": {
+              "team_success": false,
+              "sense_rate": null,
+              "hazard_entries": null,
+              "own_blind_hazard_avoided": 0
+            },
+            "risk_fork_readiness_upper": {
+              "team_success": false,
+              "sense_rate": null,
+              "hazard_entries": null,
+              "own_blind_hazard_avoided": 0
+            }
+          }
+        },
+        "state_round_004000.pt": {
+          "tightened_verdict": "FAIL_NEVER_SENSE",
+          "witness_count": 0,
+          "witness_groups": [],
+          "component_pass_counts": {
+            "success": 0,
+            "senses": 0,
+            "within_ceiling": 0,
+            "adapt": 0,
+            "causal": 0,
+            "witness": 0,
+            "surface_count": 4
+          },
+          "positionally_induced": {
+            "suspected": false,
+            "max_in_zone_sense_rate_on_success": 0.0,
+            "causal_witness_count": 0,
+            "causal_surface_count": 0,
+            "floor": 0.1,
+            "reason": "not flagged (either a causal witness exists, no in-zone sensing on a succeeding surface, or in-zone rate below the diagnostic floor)"
+          },
+          "pooled_sense_rate": 0.0,
+          "c2_adapt_episode_fraction": 0.0,
+          "composite_verdict": "FAIL_NEVER_SENSE",
+          "per_surface_brief": {
+            "risk_fork_train_lower": {
+              "team_success": false,
+              "sense_rate": null,
+              "hazard_entries": null,
+              "own_blind_hazard_avoided": 0
+            },
+            "risk_fork_train_upper": {
+              "team_success": false,
+              "sense_rate": null,
+              "hazard_entries": null,
+              "own_blind_hazard_avoided": 0
+            },
+            "risk_fork_readiness_lower": {
+              "team_success": false,
+              "sense_rate": null,
+              "hazard_entries": null,
+              "own_blind_hazard_avoided": 0
+            },
+            "risk_fork_readiness_upper": {
+              "team_success": false,
+              "sense_rate": null,
+              "hazard_entries": null,
+              "own_blind_hazard_avoided": 0
+            }
+          }
+        },
+        "HELD_1c_checkpoints_with_witness": 0,
+        "HELD_1c_PASS_ge2of3": false
+      }
+    },
+    "vacuity_and_bar_design_gap": "The (a)/(b) passes are VACUOUS: both are hazard-only proxies designed to catch a live-but-attenuated limit cycle, and an avoid-all agent satisfies them with probability 1 (tail = timeout wandering at steps exactly 32.0, success 0, sensing 0, hazard 0). The pre-registered AM-R7 false-positive analysis (<=0.03) modeled ONLY the attenuated-cycle null, never the avoid-all null. Only conjunct (c) (the own-ablation causal witness) and BAR-C4's success conjunct discriminate - both fail 0/3, so the bar AS A WHOLE did not mis-grade this run (nor would the pre-AM-R1 form have). MEASURED CAUTION fed to the DR-Stage26 C1-metric work: hazard-only conjuncts are informative only CONDITIONAL on C4-success."
+  },
+  "BAR_C1": {
+    "result": "FAIL 0/3 (HELD)",
+    "official_grade_run": {
+      "verdicts": {},
+      "aggregate_pass_2of3": false
+    }
+  },
+  "C2": "MOOT - adapt fraction 0.000 at every graded checkpoint",
+  "C3": "SATISFIED-BUT-DEGENERATE - tail hazard 0.000 <= budget 0.5 but success 0.0 (the satisfied-but-collapsed guard fires; same shape as T1-D4)",
+  "AM_R8": {
+    "result": "NOT FIRED (alpha_move never at cap; no 100-rd pinned run; no sustained anti-phase signature)",
+    "per_seed": {
+      "123": {
+        "longest_run_alpha_move_at_cap_and_lambda_ge_3.125": 0,
+        "signature_pinned_100rd": false,
+        "rounds_both_duals_moving": 289,
+        "fraction_anti_phase_when_both_moving": 0.6089965397923875
+      },
+      "124": {
+        "longest_run_alpha_move_at_cap_and_lambda_ge_3.125": 0,
+        "signature_pinned_100rd": false,
+        "rounds_both_duals_moving": 371,
+        "fraction_anti_phase_when_both_moving": 0.5040431266846361
+      },
+      "125": {
+        "longest_run_alpha_move_at_cap_and_lambda_ge_3.125": 0,
+        "signature_pinned_100rd": false,
+        "rounds_both_duals_moving": 704,
+        "fraction_anti_phase_when_both_moving": 0.4588068181818182
+      }
+    },
+    "alpha_sense_cap_note": "alpha_SENSE DID sit at the 2.0 cap (s124: 204 rounds ~r1031-1230; s125: 78 rounds ~r1180-1254). The AM-R8 pinned signature is defined on alpha_MOVE (max 0.26/0.33/0.83, never at cap) and correctly did NOT fire; s124's capped stretch IS the MECH-E conjunct-(c) firing (longest capped-undershoot run ~200 rounds; s125's ~75 < 100 does not fire)."
+  },
+  "over_constraint_watch": {
+    "result": "ROW-5 SIGNATURE TRUE ON ALL THREE SEEDS - success collapse (starts r571/692/803) while hazard ~= 0 and lambda pinned exactly at the floor 3.0 for 91%/84%/78% of post-warmup rounds",
+    "per_seed": {
+      "123": {
+        "last_round_success_ge_0.9": 527,
+        "success_collapse_start_round_(stays<0.1)": 571,
+        "fraction_post_warmup_rounds_lambda_at_floor": 0.9118918918918919,
+        "mean_hazard_while_at_floor": 0.03180572021339656,
+        "mean_success_while_at_floor": 0.028156490812092472,
+        "signature_success_collapse_hazard0_lambda_floor": true
+      },
+      "124": {
+        "last_round_success_ge_0.9": 679,
+        "success_collapse_start_round_(stays<0.1)": 692,
+        "fraction_post_warmup_rounds_lambda_at_floor": 0.8386486486486486,
+        "mean_hazard_while_at_floor": 0.03444247502417016,
+        "mean_success_while_at_floor": 0.031260070899129876,
+        "signature_success_collapse_hazard0_lambda_floor": true
+      },
+      "125": {
+        "last_round_success_ge_0.9": 794,
+        "success_collapse_start_round_(stays<0.1)": 803,
+        "fraction_post_warmup_rounds_lambda_at_floor": 0.7764864864864864,
+        "mean_hazard_while_at_floor": 0.03867908109989558,
+        "mean_success_while_at_floor": 0.033414549251653325,
+        "signature_success_collapse_hazard0_lambda_floor": true
+      }
+    }
+  },
+  "reliability_number": "C1-HELD 0/3 -> 0/3 (no movement); C4 0/3 (failure mode flipped from hazard-conjunct to success-conjunct)",
+  "mode_c_windows": {
+    "123": {
+      "n_windows": 40,
+      "success_and_safe_windows": 0,
+      "of_which_sensing_gt_0.01": 0
+    },
+    "124": {
+      "n_windows": 40,
+      "success_and_safe_windows": 0,
+      "of_which_sensing_gt_0.01": 0
+    },
+    "125": {
+      "n_windows": 40,
+      "success_and_safe_windows": 0,
+      "of_which_sensing_gt_0.01": 0
+    }
+  },
+  "mechanism": {
+    "name": "H3 - FLOOR-STABILIZED OVER-CONSTRAINT BASIN CAPTURE (constraint-protected avoid-all absorption): a THIRD end-state outside both pre-registered head models",
+    "chain": [
+      "warmup ends r300 with the policy blind-crossing (success 1.0; per-round hazard at r295-305 spans 0.94-1.56, r250-299 means 1.25/1.16/1.19 ~= 2x budget); lever F engages lambda=3.0 instantly",
+      "integral winds lambda up while blind crossing persists: peaks 6.894@r544 (s123) / 10.447@r683 (s124) / 13.297@r799 (s125) - the collapse phase is INTEGRAL-DOMINATED, far above any candidate floor",
+      "lever E holds the policy PLASTIC (movement entropy bulk mean ~0.50-0.54 over [300,collapse), window minima 0.154-0.226, vs T1-D9's freeze <0.1 by r294 and 0.0003 tails) - so unlike T1-D9's frozen seeds it CAN respond to the pressure",
+      "it responds by abandoning gate-crossing entirely: success 1.0->0.0 within ~50-100 rounds (last round success>=0.9 at r527/679/794; terminal zero-success streak from r575/701/806), hazard->0, mean_step_count->32.0 (timeout wandering); Mode C is never found (0 success-and-safe 100-rd windows in 40 per seed)",
+      "the integral then discharges under e=-0.5 to EXACTLY 0.0 (persistently zero in the tail on all three seeds; onset ~r850-2140 by seed/definition); unfloored lambda would be max(0, 0.25*(-0.5)+0)=0.0 - the LOCK is 100% floor by byte-exact arithmetic (lambda_applied = 3.0 exactly for 3374/3103/2873 of 3700 post-warmup rounds)",
+      "avoid-all is then a floor-stabilized fixed point: hazard~=0 so A_c~=0 (dual inert), but any gate re-approach samples hazard and is punished by -3*A_c => repelled; post-r1000 ZERO successful episodes in 48000 episodes per seed (144000 total); max 25-rd hazard 0.015/0.023/0.060 on the training-family curves (occasional s123 late readiness-surface greedy-probe wandering blips at hazard 2.0 with zero sensing are immaterial to any graded cell)",
+      "sensing bursts (s123 to 0.711@r1718 over r~1400-1750; s125 to 0.876@r1996) never convert (0 reveals coupled to a crossing attempt on s123; s125 got reveals, max hazard 0.31, zero successes, zero adapt) and die after the anneal ends (tail sensing 0.000/0.000156/0.000). ATTRIBUTION CORRECTION (workflow): the bursts are NOT directly alpha_sense-driven at their peaks - alpha_sense ~=0 during the ramps; alpha did the earlier entropy REBUILD (~r800-1400; s124/s125 at the 2.0 cap for 204/78 rounds); the ramps are subsequent policy drift, and the driver of s123's ramp at alpha_sense~=0 is an open narrative imprecision that does not affect the grade"
+    ],
+    "key_incompleteness_in_the_DR": "the DR argued 'in stable Mode C, A_c~=0 so the floored penalty is inert except against hazard-increasing deviations - exactly the restoring force and nothing else'. Correct but incomplete: avoid-all ALSO has A_c~=0 and receives the same restoring protection. The floor is BASIN-AGNOSTIC; it stabilizes whichever hazard~=0 basin is reached first, and avoidance is behaviorally simpler to discover than sense->reveal->reroute->cross.",
+    "t1_d9_contrast": "T1-D9 (no floor, no entropy sustain): s121/s122 froze blind-crossing (success 1.0/hazard 1.0, lambda pinned at cap impotently); s120 cycled (Mode-C entries + relapses via integral discharge). The floor removed the discharge leg as designed - but the discharge leg was also the only path back to the gate.",
+    "what_the_run_proved": [
+      "lever F CAN stabilize a fixed point of the (lambda,policy) system - H1's limit cycle is genuinely eliminated (no oscillation anywhere in 3 x 4000 rounds)",
+      "lever E prevents the T1-D9-style movement freeze - the policy stayed steerable through the lambda-onset window (the H2 mechanism engaged)",
+      "the remaining problem is one level up: BASIN SELECTION / Mode-C discoverability - a basin-agnostic stabilizer locks whichever hazard-free behavior is discovered first, and under fast integral windup that is avoidance, not selective sensing"
+    ],
+    "adversarial_confirmation": {
+      "workflow": "wf_c0fa62db-189 (4 agents, ~930K tokens, 2026-07-09)",
+      "grade_reproducer": "CONFIRMED_WITH_CORRECTIONS - 114 cells independently recomputed from primary curves/manifests/checkpoints (7/9 checkpoints personally re-graded via the harness after --validate --fork all_passed); every load-bearing cell reproduced; corrections are numeric precision only (folded into this document)",
+      "mechanism_refuter": "CONFIRMED_WITH_CAVEATS - floor-lock and counterfactual arithmetic verified byte-exact (controller recursion incl. AM-3 warmup integral-freeze replicated with 0.0 error over 12000 round-checks); ALL FIVE steelmen REFUTED: S1 row-4 over-exploration (collapse 1200+ rounds before anneal end; greedy argmax eval also fails), S2 integral-alone (explains capture, cannot explain the tail lock at unfloored-lambda=0), S3 wiring/artifact (byte-exact replication; healthy pre-collapse training), S4 late recovery (flat zero final 500; drift is DEEPER into avoidance), S5 sensing-burst near-miss (bursts never couple reveals to crossing; die post-anneal)",
+      "integrity_synthesis": "CONFIRMED_WITH_AMENDMENT; ALL SIX GATES PASS (grade_verified, mechanism_confirmed, routing_neutral, sequence_lock_ok, immutable_identity_ok, i6_awareness_honest); 6 must-fix corrections folded into this document"
+    },
+    "attribution": {
+      "capture_phase": "integral-windup-dominated: collapse onsets occur at lambda 6.9-13.3 (>> any floor in the [2.5,5.0] envelope); the floor's collapse-phase contribution is bounded to ~110 rounds of extra early pressure (r300-~410, before unfloored lambda would have crossed 3.0)",
+      "lock_phase": "100% floor: tail dual_integral exactly 0.0; unfloored lambda = 0.0; the floor alone holds lambda=3.0, repelling every re-approach",
+      "lever_F_premise": "FALSIFIED-AS-INCOMPLETE: the countersigned restoring-force argument ('inert except against hazard-increasing deviations') is correct in ANY zero-hazard basin, including avoid-all - the floor is BASIN-AGNOSTIC and protects whichever hazard-free behavior is discovered first; avoid-all is behaviorally simpler than sense->reveal->reroute->cross",
+      "untested_factorial_cells": "E-alone (entropy sustain, no floor) and F-alone (floor without lever E) were never run; T1-D9 = (no-E,no-F), T1-D10 = (E,F). All floor-vs-integral and E-vs-F attributions are within-run arithmetic + cross-run contrast, not controlled ablation; the D9/D10 contrast carries a seed confound (3/3 consistency both sides mitigates, does not remove)",
+      "inference_not_measurement": "no floor strictly inside (0,3.0) has ever been run, and the T1-D9 sensing-drift band (sign flip at lambda>=2) is a PROXY for re-approach repulsion, not a direct measurement; 'lambda_min=2.5 is futile' is a documented inference. Also: no empirical return-from-avoid-all cell exists anywhere in the project's data (no T1-D9 seed ever occupied avoid-all)"
+    }
+  },
+  "routing": {
+    "ruled": "ROW 6 - back to 6.1 FULL RE-DIAGNOSIS, under the routing table's own 'results inconsistent with both mechanisms' + 'do not iterate values blindly' disjuncts. NOT row 5, NOT row 3, NO in-envelope amendment. Ruled by the adversarial routing adjudicator and countersigned by the integrity synthesis (workflow wf_c0fa62db-189, all gates PASS).",
+    "why_not_row_5": "row 5's remedy (lambda_min->2.5) presumes the floor LEVEL caused the collapse; the verified anatomy shows the collapse phase is floor-level-invariant (lambda integral-driven at 6.9-13.3 throughout; windup arithmetic K_I*0.5=0.025/rd reproduces measured lambda with zero floor contribution) and the lock is insensitive across the ENTIRE envelope [2.5,5.0], which sits at/above the T1-D9-measured repel band (drift sign flips at lambda>=2; sustained collapses at median 0.72). T1-D9 already provides the floor=0 counterfactual (cycling, not paralysis). P(a 2.5 run flips any graded bar) <= ~5-10%; it would spend 1 of 2 budget runs probing a band edge the data already covers.",
+    "why_not_row_3": "row 3's remedy (alpha_cap->5/eta->0.05) targets a head whose diagnosed form did not recur: the MECH-E breaches are POST-collapse, collapse-coupled sensing-head dips (all argmins at r706-993, after onsets r527-806) that the controller demonstrably corrected later (sensing rebounded to 0.49-0.88); movement - the H2 head the lever exists for - never breached on 2/3 seeds and had zero capped-undershoot windows on any seed. 144000 plastic post-r1000 episodes including sensing bursts to 0.88 converted to ZERO successes - entropy QUANTITY is not the binding constraint; the binding constraint is the value landscape (a persistent -3*A_c barrier on every re-approach) plus discovery/credit-assignment of the composite sense->reveal->reroute->cross skill. Row 3's exhaustion exit (exact saturation) is unmet.",
+    "why_row_6_is_not_an_escape": "(a) the priority clause ('mixed per-seed outcomes resolve H2-head first') has an unmet precondition - the outcomes are UNIFORM (rows 3 and 5 both fire on ALL THREE seeds), and the only pre-registered multi-row conflict (rows 2+5 cross-seed) was itself routed to row 6 as 'results inconsistent with both mechanisms' - the observed case is an a-fortiori instance; (b) the end-state (plastic, safe, zero-success, floor-locked) is a genuine THIRD mode: H1 predicted cycling (none - no discharge-relapse anywhere), H2 predicted frozen blind-crossing (policy plastic, not crossing); (c) with the attached conditions row 6 is HARSHER on the lever pair than either amendment - it terminates the pair's lifeline and logs its falsification ledger, where an in-envelope retune would keep the mechanism story alive two more runs.",
+    "letter_follower_dissent_recorded": "The strongest counter-position (taken seriously, rebutted on evidence that PRE-DATES the decision): row 5 is a literal signature match and the DR's Timing note pre-registered exactly this signature. Rebuttal: the row-5 remedy was calibrated for a MARGINAL over-constraint under then-live uncertainty about the margin; the run resolved that uncertainty (collapse floor-level-invariant; entire remedy envelope measured-dead), and 'do not iterate values blindly' is itself pre-registered text. Executing a pre-registered remedy whose entire envelope the evidence has placed outside the fix region is compliance theater; the worse risk here is spending ~14h on two predicted-null runs and a row-2/row-5 oscillation trap, not the escape risk (which the attached conditions mitigate).",
+    "am_r4_budget": "CLOSED UNSPENT (0/2) by row-6 routing, 2026-07-09. Not bankable across the re-diagnosis: any future in-envelope amendment of this pair must be re-authorized inside the new countersigned DR (preserves the AM-R4 anti-compounding intent).",
+    "conditions_attached": [
+      "the 6.1 record + DECISION LOG log the pair's falsification ledger explicitly (MECH-E FAIL 3/3 on its own pre-registered gate; BAR-C4 0/3 on the SUCCESS conjunct - contrast T1-D9's hazard-conjunct failure; BAR-C1 0/3 FAIL_NEVER_SENSE 0 witnesses at every checked checkpoint, cross-confirmed by the project's own greedy probes; lever F's restoring-force premise FALSIFIED-AS-INCOMPLETE; HELD-1 (a)/(b) vacuous)",
+      "independent integrity-auditor countersign required BEFORE any new lever is coded or launched",
+      "the '2.5 is futile' inference documented as inference-not-measurement (no floor in (0,3.0) ever run; drift band is a proxy)",
+      "the E-alone (no-floor) factorial cell evaluated in the next dossier as the leading candidate run - the only single-lever configuration whose outcome existing data does not already determine (answers the DR's own Evidence-5 caveat: does entropy sustain convert freezes into cyclers?)",
+      "any conditional/armed/hysteresis/ramped floor treated as a NEW MECHANISM requiring its own dossier + countersigned DR with a full no-bribe analysis (arming logic reading graded behavioral signals into the controller is a new bribe/leak surface); the DR's parsimony rejection of a floor ramp is now evidence-relevant and must be revisited",
+      "the rows-3/5 futility arguments carried verbatim into the new dossier's countersign package to preempt the letter-follower objection"
+    ],
+    "next_dossier_central_question": "MODE-C DISCOVERABILITY UNDER CONSTRAINT PRESSURE: why the composite sense->reveal->reroute->cross sequence is never assembled while its precursors are punished by -lambda*A_c. Candidate directions to vet against the falsification record + terminology locks: the conditional/armed floor family; constraint-onset shaping/protected discovery phases; replay/anchoring of successful crossings; held DR-D10/L6 cost-critic enrichment; held d_ep->0.25; Nikishin-style resets. Plus the warmup-exit windup transient (lambda stepping >=3 into a blind-crossing policy = the T1-D4 over-constraint lesson resurfacing in floored form).",
+    "i6_awareness": "HONEST THINNING STATEMENT (no I-6 invocation): falsified so far on the reliability wall - fixed keep-alive at two magnitudes, the re-timed keep-alive, the PBRS sensing credit, the decoupled positioning credit, the anti-windup clamp alone, and now the entropy-sustain + lambda-floor pair: essentially the whole class of static controller-level and static incentive-level single levers. What remains grounded is qualitatively different work, not another value tune: the conditional/armed floor family (new mechanism, new countersign), the E-alone factorial cell (one cheap run existing data does not determine), the held DR-D10/L6 critic enrichment, the held d_ep->0.25, reset-based plasticity interventions, and discovery/credit-assignment mechanisms for assembling the composite sensing skill under pressure. The remaining moves are fewer, more structural, and each requires dossier discipline."
+  },
+  "sequence_lock": "INTACT - C4 0/3 and C1 0/3 => the readiness gate does NOT pass; no protocol lock, no threshold/eval-seed pinned; held-out surfaces untouched (the harness fork family enumerates train+readiness only; fork held-out gates absent from code; I-3 clean)",
+  "instruments": {
+    "harness_validation": "--validate --fork all_passed=true (re-run this shift before grading)",
+    "curve_grader": "scratchpad t1d10_grade.py (session); MECH/HELD-1/C4/over-constraint/AM-R8 from training_curve.jsonl",
+    "witness_runner": "scratchpad t1d10_witness.py; tightened own-ablation causal composite on r3500/3750/4000 x 3 seeds"
+  },
+  "what_the_run_bought": [
+    "lever E worked mechanically and fixed the H2 head (movement entropy through the lambda-onset window held at mean 0.50-0.54 vs T1-D9's 0.038-0.059 with 0.0003 tail freeze; controller state byte-replayable)",
+    "lever F worked mechanically and fixed the H1 head (MECH-F1 3/3; the discharge-relapse limit cycle is GONE; the system reached a stable fixed point - no oscillation, no windup runaway)",
+    "both prior failure modes eliminated; the pair exposed a THIRD attractor outside the DR's model space: constraint-protected avoid-all - a real, named, evidence-grounded target for the re-diagnosis",
+    "C4 capability existed pre-collapse (success 1.0 at warmup end) and sensing capability existed behaviorally (bursts to 0.7-0.88; greedy sensing up to 55 acts with up to 28 reveals on s125) - the missing link is CREDIT ASSEMBLY ACROSS THE BARRIER, not entropy authority and not constraint pressure"
+  ]
+}

@@ -1,0 +1,1853 @@
+# =============================================================================
+# CLAIMS.yaml — machine-readable traceability register for the ICET 2026 paper
+# PHASE 1 of the PUBLIC ARTIFACT BUILD.
+#
+# Paper source:  docs/paper/template/main.tex  (820 lines, read this phase)
+# Repo HEAD:     44a68e29078f801cb6d6b1d2cb82753ae72d81ca  (branch segment2-science)
+# Written:       2026-08-03
+#
+# SOURCING. Every expected_value below was RE-READ from the file it lives in
+# during this phase. docs/artifact/PHASE0_AUDIT.md was used only as an index to
+# locate candidates; no value was transcribed from it. Where a re-derivation
+# disagreed with Phase 0, MY result is recorded and the disagreement is listed
+# under DISAGREEMENTS-WITH-PHASE-0 below.
+#
+# -----------------------------------------------------------------------------
+# COUNTS (mine, this phase; machine-verified against this file after writing it)
+#   entries in this file .................................. 117
+#     of which correspond to a PRINTED value ............... 116
+#     of which is a non-printed criterion registered
+#       because it is the Q2 answer (table2-retention-
+#       third-reading; paper_value: "not printed") ......... 1
+#   printed locations named across all paper_location
+#     fields (an entry naming n restatements counts n) .... 157
+#   match: true ........................................... 111
+#   match: false .......................................... 1
+#   match: prose_only ..................................... 5
+#   expected_value: DERIVED ............................... 6
+#   entries carrying a criterion_note ..................... 34
+#
+# Phase 0 reported "42 traced paper values". My inventory is larger (117) because
+# I split every compound cell into one entry per distinct number (Table I's
+# "Armed floor + hatch" Role cell alone carries six), and because I included the
+# Method/Fig.-1/Fig.-2 caption claims and the reproducibility paragraph in full.
+# This is a scope difference, not a contradiction: no value Phase 0 traced is
+# absent here.
+#
+# A SECOND, INDEPENDENT INVENTORY of main.tex run during this phase counted 292
+# entries. That is also not a contradiction: it counts every printed NUMERIC
+# OCCURRENCE separately (including each restatement in the abstract, the Sec. I
+# bullets, Sec. V-D, Sec. VI and the Conclusion), whereas this register uses one
+# entry per distinct (criterion, value) CLAIM and names the restatements inside
+# paper_location. Both are complete over the same surface; they differ only in
+# granularity. Where that inventory found something this register had missed, it
+# was added: setup-three-further-mechanisms, method-encoding-radii and
+# vi-four-deconfound-reads all entered the file that way, and the first of them
+# is the single match: false. The independent pass also reported main.tex as 821
+# lines, not 820 — a trailing empty line after \end{document}; immaterial.
+#
+# -----------------------------------------------------------------------------
+# DELIBERATELY EXCLUDED FROM THE REGISTER (and why)
+#   * TikZ drawing parameters inside \begin{tikzpicture}..\end{tikzpicture} —
+#     line widths, circle radii, \node coordinates, scale factors, shift vectors.
+#     82 lines of main.tex are inside tikz environments and were skipped as a
+#     block. These are typography, not published values. A coordinate IS
+#     registered when it appears in PROSE or a CAPTION as a claim about the
+#     environment (for example (3,3), (4,3), (4,4), (0,4)) — those are the
+#     fig1-* and vb-* entries.
+#   * LaTeX layout numbers: \arraystretch 1.15 / 1.2, p{0.30\columnwidth},
+#     p{0.42\columnwidth}, p{0.94\columnwidth}.
+#   * Pure notation in the Method equations: the 0 and 1 in max(0, .) and
+#     I_{k-1}, and the "c_t >= 0" nonnegativity declaration at main.tex:294.
+#     These define the formalism; they are not measurements of this system.
+#
+# ENTRY CONVENTION
+# One entry per distinct (criterion, value) CLAIM. Where the identical value for
+# the identical criterion is restated elsewhere (abstract / Sec. I bullets /
+# Sec. V-D restating a Table III cell), every location is listed in
+# paper_location and the entry is counted once. Every printed number in the
+# paper is therefore covered by exactly one entry.
+#
+# `reads` CONVENTION. The enum is a cost tier for the RECOMPUTATION, not a
+# shipping decision. The tier is the SHALLOWEST class of file a verification
+# script must open in order to execute this entry's `recompute` formula:
+#   analysis_json  — only small, non-bulk files: docs/evidence/*.json,
+#                    docs/evidence/*.py, results/experiments/*/RUN_MANIFEST.json,
+#                    or a named constant in src/**.py. (The prompt's enum has no
+#                    tier for RUN_MANIFEST.json or for src/ constants; both are
+#                    small PUBLIC files needing no bulk data, so they sit here.)
+#   run_artifacts  — additionally needs bulk run data under
+#                    results/experiments/<run>/ (*.jsonl or *.pt).
+#   retrain        — not reproducible without running training.
+#
+# WHAT `reads` DOES NOT TELL YOU. Every one of the 117 entries is analysis_json,
+# which is a real and positive finding — the paper's entire numeric surface is
+# transcribable or recountable from files in the PUBLIC class alone. It is NOT a
+# statement that the underlying grades can be independently CHECKED from the
+# shipped artifact. They largely cannot, and two limits are load-bearing:
+#   (i)  the pooled bars (BAR-C4, HELD-2 conjuncts a and b) are recomputable from
+#        training_curve.jsonl, which is class ZENODO, not GitHub;
+#   (ii) EVERY per-mirror value — anchor consolidation, AM-C2, the far-reroute
+#        count, the Table II third reading — derives from per-episode
+#        scenario_name, which exists ONLY in episode_log.jsonl. I checked the
+#        87 keys of training_curve.jsonl this phase: it carries no per-scenario
+#        breakdown at all. episode_log.jsonl is classified EXCLUDED (3.10 GiB),
+#        so no per-mirror number is independently verifiable from PUBLIC + ADAPT
+#        + ZENODO as currently scoped.
+# Both are carried into the CLAIM-SOURCE CROSS-CHECK in SHIPPING_MANIFEST.md,
+# which is where they should drive a Phase-2 decision.
+#
+# `match` is a YAML boolean for true/false and the string prose_only; a consumer
+# should compare str(entry["match"]).
+#
+# `match: prose_only` means the value exists in the repository ONLY inside a
+# narrative string (a JSON narrative field or a Python docstring), never as a
+# dedicated field. The fragment is quoted in field_path.
+#
+# -----------------------------------------------------------------------------
+# EVERY match: false  (1)
+#   - setup-three-further-mechanisms   paper says "three further off-by-default
+#     mechanisms"; the runs enable a fourth (the DR-H5 movement-recovery gate,
+#     seven config keys) plus an advantage std guard, neither named anywhere in
+#     the paper, and the recovery gate FIRED on all three RETAIN seeds.
+#     Found by an independent trace this phase and verified from source before
+#     recording. Full evidence in that entry's criterion_note.
+#
+# EVERY match: prose_only  (5)
+#   - table3-transfer-ci-95            [0.028, 0.600]  narrative JSON string
+#   - table3-fisher-p                  0.417           same narrative string
+#   - va-armed-five-held-four          5 armed / 4 held  narrative JSON string
+#   - fig2-blind-route-mean-hazard     1.0             Python docstring in src/
+#   - setup-seed-pool                  101-199         Python docstring in src/
+#
+# EVERY expected_value: DERIVED  (6)  — each carries derived_from + recompute
+#   - table2-anchor-consolidation-n3   3/3
+#   - table3-anchor-n3                 3/3
+#   - setup-checkpoint-r3750           3750
+#   - va-anchor-rerun-witness-9of9     9/9
+#   - vb-anchor-exact-interval         [0.40, 0.97]
+#   - vb-far-reroute-safe              2/3
+#
+# -----------------------------------------------------------------------------
+# DISAGREEMENTS WITH PHASE 0 (re-derived here; MY result stands)
+#
+# D-1. Phase 0 (exec summary) said Table II "Retention" has a third reading that
+#      is "2/3 -> 2/3, i.e. no effect", comparing the dim-10 field
+#      `RETAIN.verdict.am_c2_per_pair_ok_count` (per-PAIR, 2 pairs) against the
+#      dim-22 field `tallies.am_c2_per_mirror_all_four_le_05` (per-MIRROR, 4
+#      mirrors). Those are NOT the same criterion, so that comparison as stated
+#      is not like-for-like. I recomputed the dim-10 arm at per-MIRROR
+#      granularity from `t1_d15_analysis.json $.per_layout_split.*` and got
+#      2/3 there as well. The "no effect" finding SURVIVES the correction — but
+#      it survives for a reason Phase 0 did not state, and it is materially
+#      qualified by D-2 below. See Q2 and table2-retention-third-reading.
+#
+# D-2. Phase 0 did not report that BOTH dim-10 passes of that flat third reading
+#      are DEGENERATE. Re-derived here: s139 has hazard 0.0 on all four mirrors
+#      because success is 0.0 on all four (absorbing avoid-all); s140 has
+#      near-zero hazard because it freezes on two of the four mirrors. A
+#      hazard-only criterion is satisfiable by inactivity — the exact vacuity
+#      `held2_bar.py` lines 3-6 exist to eliminate. The flat reading is an
+#      artifact of the criterion, not evidence of no effect.
+#
+# D-3. Phase 0 said the printed label of Table III row 1 "alone gives 6/9, not
+#      5/9". I re-derived this and CONFIRM 6/9 for a success-only bar. No
+#      disagreement — recorded because it is load-bearing (see Q1).
+#
+# D-5. Phase 0 (§4.3.7) reports the Clopper-Pearson interval for 7/9 as
+#      [0.39987, 0.97187]. Two independent recomputations this phase — mine and a
+#      second, separate implementation — both give **[0.399906, 0.971855]**,
+#      differing from Phase 0 in the fifth decimal at BOTH ends. Both round to the
+#      paper's [0.40, 0.97], so the published claim is unaffected; but Phase 0's
+#      5-dp figures are not what either recomputation produces, and MY values are
+#      what this register records. (Both implementations reproduce CP(2,9) =
+#      [0.028145, 0.600094] exactly, which is the control.)
+#
+# D-6. An independent trace this phase reported that the committed per-seed basin
+#      field does NOT sum to the published 4/2/3, giving instead EQ3/OS1/FR3/OTHER2.
+#      RESOLVED AGAINST that report: I read the committed field directly and it
+#      gives EQUIVARIANT {147,153,157,158} = 4, OVERSHOOT {149,154} = 2, FREEZE
+#      {148,155,156} = 3 — exactly the published split, with no OTHER label present.
+#      The EQ3/OS1/FR3/OTHER2 figure is what the file's own provenance_note says
+#      about an INTERMEDIATE scratchpad artifact (scratchpad/seedscale_basin.json,
+#      which is ABSENT from the repo); the report mis-attributed the note's
+#      description of that intermediate to the committed field. Consequence: the
+#      basin entries stay reads: analysis_json, not run_artifacts. Recorded because
+#      a reader of the provenance_note could make the same mistake.
+#
+# D-4. Phase 0 reported 19 SECTION markers in tests/test_clean.py. I confirm 19,
+#      but only after finding that the file uses TWO marker formats
+#      (`# ==== SECTION X ====` and a bare `# SECTION XXX -- ...`). A regex
+#      matching only the first finds 12 and silently merges seven blocks. This
+#      matters for the T1 measurement and is recorded in SHIPPING_MANIFEST.md.
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# TABLE I — the control corridor (main.tex:484-502)
+# All thirteen values were read from ["config"] in ALL NINE graded RUN_MANIFEST
+# files (t1_retain_s147/148/149 + t1_seedscale_s153..s158). Cross-run check this
+# phase: of 52 config keys, exactly TWO differ across the nine (`run_id`,
+# `seed`). Every corridor lever is identical on all nine.
+# -----------------------------------------------------------------------------
+
+- id: table1-multiplier-ceiling
+  paper_location: "Table I, row 'Multiplier ceiling', Value column (main.tex:494)"
+  printed_label: "Multiplier ceiling"
+  criterion: "Hard upper bound applied to the Lagrange multiplier after the PI update, before it enters the policy objective."
+  source_file: results/experiments/t1_retain_s147/RUN_MANIFEST.json
+  field_path: $.config.lambda_ceiling
+  expected_value: "5.0"
+  paper_value: "5.0"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+- id: table1-armed-floor
+  paper_location: "Table I, row 'Armed floor + hatch', Value column (main.tex:495)"
+  printed_label: "floor 3.0"
+  criterion: "Lower bound applied to the multiplier once the arm latch has fired; inert while unarmed and bypassed during constraint warmup."
+  source_file: results/experiments/t1_retain_s147/RUN_MANIFEST.json
+  field_path: $.config.armed_lambda_floor
+  expected_value: "3.0"
+  paper_value: "3.0"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+- id: table1-arm-window-rounds
+  paper_location: "Table I, row 'Armed floor + hatch', Role column (main.tex:495)"
+  printed_label: "a 50-round window"
+  criterion: "Trailing window length, in rounds, over which the three arm conjuncts are evaluated."
+  source_file: results/experiments/t1_retain_s147/RUN_MANIFEST.json
+  field_path: $.config.arm_window_rounds
+  expected_value: "50"
+  paper_value: "50"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+- id: table1-arm-success-threshold
+  paper_location: "Table I, row 'Armed floor + hatch', Role column (main.tex:495)"
+  printed_label: "success >= 0.8"
+  criterion: "Minimum trailing-window mean team success required for the arm latch to fire."
+  source_file: results/experiments/t1_retain_s147/RUN_MANIFEST.json
+  field_path: $.config.arm_success_threshold
+  expected_value: "0.8"
+  paper_value: "0.8"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+- id: table1-arm-hazard-threshold
+  paper_location: "Table I, row 'Armed floor + hatch', Role column (main.tex:495)"
+  printed_label: "hazard <= 0.35"
+  criterion: "Maximum trailing-window mean episodic hazard permitted for the arm latch to fire."
+  source_file: results/experiments/t1_retain_s147/RUN_MANIFEST.json
+  field_path: $.config.arm_hazard_threshold
+  expected_value: "0.35"
+  paper_value: "0.35"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+- id: table1-arm-sensing-threshold
+  paper_location: "Table I, row 'Armed floor + hatch', Role column (main.tex:495)"
+  printed_label: "sensing >= 0.05"
+  criterion: "Minimum trailing-window mean sensing rate required for the arm latch to fire."
+  source_file: results/experiments/t1_retain_s147/RUN_MANIFEST.json
+  field_path: $.config.arm_sensing_threshold
+  expected_value: "0.05"
+  paper_value: "0.05"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+- id: table1-hatch-window-rounds
+  paper_location: "Table I, row 'Armed floor + hatch', Role column (main.tex:495)"
+  printed_label: "a hatch releases it after 200 rounds"
+  criterion: "Trailing window length, in rounds, over which the de-arm (hatch) success condition is evaluated."
+  source_file: results/experiments/t1_retain_s147/RUN_MANIFEST.json
+  field_path: $.config.dearm_window_rounds
+  expected_value: "200"
+  paper_value: "200"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+- id: table1-hatch-success-threshold
+  paper_location: "Table I, row 'Armed floor + hatch', Role column (main.tex:495)"
+  printed_label: "at success <= 0.1"
+  criterion: "Trailing-window mean team success at or below which the hatch releases the armed floor."
+  source_file: results/experiments/t1_retain_s147/RUN_MANIFEST.json
+  field_path: $.config.dearm_success_threshold
+  expected_value: "0.1"
+  paper_value: "0.1"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+- id: table1-entropy-sustain-movement
+  paper_location: "Table I, row 'Entropy sustain', Value column, first of the pair (main.tex:496); restated Sec. IV (main.tex:539)"
+  printed_label: "0.5 nats"
+  criterion: "Target movement-factor policy entropy that the per-factor entropy-sustain dual drives toward while the schedule is active."
+  source_file: results/experiments/t1_retain_s147/RUN_MANIFEST.json
+  field_path: $.config.movement_entropy_sustain_target
+  expected_value: "0.5"
+  paper_value: "0.5"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+- id: table1-entropy-sustain-sensing
+  paper_location: "Table I, row 'Entropy sustain', Value column, second of the pair (main.tex:496); restated Sec. IV (main.tex:541)"
+  printed_label: "0.3 nats"
+  criterion: "Target sensing-factor policy entropy held while the armed floor is UNARMED; pinned to zero once the floor arms."
+  criterion_note: "Table I prints this alongside the movement target as if both followed the same wall-clock schedule. They do not: Sec. IV:541 states the sensing target is armed-gated, and the config confirms $.config.sensing_sustain_armed_gate = true. The Table I cell alone under-describes the criterion."
+  source_file: results/experiments/t1_retain_s147/RUN_MANIFEST.json
+  field_path: $.config.sensing_entropy_sustain_target
+  expected_value: "0.3"
+  paper_value: "0.3"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+- id: table1-integral-cap
+  paper_location: "Table I, row 'Integral cap', Value column (main.tex:497)"
+  printed_label: "20"
+  criterion: "Anti-windup ceiling on the PI controller's integral accumulator."
+  criterion_note: "The paper prints the integer 20; the config stores the float 20.0. Numerically identical."
+  source_file: results/experiments/t1_retain_s147/RUN_MANIFEST.json
+  field_path: $.config.lambda_integral_cap
+  expected_value: "20.0"
+  paper_value: "20"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+- id: table1-constraint-warmup
+  paper_location: "Table I, row 'Constraint warmup', Value column (main.tex:498)"
+  printed_label: "300 rounds"
+  criterion: "Number of initial rounds during which the applied multiplier is held at zero and the dual integral is frozen."
+  source_file: results/experiments/t1_retain_s147/RUN_MANIFEST.json
+  field_path: $.config.constraint_warmup_rounds
+  expected_value: "300"
+  paper_value: "300"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+- id: table1-hazard-budget
+  paper_location: "Table I, row 'Hazard budget', Value column (main.tex:499); restated Sec. III Method (main.tex:425) and Fig. 2 caption (main.tex:400)"
+  printed_label: "0.25"
+  criterion: "Per-episode team hazard-cost budget d_ep that the dual error is measured against."
+  criterion_note: "This is a per-run CONFIG override, not a code default. Re-read this phase: src/raas_marl/final_training/stage25_driver.py:357 defaults hazard_budget to 0.5, and stage25_update.py:1442 (from_decision_records) also sets 0.5. It is the only Table I lever whose shipped default is a different NUMBER rather than an OFF sentinel, so a reader running the code unmodified will not reproduce the paper's constraint."
+  source_file: results/experiments/t1_retain_s147/RUN_MANIFEST.json
+  field_path: $.config.hazard_budget
+  expected_value: "0.25"
+  paper_value: "0.25"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+# -----------------------------------------------------------------------------
+# TABLE II — the single-variable encoding comparison (main.tex:570-591)
+# Source-run identity verified this phase by reading .run_set / .experiment /
+# .family / .seeds in each JSON. Table II's caption pins the mixture to
+# {3,4}+{0,3}, which uniquely selects t1_d15 (dim-10) and t1_retain (dim-22):
+# t1_d14 is a four-pair curriculum and t1_d16 is {3,4}+{0,7}.
+# -----------------------------------------------------------------------------
+
+- id: table2-retention-dim10
+  paper_location: "Table II, row 'one-cell scalar count', Retention column (main.tex:587)"
+  printed_label: "Retention"
+  criterion: "Count of seeds passing BAR-C4-RETAIN: pooled tail-100 mean team success >= 0.9 AND pooled tail-100 mean episodic hazard <= 0.5."
+  source_file: docs/evidence/t1_d15_analysis.json
+  field_path: $.RETAIN.verdict.bar_c4_retain_pass_count
+  expected_value: "0 (of 3 seeds: 138, 139, 140)"
+  paper_value: "0/3"
+  match: true
+  reads: analysis_json
+  recompute: "count of $.RETAIN.per_seed.*.bar_c4_pooled_pass == true over 3 seeds"
+
+- id: table2-retention-dim22
+  paper_location: "Table II, row 'two-cell obstacle patch', Retention column (main.tex:588)"
+  printed_label: "Retention"
+  criterion: "Same BAR-C4-RETAIN bar as table2-retention-dim10, on the dim-22 arm."
+  source_file: docs/evidence/t1_retain_analysis.json
+  field_path: $.tallies.bar_c4_retain
+  expected_value: "2/3"
+  paper_value: "2/3"
+  match: true
+  reads: analysis_json
+  recompute: "count of $.per_seed.*.bar_c4_pooled.pass == true over seeds 147,148,149 -> {147,149} = 2"
+
+- id: table2-retention-third-reading
+  paper_location: "Table II, Retention column — the reading NOT printed (see criterion_note)"
+  printed_label: "Retention"
+  criterion: "Count of seeds whose per-mirror tail-100 hazard is <= 0.5 on ALL FOUR training mirrors (the AM-C2 per-mirror read, part of the RETAIN protocol in DR-curriculum-form)."
+  criterion_note: "RECORDED BECAUSE IT IS THE Q2 ANSWER, not because it is printed. Under this third reading of 'Retention' the effect is FLAT: 2/3 -> 2/3. I recomputed the dim-10 arm at per-mirror granularity myself (Phase 0 compared per-PAIR against per-MIRROR, which is not like-for-like) and the flat result survives. It is nevertheless not evidence of no effect: BOTH dim-10 passes are degenerate — s139 has hazard 0.0 on all four mirrors because success is 0.0 on all four, and s140 freezes on two of four. A hazard-only criterion is satisfiable by inactivity. NOTE ON match: this row has no printed value, so paper_value is the literal string 'not printed' and match: true records only that the two arms were read as stated - it is not a paper-versus-source comparison."
+  source_file: docs/evidence/t1_d15_analysis.json
+  field_path: $.per_layout_split.*.hazard  (dim-10)  AND  docs/evidence/t1_retain_analysis.json $.per_seed.*.am_c2_all_four_le_05  (dim-22)
+  expected_value: "dim-10 2/3 (139,140) ; dim-22 2/3 (147,149)"
+  paper_value: "not printed"
+  match: true
+  reads: analysis_json
+  recompute: "dim-10: count of seeds with max over the four $.per_layout_split.<run>.<mirror>.hazard <= 0.5, over runs t1_d15_s138/139/140. dim-22: count of $.per_seed.*.am_c2_all_four_le_05 == true over 147,148,149."
+
+- id: table2-anchor-consolidation-n3
+  paper_location: "Table II, row 'two-cell obstacle patch', Anchor consolidation column (main.tex:588)"
+  printed_label: "Anchor consolidation"
+  criterion: "Count of seeds satisfying the CONJUNCTION defined at main.tex:522-525 — both anchor-pair mirrors at per-mirror tail-100 hazard <= 0.5 AND an own-ablation causal witness on an anchor mirror at >= 2 of the three graded checkpoints."
+  criterion_note: "No single field holds the conjunction at n=3. Two fields each read '3/3' and the conjunction must be composed from them (and confirmed per seed). At n=9 a dedicated conjunction field DOES exist (anchor_clean_class_haz_AND_witness), so the two columns of this row are not sourced symmetrically."
+  source_file: NONE
+  field_path: "composed: $.tallies.anchor_both_mirrors_le_05 and $.tallies.anchor_causal_witness_seeds in docs/evidence/t1_retain_analysis.json"
+  expected_value: DERIVED
+  derived_from: "docs/evidence/t1_retain_analysis.json $.per_seed.{147,148,149}.anchor_both_le_05 (True, True, True) and $.per_seed.{147,148,149}.checkpoint_witnesses (anchor mirrors present at 3, 2 and 3 of the three checkpoints respectively)"
+  paper_value: "3/3"
+  match: true
+  reads: analysis_json
+  recompute: "count over seeds 147,148,149 of (anchor_both_le_05 == true AND number of checkpoints in checkpoint_witnesses whose list contains an anchor mirror >= 2) -> 3"
+
+- id: table2-anchor-consolidation-n9
+  paper_location: "Table II, row 'two-cell obstacle patch', Anchor consolidation column, parenthetical (main.tex:588); restated Sec. V-B (main.tex:640-641), Sec. V-D (main.tex:717-718), abstract (main.tex:109), Sec. I bullet 2 (main.tex:276)"
+  printed_label: "n=9: 7/9"
+  criterion: "Same conjunction as table2-anchor-consolidation-n3, over the nine replication seeds."
+  criterion_note: "t1_seedscale_analysis.json contains TWO distinct fields whose value is the string '7/9': anchor_clean_class_haz_AND_witness (the criterion the paper defines) and am_c2_per_mirror_haz_le05_WEAK (per-mirror hazard only, no witness). They are the same COUNT over DIFFERENT seed sets — {147,148,149,153,155,156,158} vs {147,149,153,154,155,156,158} — verified per seed this phase. The paper's cross-reference at main.tex:640-641 resolves the ambiguity to the first."
+  source_file: docs/evidence/t1_seedscale_analysis.json
+  field_path: $.retain_reliability_tallies_n9.anchor_clean_class_haz_AND_witness
+  expected_value: "7/9"
+  paper_value: "7/9"
+  match: true
+  reads: analysis_json
+  recompute: "count of $.per_seed.*.anchor_clean_class == true over the nine seeds -> {147,148,149,153,155,156,158} = 7"
+
+- id: table2-anchor-dim10-dash
+  paper_location: "Table II, row 'one-cell scalar count', Anchor consolidation column (main.tex:587)"
+  printed_label: "--- (three degenerate basins)"
+  criterion: "No numeric value is printed. The dash is a pointer to the three named failure forms of the dim-10 run."
+  criterion_note: "Recorded so the register covers every Table II cell. Verified this phase: no key matching 'anchor' exists anywhere in t1_d15_analysis.json, so the dash is not concealing an unreported number."
+  source_file: docs/evidence/t1_d15_analysis.json
+  field_path: $.mechanisms.s138 / $.mechanisms.s139 / $.mechanisms.s140
+  expected_value: "three named degenerate basins; no anchor* key exists in the file"
+  paper_value: "---"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+# -----------------------------------------------------------------------------
+# TABLE III — the n=9 reliability result (main.tex:674-707)
+# All four n=3 cells and all four n=9 cells were independently RECOUNTED from
+# per-seed records this phase; every count reproduced.
+# -----------------------------------------------------------------------------
+
+- id: table3-task-success-n3
+  paper_location: "Table III, row 'Task success', n=3 column (main.tex:690); restated Sec. V-B (main.tex:653)"
+  printed_label: "Task success"
+  criterion: "Count of seeds passing BAR-C4-RETAIN: pooled tail-100 mean team success >= 0.9 AND pooled tail-100 mean episodic hazard <= 0.5 (a CONJUNCTION)."
+  criterion_note: "See table3-task-success-n9 — the label under-describes the criterion in both columns."
+  source_file: docs/evidence/t1_retain_analysis.json
+  field_path: $.tallies.bar_c4_retain
+  expected_value: "2/3"
+  paper_value: "2/3"
+  match: true
+  reads: analysis_json
+  recompute: "count of $.per_seed.*.bar_c4_pooled.pass == true over 147,148,149 -> {147,149} = 2"
+
+- id: table3-task-success-n9
+  paper_location: "Table III, row 'Task success', n=9 column (main.tex:690); restated Sec. V-D (main.tex:716)"
+  printed_label: "Task success"
+  criterion: "Count of seeds passing BAR-C4-RETAIN, the JOINT bar: mean(success over the final 100 rounds) >= 0.9 AND mean(hazard over the final 100 rounds) <= 0.5."
+  criterion_note: "Q1 ANSWER. The printed label names only the success half. Re-derived from all nine per-seed records this phase: `pass` is a conjunction, not a success-only test — s148 has succ 0.9975 (clears a success-only bar) but haz 0.508125, and pass is false. A SUCCESS-ONLY bar gives 6/9 ({147,148,149,153,156,158}); a HAZARD-ONLY bar gives 7/9; the printed 5/9 is the joint. Separately: main.tex:525 states 'Hazard is graded per-mirror on all four training mirrors', but this row's hazard is POOLED (verified this phase to equal the arithmetic mean of the four per-mirror hazards). At n=9 the pooled and per-mirror readings happen to select the identical 7-seed set, so the imprecision changes no tally here."
+  source_file: docs/evidence/t1_seedscale_analysis.json
+  field_path: $.retain_reliability_tallies_n9.bar_c4_retain
+  expected_value: "5/9"
+  paper_value: "5/9 = 0.56"
+  match: true
+  reads: analysis_json
+  recompute: "count of $.per_seed.*.bar_c4_retain.pass == true over the nine seeds -> {147,149,153,156,158} = 5. Equivalently, from raw curves: held2_bar.held2_verdict(load_run_curve(run))['bar_c4_pass']."
+
+- id: table3-hold-n3
+  paper_location: "Table III, row 'Selective-sensing hold (core)', n=3 column (main.tex:691); restated Sec. V-B (main.tex:653)"
+  printed_label: "Selective-sensing hold (core)"
+  criterion: "Count of seeds passing all three HELD-2 conjuncts: (a) >= 85% of the final 500 rounds jointly satisfy per-round success >= 0.9 and hazard <= 0.5; (b) no sliding 50-round window below 0.75 mean success or reaching 0.75 mean hazard; (c) a magnitude-floored own-ablation causal witness at >= 2 of checkpoints 3500/3750/4000."
+  source_file: docs/evidence/t1_retain_analysis.json
+  field_path: $.tallies.bar_c1_held2_full
+  expected_value: "2/3"
+  paper_value: "2/3"
+  match: true
+  reads: analysis_json
+  recompute: "count of $.per_seed.*.held2_full_pass == true over 147,148,149 -> {147,149} = 2"
+
+- id: table3-hold-n9
+  paper_location: "Table III, row 'Selective-sensing hold (core)', n=9 column (main.tex:691); restated Sec. V-D (main.tex:717), Sec. VI (main.tex:740-741), abstract (main.tex:115), Sec. I (main.tex:259), Conclusion (main.tex:800)"
+  printed_label: "Selective-sensing hold (core)"
+  criterion: "Same three-conjunct HELD-2 bar as table3-hold-n3, over the nine replication seeds."
+  criterion_note: "Q3 ANSWER. The passing seed set {147,149,153,158} is a STRICT SUBSET of Table III row 1's {147,149,153,156,158}; s156 passes row 1 and fails row 2. Recomputed from raw curves this phase: s156 fails HELD-2 conjuncts (a) and (b) — joint occupancy 0.41 and worst 50-round window success 0.735 — while passing BAR-C4 with tail-100 success 0.9938. The containment is driven by a SHARED CONJUNCT (both bars apply success >= 0.9 and hazard <= 0.5 to the same two curve quantities, and row 1's final-100 window sits inside row 2's final-500 window), but it is NOT structural: I constructed a curve on which HELD-2 (a)+(b) pass while BAR-C4 fails (75 rounds at hazard 0.70 placed inside the final 100; occupancy exactly 0.85, worst hazard window 0.70 < 0.75, tail-100 hazard 0.525 > 0.5) and ran it through held2_bar.held2_verdict. The two rows must not be read as independent evidence."
+  source_file: docs/evidence/t1_seedscale_analysis.json
+  field_path: $.retain_reliability_tallies_n9.bar_c1_held2_full
+  expected_value: "4/9"
+  paper_value: "4/9 = 0.44"
+  match: true
+  reads: analysis_json
+  recompute: "count of $.per_seed.*.held2_full == true over the nine seeds -> {147,149,153,158} = 4"
+
+- id: table3-anchor-n3
+  paper_location: "Table III, row 'Anchor clean-class (load-bearing)', n=3 column (main.tex:692); restated Sec. V-B (main.tex:654)"
+  printed_label: "Anchor clean-class (load-bearing)"
+  criterion: "Identical criterion to table2-anchor-consolidation-n3 (both anchor mirrors at per-mirror hazard <= 0.5 with an own-ablation causal witness)."
+  criterion_note: "Table II calls this criterion 'Anchor consolidation' and Table III calls it 'Anchor clean-class'. Verified this phase to be the same criterion over the same seeds; the label divergence is cosmetic and was flagged for camera-ready in the paper's own shift record."
+  source_file: NONE
+  field_path: "composed, as table2-anchor-consolidation-n3"
+  expected_value: DERIVED
+  derived_from: "docs/evidence/t1_retain_analysis.json $.tallies.anchor_both_mirrors_le_05 ('3/3') and $.tallies.anchor_causal_witness_seeds ('3/3'), confirmed per seed from $.per_seed.*.anchor_both_le_05 and $.per_seed.*.checkpoint_witnesses"
+  paper_value: "3/3"
+  match: true
+  reads: analysis_json
+  recompute: "as table2-anchor-consolidation-n3"
+
+- id: table3-anchor-n9
+  paper_location: "Table III, row 'Anchor clean-class (load-bearing)', n=9 column (main.tex:692)"
+  printed_label: "Anchor clean-class (load-bearing)"
+  criterion: "Same conjunction over the nine replication seeds; identical to table2-anchor-consolidation-n9."
+  source_file: docs/evidence/t1_seedscale_analysis.json
+  field_path: $.retain_reliability_tallies_n9.anchor_clean_class_haz_AND_witness
+  expected_value: "7/9"
+  paper_value: "7/9 = 0.78"
+  match: true
+  reads: analysis_json
+  recompute: "count of $.per_seed.*.anchor_clean_class == true -> 7"
+
+- id: table3-transfer-n3
+  paper_location: "Table III, row 'Transfer to validation', n=3 column (main.tex:693)"
+  printed_label: "Transfer to validation"
+  criterion: "Count of seeds whose greedy policy succeeds with zero hazard on BOTH readiness (validation) mirrors at the same checkpoint, on >= 2 of the three graded checkpoints, with the corridor levers off at evaluation."
+  source_file: docs/evidence/t1_retain_analysis.json
+  field_path: $.tallies.c4_gen_2of3_seeds
+  expected_value: "1/3 (s147 only, 2/3 checkpoints)"
+  paper_value: "1/3"
+  match: true
+  reads: analysis_json
+  recompute: "count of $.per_seed.*.c4_gen_pass_2of3 == true over 147,148,149 -> {147} = 1"
+
+- id: table3-transfer-n9
+  paper_location: "Table III, row 'Transfer to validation', n=9 column (main.tex:693); restated Sec. V-D (main.tex:723), Sec. VI (main.tex:741,743), abstract (main.tex:116), Sec. I (main.tex:259,279,284)"
+  printed_label: "Transfer to validation"
+  criterion: "Same transfer criterion over the nine replication seeds."
+  source_file: docs/evidence/t1_seedscale_analysis.json
+  field_path: $.retain_reliability_tallies_n9.c4_gen_2of3ckpts
+  expected_value: "2/9"
+  paper_value: "2/9 = 0.22"
+  match: true
+  reads: analysis_json
+  recompute: "count of $.per_seed.*.c4_gen_2of3 == true over the nine seeds -> {147,158} = 2"
+
+- id: table3-transfer-ci-95
+  paper_location: "Table III, row 'exact 95% interval (transfer)' (main.tex:694); restated Sec. V-D (main.tex:724)"
+  printed_label: "exact 95% interval (transfer)"
+  criterion: "Clopper-Pearson exact two-sided 95% binomial confidence interval for the transfer rate 2 of 9."
+  criterion_note: "No dedicated numeric field exists anywhere under docs/evidence/. The interval appears only inside one narrative string. It was recomputed from primary per-seed records this phase and matched to the printed precision; a Wilson-score interval for 2/9 is [0.0632, 0.5474], so the paper's 'Clopper-Pearson' attribution is discriminating and correct."
+  source_file: docs/evidence/t1_seedscale_analysis.json
+  field_path: "PROSE:$.step3_fork.adversarial_confirmation — 'base rate 2/9 CI [0.028,0.600] contains 1/3'"
+  expected_value: "[0.028145, 0.600094] recomputed; printed as [0.028, 0.600] in the narrative string"
+  paper_value: "[0.028, 0.600]"
+  match: prose_only
+  reads: analysis_json
+  recompute: "clopper_pearson(k=2, n=9, alpha=0.05) -> lower = Beta.ppf(0.025; 2, 8), upper = Beta.ppf(0.975; 3, 7); equivalently solve P(X>=2|p)=0.025 and P(X<=2|p)=0.025 for Binomial(9,p)"
+
+- id: table3-fresh-seed-transfer
+  paper_location: "Table III, row 'fresh-seed-only transfer' (main.tex:695); restated Sec. V-D (main.tex:727-728)"
+  printed_label: "fresh-seed-only transfer"
+  criterion: "Transfer count restricted to the six FRESH replication seeds (153-158), excluding the three anchor seeds 147-149 that motivated the replication."
+  source_file: docs/evidence/t1_seedscale_analysis.json
+  field_path: $.step2_reads.read1_c4gen_base_rate_PRIMARY.seedscale_only_base_rate
+  expected_value: "1/6 = 0.167 (s158 only, the 6 FRESH seeds 153-158)"
+  paper_value: "1/6 = 0.17"
+  match: true
+  reads: analysis_json
+  recompute: "count of $.per_seed.{153,154,155,156,157,158}.c4_gen_2of3 == true -> {158} = 1"
+
+- id: table3-basin-equivariant
+  paper_location: "Table III, 'equivariant / overshoot / freeze' row, first value (main.tex:698); restated Sec. V-D (main.tex:731), Sec. VI (main.tex:743)"
+  printed_label: "equivariant"
+  criterion: "Count of seeds whose greedy policy executes the equivariant reroute (stop at the perceived open safe gate) on the LOWER validation mirror."
+  source_file: docs/evidence/t1_seedscale_analysis.json
+  field_path: $.step2_reads.basin_classification_MOST_VALUABLE.n9.EQUIVARIANT
+  expected_value: "4"
+  paper_value: "4/9"
+  match: true
+  reads: analysis_json
+  recompute: "count of $.per_seed.*.reroute_basin_readiness_lower == 'EQUIVARIANT' -> {147,153,157,158} = 4"
+
+- id: table3-basin-overshoot
+  paper_location: "Table III, 'equivariant / overshoot / freeze' row, second value (main.tex:698)"
+  printed_label: "overshoot"
+  criterion: "Count of seeds executing the memorized-absolute overshoot reroute (climb to the grid-boundary row) on the lower validation mirror."
+  source_file: docs/evidence/t1_seedscale_analysis.json
+  field_path: $.step2_reads.basin_classification_MOST_VALUABLE.n9.OVERSHOOT
+  expected_value: "2"
+  paper_value: "2/9"
+  match: true
+  reads: analysis_json
+  recompute: "count of $.per_seed.*.reroute_basin_readiness_lower == 'OVERSHOOT' -> {149,154} = 2"
+
+- id: table3-basin-freeze
+  paper_location: "Table III, 'equivariant / overshoot / freeze' row, third value (main.tex:698)"
+  printed_label: "freeze"
+  criterion: "Count of seeds executing the reveal-gated no-go (freeze to timeout) on the lower validation mirror."
+  source_file: docs/evidence/t1_seedscale_analysis.json
+  field_path: $.step2_reads.basin_classification_MOST_VALUABLE.n9.FREEZE
+  expected_value: "3"
+  paper_value: "3/9"
+  match: true
+  reads: analysis_json
+  recompute: "count of $.per_seed.*.reroute_basin_readiness_lower == 'FREEZE' -> {148,155,156} = 3"
+
+- id: table3-chance-level
+  paper_location: "Table III footnote (main.tex:702); restated Sec. V-D (main.tex:725), Sec. V-B (main.tex:719 as 'one third')"
+  printed_label: "the flat-manifold chance level 1/3"
+  criterion: "The null rate an uninformative learner would reach: one of the three underdetermined reroute basins with equal probability."
+  criterion_note: "This is a MODELLING ASSUMPTION stated in the paper, not a measured quantity. It is grounded in the three-way basin classification (table3-basin-*), which IS measured, but 1/3 itself is not read from any file. Recorded so a reader does not look for a source that does not exist."
+  source_file: NONE
+  field_path: "PROSE:main.tex:725 'an uninformative learner reaches each of three underdetermined reroute basins with equal probability'"
+  expected_value: "1/3 (definitional; the three basins are measured, the uniform prior is assumed)"
+  paper_value: "1/3"
+  match: true
+  reads: analysis_json
+  recompute: "1 / (number of distinct reroute basins observed) = 1/3, from the three basin categories in $.step2_reads.basin_classification_MOST_VALUABLE.n9"
+
+- id: table3-fisher-p
+  paper_location: "Table III footnote (main.tex:704)"
+  printed_label: "Fisher p=0.417"
+  criterion: "Two-sided Fisher exact p for the 2x2 of arm-fire signature (MECH-F84 fired) against transfer, over the nine seeds — a FEATURE test, explicitly not the rate-versus-chance test."
+  criterion_note: "No dedicated numeric field exists. It appears only inside the same narrative string as the confidence interval. Recomputed from primary per-seed records this phase: the 2x2 is [[1,1],[1,6]] (fired and transferred: s147; fired and did not: s156; not fired and transferred: s158; neither: the remaining six)."
+  source_file: docs/evidence/t1_seedscale_analysis.json
+  field_path: "PROSE:$.step3_fork.adversarial_confirmation — 'F84 collinearity BROKEN by s156 fire-and-fail vs s158 transfer-without-fire, Fisher p=0.417'"
+  expected_value: "0.416667 recomputed"
+  paper_value: "0.417"
+  match: prose_only
+  reads: analysis_json
+  recompute: "fisher_exact_two_sided([[1,1],[1,6]]) built from $.per_seed.*.mech_f84_fired x $.per_seed.*.c4_gen_2of3; sum of hypergeometric table probabilities <= the observed table's probability"
+
+- id: table3-ci-confidence-level
+  paper_location: "Table III, row label 'exact 95% interval (transfer)' (main.tex:694)"
+  printed_label: "95%"
+  criterion: "Nominal two-sided coverage of the exact binomial interval."
+  source_file: NONE
+  field_path: "PROSE:main.tex:694 and the recomputation alpha"
+  expected_value: "0.95 (alpha = 0.05), confirmed by the recomputation reproducing both printed intervals"
+  paper_value: "95%"
+  match: true
+  reads: analysis_json
+  recompute: "alpha = 0.05 in clopper_pearson(k, n, alpha)"
+
+# -----------------------------------------------------------------------------
+# SECTION IV — Experimental Setup (main.tex:505-567)
+# -----------------------------------------------------------------------------
+
+- id: setup-trainable-gate-rows
+  paper_location: "Sec. IV (main.tex:509)"
+  printed_label: "Trainable gate rows are {0,3,4,7}"
+  criterion: "The set of gate rows used by any trainable fork scenario in the catalog."
+  source_file: src/raas_marl/environments/active_sensing/grid_environment.py
+  field_path: "grid_environment.py:817-965 — per-scenario `obstacles` tuples; gate rows are the two column-4 rows NOT listed as obstacles"
+  expected_value: "{3,4} (train), {0,3}, {4,7}, {0,7} (curriculum) -> union {0,3,4,7}"
+  paper_value: "{0,3,4,7}"
+  match: true
+  reads: analysis_json
+  recompute: "for each fork scenario, gate_rows = {0..7} minus {r : (r,4) in obstacles}; union over the train + curriculum scenarios"
+
+- id: setup-reported-run-rows
+  paper_location: "Sec. IV (main.tex:509-511)"
+  printed_label: "every reported run trains within {0,3,4} except the four-pair and row-disjoint curricula ... which also use row-7 gates"
+  criterion: "The gate rows actually present in each reported run's scenario_names."
+  source_file: results/experiments/t1_retain_s147/RUN_MANIFEST.json
+  field_path: $.config.scenario_names
+  expected_value: "['risk_fork_train_lower','risk_fork_train_upper','risk_fork_curriculum_r0r3_lower','risk_fork_curriculum_r0r3_upper'] -> gate rows {0,3,4}"
+  paper_value: "{0,3,4}"
+  match: true
+  reads: analysis_json
+  recompute: "map each name in $.config.scenario_names to its gate rows via the catalog; union"
+
+- id: setup-validation-gate-rows
+  paper_location: "Sec. IV (main.tex:511-512)"
+  printed_label: "a validation set of readiness geometries at gate rows {1,2}"
+  criterion: "The gate rows of the two readiness fork scenarios."
+  source_file: src/raas_marl/environments/active_sensing/grid_environment.py
+  field_path: "grid_environment.py:846-881 — risk_fork_readiness_upper (:846) / _lower (:861), obstacles ((0,4),(3,4),(4,4),(5,4),(6,4),(7,4))"
+  expected_value: "{1,2}"
+  paper_value: "{1,2}"
+  match: true
+  reads: analysis_json
+  recompute: "{0..7} minus the obstacle rows on column 4 = {1,2}"
+
+- id: setup-heldout-gate-rows
+  paper_location: "Sec. IV (main.tex:512-514); restated Table III caption (main.tex:680), Sec. I (main.tex:280), abstract (main.tex:130-131), Conclusion"
+  printed_label: "a held-out set at gate rows {5,6} is deliberately preserved and never instantiated, read, or cited"
+  criterion: "Whether any catalog scenario places its two gates at rows 5 and 6."
+  criterion_note: "The claim holds in the strongest possible form: NO such scenario EXISTS. Verified this phase by reading all ten fork scenario definitions — the gate-row sets present are {3,4}, {1,2}, {0,3}, {4,7}, {0,7}, and rows 5 and 6 appear only as obstacles. The catalog comment at grid_environment.py:816-817 states the held-out fork scenarios are deferred. See the HELD-OUT NOTE in SHIPPING_MANIFEST.md for the separate LEGACY held-out variant, which is a different object."
+  source_file: src/raas_marl/environments/active_sensing/grid_environment.py
+  field_path: "grid_environment.py:817-965 (all ten fork Stage23Scenario definitions) + the deferral comment at :816-817"
+  expected_value: "no scenario with gates at rows 5,6 exists in the catalog"
+  paper_value: "{5,6} preserved"
+  match: true
+  reads: analysis_json
+  recompute: "for every fork scenario, gate_rows = {0..7} minus obstacle rows on column 4; assert 5 not in gate_rows and 6 not in gate_rows"
+
+- id: setup-update-rounds
+  paper_location: "Sec. IV (main.tex:520)"
+  printed_label: "4000 rounds"
+  criterion: "Number of collect-and-update rounds per run."
+  source_file: results/experiments/t1_retain_s147/RUN_MANIFEST.json
+  field_path: $.config.update_rounds
+  expected_value: "4000"
+  paper_value: "4000"
+  match: true
+  reads: analysis_json
+  recompute: "corroborated by $.last_completed_round == 3999 on all nine (0-indexed final round)"
+
+- id: setup-episodes-per-round
+  paper_location: "Sec. IV (main.tex:520)"
+  printed_label: "16 episodes"
+  criterion: "Episodes collected per update round."
+  source_file: results/experiments/t1_retain_s147/RUN_MANIFEST.json
+  field_path: $.config.episodes_per_round
+  expected_value: "16"
+  paper_value: "16"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+- id: setup-steps-per-episode
+  paper_location: "Sec. IV (main.tex:520)"
+  printed_label: "up to 32 steps"
+  criterion: "Environment episode horizon."
+  criterion_note: "All nine manifests record $.config.steps_per_episode = null, i.e. 'full environment horizon'. The 32 resolves through the environment default, not through the run config. Re-read this phase at grid_environment.py:212."
+  source_file: src/raas_marl/environments/active_sensing/grid_environment.py
+  field_path: "grid_environment.py:212 — Stage23EnvironmentConfig.max_steps: int = 32"
+  expected_value: "32"
+  paper_value: "32"
+  match: true
+  reads: analysis_json
+  recompute: "independently observable as environment_max_steps == 32 in results/experiments/<run>/episode_log.jsonl (run_artifacts tier)"
+
+- id: setup-anchor-per-mirror-hazard
+  paper_location: "Sec. IV (main.tex:523)"
+  printed_label: "per-mirror hazard at most 0.5"
+  criterion: "The per-mirror hazard threshold in the anchor-consolidation bar."
+  source_file: docs/evidence/held2_bar.py
+  field_path: "held2_bar.py:38 OCCUPANCY_HAZARD = 0.5 (and :47 C4_HAZARD = 0.5)"
+  expected_value: "0.5"
+  paper_value: "0.5"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+- id: setup-hold-tail-window
+  paper_location: "Sec. IV (main.tex:526)"
+  printed_label: "over the final 500 rounds"
+  criterion: "Length of the graded tail window for the HELD-2 bar."
+  criterion_note: "500 is COMPUTED, not a literal: TAIL_END - TAIL_START = 4000 - 3500, enforced at held2_bar.py:80-86 and emitted as tail_round_count."
+  source_file: docs/evidence/held2_bar.py
+  field_path: "held2_bar.py:35-36 TAIL_START = 3500, TAIL_END = 4000; difference taken at :80"
+  expected_value: "500"
+  paper_value: "500"
+  match: true
+  reads: analysis_json
+  recompute: "TAIL_END - TAIL_START"
+
+- id: setup-hold-occupancy
+  paper_location: "Sec. IV (main.tex:526)"
+  printed_label: "at least 85% of rounds"
+  criterion: "Minimum fraction of tail rounds that must jointly satisfy the success and hazard conditions."
+  source_file: docs/evidence/held2_bar.py
+  field_path: "held2_bar.py:39 OCCUPANCY_MIN_FRACTION = 0.85, applied at :99"
+  expected_value: "0.85"
+  paper_value: "85%"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+- id: setup-hold-success
+  paper_location: "Sec. IV (main.tex:527)"
+  printed_label: "team success at least 0.9"
+  criterion: "Per-round team success threshold in the HELD-2 joint occupancy conjunct."
+  source_file: docs/evidence/held2_bar.py
+  field_path: "held2_bar.py:37 OCCUPANCY_SUCCESS = 0.9, applied at :97"
+  expected_value: "0.9"
+  paper_value: "0.9"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+- id: setup-hold-hazard
+  paper_location: "Sec. IV (main.tex:527)"
+  printed_label: "episodic hazard at most 0.5"
+  criterion: "Per-round episodic hazard threshold in the HELD-2 joint occupancy conjunct."
+  source_file: docs/evidence/held2_bar.py
+  field_path: "held2_bar.py:38 OCCUPANCY_HAZARD = 0.5, applied at :97"
+  expected_value: "0.5"
+  paper_value: "0.5"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+- id: setup-relapse-window
+  paper_location: "Sec. IV (main.tex:528)"
+  printed_label: "no sliding 50-round window"
+  criterion: "Length of the sliding relapse window over the graded tail."
+  source_file: docs/evidence/held2_bar.py
+  field_path: "held2_bar.py:40 RELAPSE_WINDOW = 50, applied at :104-106"
+  expected_value: "50"
+  paper_value: "50"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+- id: setup-relapse-success-floor
+  paper_location: "Sec. IV (main.tex:528)"
+  printed_label: "falls below 0.75 mean success"
+  criterion: "Sliding-window mean success floor; a window below it fails HELD-2 conjunct (b)."
+  source_file: docs/evidence/held2_bar.py
+  field_path: "held2_bar.py:41 RELAPSE_SUCCESS_FLOOR = 0.75, applied at :112"
+  expected_value: "0.75"
+  paper_value: "0.75"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+- id: setup-relapse-hazard-ceiling
+  paper_location: "Sec. IV (main.tex:528)"
+  printed_label: "reaches 0.75 mean hazard"
+  criterion: "Sliding-window mean hazard ceiling; a window reaching it fails HELD-2 conjunct (b)."
+  source_file: docs/evidence/held2_bar.py
+  field_path: "held2_bar.py:42 RELAPSE_HAZARD_CEIL = 0.75, applied at :113"
+  expected_value: "0.75"
+  paper_value: "0.75"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+- id: setup-checkpoint-r3500
+  paper_location: "Sec. IV (main.tex:530)"
+  printed_label: "rounds 3500, 3750, and 4000 — first"
+  criterion: "First graded witness checkpoint; also the start of the HELD-2 tail window."
+  source_file: docs/evidence/held2_bar.py
+  field_path: "held2_bar.py:35 TAIL_START = 3500"
+  expected_value: "3500"
+  paper_value: "3500"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+- id: setup-checkpoint-r3750
+  paper_location: "Sec. IV (main.tex:530)"
+  printed_label: "rounds 3500, 3750, and 4000 — second"
+  criterion: "Middle graded witness checkpoint."
+  criterion_note: "3750 is NOT a named Python constant anywhere. Verified this phase by searching src/, tests/ and docs/evidence/. It exists as a JSON key in the analysis files, as an on-disk filename, and as prose in held2_bar.py's docstring; it is generated by the 250-round checkpoint cadence."
+  source_file: NONE
+  field_path: "$.per_seed.*.checkpoint_witnesses keys in docs/evidence/t1_retain_analysis.json; state_round_003750.pt on disk"
+  expected_value: DERIVED
+  derived_from: "results/experiments/t1_retain_s147/RUN_MANIFEST.json $.config.state_save_every = 250, together with held2_bar.py:35-36 TAIL_START = 3500 / TAIL_END = 4000"
+  paper_value: "3750"
+  match: true
+  reads: analysis_json
+  recompute: "the checkpoint at the midpoint of the graded tail: TAIL_START + (TAIL_END - TAIL_START)/2 = 3750, which is on the state_save_every = 250 cadence"
+
+- id: setup-checkpoint-r4000
+  paper_location: "Sec. IV (main.tex:530)"
+  printed_label: "rounds 3500, 3750, and 4000 — third"
+  criterion: "Final graded witness checkpoint; also the end of the HELD-2 tail window."
+  source_file: docs/evidence/held2_bar.py
+  field_path: "held2_bar.py:36 TAIL_END = 4000"
+  expected_value: "4000"
+  paper_value: "4000"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+- id: setup-witness-two-of-three
+  paper_location: "Sec. IV (main.tex:529-530)"
+  printed_label: "fires at two of the three checkpoints"
+  criterion: "Minimum number of graded checkpoints at which the own-ablation causal witness must fire for HELD-2 conjunct (c)."
+  criterion_note: "Conjunct (c) is graded EXTERNALLY and is not computed by held2_bar.py — see its docstring lines 15-17 and the emitted held2_c_note at :132. The 2-of-3 rule lives in the decision record and in the composite harness invocation, not in a constant."
+  source_file: docs/evidence/held2_bar.py
+  field_path: "PROSE:held2_bar.py:16-17 'on >= 2 of checkpoints r3500/r3750/r4000; NOT computed here'"
+  expected_value: "2 of 3"
+  paper_value: "two of the three"
+  match: true
+  reads: analysis_json
+  recompute: "count of checkpoints in $.per_seed.*.checkpoint_witnesses whose list is non-empty for the relevant surface, thresholded at >= 2"
+
+- id: setup-adam-learning-rate
+  paper_location: "Sec. IV (main.tex:533)"
+  printed_label: "learning rate 3x10^-4"
+  criterion: "Adam optimizer learning rate."
+  source_file: results/experiments/t1_retain_s147/RUN_MANIFEST.json
+  field_path: $.config.stage25_update_config.learning_rate
+  expected_value: "0.0003"
+  paper_value: "3e-4"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+- id: setup-adam-epsilon
+  paper_location: "Sec. IV (main.tex:533)"
+  printed_label: "epsilon = 10^-5"
+  criterion: "Adam optimizer epsilon."
+  source_file: results/experiments/t1_retain_s147/RUN_MANIFEST.json
+  field_path: $.config.stage25_update_config.adam_epsilon
+  expected_value: "1e-05"
+  paper_value: "1e-5"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+- id: setup-discount
+  paper_location: "Sec. IV (main.tex:534)"
+  printed_label: "discount 0.99"
+  criterion: "Discount factor gamma."
+  source_file: results/experiments/t1_retain_s147/RUN_MANIFEST.json
+  field_path: $.config.stage25_update_config.algorithm.discount_factor
+  expected_value: "0.99"
+  paper_value: "0.99"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+- id: setup-gae-lambda
+  paper_location: "Sec. IV (main.tex:534)"
+  printed_label: "generalized-advantage parameter 0.95"
+  criterion: "GAE trace-decay parameter."
+  source_file: results/experiments/t1_retain_s147/RUN_MANIFEST.json
+  field_path: $.config.stage25_update_config.algorithm.gae_lambda
+  expected_value: "0.95"
+  paper_value: "0.95"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+- id: setup-ppo-clip
+  paper_location: "Sec. IV (main.tex:534)"
+  printed_label: "clip range 0.2"
+  criterion: "PPO clipped-surrogate epsilon."
+  source_file: results/experiments/t1_retain_s147/RUN_MANIFEST.json
+  field_path: $.config.stage25_update_config.algorithm.ppo_clip_range
+  expected_value: "0.2"
+  paper_value: "0.2"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+- id: setup-update-epochs
+  paper_location: "Sec. IV (main.tex:534-535)"
+  printed_label: "ten update epochs per round"
+  criterion: "Maximum PPO epochs per update round (may terminate early on the KL condition)."
+  source_file: results/experiments/t1_retain_s147/RUN_MANIFEST.json
+  field_path: $.config.stage25_update_config.max_update_epochs
+  expected_value: "10"
+  paper_value: "10"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+- id: setup-kl-early-stop
+  paper_location: "Sec. IV (main.tex:535)"
+  printed_label: "Kullback-Leibler early stopping at 0.01"
+  criterion: "The configured KL TARGET is 0.01; the epoch loop actually stops when approx_kl exceeds kl_stop_margin x target_kl."
+  criterion_note: "The paper states the target, not the trigger. Re-read this phase: $.config.stage25_update_config.kl_stop_margin = 1.5 and src/raas_marl/final_training/stage25_update.py:1952 computes kl_stop_threshold = kl_stop_margin * target_kl, so the EFFECTIVE threshold is 0.015. Not a value mismatch (0.01 is exactly the stored target_kl) but the printed phrasing over-describes what 0.01 gates."
+  source_file: results/experiments/t1_retain_s147/RUN_MANIFEST.json
+  field_path: $.config.stage25_update_config.target_kl  (with $.config.stage25_update_config.kl_stop_margin = 1.5)
+  expected_value: "0.01 (target); effective stop threshold 0.015"
+  paper_value: "0.01"
+  match: true
+  reads: analysis_json
+  recompute: "effective = kl_stop_margin * target_kl = 1.5 * 0.01 = 0.015"
+
+- id: setup-entropy-coefficient
+  paper_location: "Sec. IV (main.tex:536)"
+  printed_label: "the per-factor entropy coefficient is 0.01"
+  criterion: "Entropy bonus coefficient, applied separately to the sensing and movement action factors."
+  source_file: results/experiments/t1_retain_s147/RUN_MANIFEST.json
+  field_path: $.config.stage25_update_config.losses.sensing_entropy_coefficient and .movement_entropy_coefficient
+  expected_value: "0.01 (both factors)"
+  paper_value: "0.01"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+- id: setup-value-loss-weight
+  paper_location: "Sec. IV (main.tex:536)"
+  printed_label: "the value-loss weight 0.5"
+  criterion: "Coefficient on the critic value loss in the total objective."
+  source_file: results/experiments/t1_retain_s147/RUN_MANIFEST.json
+  field_path: $.config.stage25_update_config.losses.value_loss_coefficient
+  expected_value: "0.5"
+  paper_value: "0.5"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+- id: setup-grad-norm-clip
+  paper_location: "Sec. IV (main.tex:537)"
+  printed_label: "the gradient-norm clip 10"
+  criterion: "Global gradient-norm clipping threshold."
+  source_file: results/experiments/t1_retain_s147/RUN_MANIFEST.json
+  field_path: $.config.stage25_update_config.max_grad_norm
+  expected_value: "10.0"
+  paper_value: "10"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+- id: setup-gru-hidden-size
+  paper_location: "Sec. IV (main.tex:537-538)"
+  printed_label: "a single-layer gated recurrent unit of hidden size 16"
+  criterion: "Recurrent actor hidden-state width and layer count."
+  source_file: src/raas_marl/environments/active_sensing/tensor_adapter.py
+  field_path: "tensor_adapter.py:76 STAGE23_HISTORY_STATE_DIM = 16; recurrent_layer_count = 1 at :189"
+  expected_value: "16 (single layer)"
+  paper_value: "16"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+- id: setup-critic-width
+  paper_location: "Sec. IV (main.tex:538)"
+  printed_label: "two critics are feedforward networks of width 32"
+  criterion: "Hidden width of the reward and hazard-cost critics."
+  source_file: src/raas_marl/environments/active_sensing/tensor_adapter.py
+  field_path: "tensor_adapter.py:186 critic_hidden_dim=32 (inside default_stage23_core_config, :177)"
+  expected_value: "32"
+  paper_value: "32"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+- id: setup-sustain-hold-rounds
+  paper_location: "Sec. IV (main.tex:539)"
+  printed_label: "the movement entropy-sustain target holds for 800 rounds"
+  criterion: "Rounds for which the movement entropy-sustain target is held at full value before annealing begins."
+  source_file: results/experiments/t1_retain_s147/RUN_MANIFEST.json
+  field_path: $.config.entropy_sustain_hold_rounds
+  expected_value: "800"
+  paper_value: "800"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+- id: setup-sustain-anneal-round
+  paper_location: "Sec. IV (main.tex:539-540)"
+  printed_label: "anneals to zero by round 1200"
+  criterion: "Round by which the movement entropy-sustain target reaches zero."
+  source_file: results/experiments/t1_retain_s147/RUN_MANIFEST.json
+  field_path: $.config.entropy_sustain_anneal_rounds
+  expected_value: "1200"
+  paper_value: "1200"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+- id: setup-sustain-dual-lr
+  paper_location: "Sec. IV (main.tex:540)"
+  printed_label: "dual learning rate 0.02"
+  criterion: "Step size of the per-factor entropy-sustain dual."
+  source_file: results/experiments/t1_retain_s147/RUN_MANIFEST.json
+  field_path: $.config.entropy_sustain_learning_rate
+  expected_value: "0.02"
+  paper_value: "0.02"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+- id: setup-sustain-alpha-cap
+  paper_location: "Sec. IV (main.tex:540)"
+  printed_label: "cap 2.0"
+  criterion: "Upper bound on the entropy-sustain dual variable alpha."
+  source_file: results/experiments/t1_retain_s147/RUN_MANIFEST.json
+  field_path: $.config.entropy_sustain_alpha_cap
+  expected_value: "2.0"
+  paper_value: "2.0"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+- id: setup-sensing-target-armed-gate
+  paper_location: "Sec. IV (main.tex:540-541)"
+  printed_label: "the sensing target is instead armed-gated, 0.3 while the floor is unarmed and pinned to zero once it arms"
+  criterion: "Whether the sensing entropy-sustain target follows the wall-clock anneal or the arm latch."
+  source_file: results/experiments/t1_retain_s147/RUN_MANIFEST.json
+  field_path: $.config.sensing_sustain_armed_gate
+  expected_value: "true"
+  paper_value: "armed-gated"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+- id: setup-seed-pool
+  paper_location: "Sec. IV (main.tex:541-542)"
+  printed_label: "a fixed training pool (integers 101 to 199)"
+  criterion: "The declared training seed pool, disjoint from the reserved evaluation band."
+  criterion_note: "Not a machine-readable field anywhere. The only occurrence inside shippable source is a docstring aside. The pool is otherwise a protocol declaration recorded in CLAUDE.md and the decision records, all of which are classified PRIVATE — so a reader of the public artifact cannot verify the disjointness claim from the artifact alone."
+  source_file: src/raas_marl/final_training/stage25_driver.py
+  field_path: "PROSE:stage25_driver.py:217 'T1 seeds are 105/106/107 (informational; the pool is 101-199).'"
+  expected_value: "101-199"
+  paper_value: "101 to 199"
+  match: prose_only
+  reads: analysis_json
+  recompute: "corroboration, verified this phase: every $.config.seed across all 55 run manifests lies in [101,199] (min 101, max 158). This is consistent with the declared pool but does not prove the pool bound, only that no run violated it."
+
+- id: setup-replication-seeds
+  paper_location: "Sec. IV (main.tex:543)"
+  printed_label: "the nine-seed replication uses seeds 147 to 149 and 153 to 158"
+  criterion: "The exact seed set of the nine graded runs."
+  source_file: results/experiments/*/RUN_MANIFEST.json
+  field_path: "$.config.seed across t1_retain_s147/148/149 and t1_seedscale_s153..s158 (also $.seeds and $.runtime_record.seed_values)"
+  expected_value: "{147,148,149,153,154,155,156,157,158}"
+  paper_value: "147-149, 153-158"
+  match: true
+  reads: analysis_json
+  recompute: "set of $.config.seed over the nine manifests"
+
+- id: setup-bfs-shaping-per-step
+  paper_location: "Sec. IV (main.tex:553)"
+  printed_label: "Phi giving -0.05 per breadth-first step to the goal"
+  criterion: "Weight of the potential-based breadth-first goal-distance shaping term."
+  source_file: results/experiments/t1_retain_s147/RUN_MANIFEST.json
+  field_path: $.config.task_progress_potential_weight
+  expected_value: "0.05"
+  paper_value: "-0.05"
+  match: true
+  reads: analysis_json
+  recompute: "the config stores the MAGNITUDE 0.05; the negative sign lives in the potential itself - src/raas_marl/final_training/stage25_collection.py:128 defines it as -w_Phi * BFS_dist(agent cell -> nearest goal), which the paper renders as -0.05 per step"
+
+- id: setup-riskzone-shaping
+  paper_location: "Sec. IV (main.tex:554)"
+  printed_label: "+0.05 for occupying the public risk zone"
+  criterion: "Weight of the decision-zone positioning potential."
+  source_file: results/experiments/t1_retain_s147/RUN_MANIFEST.json
+  field_path: $.config.sensing_zone_potential_weight
+  expected_value: "0.05"
+  paper_value: "+0.05"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+- id: setup-keepalive-weight
+  paper_location: "Sec. IV (main.tex:556)"
+  printed_label: "a 0.15-weighted bonus"
+  criterion: "Coefficient of the sensing keep-alive bonus."
+  source_file: results/experiments/t1_retain_s147/RUN_MANIFEST.json
+  field_path: $.config.sensing_keepalive_coefficient
+  expected_value: "0.15"
+  paper_value: "0.15"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+- id: setup-keepalive-rounds
+  paper_location: "Sec. IV (main.tex:556-557)"
+  printed_label: "for the first 500 rounds"
+  criterion: "Number of initial rounds during which the sensing keep-alive bonus can fire."
+  source_file: results/experiments/t1_retain_s147/RUN_MANIFEST.json
+  field_path: $.config.sensing_keepalive_rounds
+  expected_value: "500"
+  paper_value: "500"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+- id: setup-keepalive-entropy-target
+  paper_location: "Sec. IV (main.tex:557)"
+  printed_label: "while sensing entropy is below 0.4"
+  criterion: "Sensing-entropy level below which the keep-alive bonus is gated on."
+  source_file: results/experiments/t1_retain_s147/RUN_MANIFEST.json
+  field_path: $.config.sensing_entropy_target
+  expected_value: "0.4"
+  paper_value: "0.4"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+- id: setup-movement-entropy-floor
+  paper_location: "Sec. IV (main.tex:557)"
+  printed_label: "entropy floors of 0.2 (movement)"
+  criterion: "Movement-factor entropy level below which a small bonus is gated on."
+  source_file: results/experiments/t1_retain_s147/RUN_MANIFEST.json
+  field_path: $.config.movement_entropy_floor
+  expected_value: "0.2"
+  paper_value: "0.2"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+- id: setup-sensing-entropy-floor
+  paper_location: "Sec. IV (main.tex:558)"
+  printed_label: "and 0.1 (sensing)"
+  criterion: "Sensing-factor entropy level below which a small bonus is gated on."
+  source_file: results/experiments/t1_retain_s147/RUN_MANIFEST.json
+  field_path: $.config.sensing_entropy_floor
+  expected_value: "0.1"
+  paper_value: "0.1"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+- id: setup-sensing-cost-coefficient
+  paper_location: "Sec. IV (main.tex:558-559)"
+  printed_label: "the sensing cost enters the reward with coefficient 0.5"
+  criterion: "Fixed weight of the sensing cost in the shaped reward channel (sensing is not a second Lagrangian constraint)."
+  source_file: results/experiments/t1_retain_s147/RUN_MANIFEST.json
+  field_path: $.config.stage25_update_config.losses.sensing_cost_coefficient
+  expected_value: "0.5"
+  paper_value: "0.5"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+# -----------------------------------------------------------------------------
+# SECTION III — Method (main.tex:294-481)
+# -----------------------------------------------------------------------------
+
+- id: method-hazard-budget-d
+  paper_location: "Sec. III Method (main.tex:425)"
+  printed_label: "d = 0.25"
+  criterion: "Same quantity as table1-hazard-budget; restated in the controller equations."
+  source_file: results/experiments/t1_retain_s147/RUN_MANIFEST.json
+  field_path: $.config.hazard_budget
+  expected_value: "0.25"
+  paper_value: "0.25"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+- id: method-proportional-gain
+  paper_location: "Sec. III Method (main.tex:425)"
+  printed_label: "K_P = 0.25"
+  criterion: "Proportional gain of the PI multiplier controller."
+  source_file: results/experiments/t1_retain_s147/RUN_MANIFEST.json
+  field_path: $.config.stage25_update_config.proportional_gain
+  expected_value: "0.25"
+  paper_value: "0.25"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+- id: method-integral-gain
+  paper_location: "Sec. III Method (main.tex:425)"
+  printed_label: "K_I = 0.05"
+  criterion: "Integral gain of the PI multiplier controller."
+  source_file: results/experiments/t1_retain_s147/RUN_MANIFEST.json
+  field_path: $.config.stage25_update_config.integral_gain
+  expected_value: "0.05"
+  paper_value: "0.05"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+- id: method-initial-integral
+  paper_location: "Sec. III Method (main.tex:425)"
+  printed_label: "I_0 = 0.1"
+  criterion: "Initial value of the PI controller's integral accumulator."
+  source_file: results/experiments/t1_retain_s147/RUN_MANIFEST.json
+  field_path: $.config.stage25_update_config.initial_integral
+  expected_value: "0.1"
+  paper_value: "0.1"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+- id: method-dual-step-timing
+  paper_location: "Sec. III Method (main.tex:425-426)"
+  printed_label: "one dual step precedes the [policy epochs]"
+  criterion: "Whether the dual update runs before or after the PPO epoch loop."
+  source_file: results/experiments/t1_retain_s147/RUN_MANIFEST.json
+  field_path: $.config.stage25_update_config.dual_step_timing
+  expected_value: "pre_epochs"
+  paper_value: "precedes"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+- id: method-cost-estimator
+  paper_location: "Sec. III Method (main.tex:296-300)"
+  printed_label: "a bound on the expected undiscounted per-episode team hazard cost"
+  criterion: "The constraint estimator: episodic team mean rather than a per-step mean."
+  source_file: results/experiments/t1_retain_s147/RUN_MANIFEST.json
+  field_path: $.config.stage25_update_config.cost_estimator
+  expected_value: "episodic_team_mean"
+  paper_value: "per-episode team hazard cost"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+- id: method-grid-size
+  paper_location: "Sec. III Method (main.tex:359); restated Sec. VI Limitations (main.tex:771)"
+  printed_label: "a family of 8x8 grids"
+  criterion: "Grid width and height of every fork scenario."
+  criterion_note: "There is no single field named 'grid size'; the claim is an aggregate over ten separate pairs of dedicated dataclass fields. Verified this phase across all ten fork scenario definitions: width=8, height=8 on every one. Not classed prose_only, because width and height ARE dedicated fields - only the aggregation is unstored."
+  source_file: src/raas_marl/environments/active_sensing/grid_environment.py
+  field_path: "grid_environment.py:817-965 — the `width=8, height=8` pair on each of the ten fork Stage23Scenario definitions"
+  expected_value: "8x8 on all ten fork scenarios"
+  paper_value: "8x8"
+  match: true
+  reads: analysis_json
+  recompute: "assert every fork scenario has width == 8 and height == 8"
+
+# -----------------------------------------------------------------------------
+# FIGURE 1 — the aliasing contradiction (caption main.tex:199-212; body Sec. V-B)
+# These are claims about the ENVIRONMENT GEOMETRY, so their source is the
+# scenario catalog, not an analysis JSON.
+# -----------------------------------------------------------------------------
+
+- id: fig1-decision-cell
+  paper_location: "Fig. 1 caption (main.tex:200-201); restated Sec. V-B (main.tex:627-633)"
+  printed_label: "the boxed cell (3,3)"
+  criterion: "The cell at which the anchor pair and the {0,3} curriculum pair present a byte-identical actor observation under the one-cell encoding."
+  source_file: src/raas_marl/environments/active_sensing/grid_environment.py
+  field_path: "grid_environment.py:817-845 (risk_fork_train_upper at :817, _lower at :832) and :883-910 (risk_fork_curriculum_r0r3_upper at :883, _lower at :897) — the obstacle tuples that determine the radius-1 obstacle count at (3,3)"
+  expected_value: "(3,3); anchor obstacles on column 4 are rows {0,1,2,5,6,7}, {0,3} obstacles are rows {1,2,4,5,6,7}; (3,4) is open in both"
+  paper_value: "(3,3)"
+  match: true
+  reads: analysis_json
+  recompute: "the aliasing is asserted executably in tests/test_clean.py SECTION DRREP (MECH-MIRROR and the M3 (3,3) positive control)"
+
+- id: fig1-obstacle-count-at-decision-cell
+  paper_location: "Fig. 1 caption (main.tex:203-205)"
+  printed_label: "the count of obstacles one step away is 0 for both"
+  criterion: "Radius-1 (Manhattan) obstacle count from (3,3) under the ORIGINAL one-cell encoding, on both scenarios."
+  criterion_note: "METRIC-DEPENDENT, and the caption does not pin the metric — Sec. III does. The code metric is Manhattan/L1 (grid_environment.py:1209-1210 _manhattan, applied at :745-749) and the paper pins it at main.tex:447 with '(four-connected)'. Under Chebyshev the counts would be 1 and 2 rather than 0 and 0, and the headline contradiction would dissolve. Corroborated by docs/paper/figure_data/fig1_aliasing.json original_radius1_obstacle_count_feature9 = {train_upper: 0, curriculum_r0r3_lower: 0} (PRIVATE)."
+  source_file: src/raas_marl/environments/active_sensing/grid_environment.py
+  field_path: "grid_environment.py obstacle tuples for risk_fork_train_upper and risk_fork_curriculum_r0r3_lower; the only column-4 cell within one step of (3,3) is (3,4), an open gate in both"
+  expected_value: "0 for both scenarios"
+  paper_value: "0"
+  match: true
+  reads: analysis_json
+  recompute: "count of cells in {(2,3),(4,3),(3,2),(3,4)} present in each scenario's obstacles tuple"
+
+- id: fig1-anchor-safe-gate
+  paper_location: "Fig. 1 caption (main.tex:205-206); restated Sec. V-B (main.tex:631)"
+  printed_label: "the anchor's safe gate (4,4) one row down"
+  criterion: "The non-hazardous gate of risk_fork_train_upper (whose hidden hazard is at (3,4))."
+  source_file: src/raas_marl/environments/active_sensing/grid_environment.py
+  field_path: "grid_environment.py:817-831 — risk_fork_train_upper, hidden_hazard_cells=((3,4),), obstacles excluding rows 3 and 4 on column 4"
+  expected_value: "(4,4)"
+  paper_value: "(4,4)"
+  match: true
+  reads: analysis_json
+  recompute: "gate cells = {(r,4) : r in 0..7} minus obstacles = {(3,4),(4,4)}; safe gate = the gate not in hidden_hazard_cells"
+
+- id: fig1-other-pair-safe-gate
+  paper_location: "Fig. 1 caption (main.tex:206, 211); restated Sec. V-B (main.tex:631-632)"
+  printed_label: "the other pair's safe gate (0,4) three rows up"
+  criterion: "The non-hazardous gate of risk_fork_curriculum_r0r3_lower (whose hidden hazard is at (3,4))."
+  source_file: src/raas_marl/environments/active_sensing/grid_environment.py
+  field_path: "grid_environment.py:897-910 — risk_fork_curriculum_r0r3_lower, hidden_hazard_cells=((3,4),), obstacles ((1,4),(2,4),(4,4),(5,4),(6,4),(7,4))"
+  expected_value: "(0,4)"
+  paper_value: "(0,4)"
+  match: true
+  reads: analysis_json
+  recompute: "as fig1-anchor-safe-gate"
+
+- id: fig1-patch-cell-open-vs-wall
+  paper_location: "Fig. 1 caption (main.tex:207-209); restated Sec. V-B (main.tex:638-639)"
+  printed_label: "adds cell (4,4): open for the anchor, a wall for {0,3}"
+  criterion: "Occupancy of cell (4,4) in the two scenarios — the bit the two-cell egocentric patch supplies and the one-cell count does not."
+  source_file: src/raas_marl/environments/active_sensing/grid_environment.py
+  field_path: "risk_fork_train_upper obstacles exclude (4,4); risk_fork_curriculum_r0r3_lower obstacles include (4,4); corroborated by docs/paper/figure_data/fig1_aliasing.json patch_cell_(4,4)_value = {train_upper OPEN 0.0, curriculum_r0r3_lower WALL 1.0} (PRIVATE)"
+  expected_value: "(4,4) open for the anchor, obstacle for {0,3}"
+  paper_value: "open / wall"
+  match: true
+  reads: analysis_json
+  recompute: "asserted executably in tests/test_clean.py SECTION DRREP as the M3 (3,3) positive control"
+
+- id: fig1-far-gate-distance
+  paper_location: "Fig. 1 caption (main.tex:211)"
+  printed_label: "(0,4) is four steps away, outside the two-cell window"
+  criterion: "Manhattan distance from the decision cell (3,3) to the other pair's safe gate (0,4)."
+  source_file: src/raas_marl/environments/active_sensing/grid_environment.py
+  field_path: "derived from the two cell coordinates in the catalog definitions"
+  expected_value: "|3-0| + |3-4| = 4"
+  paper_value: "four steps"
+  match: true
+  reads: analysis_json
+  recompute: "manhattan((3,3),(0,4)) = 4; compare against tensor_adapter.py:99 STAGE23_LOCAL_OBSTACLE_RADIUS = 2"
+
+- id: vb-obstacle-count-at-43
+  paper_location: "Sec. V-B (main.tex:634-635)"
+  printed_label: "one row down, at (4,3), the one-step obstacle count is 0 for the anchor and 1 for the other pair"
+  criterion: "Radius-1 obstacle count from (4,3) in each scenario — the paper's own demonstration that the conflict is local rather than absolute."
+  source_file: src/raas_marl/environments/active_sensing/grid_environment.py
+  field_path: "anchor obstacles exclude (4,4); {0,3} obstacles include (4,4); (4,4) is the only column-4 cell within one step of (4,3)"
+  expected_value: "0 (anchor) and 1 ({0,3})"
+  paper_value: "0 and 1"
+  match: true
+  reads: analysis_json
+  recompute: "count of {(3,3),(5,3),(4,2),(4,4)} present in each scenario's obstacles tuple"
+
+- id: setup-patch-window-size
+  paper_location: "Fig. 1 caption (main.tex:208, 211); abstract (main.tex:110); Sec. V-B (main.tex:638)"
+  printed_label: "an egocentric two-cell obstacle patch"
+  criterion: "The Manhattan radius of the enriched actor obstacle patch."
+  criterion_note: "The paper's phrase 'two-cell' denotes the RADIUS (Manhattan 2), not a two-cell patch: the patch is the twelve non-centre cells of the Manhattan-radius-2 ball. The dimension arithmetic confirms it — 10 legacy features + 12 patch cells = 22, and the trained checkpoints carry actor_encoder.weight of shape (32, 26) = 22 + 4 reveal features."
+  source_file: src/raas_marl/environments/active_sensing/tensor_adapter.py
+  field_path: "tensor_adapter.py:99 STAGE23_LOCAL_OBSTACLE_RADIUS = 2; :60 _RADIUS2_PATCH_OFFSETS (12 offsets); :74 STAGE23_ACTOR_OBSERVATION_DIM = 10 + 12 = 22"
+  expected_value: "radius 2, 12 patch cells, observation dim 22"
+  paper_value: "two-cell"
+  match: true
+  reads: analysis_json
+  recompute: "len(_RADIUS2_PATCH_OFFSETS) == 12; STAGE23_ACTOR_OBSERVATION_DIM == 22"
+
+# -----------------------------------------------------------------------------
+# FIGURE 2 — the risk-fork environment (caption main.tex:396-403)
+# -----------------------------------------------------------------------------
+
+- id: fig2-blind-route-mean-hazard
+  paper_location: "Fig. 2 caption (main.tex:399-401)"
+  printed_label: "A blind route to the goal incurs a mean hazard of 1.0 per episode"
+  criterion: "The no-sense comparator's team hazard, averaged over the two layouts of a fork pair — the budget-level witness that no blind policy both reaches the goal and satisfies the constraint."
+  criterion_note: "Stated only in a Python docstring. The same docstring is explicit that the per-layout MINIMUM no-sense hazard is 0.0 (the safe-guess layout), and that it is the union CUT, not this mean, that forbids a blind safe route. The caption's 'a blind route incurs a mean hazard of 1.0' is therefore a statement about the AVERAGE over the pair, not about any single episode."
+  source_file: src/raas_marl/environments/active_sensing/stage24_diagnostics.py
+  field_path: "PROSE:stage24_diagnostics.py:1237 'For the 2-layout fork this mean is 1.0 (per-layout {0.0, 2.0})'"
+  expected_value: "1.0 (per-layout 0.0 and 2.0)"
+  paper_value: "1.0"
+  match: prose_only
+  reads: analysis_json
+  recompute: "verify_fork_family_forces_sensing(('risk_fork_train_lower','risk_fork_train_upper'), hazard_budget=0.25) -> no_sense_mean_hazard; this executes the environment and scripted comparators, no training required"
+
+- id: fig2-budget-restatement
+  paper_location: "Fig. 2 caption (main.tex:400)"
+  printed_label: "above the training budget of 0.25 used in the reported runs"
+  criterion: "Same quantity as table1-hazard-budget."
+  source_file: results/experiments/t1_retain_s147/RUN_MANIFEST.json
+  field_path: $.config.hazard_budget
+  expected_value: "0.25"
+  paper_value: "0.25"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+# -----------------------------------------------------------------------------
+# SECTION V-A — selective sensing on one geometry (main.tex:597-613)
+# -----------------------------------------------------------------------------
+
+- id: va-t1d13-task-success
+  paper_location: "Sec. V-A (main.tex:602-603)"
+  printed_label: "two of three seeds pass task success"
+  criterion: "BAR-C4 count on the SINGLE-PAIR {3,4} run at the ORIGINAL dim-10 encoding (seeds 132/133/134)."
+  criterion_note: "Different experiment from Table III's n=3 column: this is t1_d13 (single pair, dim-10), whereas Table III n=3 is t1_retain (two-pair mixture, dim-22). Both print '2/3' and both are correct; a reader tracing '2/3' must not conflate them."
+  source_file: docs/evidence/t1_d13_analysis.json
+  field_path: $.grade_summary.bar_c4.tally
+  expected_value: "2/3 PASS"
+  paper_value: "two of three"
+  match: true
+  reads: analysis_json
+  recompute: "count of $.grade_summary.bar_c4.s{132,133,134}.pass == true -> {132,133} = 2"
+
+- id: va-t1d13-hold
+  paper_location: "Sec. V-A (main.tex:603)"
+  printed_label: "two of three pass the selective-sensing hold"
+  criterion: "HELD-2 count on the same single-pair dim-10 run."
+  source_file: docs/evidence/t1_d13_analysis.json
+  field_path: $.grade_summary.bar_c1_held2.tally
+  expected_value: "2/3 PASS"
+  paper_value: "two of three"
+  match: true
+  reads: analysis_json
+  recompute: "count of $.grade_summary.bar_c1_held2.s{132,133,134}.pass == true -> {132,133} = 2"
+
+- id: va-t1d13-witnesses-all-checkpoints
+  paper_location: "Sec. V-A (main.tex:603-605)"
+  printed_label: "both holding seeds carry an own-ablation causal witness at all three graded checkpoints, and one witnesses on both training surfaces at once"
+  criterion: "Per-seed witness checkpoint counts and surface coverage on the two holding seeds."
+  source_file: docs/evidence/t1_d13_analysis.json
+  field_path: $.grade_summary.bar_c1_held2.s132.c_witness and .s133.c_witness
+  expected_value: "s132 'SELECTIVE_COMPOSITE at 3/3 checkpoints ... own_blind_hazard_avoided=2 on risk_fork_train_upper'; s133 'SELECTIVE_COMPOSITE at 3/3 checkpoints: witnesses on BOTH training surfaces'"
+  paper_value: "all three checkpoints; one on both surfaces"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+- id: va-armed-five-held-four
+  paper_location: "Sec. V-A (main.tex:608-609); restated Sec. I bullet 1 (main.tex:265-266)"
+  printed_label: "the floor armed on five seeds; four held"
+  criterion: "Count of seeds in the corridor's tuning campaign on the single pair at the original encoding for which the armed floor latched, and how many of those passed the hold bar."
+  criterion_note: "The tally is written down in ONE narrative string, but its five constituent arms are recorded across THREE analysis files. A verification script must open t1_d11_analysis.json (s126/s127 never armed; s128 armed and held), t1_d12_analysis.json (s129 never armed; s130 armed and held; s131 armed and did NOT hold), and t1_d13_analysis.json (s132, s133 armed and held; s134 never armed). Verified this phase: 5 arms {128,130,131,132,133}, 4 held (all but s131). SCOPE CAVEAT: the three source runs do NOT share one configuration - T1-D12 introduced lever I and T1-D13 changed the hazard budget from 0.5 to 0.25 (lever J). So this is a rate pooled across three lever configurations, consistent with the printed words 'tuning campaign' but not a single-configuration reliability rate."
+  source_file: docs/evidence/t1_d13_analysis.json
+  field_path: "PROSE:$.decomposed_read.hold_at_n4 — 'campaign hold record now 4 of 5 armed seeds held (s128, s130, s132, s133; s131 was the armed limbo)'"
+  expected_value: "5 armed, 4 held"
+  paper_value: "five armed; four held"
+  match: prose_only
+  reads: analysis_json
+  recompute: "compose from t1_d11_analysis.json $.MECH_H / $.AM_H8_annotation_s128, t1_d12_analysis.json $.mech.mech_sched.armed_rounds (s129=0, s130=2157, s131=2295), t1_d13_analysis.json $.per_seed.*.mech_wiring / $.grade_summary.bar_c1_held2"
+
+- id: va-anchor-rerun-both-bars
+  paper_location: "Sec. V-A (main.tex:609-611)"
+  printed_label: "re-establishes the result, three of three on both bars"
+  criterion: "BAR-C4 (per-mirror) and HELD-2 counts on the single-pair {3,4} re-run under the ENRICHED dim-22 encoding (seeds 144/145/146)."
+  source_file: docs/evidence/anchor_rerun_analysis.json
+  field_path: $.tally.BAR_C4_per_mirror and $.tally.BAR_C1_HELD2
+  expected_value: "'3/3' and '3/3'"
+  paper_value: "three of three on both bars"
+  match: true
+  reads: analysis_json
+  recompute: "count of $.per_seed.anchor_rerun_s14{4,5,6}.BAR_C4_per_mirror.PASS and .BAR_C1_HELD2.HELD2_PASS -> 3 and 3"
+
+- id: va-anchor-rerun-witness-9of9
+  paper_location: "Sec. V-A (main.tex:611)"
+  printed_label: "with causal witnesses at all nine checkpoints"
+  criterion: "Total own-ablation causal witnesses across three seeds x three graded checkpoints on the anchor re-run."
+  criterion_note: "The literal string '9/9' is present in a summary field, but the underlying composition (3 + 3 + 3) is also stored per seed and was recomposed this phase, so the value is recorded as DERIVED with the summary field as corroboration rather than as the primary source."
+  source_file: NONE
+  field_path: "composed from docs/evidence/anchor_rerun_analysis.json $.per_seed.anchor_rerun_s14{4,5,6}.BAR_C1_HELD2.c_ba5_anchor_witness_checkpoints"
+  expected_value: DERIVED
+  derived_from: "docs/evidence/anchor_rerun_analysis.json $.per_seed.anchor_rerun_s144.BAR_C1_HELD2.c_ba5_anchor_witness_checkpoints = 3, s145 = 3, s146 = 3; corroborated by the literal '9/9' in $.ruling.task_easing_ruled_out"
+  paper_value: "nine checkpoints"
+  match: true
+  reads: analysis_json
+  recompute: "sum of c_ba5_anchor_witness_checkpoints over the three seeds = 3 + 3 + 3 = 9, against 3 seeds x 3 checkpoints = 9 possible"
+
+- id: va-task-easing-three-axes
+  paper_location: "Sec. V-A (main.tex:611-613)"
+  printed_label: "task-easing ruled out on three axes"
+  criterion: "The three independent checks: the mirrors are bit-identical before sensing; both mirrors reach near-zero hazard; zeroing the reveal raises hazard."
+  source_file: docs/evidence/anchor_rerun_analysis.json
+  field_path: $.ruling.task_easing_ruled_out (with $.step0_behavioral_battery)
+  expected_value: "'sensing ALIVE (per-mirror rates 0.17-0.40) AND CAUSAL (own_blind>=1 anchor witnesses at 9/9 checkpoints, below_floor=[])'"
+  paper_value: "three axes"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+# -----------------------------------------------------------------------------
+# SECTION V-B — the barrier is representational (main.tex:615-658)
+# -----------------------------------------------------------------------------
+
+- id: vb-curricula-broke-retention-d14
+  paper_location: "Sec. V-B (main.tex:619-621) — the uniform four-pair mixture"
+  printed_label: "each broke multi-geometry retention on all three seeds"
+  criterion: "BAR-C4-RETAIN count on the four-pair curriculum run (seeds 135/136/137, dim-10)."
+  source_file: docs/evidence/t1_d14_analysis.json
+  field_path: $.retain.bar_c4_retain.verdict
+  expected_value: "FAIL 0/3"
+  paper_value: "0/3"
+  match: true
+  reads: analysis_json
+  recompute: "corroborated by $.routing.tally.bar_c4_retain_count = 0"
+
+- id: vb-curricula-broke-retention-d15
+  paper_location: "Sec. V-B (main.tex:619-621) — the concentrated two-pair mixture"
+  printed_label: "each broke multi-geometry retention on all three seeds"
+  criterion: "BAR-C4-RETAIN count on the {3,4}+{0,3} curriculum run (seeds 138/139/140, dim-10). Same run as Table II's dim-10 row."
+  source_file: docs/evidence/t1_d15_analysis.json
+  field_path: $.RETAIN.verdict.bar_c4_retain_pass_count
+  expected_value: "0"
+  paper_value: "0/3"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+- id: vb-curricula-broke-retention-d16
+  paper_location: "Sec. V-B (main.tex:619-623) — the row-disjoint two-pair mixture"
+  printed_label: "each broke multi-geometry retention on all three seeds"
+  criterion: "BAR-C4-RETAIN count on the {3,4}+{0,7} row-disjoint curriculum run (seeds 141/142/143, dim-10)."
+  source_file: docs/evidence/t1_d16_analysis.json
+  field_path: $.aggregate.bar_c4_retain
+  expected_value: "0/3"
+  paper_value: "0/3"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+- id: vb-anchor-exact-interval
+  paper_location: "Sec. V-B (main.tex:640-641); restated Sec. V-D (main.tex:719)"
+  printed_label: "seven of nine, exact interval [0.40,0.97]"
+  criterion: "Clopper-Pearson exact two-sided 95% binomial interval for the anchor-consolidation rate 7 of 9."
+  criterion_note: "NOT STORED ANYWHERE. Exhaustive search this phase over docs/evidence/ (all JSON keys walked, plus the .md files) found no field carrying this interval. It is a derived statistic that exists only in the paper. Recomputed here and matched to the printed 2-dp precision."
+  source_file: NONE
+  field_path: "not present in any repository artifact; the underlying COUNT is docs/evidence/t1_seedscale_analysis.json $.retain_reliability_tallies_n9.anchor_clean_class_haz_AND_witness"
+  expected_value: DERIVED
+  derived_from: "docs/evidence/t1_seedscale_analysis.json $.retain_reliability_tallies_n9.anchor_clean_class_haz_AND_witness = '7/9', confirmed per seed from $.per_seed.*.anchor_clean_class"
+  paper_value: "[0.40, 0.97]"
+  match: true
+  reads: analysis_json
+  recompute: "clopper_pearson(k=7, n=9, alpha=0.05) -> [0.399906, 0.971855]; printed at 2 dp as [0.40, 0.97]. TWO honesty notes. (i) Printing 0.399906 as 0.40 rounds a LOWER bound UP, which very slightly widens the apparent exclusion of the 1/3 chance level; the paper's claim that the interval 'lies wholly above one third' is nevertheless TRUE on the exact value (0.399906 > 0.333333). (ii) I verified the paper's uniqueness claim: among the four n=9 rates only this one excludes 1/3 - CP(5,9)=[0.2120,0.8630], CP(4,9)=[0.1370,0.7880] and CP(2,9)=[0.0281,0.6001] all contain it."
+
+- id: vb-far-reroute-safe
+  paper_location: "Sec. V-B (main.tex:649-652)"
+  printed_label: "the far reroute of the second pair ... learned safe on two of three seeds via a longer route"
+  criterion: "Count of dim-22 mixture seeds whose tail-100 per-mirror hazard on curriculum_r0r3_lower (the mirror whose safe gate lies outside the two-cell window) is <= 0.5."
+  criterion_note: "The nearest aggregate field, $.tallies.am_c2_per_mirror_all_four_le_05 = '2/3', counts a DIFFERENT criterion (all four mirrors, not the far mirror alone). The two coincide on this data only because curriculum_r0r3_lower is the sole mirror that fails on any seed. Recorded as DERIVED from the per-mirror records so the criterion is exact. The 'longer route' is visible in the same records: 14.94 and 14.78 mean steps on the two safe seeds against 8.82 on the blind one."
+  source_file: NONE
+  field_path: "docs/evidence/t1_retain_analysis.json $.per_seed.{147,148,149}.per_mirror.curriculum_r0r3_lower"
+  expected_value: DERIVED
+  derived_from: "docs/evidence/t1_retain_analysis.json $.per_seed.147.per_mirror.curriculum_r0r3_lower.haz = 0.0; .148 = 2.0; .149 = 0.0 (with .succ 1.0 / 0.9975 / 1.0 and .steps 14.94 / 8.82 / 14.78)"
+  paper_value: "two of three"
+  match: true
+  reads: analysis_json
+  recompute: "count over seeds 147,148,149 of per_mirror.curriculum_r0r3_lower.haz <= 0.5 -> {147,149} = 2; corroborated by $.tallies.am_c2_per_mirror_all_four_le_05 = '2/3'"
+
+- id: vb-arm-then-recovery
+  paper_location: "Sec. V-B (main.tex:654-655)"
+  printed_label: "one seed reached its clean tail through an arm-then-recovery rather than a clean trajectory"
+  criterion: "Whether the MECH-F84 partial-mixture tripwire fired on any of the three dim-22 mixture seeds, and whether that seed recovered."
+  source_file: docs/evidence/t1_retain_analysis.json
+  field_path: $.mech_summary.mech_f84 (with $.per_seed.147.MECH.'MECH-F84_any_fired' = true, .148 = false, .149 = false)
+  expected_value: "'FIRED on s147 arm r2824 ...; s148/s149 SILENT. s147 RECOVERED (not collapsed)'"
+  paper_value: "one seed"
+  match: true
+  reads: analysis_json
+  recompute: "count of $.per_seed.*.MECH.'MECH-F84_any_fired' == true -> {147} = 1"
+
+# -----------------------------------------------------------------------------
+# SECTION V-C — transfer (main.tex:660-671)
+# -----------------------------------------------------------------------------
+
+- id: vc-two-seeds-transfer
+  paper_location: "Sec. V-C (main.tex:664-670); restated Sec. I bullet 3 (main.tex:277-279), abstract (main.tex:120-121)"
+  printed_label: "Two seeds produce policies whose selective sensing generalizes ... each with a magnitude-floored own-ablation causal witness on the validation surface at two graded checkpoints"
+  criterion: "Same criterion as table3-transfer-n9, stated in prose with the per-seed checkpoint count."
+  source_file: docs/evidence/t1_seedscale_analysis.json
+  field_path: $.per_seed.147.c4_gen_2of3 and $.per_seed.158.c4_gen_2of3 (with $.per_seed.*.c4_gen_checkpoints)
+  expected_value: "true for 147 and 158; false for the other seven"
+  paper_value: "two seeds"
+  match: true
+  reads: analysis_json
+  recompute: "as table3-transfer-n9"
+
+# -----------------------------------------------------------------------------
+# SECTION V-D and VI — restatements of Table III
+# Every numeric claim in Sec. V-D (main.tex:713-733) and Sec. VI (main.tex:738-749)
+# restates a Table III cell already registered above:
+#   'five of nine'  -> table3-task-success-n9
+#   'four of nine'  -> table3-hold-n9  and  table3-basin-equivariant
+#   'seven of nine' -> table3-anchor-n9
+#   'two of nine'   -> table3-transfer-n9
+#   '[0.40, 0.97]'  -> vb-anchor-exact-interval
+#   '0.028 to 0.600'-> table3-transfer-ci-95
+#   'one third'     -> table3-chance-level
+#   'one of six'    -> table3-fresh-seed-transfer
+# No Sec. V-D or Sec. VI number lacks a registered entry.
+# -----------------------------------------------------------------------------
+
+- id: vd-good-basin-exceeds-good-outcome
+  paper_location: "Sec. V-D (main.tex:730-733); restated Sec. VI (main.tex:742-743)"
+  printed_label: "the correct, equivariant rule appears on four of nine seeds while the good outcome, which requires both mirrors, appears on only two"
+  criterion: "The GAP between the equivariant-basin count (on the lower validation mirror alone) and the transfer count (which requires both validation mirrors)."
+  criterion_note: "Registered separately because it is a claim about the RELATION between two already-registered numbers, and because it is the paper's own statement that a correct reroute on one mirror does not imply selective sensing on both. Verified this phase: the equivariant set {147,153,157,158} strictly contains the transfer set {147,158}; the two seeds in the gap are s153 and s157."
+  source_file: docs/evidence/t1_seedscale_analysis.json
+  field_path: $.per_seed.*.reroute_basin_readiness_lower and $.per_seed.*.c4_gen_2of3
+  expected_value: "equivariant {147,153,157,158} = 4; transfer {147,158} = 2; gap seeds {153,157}"
+  paper_value: "four of nine vs two"
+  match: true
+  reads: analysis_json
+  recompute: "set difference of the EQUIVARIANT basin set and the c4_gen_2of3 set"
+
+# -----------------------------------------------------------------------------
+# ABSTRACT and SECTION I — numeric claims (main.tex:104-131, 250-287)
+# Every abstract and Sec. I number restates a value registered above:
+#   'three seeds' (mixture failed)  -> table2-retention-dim10
+#   'two of three' (recovery)       -> table2-retention-dim22
+#   'seven of nine'                 -> table2-anchor-consolidation-n9
+#   'four of nine'                  -> table3-hold-n9
+#   'two of nine'                   -> table3-transfer-n9
+#   'two seeds' (transfer)          -> vc-two-seeds-transfer
+#   'four of five armed seeds'      -> va-armed-five-held-four
+#   'two families of low-burden levers' -> intro-two-lever-families (below)
+# -----------------------------------------------------------------------------
+
+- id: setup-three-further-mechanisms
+  paper_location: "Sec. IV (main.tex:551-552)"
+  printed_label: "Beyond Table~I, every reported run enables three further off-by-default mechanisms"
+  criterion: "The number of off-by-default mechanisms, beyond the Table I corridor, that the reported runs actually enable."
+  criterion_note: "THE ONE match: false IN THIS REGISTER. The paragraph goes on to name exactly three - potential-based shaping, the sensing keep-alive, and the entropy floors. Diffing the nine runs' config against the driver's own dataclass defaults (src/raas_marl/final_training/stage25_driver.py, Stage25RunConfig) shows 32 keys set away from an OFF default. Twenty-five of those are disclosed (13 by Table I, 5 by the entropy-sustain schedule, 7 by the three named mechanisms). SEVEN are not disclosed anywhere in the paper: movement_recovery_gate=true plus its six midband_recovery_* parameters - the DR-H5 lever-K movement-recovery gate - and separately advantage_std_guard_threshold=1e-06. The words 'midband' and 'containment' appear ZERO times in main.tex, and all six occurrences of 'recovery' describe the RESULT (recovery of the behavior) or the s147 arm-then-recovery episode, never the lever. The mechanism is not inert: t1_retain_analysis.json $.lever_k_now_tested records it FIRING on all three RETAIN seeds (s147 twice, s148 once, s149 once, with named round ranges). So the published count of three is an undercount of what the runs behind Table II's dim-22 row and Table III's n=3 column enabled."
+  source_file: results/experiments/t1_retain_s147/RUN_MANIFEST.json
+  field_path: "$.config - compared key-by-key against the Stage25RunConfig dataclass defaults in src/raas_marl/final_training/stage25_driver.py:226-365"
+  expected_value: "at least 4 (the three named, plus the movement-recovery gate); 32 config keys total are set away from an OFF default, of which 7 are undisclosed"
+  paper_value: "three"
+  match: false
+  reads: analysis_json
+  recompute: "parse the Stage25RunConfig dataclass field defaults from stage25_driver.py; for each key in $.config, flag it where the default is an OFF sentinel (None / 0 / 0.0 / False) and the run value is not; subtract the keys disclosed by Table I, the entropy-sustain sentence, and the three named mechanisms"
+
+- id: method-encoding-radii
+  paper_location: "Sec. III Method (main.tex:446-448)"
+  printed_label: "a scalar count of obstacles within a one-cell radius (four-connected), and a small egocentric occupancy patch within a two-cell radius"
+  criterion: "The two obstacle-percept radii being compared: radius 1 for the original encoding, radius 2 for the enriched one."
+  criterion_note: "Only the radius-2 value is present in the shipped source. src/raas_marl/environments/active_sensing/tensor_adapter.py:99 reads STAGE23_LOCAL_OBSTACLE_RADIUS = 2 and grid_environment.py:219 reads local_observation_radius: int = 2. The radius-1 value is the PRE-3591d61 state of those same constants and is recoverable only from git history (git show 7ae9650:src/.../tensor_adapter.py), which is class PRIVATE. See the CLAIM-SOURCE CROSS-CHECK in SHIPPING_MANIFEST.md."
+  source_file: src/raas_marl/environments/active_sensing/tensor_adapter.py
+  field_path: "tensor_adapter.py:99 STAGE23_LOCAL_OBSTACLE_RADIUS = 2 (radius-2 arm); the radius-1 arm exists only at git revision 7ae9650 and earlier"
+  expected_value: "radius 2 present in HEAD; radius 1 only in git history"
+  paper_value: "one-cell radius / two-cell radius"
+  match: true
+  reads: analysis_json
+  recompute: "HEAD: read STAGE23_LOCAL_OBSTACLE_RADIUS. Historical arm: git show <t1_d15 git_head>:src/raas_marl/environments/active_sensing/tensor_adapter.py and read the same constant."
+
+- id: vi-four-deconfound-reads
+  paper_location: "Sec. VI Discussion and Limitations (main.tex:761-763)"
+  printed_label: "four pre-registered de-confound reads returned no lift"
+  criterion: "The number of de-confound reads pre-registered before the nine-seed replication was graded, all of which returned no lift."
+  source_file: docs/evidence/t1_seedscale_analysis.json
+  field_path: "$.step2_reads — the four keys read1_c4gen_base_rate_PRIMARY, read2_f84_x_recovery_deconfound_PRIMARY, read3_temporal_overlap, read4_sensing_exoneration"
+  expected_value: "4"
+  paper_value: "four"
+  match: true
+  reads: analysis_json
+  recompute: "count of keys under $.step2_reads matching ^read[0-9] -> 4 (the fifth key, basin_classification_MOST_VALUABLE, is the basin read, not a de-confound read)"
+
+- id: intro-two-lever-families
+  paper_location: "Sec. I bullet 4 (main.tex:283-284); restated abstract (main.tex:128-129), Sec. VI (main.tex:759-760)"
+  printed_label: "two low-burden lever families (curriculum/data, dynamics/exploration) do not remove it"
+  criterion: "The number of distinct low-burden lever families searched and found empty against the structural non-identifiability."
+  criterion_note: "A COUNT OF EXPERIMENTAL CAMPAIGNS, not a measurement of a run. The curriculum/data family is the three curriculum experiments registered above (vb-curricula-broke-retention-d14/d15/d16). The dynamics/exploration family is a separate search whose record is docs/evidence/ED-basin-lever-search.md, which is classified PRIVATE — so the second half of this claim is NOT verifiable from the public artifact. Flagged for the CLAIM-SOURCE CROSS-CHECK in SHIPPING_MANIFEST.md."
+  source_file: docs/evidence/ED-basin-lever-search.md
+  field_path: "PROSE:the dossier's verdict section (curriculum/data family = T1-D14/D15/D16; dynamics/exploration family = the n=9 de-confound reads)"
+  expected_value: "2 (curriculum/data; dynamics/exploration)"
+  paper_value: "two families"
+  match: true
+  reads: analysis_json
+  recompute: null
+
+# =============================================================================
+# END OF REGISTER
+#
+# THE THREE RE-DERIVED QUESTIONS — full answers with the data behind them
+# =============================================================================
+#
+# Q1. Table III row 1, "Task success", n=9 column.
+#     Read: t1_seedscale_analysis.json $.per_seed.<seed>.bar_c4_retain, all nine.
+#
+#       seed | succ     | haz      | pass
+#       -----+----------+----------+------
+#       147  | 1.0      | 0.0      | True
+#       148  | 0.9975   | 0.508125 | False
+#       149  | 1.0      | 0.003125 | True
+#       153  | 1.0      | 0.00125  | True
+#       154  | 0.02     | 0.003125 | False
+#       155  | 0.748125 | 0.004375 | False
+#       156  | 0.99375  | 0.003125 | True
+#       157  | 0.750625 | 0.560625 | False
+#       158  | 1.0      | 0.000625 | True
+#
+#     ANSWER: `pass` is a CONJUNCTION, not a success-only test. s148 is the
+#     decisive case: success 0.9975 clears a 0.9 success bar, but hazard
+#     0.508125 exceeds 0.5, and pass is false. The grader is
+#     held2_bar.py:122 — `c4_pass = c4_succ >= C4_SUCCESS and c4_haz <= C4_HAZARD`
+#     with C4_SUCCESS = 0.9 (line 46) and C4_HAZARD = 0.5 (line 47), both over
+#     rows[-100:] (line 119). I re-ran held2_bar.held2_verdict on the raw curves
+#     of the five row-1 seeds and reproduced every stored succ/haz pair.
+#
+#     SUCCESS-ALONE across the nine seeds: 6/9 — {147,148,149,153,156,158}.
+#     HAZARD-ALONE: 7/9 — {147,149,153,154,155,156,158}.
+#     JOINT (printed): 5/9 — {147,149,153,156,158}.
+#
+#     So the printed label, read literally, names a quantity that is 6/9, while
+#     the printed number is the joint 5/9. criterion_note written accordingly on
+#     table3-task-success-n9 (and cross-referenced from the n=3 entry).
+#
+#     A SECOND label imprecision found while doing this: main.tex:525 says
+#     "Hazard is graded per-mirror on all four training mirrors", but this row's
+#     hazard is POOLED. I verified the pooled value equals the arithmetic mean of
+#     the four per-mirror hazards on every seed, and that the pooled and
+#     per-mirror readings select the IDENTICAL 7-seed set at n=9, so the
+#     imprecision changes no tally here. Recorded, not inflated.
+#
+# -----------------------------------------------------------------------------
+# Q2. Table II, "Retention" column.
+#     Candidates readable as "retention" for the {3,4}+{0,3} mixture, with each
+#     candidate's value in BOTH arms:
+#
+#       candidate                                   dim-10   dim-22   direction
+#       ------------------------------------------- -------- -------- ---------
+#       BAR-C4-RETAIN (pooled tail-100 success>=0.9
+#         AND hazard<=0.5)                            0/3      2/3     IMPROVES
+#       BAR-C1-HELD-2 full (the core hold)            0/3      2/3     IMPROVES
+#       AM-C2 per-mirror hazard <= 0.5 on all four
+#         mirrors                                     2/3      2/3     FLAT
+#
+#     Sources: t1_d15_analysis.json $.RETAIN.verdict.{bar_c4_retain_pass_count,
+#     bar_c1_held2_pass_count} and $.per_layout_split.*; t1_retain_analysis.json
+#     $.tallies.{bar_c4_retain, bar_c1_held2_full, am_c2_per_mirror_all_four_le_05}
+#     and $.per_seed.*.per_mirror.
+#
+#     ANSWER: NO — the candidates do NOT all show the same direction of effect.
+#     Two go 0/3 -> 2/3; the third is flat at 2/3 -> 2/3.
+#
+#     TWO CORRECTIONS TO HOW THAT FLAT READING SHOULD BE STATED:
+#
+#     (a) LIKE-FOR-LIKE. The two arms store the third criterion under different
+#         names at different granularity: dim-10 has `am_c2_per_pair_ok_count`
+#         (per PAIR, 2 pairs) and dim-22 has `am_c2_per_mirror_all_four_le_05`
+#         (per MIRROR, 4 mirrors). Comparing those two fields directly is not
+#         like-for-like. I recomputed the dim-10 arm at per-MIRROR granularity
+#         from $.per_layout_split (which stores all four mirrors):
+#           s138 hazards {2.0, 0.0, 0.0, 2.0} -> fails
+#           s139 hazards {0.0, 0.0, 0.0, 0.0} -> passes
+#           s140 hazards {0.005, 0.0, 0.0, 0.0125} -> passes
+#         = 2/3. The flat result SURVIVES the correction.
+#
+#     (b) THE FLAT READING IS VACUOUS, and this is the substantive point. Both
+#         dim-10 passes are degenerate:
+#           s139 has hazard 0.0 on all four mirrors because SUCCESS IS 0.0 on all
+#                four mirrors — an absorbing avoid-all capture.
+#           s140 has near-zero hazard because it FREEZES on two of the four
+#                mirrors (success 0.0 on curriculum_r0r3_lower and train_upper).
+#         By contrast both dim-22 passes (s147, s149) have success 1.0 on ALL
+#         FOUR mirrors with hazard <= 0.0125. The same count sits over
+#         categorically different behaviour. A hazard-only criterion is
+#         satisfiable by inactivity — precisely the vacuity that held2_bar.py's
+#         own docstring (lines 3-6) records HELD-2 as having been introduced to
+#         eliminate, after T1-D10 satisfied the hazard-only conjuncts with
+#         success 0.000 on all three seeds.
+#
+#     criterion_note written on table2-retention-third-reading, which is
+#     registered even though it is not printed, so the flat reading is on the
+#     record rather than discoverable only by someone who goes looking.
+#
+# -----------------------------------------------------------------------------
+# Q3. Table III rows 1 and 2, independence.
+#
+#     Row 1 (Task success, BAR-C4-RETAIN) passing set: {147, 149, 153, 156, 158}
+#     Row 2 (Selective-sensing hold, HELD-2)   passing set: {147, 149, 153, 158}
+#
+#     ANSWER: row 2 is a STRICT SUBSET of row 1. The single seed in the gap is
+#     s156. (At n=3 the two sets are equal, {147,149}, so the containment is only
+#     visible at n=9.)
+#
+#     WHY s156 SPLITS THEM — recomputed from the raw curve this phase via
+#     held2_bar.held2_verdict(load_run_curve('t1_seedscale_s156')):
+#       BAR-C4  tail-100 success 0.9938, hazard 0.0031          -> PASS
+#       HELD-2  (a) joint occupancy 0.4100                      -> FAIL (< 0.85)
+#       HELD-2  (b) worst 50-round window success 0.7350        -> FAIL (< 0.75)
+#     i.e. a run that recovered into a good final 100 rounds but was unstable
+#     across the wider 500-round tail. My recomputation reproduced the stored
+#     held2_full booleans on all five row-1 seeds exactly (4 true, 1 false).
+#
+#     IS THE CONTAINMENT STRUCTURAL? Reading the grader (docs/evidence/held2_bar.py):
+#       * Both bars apply the SAME two thresholds — success >= 0.9 (OCCUPANCY_SUCCESS
+#         :37 / C4_SUCCESS :46) and hazard <= 0.5 (OCCUPANCY_HAZARD :38 /
+#         C4_HAZARD :47) — to the SAME two per-round curve quantities
+#         (success_rate, hazard_cost_sum_mean).
+#       * BAR-C4's window, rows[-100:] (:119), is a SUBSET of HELD-2's window
+#         [3500, 4000) (:76).
+#       * HELD-2 additionally requires the conjunction to hold PER ROUND on >= 85%
+#         of the wider window, plus two-sided relapse windows, plus an external
+#         causal witness.
+#     So the two rows share a conjunct and HELD-2 is strictly more demanding on
+#     it — the containment is a shared-conjunct effect, not independence.
+#
+#     BUT IT IS NOT A LOGICAL IMPLICATION. I constructed a counterexample and ran
+#     it through the actual grader: a 4000-round curve with success 1.0
+#     throughout and hazard 0.70 on exactly 75 rounds placed inside the final 100
+#     (rounds 3900-3974), hazard 0.0 elsewhere. Result:
+#       held2_a_joint_occupancy 0.85  -> (a) PASS (exactly at the bar)
+#       held2_b_worst_window_hazard 0.70 -> (b) PASS (below 0.75)
+#       held2_ab_pass TRUE
+#       bar_c4_tail100_hazard 0.525   -> BAR-C4 FAIL
+#     HELD-2 (a)+(b) can therefore pass while BAR-C4 fails. The nesting observed
+#     at n=9 is empirical, driven by the shared conjunct, not guaranteed by
+#     construction.
+#
+#     CONSEQUENCE FOR READING THE TABLE: rows 1 and 2 are not independent
+#     evidence. "Task success 5/9 and the hold 4/9" describes one nested family,
+#     not two agreeing measurements — the four holding seeds are four of the five
+#     succeeding seeds. criterion_note written on table3-hold-n9.
+# =============================================================================

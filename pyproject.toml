@@ -1,0 +1,241 @@
+# =============================================================================
+# Packaging metadata for the public artifact.
+#
+# EVERY VERSION BELOW WAS READ FROM SOURCE, NOT ASSERTED. The Python and torch
+# versions come from the `runtime_record` block of the nine graded
+# RUN_MANIFEST.json files (t1_retain_s147/148/149, t1_seedscale_s153..s158);
+# all nine agree exactly. See README.md "Reproduction environment".
+# =============================================================================
+
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "raas-marl"
+
+# 1.0.0, not 0.x. This is a frozen published record accompanying a paper, not
+# evolving software; under SemVer a 0.x version signals an unstable, still-
+# changing API, which would misdescribe it.
+version = "1.0.0"
+
+description = "Observational aliasing bounds generalization in constrained active-sensing multi-agent reinforcement learning: code, grading instruments, and run provenance."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE", "LICENSES/CC-BY-4.0.txt"]
+
+# READ from the author block of the SOURCE repository's
+# docs/paper/template/main.tex (the \else branch); that file is not shipped here.
+# Only the corresponding author's address is carried; see CITATION.cff for why.
+authors = [
+    { name = "Muhammad Umair Waseem" },
+    { name = "Abdullah" },
+    { name = "Shayan Khan" },
+    { name = "Musadaq Mansoor", email = "musadaq.mansoor@paf-iast.edu.pk" },
+]
+
+# READ from runtime_record.python_version, which is
+#   "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]"
+# identically in all nine graded manifests. The exact patch is recorded in the
+# README; the floor here is the minor version that was actually exercised.
+requires-python = ">=3.12"
+
+# READ from runtime_record.torch_version = "2.5.1+cpu", identically in all nine
+# graded manifests. torch is imported by 19 of the shipped Python files and is
+# the ONLY third-party runtime import in the artifact. An AST census over all 42
+# shipped .py files finds FOUR non-stdlib top-level import names, of which only
+# two are external: `raas_marl` (the package importing itself) and
+# `c1_selectivity_harness` (a grading instrument imported as a sibling by two
+# others, shipped alongside them) are internal; `torch` (19 files) and `pytest`
+# (1 file, tests/test_clean.py) are external. `pytest` is recorded in no manifest
+# and is therefore dev-only. No recorded package is unimported. The "+cpu" local
+# segment is a wheel-build tag, not orderable in a requirement specifier, so the
+# floor here is the public version; CI pins the exact recorded build.
+dependencies = [
+    "torch>=2.5.1",
+]
+
+keywords = [
+    "reinforcement-learning",
+    "multi-agent",
+    "constrained-rl",
+    "active-sensing",
+    "partial-observability",
+    "generalization",
+]
+
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Science/Research",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8",
+    "ruff>=0.5",
+    "mypy>=1.8",
+]
+
+# -----------------------------------------------------------------------------
+# PACKAGE DISCOVERY -- chosen to match how the source repository actually works.
+#
+# The research repository declares NO packaging at all: it has no pyproject.toml,
+# no setup.py, no setup.cfg and no .pth file, and `raas_marl` is not installed.
+# Every consumer reaches the package by putting <root>/src on sys.path:
+#   * tests/conftest.py:15-17  -- Path(__file__).resolve().parent.parent/"src"
+#   * docs/evidence/c1_selectivity_harness.py:46-54
+#   * docs/evidence/c1_tightened_adversarial_test.py:24-26
+#   * docs/evidence/r2_null_rejection_check.py:20-22
+# all inserting at sys.path[0].
+#
+# So this is a src-layout project, and it is declared as one. The hazard worth
+# naming (Phase-1 finding I-5): if the package were installed NON-editable, a
+# second copy would exist in site-packages while conftest.py kept inserting
+# <repo>/src at position 0 -- two copies of raas_marl reachable at once.
+# INSTALL EDITABLE (`pip install -e .`), which is what .github/workflows/ci.yml
+# does: the PEP 660 finder then maps raas_marl -> <repo>/src/raas_marl, the SAME
+# files conftest.py puts on the path. One copy, both mechanisms agreeing.
+# -----------------------------------------------------------------------------
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["raas_marl*"]
+
+# -----------------------------------------------------------------------------
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+extend-exclude = ["docs/evidence/*_analysis.json"]
+
+[tool.ruff.lint]
+# Ruff's default rule set, stated explicitly rather than inherited.
+select = ["E4", "E7", "E9", "F"]
+
+# The exemptions below are SCOPED TO ONE FILE AND ONE RULE EACH, never global.
+#
+# PHASE 3 UPDATE -- SEVEN SUPPRESSIONS WERE REMOVED, NOT RELAXED. Extraction (Phase 2)
+# shipped every file byte-identical to the research repository, so a finding could only
+# be suppressed, never fixed. Phase 3 fixed the real ones and deleted their entries:
+#   * F821 x3 (buffer/losses/config) -- fixed by `if TYPE_CHECKING: import torch`.
+#     `ruff check --isolated --select F821 src/` now reports ZERO with this file's
+#     suppressions bypassed entirely, so the entries were describing a solved problem.
+#   * four cosmetic nits (held2_bar F401, r2_null_rejection_check F541,
+#     c1_tightened_adversarial_test F841, generate_fig1_data E401) -- all fixed.
+# A suppression for a fixed problem makes this file assert something false, which is
+# why they are gone rather than left behind as harmless clutter.
+#
+# ****  DO NOT RUN `ruff check --fix` ON THIS TREE.  ****
+# BYTE-IDENTITY IS STILL THE ARTIFACT'S GUARANTEE FOR EVERY FILE PHASE 3 DID NOT
+# DELIBERATELY TOUCH. 111 of the 124 shipped files remain sha256-verified against the
+# research repository; the small enumerated set Phase 3 modified is recorded with
+# before/after hashes in that phase's MODIFICATION LEDGER. `--fix` would rewrite files
+# outside that set and destroy the provenance that lets a reader trust this is the code
+# the reported runs executed. Corrections belong in a phase that re-establishes
+# provenance deliberately and writes down what it changed.
+#
+# Honesty note, because an earlier draft of this comment claimed otherwise and
+# the claim did not survive testing: the nine F401 findings in src/ ARE unused
+# imports left by the shared-module (D-7) rewiring, but they are NOT load-bearing
+# re-exports. An AST import graph over all 42 shipped .py files shows that ZERO
+# of the nine names is imported via the module that re-exports it -- each is
+# imported from its canonical home (_governance, _rollout_common, artifacts,
+# config). Removing all nine on a throwaway clone left the suite at 1539 passed.
+# So --fix would not break the code; it would break the provenance. That is
+# still a reason not to run it, and it is the true one.
+[tool.ruff.lint.per-file-ignores]
+# NOTE: the F821 "undefined name torch" entries that used to head this table are GONE.
+# They covered buffer.py (22 findings), losses.py (84) and config.py (4) -- exactly the
+# annotation-only `torch` references in the three lazy-torch modules that carried any.
+# Phase 3 added `if TYPE_CHECKING: import torch` to each, which resolves the name for
+# static tools without importing torch at run time, and the modules still import cleanly
+# with `torch` blocked on sys.meta_path (all FIVE lazy-torch modules were re-tested:
+# buffer, losses, config, env_contracts, grid_environment). The four cosmetic-nit
+# entries that used to sit below the F401 block are gone for the same reason: fixed.
+
+# --- F401: deliberate re-exports. Do not "fix".
+# These ARE unused imports left by the D-7 shared-module rewiring, kept so consumers can
+# continue importing each name from its historical module path. They are suppressed
+# rather than deleted because these four files are byte-identical to the research
+# repository and removing the names would break that provenance for no functional gain
+# (measured: deleting all nine on a throwaway clone still left the suite at 1539 passed).
+"src/raas_marl/mappo_lagrangian/development_runner.py" = ["F401"]
+"src/raas_marl/mappo_lagrangian/env_adapter.py" = ["F401"]
+"src/raas_marl/mappo_lagrangian/_governance.py" = ["F401"]
+"src/raas_marl/environments/active_sensing/tensor_adapter.py" = ["F401"]
+
+# --- The test suite ships WHOLE AND UNMODIFIED (13,758 lines, 1,325 tests). It
+# groups its imports in per-section blocks, so the same symbol is bound more than
+# once at module level (F811) and some imports follow code (E402). Confirmed
+# harmless: an AST pass found 1,325 module-level `test_*` functions and ZERO
+# duplicate function names, so no test is shadowed.
+"tests/test_clean.py" = ["E402", "F401", "F811", "F841"]
+
+# -----------------------------------------------------------------------------
+[tool.mypy]
+python_version = "3.12"
+files = ["src/raas_marl", "docs/evidence"]
+ignore_missing_imports = true
+
+# ---------------------------------------------------------------------------
+# WHY THIS IS PERMISSIVE GLOBALLY AND STRICT ONLY ON THE PUBLIC API SURFACE.
+#
+# The baseline is 92 errors across 23 files (measured at release; the figure was
+# stale at 78/20 and is corrected here), and they are NOT missing annotations.
+# 48 of the 92 are [arg-type], and the shape is always the same: this codebase
+# validates HOSTILE INPUT at run time rather than trusting a static type. A
+# validator takes `object` precisely because its job is to accept anything and
+# reject what is wrong -- e.g. _validation.py calls int.__index__(value) on a
+# parameter annotated `object`, deliberately, so an int SUBCLASS cannot smuggle a
+# different value past the bound check. mypy cannot see that the previous line
+# already narrowed it. Those errors are a true statement about what mypy can
+# prove and a false statement about whether the code is correct.
+#
+# Silencing them would mean either ~78 `# type: ignore` comments or rewriting the
+# validation architecture -- in files whose byte-identity to the research
+# repository IS the artifact's provenance guarantee. Neither is worth it, and
+# neither is what an annotation pass is for.
+#
+# So strictness here is scoped to the one thing an annotation pass can honestly
+# guarantee and a reader actually depends on: THAT EVERY PUBLIC FUNCTION ON THE
+# API SURFACE DECLARES ITS TYPES. That is what disallow_untyped_defs /
+# disallow_incomplete_defs check, and on the modules below it now passes clean.
+# The surface is the five entry points a reader calls: environment construction,
+# the training entry point, the evaluation-side probes (no locked evaluation
+# executor exists yet), the own-ablation causal-witness routine, and the
+# grading/bar logic.
+#
+# CI CONSEQUENCE, STATED PLAINLY: because the 78 baseline errors remain, `mypy`
+# over the whole package is NOT clean and the CI step is NOT blocking. An earlier
+# draft of .github/workflows/ci.yml promised that Phase 3 would make it blocking;
+# that promise was withdrawn once the baseline was actually measured, because
+# keeping it would have turned CI red on the first push for reasons unrelated to
+# any defect. See the comment on that step.
+# ---------------------------------------------------------------------------
+warn_unused_ignores = false
+warn_return_any = false
+disallow_untyped_defs = false
+
+# --- STRICT: annotation completeness on the public API surface (passes clean) ---
+[[tool.mypy.overrides]]
+module = [
+    "raas_marl.environments.active_sensing.grid_environment",
+    "raas_marl.environments.active_sensing.scenarios",
+    "raas_marl.environments.active_sensing.tensor_adapter",
+    "raas_marl.mappo_lagrangian.config",
+    "raas_marl.final_training.stage25_driver",
+    "raas_marl.final_training.baseline_driver",
+]
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+
+# -----------------------------------------------------------------------------
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# `-p no:cacheprovider` is the convention the research repository ran the suite
+# with; it keeps the tree free of .pytest_cache during verification.
+addopts = "-q -p no:cacheprovider"

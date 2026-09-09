@@ -1,0 +1,127 @@
+{
+ "_bars": {
+  "bar_c4": "tail-100 team success >= 0.9 AND episodic hazard <= 0.5",
+  "held2_a": "joint per-round occupancy >= 0.85 over rounds [3500,4000)",
+  "held2_b": "no 50-round window with mean success < 0.75 or mean hazard >= 0.75"
+ },
+ "_what": "Per-seed HELD-2 (a)/(b) conjuncts and the tail-100 task-success bar, for the nine replication seeds. These are the conjuncts of Table III's task-success and core-hold criteria that come from the training curves rather than from the per-checkpoint grade records; the composer combines them with the two-of-three witness conjunct it derives from results/experiments/*/checkpoint_grades/.",
+ "per_seed": {
+  "147": {
+   "bar_c4_pass": true,
+   "bar_c4_tail100_hazard": 0.0,
+   "bar_c4_tail100_success": 1.0,
+   "held2_a_joint_occupancy": 1.0,
+   "held2_a_pass": true,
+   "held2_ab_pass": true,
+   "held2_b_pass": true,
+   "held2_b_worst_window_hazard": 0.0037,
+   "held2_b_worst_window_success": 0.9975,
+   "run": "t1_retain_s147",
+   "source": "docs/evidence/t1_retain_analysis.json :: per_seed[seed].held2_abc / .bar_c4_pooled"
+  },
+  "148": {
+   "bar_c4_pass": false,
+   "bar_c4_tail100_hazard": 0.508125,
+   "bar_c4_tail100_success": 0.9975,
+   "held2_a_joint_occupancy": 0.66,
+   "held2_a_pass": false,
+   "held2_ab_pass": false,
+   "held2_b_pass": true,
+   "held2_b_worst_window_hazard": 0.74,
+   "held2_b_worst_window_success": 0.8588,
+   "run": "t1_retain_s148",
+   "source": "docs/evidence/t1_retain_analysis.json :: per_seed[seed].held2_abc / .bar_c4_pooled"
+  },
+  "149": {
+   "bar_c4_pass": true,
+   "bar_c4_tail100_hazard": 0.003125,
+   "bar_c4_tail100_success": 1.0,
+   "held2_a_joint_occupancy": 1.0,
+   "held2_a_pass": true,
+   "held2_ab_pass": true,
+   "held2_b_pass": true,
+   "held2_b_worst_window_hazard": 0.0063,
+   "held2_b_worst_window_success": 0.9962,
+   "run": "t1_retain_s149",
+   "source": "docs/evidence/t1_retain_analysis.json :: per_seed[seed].held2_abc / .bar_c4_pooled"
+  },
+  "153": {
+   "bar_c4_pass": true,
+   "bar_c4_tail100_hazard": 0.0013,
+   "bar_c4_tail100_success": 1.0,
+   "held2_a_joint_occupancy": 1.0,
+   "held2_a_pass": true,
+   "held2_ab_pass": true,
+   "held2_b_pass": true,
+   "held2_b_worst_window_hazard": 0.0025,
+   "held2_b_worst_window_success": 0.9975,
+   "run": "t1_seedscale_s153",
+   "source": "SHIFT-43 MECH grader (seedscale_mech_summary.json), per-run held2 block"
+  },
+  "154": {
+   "bar_c4_pass": false,
+   "bar_c4_tail100_hazard": 0.0031,
+   "bar_c4_tail100_success": 0.02,
+   "held2_a_joint_occupancy": 0.016,
+   "held2_a_pass": false,
+   "held2_ab_pass": false,
+   "held2_b_pass": false,
+   "held2_b_worst_window_hazard": 0.29,
+   "held2_b_worst_window_success": 0.0175,
+   "run": "t1_seedscale_s154",
+   "source": "SHIFT-43 MECH grader (seedscale_mech_summary.json), per-run held2 block"
+  },
+  "155": {
+   "bar_c4_pass": false,
+   "bar_c4_tail100_hazard": 0.0044,
+   "bar_c4_tail100_success": 0.7481,
+   "held2_a_joint_occupancy": 0.0,
+   "held2_a_pass": false,
+   "held2_ab_pass": false,
+   "held2_b_pass": false,
+   "held2_b_worst_window_hazard": 0.02,
+   "held2_b_worst_window_success": 0.7188,
+   "run": "t1_seedscale_s155",
+   "source": "SHIFT-43 MECH grader (seedscale_mech_summary.json), per-run held2 block"
+  },
+  "156": {
+   "bar_c4_pass": true,
+   "bar_c4_tail100_hazard": 0.0031,
+   "bar_c4_tail100_success": 0.9938,
+   "held2_a_joint_occupancy": 0.41,
+   "held2_a_pass": false,
+   "held2_ab_pass": false,
+   "held2_b_pass": false,
+   "held2_b_worst_window_hazard": 0.0075,
+   "held2_b_worst_window_success": 0.735,
+   "run": "t1_seedscale_s156",
+   "source": "SHIFT-43 MECH grader (seedscale_mech_summary.json), per-run held2 block"
+  },
+  "157": {
+   "bar_c4_pass": false,
+   "bar_c4_tail100_hazard": 0.5606,
+   "bar_c4_tail100_success": 0.7506,
+   "held2_a_joint_occupancy": 0.0,
+   "held2_a_pass": false,
+   "held2_ab_pass": false,
+   "held2_b_pass": false,
+   "held2_b_worst_window_hazard": 0.9062,
+   "held2_b_worst_window_success": 0.0,
+   "run": "t1_seedscale_s157",
+   "source": "SHIFT-43 MECH grader (seedscale_mech_summary.json), per-run held2 block"
+  },
+  "158": {
+   "bar_c4_pass": true,
+   "bar_c4_tail100_hazard": 0.0006,
+   "bar_c4_tail100_success": 1.0,
+   "held2_a_joint_occupancy": 1.0,
+   "held2_a_pass": true,
+   "held2_ab_pass": true,
+   "held2_b_pass": true,
+   "held2_b_worst_window_hazard": 0.005,
+   "held2_b_worst_window_success": 1.0,
+   "run": "t1_seedscale_s158",
+   "source": "SHIFT-43 MECH grader (seedscale_mech_summary.json), per-run held2 block"
+  }
+ }
+}
