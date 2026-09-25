@@ -9,7 +9,11 @@ cff-version: 1.2.0
 message: "If you use this software or its data, please cite the paper below."
 type: software
 title: "Observational Aliasing Bounds Generalization in Constrained Active-Sensing Multi-Agent Reinforcement Learning"
-version: 1.0.0
+version: v1.0-icet2026
+# LICENSE lists the software file-sets under MIT and the data and records
+# under CC BY 4.0. It lists no file-set under instruments/ or scripts/.
+# CFF 1.2.0 reads a list of licenses as alternatives, so this field names
+# only MIT.
 license: MIT
 abstract: >-
   Code, grading instruments, run provenance and a claim-to-source traceability
@@ -18,22 +22,20 @@ abstract: >-
   Institute of Applied Sciences and Technology, Haripur, Pakistan.
 
 # Only the CORRESPONDING author's address appears here. The other three are
-# student roll-number addresses tied to enrolment; a citation record is
-# permanent, and a dead contact address in it is worse than no address at all.
-# The corresponding author is Musadaq Mansoor, who carries the \textsuperscript{*}
-# marker and the "(*corresponding author)" tag in the paper's author block.
+# student roll-number addresses tied to enrollment.
+# The corresponding author is Musadaq Mansoor. On page 1 of the paper, an asterisk
+# follows the name and a footnote reads "*Corresponding author."
 #
-# ORCID identifiers are OMITTED: none is available yet. This file is valid
+# ORCID identifiers are OMITTED. This file is valid
 # without them, and each can later be added as one `orcid:` line under the
 # relevant author without restructuring anything.
 authors:
   - given-names: "Muhammad Umair"
     family-names: "Waseem"
     affiliation: "School of Computing Sciences, Pak-Austria Fachhochschule Institute of Applied Sciences and Technology, Haripur, Pakistan"
-  # Mononymous author. CFF models this as an `entity`, which is the only
-  # schema-valid way to carry a single name -- and the entity schema has no
-  # `affiliation` key, so the shared affiliation is carried here as the
-  # entity-legal `city`/`country` pair and is stated in full in the abstract above.
+  # Mononymous author, encoded here as a CFF `entity`. The entity schema has no
+  # `affiliation` key. This entry carries only the city and country of the
+  # shared affiliation, which the abstract above states in full.
   - name: "Abdullah"
     city: "Haripur"
     country: "PK"
@@ -53,17 +55,20 @@ keywords:
   - partial observability
   - generalization
 
-# Filled in at publication. The URL below is the one printed in the
+# The URL below is the one printed in the
 # camera-ready ("The implementation and per-run configuration records are
 # available at ..."), and must stay character-identical to it.
 repository-code: "https://github.com/Umair-Waseem/observational-aliasing-marl"
 url: "https://github.com/Umair-Waseem/observational-aliasing-marl"
-date-released: "2026-09-08"
+date-released: "2026-09-09"
+doi: "10.5281/zenodo.22680695"
 
-# The state the paper describes is the tag v1.0-icet2026.
+# The state the paper describes is the tag v1.0-icet2026. The doi above is
+# the version DOI of its Zenodo software archive, under the concept DOI
+# 10.5281/zenodo.22680694.
 #
-# A Zenodo DOI for the raw training-log data record is NOT minted as of this
-# release, so none is claimed here. When it is minted, add it as:
+# As of 2026-09-24 UTC, no Zenodo DOI is minted for the raw training logs,
+# so none is claimed here. When one is minted, add it as:
 #   identifiers:
 #     - type: doi
 #       value: "10.5281/zenodo.XXXXXXX"
@@ -71,6 +76,7 @@ date-released: "2026-09-08"
 
 preferred-citation:
   type: conference-paper
+  status: in-press
   title: "Observational Aliasing Bounds Generalization in Constrained Active-Sensing Multi-Agent Reinforcement Learning"
   authors:
     - given-names: "Muhammad Umair"
