@@ -28,8 +28,6 @@ This branch differs from the tag only in `.github/workflows/ci.yml`, `README.md`
 
 [Citation](#citation) · [Reproduce the numbers in Table III](#reproduce-the-numbers-in-table-iii) · [Install and tests](#install-and-tests) · [The paper map](#the-paper-map) · [Data availability](#data-availability) · [What is here, by directory](#what-is-here-by-directory) · [What is not here and why](#what-is-not-here-and-why) · [Reproduction environment](#reproduction-environment) · [Provenance](#provenance) · [License](#license)
 
----
-
 ## Citation
 
 To cite the paper, use this entry. Its `note` marks the paper as accepted and
@@ -62,7 +60,7 @@ This needs git and Python. `pyproject.toml` declares Python 3.12 or newer.
 The runs of `instruments.reproduce_table3` reported below used Python 3.12.
 The three release instruments are standard library only, so this needs no packages:
 
-```
+```shell
 git clone https://github.com/Umair-Waseem/observational-aliasing-marl
 cd observational-aliasing-marl
 git checkout v1.0-icet2026
@@ -72,14 +70,14 @@ python -m instruments.reproduce_table3
 That recomputes, from the records in this repository, the n=9 column of
 Table III of the paper: the four nine-seed reliability rates, their exact 95%
 Clopper–Pearson intervals, the fresh-seed-only rates, and the reroute-basin
-classification. It also recomputes the Fisher *p* of the arm-fire de-confound,
+classification. It also recomputes the Fisher p of the arm-fire de-confound,
 reported in the notes to Table III. It does not print the n=3 column. It
 prints the paper's value beside the reroute-basin classification and the
-Fisher *p*. It exits non-zero if any recomputed value stops matching the paper,
+Fisher p. It exits non-zero if any recomputed value stops matching the paper,
 so it is usable as a pass/fail check. A pass is exit status 0 and the line
 "All reproduced values match the camera-ready." Its output is:
 
-```
+```text
 ------------------------------------------------------------------------------
 TABLE III, REPRODUCED FROM THE SHIPPED RECORDS
 ------------------------------------------------------------------------------
@@ -113,7 +111,7 @@ Table III's n=3 column covers the three anchor seeds, 147 to 149. The
 For each criterion, the number of those three seeds that meet it, out of
 three, is its n=3 value. The three instruments also run individually:
 
-```
+```shell
 python -m instruments.grade_composer --check    # per-seed composition + registry audit
 python -m instruments.reroute_basin             # the reroute-basin classification, seed by seed
 python -c "from instruments.statistics import clopper_pearson; print(clopper_pearson(2, 9))"
@@ -143,7 +141,7 @@ To run the environment, the training drivers, or a re-grade from the shipped
 policy checkpoints, install PyTorch at the recorded version and the package
 itself:
 
-```
+```shell
 python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
 python -m pip install -e .
@@ -175,7 +173,7 @@ would put a second copy of `raas_marl` in `site-packages` alongside it.
 To run the test suite, install the requirements in `requirements-dev.txt`, which
 includes `requirements.txt` and adds the development tools pytest, ruff, and mypy:
 
-```
+```shell
 python -m pip install -r requirements-dev.txt
 python -m pytest tests -o addopts="" -p no:cacheprovider -q     # 1539 tests
 ```
@@ -222,9 +220,10 @@ Table III value.
 | Notes to Table III, lift search, p. 6 | "the strongest lift (single- and paired-feature search) does not survive multiple-comparison correction" | In `docs/evidence/t1_seedscale_analysis.json`, `step3_fork.adversarial_confirmation` records the search's result in prose. No command here repeats the search. | opened, 2026-09-24 |
 | Fig. 3, applied constraint multiplier λ per round, p. 5 | the nine replication seeds over training rounds; seeds that hold the joint task-success bar solid, the rest dashed; dotted guides at the armed floor 3.0 and the ceiling 5.0; "on the holding seeds the tail multiplier rests at the armed floor of 3.0 with the dual integral at zero" | No generator is included. The solid seeds are those whose `bar_c4_pass` is `true` in `results/held2_conjuncts.json`: 147, 149, 153, 156, and 158. Their checkpoints check the quoted caption claim only in part. In the 15 checkpoints of those five seeds (`state_round_003500.pt`, `state_round_003750.pt`, and `state_round_004000.pt`), `controller.integral` is 0.0 and `arm_state.armed` is `true`. The checkpoints do not store the applied multiplier, so the claimed value 3.0 is not checked here. | opened, 2026-09-24; per-round values are in `training_curve.jsonl` files, which are not in this repository |
 | Sec. IV, wall-clock time, p. 4 | "2.4 to 3.5 h of wall-clock time (median 2.8 h)" | `finish_timestamp_utc` minus `launch_timestamp_utc` in the nine replication `RUN_MANIFEST.json` files gives a minimum of 2.3758 h (`t1_seedscale_s158`), a maximum of 3.4989 h (`t1_retain_s147`), and a median of 2.7844 h. No field records how many runs ran at once. | opened, 2026-09-24 |
-| Sec. III, the counterfactual own-ablation witness, on one seed, pp. 3, 4 | "counterfactual own-ablation witness": the policy is re-rolled "with its revealed-information channel zeroed for the whole episode", and the witness requires "hazard exposure to rise" | `python docs/evidence/c1_selectivity_harness.py --grade-run t1_retain_s147 --fork` (needs PyTorch) grades the shipped checkpoint `state_round_004000.pt` and prints the verdict `SELECTIVE_COMPOSITE`. Its result for the run equals the `grade` object in `results/experiments/t1_retain_s147/checkpoint_grades/grade_r004000.json`, except that it adds `state_file` and its `label` lacks `@r4000`. | Windows 11, Python 3.12.10, 2026-09-24 |
 
----
+| Paper item | Value in paper | Command or file | Verified (platform, date) |
+|---|---|---|---|
+| Sec. III, the counterfactual own-ablation witness, on one seed, pp. 3, 4 | "counterfactual own-ablation witness": the policy is re-rolled "with its revealed-information channel zeroed for the whole episode", and the witness requires "hazard exposure to rise" | `python docs/evidence/c1_selectivity_harness.py --grade-run t1_retain_s147 --fork` (needs PyTorch) grades the shipped checkpoint `state_round_004000.pt` and prints the verdict `SELECTIVE_COMPOSITE`. Its result for the run equals the `grade` object in `results/experiments/t1_retain_s147/checkpoint_grades/grade_r004000.json`, except that it adds `state_file` and its `label` lacks `@r4000`. | Windows 11, Python 3.12.10, 2026-09-24 |
 
 ## Data availability
 
@@ -241,6 +240,9 @@ in quotation marks in the first column below is quoted from it.
 | "Every run ships a complete configuration record" | Each of the 55 `RUN_MANIFEST.json` files holds its run's configuration. No record names the observation encoding, the one variable of Table II's single-configuration-variable comparison. The next subsection names the older records that lack fields the shipped `Stage25RunConfig` defines. | Partly delivered |
 | The grading instruments, including the reroute-basin classifier and the grade composer | `instruments/` (three instruments plus a driver) and `docs/evidence/*.py` (five modules) | Delivered |
 | "the reroute-basin classifier, validated to reproduce the reported equivariant/overshoot/freeze partition" | `instruments/reroute_basin.py`, which compares its classification of the nine replication seeds with the reported partition. Its output ends with "MATCHES the reported partition." | Delivered |
+
+| Promise | Where it is | Status as of 2026-09-24 UTC |
+|---|---|---|
 | The recorded per-checkpoint grade records | `results/experiments/<run_id>/checkpoint_grades/grade_r{003500,003750,004000}.json`: 27 records, the nine replication seeds × three checkpoints | Delivered |
 | A README data-availability statement | this section | Delivered |
 | "The raw training logs, which are large, will be archived in a separate public data record with a persistent identifier" | As of 2026-09-24 UTC, no such record exists. See [The raw training logs](#the-raw-training-logs). | Not delivered |
@@ -253,7 +255,7 @@ checkpoints (`results/experiments/<run_id>/state_round_{003500,003750,004000}.pt
 3.35 MB in total, ≤ 125 kB each). With them, a reader can re-grade from the
 weights in place rather than only recompose from the records:
 
-```
+```shell
 python docs/evidence/c1_selectivity_harness.py --grade-run t1_retain_s147 --fork
 ```
 
@@ -283,14 +285,14 @@ of the table below.
 
 | Group | Runs | Seeds | In the paper |
 |---|---|---|---|
-| **The nine replication seeds** | `t1_retain_s147`–`s149`, `t1_seedscale_s153`–`s158` | 147–149, 153–158 | Table III, Fig. 3, Fig. 4, Fig. 5: the reliability rates, the intervals, the reroute-basin classification, and the applied multiplier per round |
-| **Table II, two-cell-obstacle-patch arm** | `t1_retain_s147`–`s149` | 147–149 | Table II: the enriched encoding (retention 2/3) |
-| **Table II, one-cell-scalar-count arm** | `t1_d15_s138`–`s140` | 138–140 | Table II: the original encoding (retention 0/3). Same mixture and configuration apart from the observation encoding: a single-configuration-variable comparison (Sec. IV). The encoding is not a field of the records. The two arms use different seed sets, as the caption states. |
-| **Single-pair runs, one-cell scalar count** | `t1_d13_s132`–`s134` | 132–134 | Sec. V-A: the anchor pair alone |
-| **Single-pair runs, two-cell obstacle patch** | `anchor_rerun_s144`–`s146` | 144–146 | Sec. V-A: the same pair after the encoding change |
-| **The three original-encoding curricula** | `t1_d14_s135`–`s137` (uniform four-pair mixture), `t1_d15_s138`–`s140` (concentrated two-pair mixture, pairs sharing gate row 3), `t1_d16_s141`–`s143` (row-disjoint two-pair mixture) | 135–143 | Sec. V-B: each broke multi-geometry retention on all three seeds |
-| **The runs at hazard budget 0.5** | `t1_d4`–`t1_d12` (nine sets of three; `t1_d4` and `t1_d5` trained on `risk_gate_hidden_hazard`) | 105–131 | Sec. V-A reported that the floor armed on five seeds across the corridor's tuning campaign on the single training pair at the original encoding. Three analysis files, `docs/evidence/t1_d11_analysis.json`, `t1_d12_analysis.json`, and `t1_d13_analysis.json`, log that the floor armed on three seeds of this row (`t1_d11_s128`, `t1_d12_s130`, `s131`) and on `t1_d13_s132` and `s133`. |
-| **The first four runs** | `b101_stoch`, `b102_stoch`, `b103_stoch`, `b104_greedy` | 101–104 | The paper does not mention these runs. They trained on `risk_gate_hidden_hazard`, which has no two-gate wall. Their analysis record is `docs/evidence/baseline_t1_analysis.json`. |
+| The nine replication seeds | `t1_retain_s147`–`s149`, `t1_seedscale_s153`–`s158` | 147–149, 153–158 | Table III, Fig. 3, Fig. 4, Fig. 5: the reliability rates, the intervals, the reroute-basin classification, and the applied multiplier per round |
+| Table II, two-cell-obstacle-patch arm | `t1_retain_s147`–`s149` | 147–149 | Table II: the enriched encoding (retention 2/3) |
+| Table II, one-cell-scalar-count arm | `t1_d15_s138`–`s140` | 138–140 | Table II: the original encoding (retention 0/3). Same mixture and configuration apart from the observation encoding: a single-configuration-variable comparison (Sec. IV). The encoding is not a field of the records. The two arms use different seed sets, as the caption states. |
+| Single-pair runs, one-cell scalar count | `t1_d13_s132`–`s134` | 132–134 | Sec. V-A: the anchor pair alone |
+| Single-pair runs, two-cell obstacle patch | `anchor_rerun_s144`–`s146` | 144–146 | Sec. V-A: the same pair after the encoding change |
+| The three original-encoding curricula | `t1_d14_s135`–`s137` (uniform four-pair mixture), `t1_d15_s138`–`s140` (concentrated two-pair mixture, pairs sharing gate row 3), `t1_d16_s141`–`s143` (row-disjoint two-pair mixture) | 135–143 | Sec. V-B: each broke multi-geometry retention on all three seeds |
+| The runs at hazard budget 0.5 | `t1_d4`–`t1_d12` (nine sets of three; `t1_d4` and `t1_d5` trained on `risk_gate_hidden_hazard`) | 105–131 | Sec. V-A reported that the floor armed on five seeds across the corridor's tuning campaign on the single training pair at the original encoding. Three analysis files, `docs/evidence/t1_d11_analysis.json`, `t1_d12_analysis.json`, and `t1_d13_analysis.json`, log that the floor armed on three seeds of this row (`t1_d11_s128`, `t1_d12_s130`, `s131`) and on `t1_d13_s132` and `s133`. |
+| The first four runs | `b101_stoch`, `b102_stoch`, `b103_stoch`, `b104_greedy` | 101–104 | The paper does not mention these runs. They trained on `risk_gate_hidden_hazard`, which has no two-gate wall. Their analysis record is `docs/evidence/baseline_t1_analysis.json`. |
 
 Seeds are drawn in ascending order from a fixed training pool (integers 101–199).
 Sec. IV of the paper states that "seeds 150 to 152 were allocated to an
@@ -302,11 +304,11 @@ here.
 
 The reported reliability rates recompute from the shipped per-checkpoint grade
 records and the two other shipped files listed below, via the released
-composer. The reported intervals and *p*-value follow from the same shipped
+composer. The reported intervals and p-value follow from the same shipped
 inputs by exact-binomial (Clopper–Pearson) and Fisher computations over the
 released counts. The diagram below traces each input to its output:
 
-```
+```text
   results/experiments/*/checkpoint_grades/grade_r*.json      (27 records)
   results/held2_conjuncts.json                               (curve-derived conjuncts)
   docs/evidence/t1_seedscale_analysis.json                   (per-mirror tail hazard)
@@ -354,22 +356,22 @@ The paper says of the gate-row split (Sec. IV):
 None of the four points below contradicts that statement. The first three can
 be checked here, and the last cannot:
 
-* **No such scenario exists.** Deriving the gate rows of all ten fork scenarios
+* No such scenario exists. Deriving the gate rows of all ten fork scenarios
   from `grid_environment.py` (the open rows of the wall on column 4) gives
   {3, 4} (the anchor pair), {1, 2} (validation), and three curriculum pairs: {0, 3},
   {4, 7}, and {0, 7}. None is {5, 6}, and no hidden hazard sits on row 5 or 6
   anywhere in the catalog. `stage24_diagnostics.py` records why: the held-out
   fork group "is DEFERRED to the Protocol-v1 lock (I-3), so it is not named here".
-* **No run touched one.** Across all 55 `RUN_MANIFEST.json` files, the only
+* No run touched one. Across all 55 `RUN_MANIFEST.json` files, the only
   scenario-carrying field is `config.scenario_names`, and its union over the 55
   is nine names, none held-out. No manifest records a layout override. The
   readiness probe in `baseline_driver.py` also builds layouts that no manifest
   records. On this branch, its code admits only the `training` and `readiness`
   variant groups.
-* **No grade record contains one.** The 27 per-checkpoint records grade exactly
+* No grade record contains one. The 27 per-checkpoint records grade exactly
   ten surfaces, grouped `training`, `curriculum`, and `readiness`. There is no
   `held_out` group. The hidden-hazard rows they grade are 0, 1, 2, 3, 4, and 7.
-* **Nothing was read, the authors report.** By their count, the union of every
+* Nothing was read, the authors report. By their count, the union of every
   scenario token across all 55 probe logs is thirteen names. None is a held-out
   surface. The probe logs are not in this repository, so this point cannot be
   checked here.
@@ -407,7 +409,7 @@ exists, the logs are available on request from the corresponding author
 (Musadaq Mansoor, `musadaq.mansoor@paf-iast.edu.pk`). When the record is
 minted, the authors will add its DOI to `CITATION.cff` and to this section.
 
-Independent re-grading *from the raw logs*, for the witness-gated cells in
+Independent re-grading from the raw logs, for the witness-gated cells in
 particular, needs that record. Every number the paper reported in Table III,
 however, recomputes from what is here. No instrument here repeats the lift
 search reported in the notes to Table III. Its result is recorded in prose in
@@ -442,8 +444,6 @@ The messages of `held2_bar.py` and `drh5_trigger_regression.py` say that the
 code repository ships only `results/experiments/<run>/RUN_MANIFEST.json`. For
 each of the nine replication seeds, this repository also ships its three graded
 policy checkpoints and their per-checkpoint grade records.
-
----
 
 ## What is here, by directory
 
@@ -491,8 +491,6 @@ policy checkpoints and their per-checkpoint grade records.
   file as the source of its `authors` list and says that the file is not shipped
   here. It is in the source repository, which, as of 2026-09-24 UTC, is not
   public.
-
----
 
 ## Reproduction environment
 
@@ -572,7 +570,7 @@ only when it resumes a run, so its absence shows that none of them was
 resumed.
 
 Read that range as measured elapsed time, not as isolated single-run cost.
-Concurrency is *not* a recorded manifest field, so these are wall-clock figures
+Concurrency is not a recorded manifest field, so these are wall-clock figures
 obtained under a concurrency the manifests do not state. The timestamps
 show that the nine ran as three batches of three, each batch sharing one
 launch instant to the second:
@@ -622,11 +620,13 @@ the code did not move between the three launches.
 Twenty-nine of the 34 shipped `src/` files are byte-identical to that code.
 The other five carry additions made for this release:
 
-    raas_marl/environments/active_sensing/grid_environment.py
-    raas_marl/environments/active_sensing/tensor_adapter.py
-    raas_marl/mappo_lagrangian/buffer.py
-    raas_marl/mappo_lagrangian/config.py
-    raas_marl/mappo_lagrangian/losses.py
+```text
+raas_marl/environments/active_sensing/grid_environment.py
+raas_marl/environments/active_sensing/tensor_adapter.py
+raas_marl/mappo_lagrangian/buffer.py
+raas_marl/mappo_lagrangian/config.py
+raas_marl/mappo_lagrangian/losses.py
+```
 
 `grid_environment.py` gains one
 docstring. The other four import `torch` lazily. Each gains an
@@ -649,8 +649,6 @@ hardcoded absolute-path fallback was deleted. In
 `sys.path` insertions, which came from a hardcoded absolute path, are now
 derived from `__file__`. `r2_null_rejection_check.py` also makes its `--json`
 output path relative to the repository root.
-
----
 
 ## License
 
