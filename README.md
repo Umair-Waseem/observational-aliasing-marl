@@ -52,7 +52,7 @@ As of 2026-09-24 UTC, the version DOI
 Zenodo's archive of the tag `v1.0-icet2026`, the state reported in the paper.
 The concept DOI [10.5281/zenodo.22680694](https://doi.org/10.5281/zenodo.22680694)
 identifies all versions of that archive. `CITATION.cff` gives the version DOI in
-its `doi` field.
+its `doi` field. As of 2026-09-25 UTC, GitHub marks the release of `v1.0-icet2026` immutable, so the tag is locked to its commit.
 
 ## Reproduce the numbers in Table III
 
@@ -285,7 +285,7 @@ of the table below.
 
 | Group | Runs | Seeds | In the paper |
 |---|---|---|---|
-| The nine replication seeds | `t1_retain_s147`–`s149`, `t1_seedscale_s153`–`s158` | 147–149, 153–158 | Table III, Fig. 3, Fig. 4, Fig. 5: the reliability rates, the intervals, the reroute-basin classification, and the applied multiplier per round |
+| The nine replication seeds | `t1_retain_s147`–`s149`, `t1_seedscale_s153`–`s158` | 147–149, 153–158 | Table II (anchor consolidation, n=9: 7/9), Table III, Fig. 3, Fig. 4, Fig. 5: the reliability rates, the intervals, the reroute-basin classification, and the applied multiplier per round |
 | Table II, two-cell-obstacle-patch arm | `t1_retain_s147`–`s149` | 147–149 | Table II: the enriched encoding (retention 2/3) |
 | Table II, one-cell-scalar-count arm | `t1_d15_s138`–`s140` | 138–140 | Table II: the original encoding (retention 0/3). Same mixture and configuration apart from the observation encoding: a single-configuration-variable comparison (Sec. IV). The encoding is not a field of the records. The two arms use different seed sets, as the caption states. |
 | Single-pair runs, one-cell scalar count | `t1_d13_s132`–`s134` | 132–134 | Sec. V-A: the anchor pair alone |
@@ -482,7 +482,7 @@ policy checkpoints and their per-checkpoint grade records.
   the countersign records). These are the campaign's internal deliberation. None
   of them is in this repository. As of 2026-09-24 UTC, the source repository that
   holds them (including, by the authors' count, 31 decision records and 24 dossiers) is not public. `CLAIMS.yaml` cites one of them, `ED-basin-lever-search.md`, as
-  the source for a single introduction claim. That entry's `criterion_note` says
+  the source for a single introduction claim. That entry's `criterion_note` says that the second half of
   the claim "is NOT verifiable from the public artifact". The
   other 116 claim entries comprise 108 whose `source_file` resolves to a file here and
   8 that give `source_file: NONE`. Those 8 include 6 whose `derived_from` field names
@@ -524,8 +524,8 @@ shipped Python files finds four non-standard-library top-level import names:
 | `torch` | external | 22 files |
 | `pytest` | external | 1 file, the test suite |
 
-`pytest` is therefore declared only under
-`[project.optional-dependencies].dev`. The `instruments/` modules add no
+`pytest` is therefore declared only as a development dependency: in `requirements-dev.txt`
+and under `[project.optional-dependencies].dev` in `pyproject.toml`. The `instruments/` modules add no
 dependency: CI asserts by AST that they import nothing
 outside the standard library and one another.
 
