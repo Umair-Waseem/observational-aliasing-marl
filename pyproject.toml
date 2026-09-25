@@ -42,16 +42,20 @@ requires-python = ">=3.12"
 
 # READ from runtime_record.torch_version = "2.5.1+cpu", identically in all nine
 # graded manifests. torch is the ONLY third-party runtime import in the
-# artifact. An AST census over all 48 shipped .py files finds FOUR non-stdlib
-# top-level import names, of which only two are external: `raas_marl` (the
-# package importing itself) and `c1_selectivity_harness` (a grading instrument
-# imported as a sibling by two others, shipped alongside them) are internal;
-# `torch` and `pytest` (1 file, tests/test_clean.py) are external. Counting a
+# artifact. An AST census over all 49 shipped .py files finds SIX non-stdlib
+# top-level import names, of which three are external: `raas_marl` (the
+# package importing itself), `c1_selectivity_harness` (a grading instrument
+# imported as a sibling by two others, shipped alongside them) and
+# `instruments` (imported by the Fig. 5 generator) are internal; `torch`,
+# `pytest` (1 file, tests/test_clean.py) and `matplotlib` (1 file,
+# docs/paper/figure_data/generate_fig5.py) are external. Counting a
 # file as a torch importer when it holds any `import torch` statement, 22 files
 # import torch; 19 do if the three whose only torch import sits under
 # `if TYPE_CHECKING:` (tensor_adapter.py, buffer.py, losses.py) are left out,
 # because that import never runs. `pytest` is recorded in no manifest and is
-# therefore dev-only. No recorded package is unimported. The "+cpu" local
+# therefore dev-only; `matplotlib` is figure-only and is declared in
+# requirements-figures.txt, not here. No recorded package is unimported. The
+# "+cpu" local
 # segment is a wheel-build tag, not orderable in a requirement specifier, so the
 # floor here is the public version; CI pins the exact recorded build.
 dependencies = [
@@ -137,7 +141,7 @@ select = ["E4", "E7", "E9", "F"]
 #
 # The nine F401 findings in src/ ARE unused imports left by the shared-module
 # (D-7) rewiring, but they are NOT load-bearing re-exports. An AST import graph
-# over all 48 shipped .py files shows that ZERO of the nine names is imported
+# over all 49 shipped .py files shows that ZERO of the nine names is imported
 # via the module that re-exports it; each is imported from its canonical home
 # (_governance, _rollout_common, artifacts, config). Removing all nine on a
 # throwaway clone left the suite at 1539 passed. So --fix would not break the

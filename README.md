@@ -24,7 +24,7 @@ of nine seeds and transfer on two of nine, indistinguishable from chance. The pa
 evaluation on the held-out geometry, which is deliberately preserved.
 
 The state reported in the paper is the tag [`v1.0-icet2026`](https://github.com/Umair-Waseem/observational-aliasing-marl/releases/tag/v1.0-icet2026).
-This branch differs from the tag only in `.github/workflows/ci.yml`, `README.md`, `CITATION.cff`, `docs/PAPER_MAP.md`, `pyproject.toml`, `CLAIMS.yaml`, and `LICENSE`. Apart from `CLAIMS.yaml`, no instrument, record, manifest, or checkpoint differs from the tag, and no number the paper reported differs.
+This branch differs from the tag only in `.github/workflows/ci.yml`, `README.md`, `CITATION.cff`, `docs/PAPER_MAP.md`, `pyproject.toml`, `CLAIMS.yaml`, `LICENSE`, `docs/paper/figure_data/generate_fig5.py`, and `requirements-figures.txt`. Apart from `CLAIMS.yaml`, no instrument, record, manifest, or checkpoint differs from the tag, and no number the paper reported differs.
 
 [Citation](#citation) · [Reproduce the numbers in Table III](#reproduce-the-numbers-in-table-iii) · [Install and tests](#install-and-tests) · [The paper map](#the-paper-map) · [Data availability](#data-availability) · [What is here, by directory](#what-is-here-by-directory) · [What is not here and why](#what-is-not-here-and-why) · [Reproduction environment](#reproduction-environment) · [Provenance](#provenance) · [License](#license)
 
@@ -182,8 +182,8 @@ On 2026-09-24 UTC, on Windows 11 with Python 3.12.10 on an Intel Core i7-9700,
 the four `pip` commands above took 236 s and 279 s in two fresh clones, with no
 pip cache. The largest download was the `torch` 2.5.1+cpu wheel, at 205.4 MB.
 The test command then reported "1539 passed, 1 warning" in about 38 s. The
-warning comes from `torch`: NumPy is not installed. No requirements file
-installs it.
+warning comes from `torch`: NumPy is not installed. Neither `requirements.txt`
+nor `requirements-dev.txt` installs it.
 
 The commands in this file invoke pip and pytest only through `python -m`, use
 forward slashes, and call no shell scripts. Every command that runs Python calls
@@ -192,6 +192,56 @@ the one in an activated virtual environment. On 2026-09-25 UTC, every command
 above except `git clone` ran as written in Windows PowerShell 5.1 on Windows
 11, with Python 3.12.10, and exited 0. In cmd.exe, remove a line's trailing
 `#` comment before running it.
+
+To draw Fig. 5 from the shipped records, install matplotlib from
+`requirements-figures.txt` and run the generator. It needs neither PyTorch nor
+the package:
+
+```shell
+python -m pip install -r requirements-figures.txt
+python docs/paper/figure_data/generate_fig5.py fig5.pdf
+```
+
+It prints the four rows it draws, then the file it wrote:
+
+```text
+[
+ {
+  "label": "Task success\n(joint with hazard)",
+  "k": 5,
+  "n": 9,
+  "lo": 0.212008506778868,
+  "hi": 0.8630043377348333
+ },
+ {
+  "label": "Selective-sensing\nhold (core)",
+  "k": 4,
+  "n": 9,
+  "lo": 0.13699566226516657,
+  "hi": 0.7879914932211318
+ },
+ {
+  "label": "Anchor consolidation\n(load-bearing)",
+  "k": 7,
+  "n": 9,
+  "lo": 0.399906426283688,
+  "hi": 0.9718550265221018
+ },
+ {
+  "label": "Transfer to\nvalidation",
+  "k": 2,
+  "n": 9,
+  "lo": 0.02814497347789824,
+  "hi": 0.6000935737163118
+ }
+]
+wrote fig5.pdf
+```
+
+On 2026-09-25 UTC, on Windows 11 with Python 3.12.10 and matplotlib 3.11.1, the
+written `fig5.pdf` had SHA-256
+`2201bd8ae85f5c0301ab2b513a6812d16bf9108022e611c3a78fc4b3076cbcb2`. The paper's
+source build includes a Fig. 5 file with the same SHA-256.
 
 ## The paper map
 
@@ -456,7 +506,7 @@ policy checkpoints and their per-checkpoint grade records.
 | `results/held2_conjuncts.json` | The curve-derived conjuncts of the task-success and core-hold criteria. |
 | `results/checkpoint_grades_manifest.json`, `results/checkpoints_manifest.json` | Byte sizes and SHA-256 for the 27 per-checkpoint grade records and the 27 graded checkpoints, and the source filename of each grade record. |
 | `CLAIMS.yaml` | The traceability register: 117 registered paper-claim entries, 109 of which give a `source_file` that resolves to a file here. Each cited file that is shipped keeps its source-repository path, apart from `instruments/reproduce_table3.py` and `instruments/statistics.py`, which the source repository does not have. Its 38 file:line citations into shipped files use this repository's line numbers. Its `main.tex` line numbers refer to `docs/paper/template/main.tex`, which is not in this repository. |
-| `docs/paper/figure_data/` | Backing data and its generator, for Fig. 1. |
+| `docs/paper/figure_data/` | Backing data and its generator, for Fig. 1, and a generator for Fig. 5. |
 | `tests/` | The test suite (1539 tests). The authors state that its two files are identical to those in the source repository, which, as of 2026-09-24 UTC, is not public. |
 | `scripts/check_provenance.py` | A check that each of the five `docs/evidence/*.py` instruments loads this repository's code and not some other tree's. |
 
@@ -511,18 +561,21 @@ version that was exercised. The exact patch is above. `requirements.txt`
 pins `torch==2.5.1`, the version that was run. `pyproject.toml` declares the
 looser floor `torch>=2.5.1` for installing the package.
 
-`torch` is the only third-party runtime dependency. An AST census over all 48
-shipped Python files finds four non-standard-library top-level import names:
+`torch` is the only third-party runtime dependency. An AST census over all 49
+shipped Python files finds six non-standard-library top-level import names:
 
 | Import name | Kind | Imported by |
 |---|---|---|
 | `raas_marl` | internal | 33 files, including the package's own modules |
 | `c1_selectivity_harness` | internal | 2 other grading instruments, as a sibling module |
+| `instruments` | internal | 1 file, the Fig. 5 generator |
 | `torch` | external | 22 files |
 | `pytest` | external | 1 file, the test suite |
+| `matplotlib` | external | 1 file, the Fig. 5 generator |
 
 `pytest` is therefore declared only as a development dependency: in `requirements-dev.txt`
-and under `[project.optional-dependencies].dev` in `pyproject.toml`. The `instruments/` modules add no
+and under `[project.optional-dependencies].dev` in `pyproject.toml`. `matplotlib` is declared only in
+`requirements-figures.txt`. The `instruments/` modules add no
 dependency: CI asserts by AST that they import nothing
 outside the standard library and one another.
 

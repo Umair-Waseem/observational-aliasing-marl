@@ -1,0 +1,13 @@
+# Figure 5 generator only: docs/paper/figure_data/generate_fig5.py
+#
+#   python -m pip install -r requirements-figures.txt
+#
+# This file does not include "-r requirements.txt" on purpose. That file sets
+# --index-url to the PyTorch CPU index, which replaces PyPI for the whole pip
+# invocation, and that index does not carry matplotlib; including it here would
+# make matplotlib impossible to install. The generator does not need torch: the
+# two instruments it calls (instruments/grade_composer.py and
+# instruments/statistics.py) use only the standard library.
+#
+# matplotlib is pinned to the version the generator was run with.
+matplotlib==3.11.1

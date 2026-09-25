@@ -26,7 +26,7 @@ SCOPE NOTE -- this repository is dual-licensed by content type.
 The MIT License above covers the SOFTWARE:
     src/raas_marl/**            the package
     docs/evidence/*.py          the grading instruments
-    docs/paper/figure_data/*.py the figure generator
+    docs/paper/figure_data/*.py the figure generators
     tests/**                    the test suite
     instruments/**              the release instruments
     scripts/**                  the provenance check
