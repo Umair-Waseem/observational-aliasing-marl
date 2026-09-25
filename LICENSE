@@ -28,6 +28,8 @@ The MIT License above covers the SOFTWARE:
     docs/evidence/*.py          the grading instruments
     docs/paper/figure_data/*.py the figure generator
     tests/**                    the test suite
+    instruments/**              the release instruments
+    scripts/**                  the provenance check
 
 The DATA AND RECORDS are licensed CC BY 4.0 (Creative Commons Attribution 4.0
 International), whose full legal code is at LICENSES/CC-BY-4.0.txt:
@@ -35,7 +37,3 @@ International), whose full legal code is at LICENSES/CC-BY-4.0.txt:
     results/**                             per-run provenance manifests
     docs/paper/figure_data/*.json          the Figure 1 backing data
     CLAIMS.yaml                            the claim-to-source register
-
-GitHub's licence detector reads this root LICENSE file; the second licence is
-placed at LICENSES/ because that is the SPDX-conventional location and will not
-confuse that detection.

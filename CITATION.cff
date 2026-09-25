@@ -7,7 +7,7 @@ type: software
 title: "Observational Aliasing Bounds Generalization in Constrained Active-Sensing Multi-Agent Reinforcement Learning"
 version: v1.0-icet2026
 # LICENSE lists the software file-sets under MIT and the data and records
-# under CC BY 4.0. It lists no file-set under instruments/ or scripts/.
+# under CC BY 4.0. Its software file-sets include instruments/ and scripts/.
 # CFF 1.2.0 reads a list of licenses as alternatives, so this field names
 # only MIT.
 license: MIT

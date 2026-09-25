@@ -24,7 +24,7 @@ of nine seeds and transfer on two of nine, indistinguishable from chance. The pa
 evaluation on the held-out geometry, which is deliberately preserved.
 
 The state reported in the paper is the tag [`v1.0-icet2026`](https://github.com/Umair-Waseem/observational-aliasing-marl/releases/tag/v1.0-icet2026).
-This branch differs from the tag only in `.github/workflows/ci.yml`, `README.md`, `CITATION.cff`, `docs/PAPER_MAP.md`, `pyproject.toml`, and `CLAIMS.yaml`. Apart from `CLAIMS.yaml`, no instrument, record, manifest, or checkpoint differs from the tag, and no number the paper reported differs.
+This branch differs from the tag only in `.github/workflows/ci.yml`, `README.md`, `CITATION.cff`, `docs/PAPER_MAP.md`, `pyproject.toml`, `CLAIMS.yaml`, and `LICENSE`. Apart from `CLAIMS.yaml`, no instrument, record, manifest, or checkpoint differs from the tag, and no number the paper reported differs.
 
 [Citation](#citation) · [Reproduce the numbers in Table III](#reproduce-the-numbers-in-table-iii) · [Install and tests](#install-and-tests) · [The paper map](#the-paper-map) · [Data availability](#data-availability) · [What is here, by directory](#what-is-here-by-directory) · [What is not here and why](#what-is-not-here-and-why) · [Reproduction environment](#reproduction-environment) · [Provenance](#provenance) · [License](#license)
 
@@ -652,4 +652,4 @@ output path relative to the repository root.
 The software file-sets that `LICENSE` lists are MIT. Data and records (the analysis JSONs, everything
 under `results/`, the Fig. 1 backing data, and `CLAIMS.yaml`) are CC BY 4.0
 (`LICENSES/CC-BY-4.0.txt`). `LICENSE` states the split file-set by file-set.
-`LICENSE` lists no file-set under `instruments/` or `scripts/`.
+`LICENSE` lists `instruments/` and `scripts/` among its software file-sets.
