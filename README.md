@@ -23,8 +23,8 @@ do so reliably: at replication, the core selective-sensing conjunct held on four
 of nine seeds and transfer on two of nine, indistinguishable from chance. The paper made no
 evaluation on the held-out geometry, which is deliberately preserved.
 
-**The state reported in the paper is the tag [`v1.0-icet2026`](https://github.com/Umair-Waseem/observational-aliasing-marl/releases/tag/v1.0-icet2026).**
-This branch differs from the tag only in `.github/workflows/ci.yml`, `README.md`, `CITATION.cff`, and `docs/PAPER_MAP.md`. No instrument, record, manifest, or checkpoint differs from the tag, and no reported number differs.
+The state reported in the paper is the tag [`v1.0-icet2026`](https://github.com/Umair-Waseem/observational-aliasing-marl/releases/tag/v1.0-icet2026).
+This branch differs from the tag only in `.github/workflows/ci.yml`, `README.md`, `CITATION.cff`, and `docs/PAPER_MAP.md`. No instrument, record, manifest, or checkpoint differs from the tag, and no number the paper reported differs.
 
 [Citation](#citation) · [Reproduce the numbers in Table III](#reproduce-the-numbers-in-table-iii) · [Install and tests](#install-and-tests) · [The paper map](#the-paper-map) · [Data availability](#data-availability) · [What is here, by directory](#what-is-here-by-directory) · [What is not here and why](#what-is-not-here-and-why) · [Reproduction environment](#reproduction-environment) · [Provenance](#provenance) · [License](#license)
 
@@ -58,8 +58,9 @@ its `doi` field.
 
 ## Reproduce the numbers in Table III
 
-This needs Python **3.12** or newer and nothing else. The three release
-instruments are standard library only, so this needs no packages:
+This needs git and Python. `pyproject.toml` declares Python 3.12 or newer.
+The runs of `instruments.reproduce_table3` reported below used Python 3.12.
+The three release instruments are standard library only, so this needs no packages:
 
 ```
 git clone https://github.com/Umair-Waseem/observational-aliasing-marl
@@ -161,15 +162,18 @@ Python version marked "yes" below:
 | macOS arm64 | yes | no | no |
 | macOS x86_64 | no | no | no |
 
-On Linux x86_64, the default PyPI wheel of `torch` 2.5.1 is the
+As of 2026-09-25 UTC, on a combination marked "no", the `requirements.txt`
+install above stops with "ERROR: No matching distribution found for torch==2.5.1".
+
+As of 2026-09-25 UTC, on Linux x86_64, the default PyPI wheel of `torch` 2.5.1 is the
 CUDA build. That wheel and the GPU packages it requires are about 3 GB to
 download. The recorded build is CPU (`2.5.1+cpu`). Install
-**editable** (`-e`). `tests/conftest.py` and four of the five `docs/evidence`
+editable (`-e`). `tests/conftest.py` and four of the five `docs/evidence`
 instruments put `<repo>/src` on `sys.path` themselves. A non-editable install
 would put a second copy of `raas_marl` in `site-packages` alongside it.
 
-To run the test suite, install pytest, which is a development dependency
-rather than a runtime one:
+To run the test suite, install the requirements in `requirements-dev.txt`, which
+includes `requirements.txt` and adds the development tools pytest, ruff, and mypy:
 
 ```
 python -m pip install -r requirements-dev.txt
@@ -184,7 +188,9 @@ warning comes from `torch`: NumPy is not installed. No requirements file
 installs it.
 
 The commands in this file invoke pip and pytest only through `python -m`, use
-forward slashes, and call no shell scripts. On 2026-09-25 UTC, every command
+forward slashes, and call no shell scripts. Every command that runs Python calls
+it `python`. Run the pip commands with a `python` that accepts installs, such as
+the one in an activated virtual environment. On 2026-09-25 UTC, every command
 above except `git clone` ran as written in Windows PowerShell 5.1 on Windows
 11, with Python 3.12.10, and exited 0. In cmd.exe, remove a line's trailing
 `#` comment before running it.
@@ -209,12 +215,12 @@ Table III value.
 |---|---|---|---|
 | Hazard budget, p. 4 | 0.25 | `config.hazard_budget` is 0.25 in 24 of the 55 records, including the nine replication records. `config.stage25_update_config.hazard_budget` is 0.5 in the 27 records of `t1_d4` to `t1_d12`. The four records of `b101_stoch`, `b102_stoch`, `b103_stoch`, and `b104_greedy` have neither field. | opened, 2026-09-24 |
 | one-cell scalar count, Retention, p. 5 | 0/3 | In `docs/evidence/t1_d15_analysis.json`, `RETAIN.verdict.bar_c4_retain_pass_count` is `0` for `t1_d15_s138` to `s140`. No command prints this cell. The training curves it was graded from are not in this repository. | opened, 2026-09-24 |
-| two-cell obstacle patch, Retention, p. 5 | 2/3 | `python -m instruments.grade_composer`: of the rows for seeds 147, 148, and 149, the `criteria met` column lists `task_success` for 147 and 149. No command prints this tally. `docs/evidence/t1_retain_analysis.json` records `2/3` in `tallies.bar_c4_retain`. | Windows 11, Python 3.12.10, 2026-09-24; counted from the per-seed rows |
+| two-cell obstacle patch, Retention, p. 5 | 2/3 | `python -m instruments.grade_composer`: of the rows for seeds 147, 148, and 149, the `criteria met` column lists `task_success` for 147 and 149. No command prints this tally. `docs/evidence/t1_retain_analysis.json` records `2/3` in `tallies.bar_c4_retain`. `grade_composer` takes `task_success` from the `bar_c4_pass` field of `results/held2_conjuncts.json`. The training curves `bar_c4_pass` was graded from are not in this repository. | Windows 11, Python 3.12.10, 2026-09-24; counted from the per-seed rows |
 | Transfer to validation, n=3, p. 6 | 1/3 | `python -m instruments.grade_composer`: of the rows for seeds 147, 148, and 149, the `criteria met` column lists `transfer` for 147 only. No command prints the n=3 tally. `docs/evidence/t1_retain_analysis.json` records `1/3 (s147 only, 2/3 checkpoints)` in `tallies.c4_gen_2of3_seeds`. | Windows 11, Python 3.12.10, 2026-09-24; counted from the per-seed rows |
 | Transfer to validation, n=9, p. 6 | 2/9 = 0.22 | `python -m instruments.reproduce_table3` prints `2/9 = 0.22` on the `Transfer to validation` line. | Windows 11, Python 3.12.10, 2026-09-24 |
 | Notes to Table III, arm-fire de-confound, p. 6 | Fisher p = 0.417 | `python -m instruments.reproduce_table3` prints `2x2 = [[1, 1], [1, 6]]` and `p = 0.4167`. `python -c "from instruments.statistics import fisher_exact_two_sided; print(fisher_exact_two_sided(1, 1, 1, 6))"` prints `0.4166666666666667`. | Windows 11, Python 3.12.10, 2026-09-24 |
 | Notes to Table III, lift search, p. 6 | "the strongest lift (single- and paired-feature search) does not survive multiple-comparison correction" | In `docs/evidence/t1_seedscale_analysis.json`, `step3_fork.adversarial_confirmation` records the search's result in prose. No command here repeats the search. | opened, 2026-09-24 |
-| Fig. 3, applied constraint multiplier λ per round, p. 5 | the nine replication seeds over training rounds; seeds that hold the joint task-success bar solid, the rest dashed; dotted guides at the armed floor 3.0 and the ceiling 5.0 | No generator is included. The solid seeds are those whose `bar_c4_pass` is `true` in `results/held2_conjuncts.json`: 147, 149, 153, 156, and 158. In the 15 checkpoints of those five seeds (`state_round_003500.pt`, `state_round_003750.pt`, and `state_round_004000.pt`), `controller.integral` is 0.0 and `arm_state.armed` is `true`. The checkpoints do not store the applied multiplier. | opened, 2026-09-24; per-round values are in `training_curve.jsonl` files, which are not in this repository |
+| Fig. 3, applied constraint multiplier λ per round, p. 5 | the nine replication seeds over training rounds; seeds that hold the joint task-success bar solid, the rest dashed; dotted guides at the armed floor 3.0 and the ceiling 5.0; "on the holding seeds the tail multiplier rests at the armed floor of 3.0 with the dual integral at zero" | No generator is included. The solid seeds are those whose `bar_c4_pass` is `true` in `results/held2_conjuncts.json`: 147, 149, 153, 156, and 158. Their checkpoints check the quoted caption claim only in part. In the 15 checkpoints of those five seeds (`state_round_003500.pt`, `state_round_003750.pt`, and `state_round_004000.pt`), `controller.integral` is 0.0 and `arm_state.armed` is `true`. The checkpoints do not store the applied multiplier, so the claimed value 3.0 is not checked here. | opened, 2026-09-24; per-round values are in `training_curve.jsonl` files, which are not in this repository |
 | Sec. IV, wall-clock time, p. 4 | "2.4 to 3.5 h of wall-clock time (median 2.8 h)" | `finish_timestamp_utc` minus `launch_timestamp_utc` in the nine replication `RUN_MANIFEST.json` files gives a minimum of 2.3758 h (`t1_seedscale_s158`), a maximum of 3.4989 h (`t1_retain_s147`), and a median of 2.7844 h. No field records how many runs ran at once. | opened, 2026-09-24 |
 | Sec. III, the counterfactual own-ablation witness, on one seed, pp. 3, 4 | "counterfactual own-ablation witness": the policy is re-rolled "with its revealed-information channel zeroed for the whole episode", and the witness requires "hazard exposure to rise" | `python docs/evidence/c1_selectivity_harness.py --grade-run t1_retain_s147 --fork` (needs PyTorch) grades the shipped checkpoint `state_round_004000.pt` and prints the verdict `SELECTIVE_COMPOSITE`. Its result for the run equals the `grade` object in `results/experiments/t1_retain_s147/checkpoint_grades/grade_r004000.json`, except that it adds `state_file` and its `label` lacks `@r4000`. | Windows 11, Python 3.12.10, 2026-09-24 |
 
@@ -223,7 +229,7 @@ Table III value.
 ## Data availability
 
 This section is the data-availability statement promised in the response to
-reviewer comment R1-S9. As of 2026-09-25 UTC, that response is not public. Text
+reviewer comment R1-S9. As of 2026-09-25 UTC, that response is not public, the authors report. Text
 in quotation marks in the first column below is quoted from it.
 
 ### What this repository contains
@@ -231,18 +237,19 @@ in quotation marks in the first column below is quoted from it.
 | Promise | Where it is | Status as of 2026-09-24 UTC |
 |---|---|---|
 | The full implementation: environment, encodings, control corridor, certification harness | `src/raas_marl/` (34 files: 29 modules and 5 package `__init__.py` files) and `docs/evidence/c1_selectivity_harness.py`. The code builds only the two-cell obstacle patch, one of the two encodings the paper compares. Its `stage25_driver.py` rejects the configuration recorded for `t1_d14_s135`–`s137`. The `RUN_MANIFEST.json` files name 18 commits, none of which is in this repository. | Partly delivered |
-| The per-run configuration records | `results/experiments/<run_id>/RUN_MANIFEST.json`: **all 55 runs** | Delivered |
+| The per-run configuration records | `results/experiments/<run_id>/RUN_MANIFEST.json`: all 55 runs | Delivered |
 | "Every run ships a complete configuration record" | Each of the 55 `RUN_MANIFEST.json` files holds its run's configuration. No record names the observation encoding, the one variable of Table II's single-configuration-variable comparison. The next subsection names the older records that lack fields the shipped `Stage25RunConfig` defines. | Partly delivered |
 | The grading instruments, including the reroute-basin classifier and the grade composer | `instruments/` (three instruments plus a driver) and `docs/evidence/*.py` (five modules) | Delivered |
-| The recorded per-checkpoint grade records | `results/experiments/<run_id>/checkpoint_grades/grade_r{003500,003750,004000}.json`: **27 records**, the nine replication seeds × three checkpoints | Delivered |
+| "the reroute-basin classifier, validated to reproduce the reported equivariant/overshoot/freeze partition" | `instruments/reroute_basin.py`, which compares its classification of the nine replication seeds with the reported partition. Its output ends with "MATCHES the reported partition." | Delivered |
+| The recorded per-checkpoint grade records | `results/experiments/<run_id>/checkpoint_grades/grade_r{003500,003750,004000}.json`: 27 records, the nine replication seeds × three checkpoints | Delivered |
 | A README data-availability statement | this section | Delivered |
 | "The raw training logs, which are large, will be archived in a separate public data record with a persistent identifier" | As of 2026-09-24 UTC, no such record exists. See [The raw training logs](#the-raw-training-logs). | Not delivered |
 | "otherwise the repository README carries the record’s location" | This README gives no location for the record. The raw-log subsection states that the logs are available on request. | Not delivered |
 | "The reported reliability rates recompute from the shipped per-checkpoint grade records via the released composer" | `instruments/grade_composer.py` recomputes them from those records together with `results/held2_conjuncts.json` and `docs/evidence/t1_seedscale_analysis.json`. Only transfer recomputes from the grade records alone. See [What recomputes from what](#what-recomputes-from-what). | Partly delivered |
 | "the reported intervals and p-values follow from those records" | They follow by Clopper–Pearson and Fisher computations over counts that also draw on the two files named in the row above. | Partly delivered |
 
-Beyond what was promised, the repository also ships the **27 graded policy
-checkpoints** (`results/experiments/<run_id>/state_round_{003500,003750,004000}.pt`,
+Beyond what was promised, the repository also ships the 27 graded policy
+checkpoints (`results/experiments/<run_id>/state_round_{003500,003750,004000}.pt`,
 3.35 MB in total, ≤ 125 kB each). With them, a reader can re-grade from the
 weights in place rather than only recompose from the records:
 
@@ -261,7 +268,7 @@ Python 3.12.10 and `torch` 2.5.1+cpu.
 
 ### Which runs are included, and their place in the paper
 
-All 55 runs are included, listed below by run id. Each has a `RUN_MANIFEST.json` that holds its configuration,
+All 55 runs are included, grouped below by their place in the paper. Each has a `RUN_MANIFEST.json` that holds its configuration,
 its seed, and, in `git_head`, a commit hash. `config_sha256` is present in 51 of
 the records and holds the hash that the launching driver computed from the
 configuration. Each of the 51 hashes recomputes from its record by the rule in
@@ -270,6 +277,9 @@ that the shipped `Stage25RunConfig` defines. The six records marked `resumed`
 (`t1_d11_s126`–`s128`, `t1_d16_s141`–`s143`) hold in `git_head` the commit
 checked out at the last resume. None of these six `RUN_MANIFEST.json` files
 records the launch commit.
+
+`t1_retain_s147`–`s149` and `t1_d15_s138`–`s140` each appear in two groups
+of the table below.
 
 | Group | Runs | Seeds | In the paper |
 |---|---|---|---|
@@ -383,9 +393,9 @@ rows 5 and 6.
 ### The raw training logs
 
 The authors state that the raw episode logs, training curves, and probe logs
-are large: **≈ 0.73 GB for the nine replication seeds** (586 MB of episode
-logs, 124 MB of curves, 15 MB of probe logs) and **≈ 4.0 GB across all 55
-runs**. They are not in this repository.
+are large: ≈ 0.73 GB for the nine replication seeds (586 MB of episode
+logs, 124 MB of curves, 15 MB of probe logs) and ≈ 4.0 GB across all 55
+runs. They are not in this repository.
 
 The authors will archive them in a separate public data record with a
 persistent identifier. As of 2026-09-24 UTC, that record does not
@@ -471,7 +481,7 @@ policy checkpoints and their per-checkpoint grade records.
 * **The decision and evidence dossiers** (`docs/decisions/**`, `docs/evidence/ED-*.md`,
   the countersign records). These are the campaign's internal deliberation. None
   of them is in this repository. As of 2026-09-24 UTC, the source repository that
-  holds them (including 31 decision records and 24 dossiers) is not public. `CLAIMS.yaml` cites one of them, `ED-basin-lever-search.md`, as
+  holds them (including, by the authors' count, 31 decision records and 24 dossiers) is not public. `CLAIMS.yaml` cites one of them, `ED-basin-lever-search.md`, as
   the source for a single introduction claim. That entry's `criterion_note` says
   the claim "is NOT verifiable from the public artifact". The
   other 116 claim entries comprise 108 whose `source_file` resolves to a file here and
@@ -488,7 +498,7 @@ policy checkpoints and their per-checkpoint grade records.
 
 The recorded values in the Software, Threading, and Hardware tables below were
 read from the `runtime_record` block of the
-**nine graded** run manifests (`t1_retain_s147`, `s148`, `s149`,
+nine graded run manifests (`t1_retain_s147`, `s148`, `s149`,
 `t1_seedscale_s153`, `s154`, `s155`, `s156`, `s157`, `s158`).
 These manifests are shipped under `results/experiments/`. Check any of them yourself.
 
@@ -544,7 +554,7 @@ the environment they found and did not set it.
 | Machine | `AMD64` |
 | Processor | `Intel64 Family 6 Model 158 Stepping 13, GenuineIntel` |
 
-**Physical core count is not a recorded field.** The manifests record
+Physical core count is not a recorded field. The manifests record
 `torch_num_interop_threads = 8`. On 2026-09-24 UTC, on an Intel Core i7-9700
 under Windows 11 with `torch` 2.5.1+cpu, that setting defaulted to the core
 count, 8. Reading the recorded machine's core count from the recorded value is
@@ -553,7 +563,7 @@ an inference, so that core count is not stated as a fact here.
 ### Wall-clock
 
 The recorded `launch_timestamp_utc` and `finish_timestamp_utc` of the nine
-graded runs give **2.38 h to 3.50 h per run** (minimum `t1_seedscale_s158`,
+graded runs give 2.38 h to 3.50 h per run (minimum `t1_seedscale_s158`,
 maximum `t1_retain_s147`). Each of the nine completed 4000 rounds
 (`last_completed_round = 3999`, `status = complete`).
 
@@ -561,7 +571,7 @@ No `resumed` key is present in any of the nine. The driver writes that key
 only when it resumes a run, so its absence shows that none of them was
 resumed.
 
-**Read that range as measured elapsed time, not as isolated single-run cost.**
+Read that range as measured elapsed time, not as isolated single-run cost.
 Concurrency is *not* a recorded manifest field, so these are wall-clock figures
 obtained under a concurrency the manifests do not state. The timestamps
 show that the nine ran as three batches of three, each batch sharing one
@@ -580,7 +590,7 @@ threads. None of the nine was timed alone on the same hardware.
 
 The manifests record `cross_platform_bitwise_determinism_claimed = false`.
 Bitwise-identical reproduction across a different platform, CPU, or PyTorch
-build is **not** claimed. The seeds are recorded per run
+build is not claimed. The seeds are recorded per run
 (`t1_retain` 147–149, `t1_seedscale` 153–158).
 
 The `instruments/` recomputation reads shipped JSON and does floating-point and
@@ -609,8 +619,8 @@ out when its run was launched:
 In the source repository, `src/` is identical at the three commits:
 the code did not move between the three launches.
 
-**Twenty-nine of the 34 shipped `src/` files are byte-identical to that code.**
-The other five carry **additions made for this release**:
+Twenty-nine of the 34 shipped `src/` files are byte-identical to that code.
+The other five carry additions made for this release:
 
     raas_marl/environments/active_sensing/grid_environment.py
     raas_marl/environments/active_sensing/tensor_adapter.py
@@ -633,8 +643,12 @@ code. Nothing was renamed, reordered, or rewritten.
 That is a weaker statement than "byte-identical".
 
 The five `docs/evidence/*.py` instruments also differ from their versions in the
-source repository. A comment in `c1_selectivity_harness.py` records one of the
-changes: a hardcoded absolute-path fallback was deleted.
+source repository. Comments in three of them record changes. In `c1_selectivity_harness.py`, a
+hardcoded absolute-path fallback was deleted. In
+`c1_tightened_adversarial_test.py` and `r2_null_rejection_check.py`, the two
+`sys.path` insertions, which came from a hardcoded absolute path, are now
+derived from `__file__`. `r2_null_rejection_check.py` also makes its `--json`
+output path relative to the repository root.
 
 ---
 
