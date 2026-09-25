@@ -246,7 +246,7 @@ in quotation marks in the first column below is quoted from it.
 | The recorded per-checkpoint grade records | `results/experiments/<run_id>/checkpoint_grades/grade_r{003500,003750,004000}.json`: 27 records, the nine replication seeds × three checkpoints | Delivered |
 | A README data-availability statement | this section | Delivered |
 | "The raw training logs, which are large, will be archived in a separate public data record with a persistent identifier" | As of 2026-09-24 UTC, no such record exists. See [The raw training logs](#the-raw-training-logs). | Not delivered |
-| "otherwise the repository README carries the record’s location" | This README gives no location for the record. The raw-log subsection states that the logs are available on request. | Not delivered |
+| "otherwise the repository README carries the record’s location" | This README gives no location for the record. | Not delivered |
 | "The reported reliability rates recompute from the shipped per-checkpoint grade records via the released composer" | `instruments/grade_composer.py` recomputes them from those records together with `results/held2_conjuncts.json` and `docs/evidence/t1_seedscale_analysis.json`. Only transfer recomputes from the grade records alone. See [What recomputes from what](#what-recomputes-from-what). | Partly delivered |
 | "the reported intervals and p-values follow from those records" | They follow by Clopper–Pearson and Fisher computations over counts that also draw on the two files named in the row above. | Partly delivered |
 
@@ -399,15 +399,12 @@ are large: ≈ 0.73 GB for the nine replication seeds (586 MB of episode
 logs, 124 MB of curves, 15 MB of probe logs) and ≈ 4.0 GB across all 55
 runs. They are not in this repository.
 
-The authors will archive them in a separate public data record with a
-persistent identifier. As of 2026-09-24 UTC, that record does not
-exist, so it has no DOI. As of 2026-09-24 UTC, two DOIs identify Zenodo's
-archive of this repository at the tag `v1.0-icet2026`:
+The response to reviewer comment R1-S9 states that they "will be archived in
+a separate public data record with a persistent identifier". As of 2026-09-24
+UTC, that record does not exist, so it has no DOI. As of 2026-09-24 UTC, two
+DOIs identify Zenodo's archive of this repository at the tag `v1.0-icet2026`:
 10.5281/zenodo.22680695 for that version and 10.5281/zenodo.22680694 for all
-versions. That archive holds no logs. The authors state that, until the record
-exists, the logs are available on request from the corresponding author
-(Musadaq Mansoor, `musadaq.mansoor@paf-iast.edu.pk`). When the record is
-minted, the authors will add its DOI to `CITATION.cff` and to this section.
+versions. That archive holds no logs.
 
 Independent re-grading from the raw logs, for the witness-gated cells in
 particular, needs that record. Every number the paper reported in Table III,
