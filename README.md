@@ -24,7 +24,7 @@ of nine seeds and transfer on two of nine, indistinguishable from chance. The pa
 evaluation on the held-out geometry, which is deliberately preserved.
 
 The state reported in the paper is the tag [`v1.0-icet2026`](https://github.com/Umair-Waseem/observational-aliasing-marl/releases/tag/v1.0-icet2026).
-This branch differs from the tag only in `.github/workflows/ci.yml`, `README.md`, `CITATION.cff`, `docs/PAPER_MAP.md`, and `pyproject.toml`. No instrument, record, manifest, or checkpoint differs from the tag, and no number the paper reported differs.
+This branch differs from the tag only in `.github/workflows/ci.yml`, `README.md`, `CITATION.cff`, `docs/PAPER_MAP.md`, `pyproject.toml`, and `CLAIMS.yaml`. Apart from `CLAIMS.yaml`, no instrument, record, manifest, or checkpoint differs from the tag, and no number the paper reported differs.
 
 [Citation](#citation) · [Reproduce the numbers in Table III](#reproduce-the-numbers-in-table-iii) · [Install and tests](#install-and-tests) · [The paper map](#the-paper-map) · [Data availability](#data-availability) · [What is here, by directory](#what-is-here-by-directory) · [What is not here and why](#what-is-not-here-and-why) · [Reproduction environment](#reproduction-environment) · [Provenance](#provenance) · [License](#license)
 
@@ -458,7 +458,7 @@ policy checkpoints and their per-checkpoint grade records.
 | `results/experiments/*/state_round_*.pt` | The 27 graded policy checkpoints, for the same 9 × 3. |
 | `results/held2_conjuncts.json` | The curve-derived conjuncts of the task-success and core-hold criteria. |
 | `results/checkpoint_grades_manifest.json`, `results/checkpoints_manifest.json` | Byte sizes and SHA-256 for the 27 per-checkpoint grade records and the 27 graded checkpoints, and the source filename of each grade record. |
-| `CLAIMS.yaml` | The traceability register: 117 registered paper-claim entries, 108 of which give a `source_file` that resolves to a file here. Paths are in source-repository coordinates. Each cited file that is shipped keeps its path, but 27 of the 38 file:line citations into shipped files point at different text here. |
+| `CLAIMS.yaml` | The traceability register: 117 registered paper-claim entries, 109 of which give a `source_file` that resolves to a file here. Each cited file that is shipped keeps its source-repository path, apart from `instruments/reproduce_table3.py` and `instruments/statistics.py`, which the source repository does not have. Its 38 file:line citations into shipped files use this repository's line numbers. Its `main.tex` line numbers refer to `docs/paper/template/main.tex`, which is not in this repository. |
 | `docs/paper/figure_data/` | Backing data and its generator, for Fig. 1. |
 | `tests/` | The test suite (1539 tests). The authors state that its two files are identical to those in the source repository, which, as of 2026-09-24 UTC, is not public. |
 | `scripts/check_provenance.py` | A check that each of the five `docs/evidence/*.py` instruments loads this repository's code and not some other tree's. |
@@ -484,8 +484,8 @@ policy checkpoints and their per-checkpoint grade records.
   holds them (including, by the authors' count, 31 decision records and 24 dossiers) is not public. `CLAIMS.yaml` cites one of them, `ED-basin-lever-search.md`, as
   the source for a single introduction claim. That entry's `criterion_note` says that the second half of
   the claim "is NOT verifiable from the public artifact". The
-  other 116 claim entries comprise 108 whose `source_file` resolves to a file here and
-  8 that give `source_file: NONE`. Those 8 include 6 whose `derived_from` field names
+  other 116 claim entries comprise 109 whose `source_file` resolves to a file here and
+  7 that give `source_file: NONE`. Those 7 include 5 whose `derived_from` field names
   a file here.
 * **`docs/paper/template/main.tex`.** A comment in `pyproject.toml` names this
   file as the source of its `authors` list and says that the file is not shipped

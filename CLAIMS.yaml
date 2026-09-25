@@ -6,6 +6,10 @@
 # Repo HEAD:     44a68e29078f801cb6d6b1d2cb82753ae72d81ca  (branch segment2-science)
 # Written:       2026-08-03
 #
+# CAMERA-READY NOTE. The main.tex line numbers in this file refer to the source
+# build's docs/paper/template/main.tex, which is not in this repository. Where
+# that file and the camera-ready paper as printed differ, the camera-ready governs.
+#
 # SOURCING. Every expected_value below was RE-READ from the file it lives in
 # during this phase. docs/artifact/PHASE0_AUDIT.md was used only as an index to
 # locate candidates; no value was transcribed from it. Where a re-derivation
@@ -19,10 +23,10 @@
 #     of which is a non-printed criterion registered
 #       because it is the Q2 answer (table2-retention-
 #       third-reading; paper_value: "not printed") ......... 1
-#   printed locations named across all paper_location
-#     fields (an entry naming n restatements counts n) .... 157
-#   match: true ........................................... 111
-#   match: false .......................................... 1
+#   main.tex line citations across all paper_location
+#     fields (one per "main.tex:" occurrence) ............ 159
+#   match: true ........................................... 112
+#   match: false .......................................... 0
 #   match: prose_only ..................................... 5
 #   expected_value: DERIVED ............................... 6
 #   entries carrying a criterion_note ..................... 34
@@ -42,8 +46,9 @@
 # paper_location. Both are complete over the same surface; they differ only in
 # granularity. Where that inventory found something this register had missed, it
 # was added: setup-three-further-mechanisms, method-encoding-radii and
-# vi-four-deconfound-reads all entered the file that way, and the first of them
-# is the single match: false. The independent pass also reported main.tex as 821
+# vi-four-deconfound-reads all entered the file that way. The first of them was
+# match: false against main.tex and is match: true against the camera-ready (see
+# its criterion_note). The independent pass also reported main.tex as 821
 # lines, not 820 — a trailing empty line after \end{document}; immaterial.
 #
 # -----------------------------------------------------------------------------
@@ -65,8 +70,10 @@
 # One entry per distinct (criterion, value) CLAIM. Where the identical value for
 # the identical criterion is restated elsewhere (abstract / Sec. I bullets /
 # Sec. V-D restating a Table III cell), every location is listed in
-# paper_location and the entry is counted once. Every printed number in the
-# paper is therefore covered by exactly one entry.
+# paper_location and the entry is counted once. The register does not cover
+# every number the camera-ready prints: for example, the Table III interval rows
+# [0.212, 0.863] and [0.137, 0.788] and the fresh-seed-only rates 3/6, 2/6 and
+# 4/6 have no entry.
 #
 # `reads` CONVENTION. The enum is a cost tier for the RECOMPUTATION, not a
 # shipping decision. The tier is the SHALLOWEST class of file a verification
@@ -105,13 +112,11 @@
 # dedicated field. The fragment is quoted in field_path.
 #
 # -----------------------------------------------------------------------------
-# EVERY match: false  (1)
-#   - setup-three-further-mechanisms   paper says "three further off-by-default
-#     mechanisms"; the runs enable a fourth (the DR-H5 movement-recovery gate,
-#     seven config keys) plus an advantage std guard, neither named anywhere in
-#     the paper, and the recovery gate FIRED on all three RETAIN seeds.
-#     Found by an independent trace this phase and verified from source before
-#     recording. Full evidence in that entry's criterion_note.
+# EVERY match: false  (0)
+#   none. setup-three-further-mechanisms was match: false against main.tex, which
+#   counted three further off-by-default mechanisms; the camera-ready gives no
+#   count and names the movement-recovery gate and the advantage-standardization
+#   guard. Full record in that entry's criterion_note.
 #
 # EVERY match: prose_only  (5)
 #   - table3-transfer-ci-95            [0.028, 0.600]  narrative JSON string
@@ -288,7 +293,7 @@
 
 - id: table1-entropy-sustain-movement
   paper_location: "Table I, row 'Entropy sustain', Value column, first of the pair (main.tex:496); restated Sec. IV (main.tex:539)"
-  printed_label: "0.5 nats"
+  printed_label: "0.5/0.3 nats"
   criterion: "Target movement-factor policy entropy that the per-factor entropy-sustain dual drives toward while the schedule is active."
   source_file: results/experiments/t1_retain_s147/RUN_MANIFEST.json
   field_path: $.config.movement_entropy_sustain_target
@@ -492,10 +497,10 @@
   recompute: "count of $.per_seed.*.held2_full == true over the nine seeds -> {147,149,153,158} = 4"
 
 - id: table3-anchor-n3
-  paper_location: "Table III, row 'Anchor clean-class (load-bearing)', n=3 column (main.tex:692); restated Sec. V-B (main.tex:654)"
-  printed_label: "Anchor clean-class (load-bearing)"
+  paper_location: "Table III, row 'Anchor consolidation (load-bearing)', n=3 column (main.tex:692); restated Sec. V-B (main.tex:654)"
+  printed_label: "Anchor consolidation (load-bearing)"
   criterion: "Identical criterion to table2-anchor-consolidation-n3 (both anchor mirrors at per-mirror hazard <= 0.5 with an own-ablation causal witness)."
-  criterion_note: "Table II calls this criterion 'Anchor consolidation' and Table III calls it 'Anchor clean-class'. Verified this phase to be the same criterion over the same seeds; the label divergence is cosmetic and was flagged for camera-ready in the paper's own shift record."
+  criterion_note: "Tables II and III both call this criterion 'Anchor consolidation' in the camera-ready; the label divergence recorded against main.tex (Table III 'Anchor clean-class') is closed. Same criterion over the same seeds."
   source_file: NONE
   field_path: "composed, as table2-anchor-consolidation-n3"
   expected_value: DERIVED
@@ -506,8 +511,8 @@
   recompute: "as table2-anchor-consolidation-n3"
 
 - id: table3-anchor-n9
-  paper_location: "Table III, row 'Anchor clean-class (load-bearing)', n=9 column (main.tex:692)"
-  printed_label: "Anchor clean-class (load-bearing)"
+  paper_location: "Table III, row 'Anchor consolidation (load-bearing)', n=9 column (main.tex:692)"
+  printed_label: "Anchor consolidation (load-bearing)"
   criterion: "Same conjunction over the nine replication seeds; identical to table2-anchor-consolidation-n9."
   source_file: docs/evidence/t1_seedscale_analysis.json
   field_path: $.retain_reliability_tallies_n9.anchor_clean_class_haz_AND_witness
@@ -603,7 +608,7 @@
   recompute: "count of $.per_seed.*.reroute_basin_readiness_lower == 'FREEZE' -> {148,155,156} = 3"
 
 - id: table3-chance-level
-  paper_location: "Table III footnote (main.tex:702); restated Sec. V-D (main.tex:725), Sec. V-B (main.tex:719 as 'one third')"
+  paper_location: "Table III footnote (main.tex:702); restated Sec. V-D (main.tex:725), Sec. V-D (main.tex:719 as 'one third')"
   printed_label: "the flat-manifold chance level 1/3"
   criterion: "The null rate an uninformative learner would reach: one of the three underdetermined reroute basins with equal probability."
   criterion_note: "This is a MODELLING ASSUMPTION stated in the paper, not a measured quantity. It is grounded in the three-way basin classification (table3-basin-*), which IS measured, but 1/3 itself is not read from any file. Recorded so a reader does not look for a source that does not exist."
@@ -649,7 +654,7 @@
   printed_label: "Trainable gate rows are {0,3,4,7}"
   criterion: "The set of gate rows used by any trainable fork scenario in the catalog."
   source_file: src/raas_marl/environments/active_sensing/grid_environment.py
-  field_path: "grid_environment.py:817-965 — per-scenario `obstacles` tuples; gate rows are the two column-4 rows NOT listed as obstacles"
+  field_path: "grid_environment.py:818-966 — per-scenario `obstacles` tuples; gate rows are the two column-4 rows NOT listed as obstacles"
   expected_value: "{3,4} (train), {0,3}, {4,7}, {0,7} (curriculum) -> union {0,3,4,7}"
   paper_value: "{0,3,4,7}"
   match: true
@@ -673,7 +678,7 @@
   printed_label: "a validation set of readiness geometries at gate rows {1,2}"
   criterion: "The gate rows of the two readiness fork scenarios."
   source_file: src/raas_marl/environments/active_sensing/grid_environment.py
-  field_path: "grid_environment.py:846-881 — risk_fork_readiness_upper (:846) / _lower (:861), obstacles ((0,4),(3,4),(4,4),(5,4),(6,4),(7,4))"
+  field_path: "grid_environment.py:847-882 — risk_fork_readiness_upper (:847) / _lower (:862), obstacles ((0,4),(3,4),(4,4),(5,4),(6,4),(7,4))"
   expected_value: "{1,2}"
   paper_value: "{1,2}"
   match: true
@@ -684,9 +689,9 @@
   paper_location: "Sec. IV (main.tex:512-514); restated Table III caption (main.tex:680), Sec. I (main.tex:280), abstract (main.tex:130-131), Conclusion"
   printed_label: "a held-out set at gate rows {5,6} is deliberately preserved and never instantiated, read, or cited"
   criterion: "Whether any catalog scenario places its two gates at rows 5 and 6."
-  criterion_note: "The claim holds in the strongest possible form: NO such scenario EXISTS. Verified this phase by reading all ten fork scenario definitions — the gate-row sets present are {3,4}, {1,2}, {0,3}, {4,7}, {0,7}, and rows 5 and 6 appear only as obstacles. The catalog comment at grid_environment.py:816-817 states the held-out fork scenarios are deferred. See the HELD-OUT NOTE in SHIPPING_MANIFEST.md for the separate LEGACY held-out variant, which is a different object."
+  criterion_note: "The claim holds in the strongest possible form: NO such scenario EXISTS. Verified this phase by reading all ten fork scenario definitions — the gate-row sets present are {3,4}, {1,2}, {0,3}, {4,7}, {0,7}, and rows 5 and 6 appear only as obstacles. The catalog comment at grid_environment.py:817-818 states the held-out fork scenarios are deferred. See the HELD-OUT NOTE in SHIPPING_MANIFEST.md for the separate LEGACY held-out variant, which is a different object."
   source_file: src/raas_marl/environments/active_sensing/grid_environment.py
-  field_path: "grid_environment.py:817-965 (all ten fork Stage23Scenario definitions) + the deferral comment at :816-817"
+  field_path: "grid_environment.py:818-966 (all ten fork Stage23Scenario definitions) + the deferral comment at :817-818"
   expected_value: "no scenario with gates at rows 5,6 exists in the catalog"
   paper_value: "{5,6} preserved"
   match: true
@@ -735,7 +740,7 @@
   printed_label: "per-mirror hazard at most 0.5"
   criterion: "The per-mirror hazard threshold in the anchor-consolidation bar."
   source_file: docs/evidence/held2_bar.py
-  field_path: "held2_bar.py:38 OCCUPANCY_HAZARD = 0.5 (and :47 C4_HAZARD = 0.5)"
+  field_path: "held2_bar.py:37 OCCUPANCY_HAZARD = 0.5 (and :46 C4_HAZARD = 0.5)"
   expected_value: "0.5"
   paper_value: "0.5"
   match: true
@@ -746,9 +751,9 @@
   paper_location: "Sec. IV (main.tex:526)"
   printed_label: "over the final 500 rounds"
   criterion: "Length of the graded tail window for the HELD-2 bar."
-  criterion_note: "500 is COMPUTED, not a literal: TAIL_END - TAIL_START = 4000 - 3500, enforced at held2_bar.py:80-86 and emitted as tail_round_count."
+  criterion_note: "500 is COMPUTED, not a literal: TAIL_END - TAIL_START = 4000 - 3500, enforced at held2_bar.py:155-161 and emitted as tail_round_count."
   source_file: docs/evidence/held2_bar.py
-  field_path: "held2_bar.py:35-36 TAIL_START = 3500, TAIL_END = 4000; difference taken at :80"
+  field_path: "held2_bar.py:34-35 TAIL_START = 3500, TAIL_END = 4000; difference taken at :155"
   expected_value: "500"
   paper_value: "500"
   match: true
@@ -760,7 +765,7 @@
   printed_label: "at least 85% of rounds"
   criterion: "Minimum fraction of tail rounds that must jointly satisfy the success and hazard conditions."
   source_file: docs/evidence/held2_bar.py
-  field_path: "held2_bar.py:39 OCCUPANCY_MIN_FRACTION = 0.85, applied at :99"
+  field_path: "held2_bar.py:38 OCCUPANCY_MIN_FRACTION = 0.85, applied at :174"
   expected_value: "0.85"
   paper_value: "85%"
   match: true
@@ -772,7 +777,7 @@
   printed_label: "team success at least 0.9"
   criterion: "Per-round team success threshold in the HELD-2 joint occupancy conjunct."
   source_file: docs/evidence/held2_bar.py
-  field_path: "held2_bar.py:37 OCCUPANCY_SUCCESS = 0.9, applied at :97"
+  field_path: "held2_bar.py:36 OCCUPANCY_SUCCESS = 0.9, applied at :172"
   expected_value: "0.9"
   paper_value: "0.9"
   match: true
@@ -784,7 +789,7 @@
   printed_label: "episodic hazard at most 0.5"
   criterion: "Per-round episodic hazard threshold in the HELD-2 joint occupancy conjunct."
   source_file: docs/evidence/held2_bar.py
-  field_path: "held2_bar.py:38 OCCUPANCY_HAZARD = 0.5, applied at :97"
+  field_path: "held2_bar.py:37 OCCUPANCY_HAZARD = 0.5, applied at :172"
   expected_value: "0.5"
   paper_value: "0.5"
   match: true
@@ -796,7 +801,7 @@
   printed_label: "no sliding 50-round window"
   criterion: "Length of the sliding relapse window over the graded tail."
   source_file: docs/evidence/held2_bar.py
-  field_path: "held2_bar.py:40 RELAPSE_WINDOW = 50, applied at :104-106"
+  field_path: "held2_bar.py:39 RELAPSE_WINDOW = 50, applied at :179-181"
   expected_value: "50"
   paper_value: "50"
   match: true
@@ -808,7 +813,7 @@
   printed_label: "falls below 0.75 mean success"
   criterion: "Sliding-window mean success floor; a window below it fails HELD-2 conjunct (b)."
   source_file: docs/evidence/held2_bar.py
-  field_path: "held2_bar.py:41 RELAPSE_SUCCESS_FLOOR = 0.75, applied at :112"
+  field_path: "held2_bar.py:40 RELAPSE_SUCCESS_FLOOR = 0.75, applied at :187"
   expected_value: "0.75"
   paper_value: "0.75"
   match: true
@@ -820,7 +825,7 @@
   printed_label: "reaches 0.75 mean hazard"
   criterion: "Sliding-window mean hazard ceiling; a window reaching it fails HELD-2 conjunct (b)."
   source_file: docs/evidence/held2_bar.py
-  field_path: "held2_bar.py:42 RELAPSE_HAZARD_CEIL = 0.75, applied at :113"
+  field_path: "held2_bar.py:41 RELAPSE_HAZARD_CEIL = 0.75, applied at :188"
   expected_value: "0.75"
   paper_value: "0.75"
   match: true
@@ -832,7 +837,7 @@
   printed_label: "rounds 3500, 3750, and 4000 — first"
   criterion: "First graded witness checkpoint; also the start of the HELD-2 tail window."
   source_file: docs/evidence/held2_bar.py
-  field_path: "held2_bar.py:35 TAIL_START = 3500"
+  field_path: "held2_bar.py:34 TAIL_START = 3500"
   expected_value: "3500"
   paper_value: "3500"
   match: true
@@ -847,7 +852,7 @@
   source_file: NONE
   field_path: "$.per_seed.*.checkpoint_witnesses keys in docs/evidence/t1_retain_analysis.json; state_round_003750.pt on disk"
   expected_value: DERIVED
-  derived_from: "results/experiments/t1_retain_s147/RUN_MANIFEST.json $.config.state_save_every = 250, together with held2_bar.py:35-36 TAIL_START = 3500 / TAIL_END = 4000"
+  derived_from: "results/experiments/t1_retain_s147/RUN_MANIFEST.json $.config.state_save_every = 250, together with held2_bar.py:34-35 TAIL_START = 3500 / TAIL_END = 4000"
   paper_value: "3750"
   match: true
   reads: analysis_json
@@ -858,7 +863,7 @@
   printed_label: "rounds 3500, 3750, and 4000 — third"
   criterion: "Final graded witness checkpoint; also the end of the HELD-2 tail window."
   source_file: docs/evidence/held2_bar.py
-  field_path: "held2_bar.py:36 TAIL_END = 4000"
+  field_path: "held2_bar.py:35 TAIL_END = 4000"
   expected_value: "4000"
   paper_value: "4000"
   match: true
@@ -869,7 +874,7 @@
   paper_location: "Sec. IV (main.tex:529-530)"
   printed_label: "fires at two of the three checkpoints"
   criterion: "Minimum number of graded checkpoints at which the own-ablation causal witness must fire for HELD-2 conjunct (c)."
-  criterion_note: "Conjunct (c) is graded EXTERNALLY and is not computed by held2_bar.py — see its docstring lines 15-17 and the emitted held2_c_note at :132. The 2-of-3 rule lives in the decision record and in the composite harness invocation, not in a constant."
+  criterion_note: "Conjunct (c) is graded EXTERNALLY and is not computed by held2_bar.py — see its docstring lines 15-17 and the emitted held2_c_note at :207. The 2-of-3 rule lives in the decision record and in the composite harness invocation, not in a constant."
   source_file: docs/evidence/held2_bar.py
   field_path: "PROSE:held2_bar.py:16-17 'on >= 2 of checkpoints r3500/r3750/r4000; NOT computed here'"
   expected_value: "2 of 3"
@@ -952,13 +957,13 @@
 
 - id: setup-kl-early-stop
   paper_location: "Sec. IV (main.tex:535)"
-  printed_label: "Kullback-Leibler early stopping at 0.01"
+  printed_label: "Kullback–Leibler early stopping at 0.015 (1.5× a target of 0.01)"
   criterion: "The configured KL TARGET is 0.01; the epoch loop actually stops when approx_kl exceeds kl_stop_margin x target_kl."
-  criterion_note: "The paper states the target, not the trigger. Re-read this phase: $.config.stage25_update_config.kl_stop_margin = 1.5 and src/raas_marl/final_training/stage25_update.py:1952 computes kl_stop_threshold = kl_stop_margin * target_kl, so the EFFECTIVE threshold is 0.015. Not a value mismatch (0.01 is exactly the stored target_kl) but the printed phrasing over-describes what 0.01 gates."
+  criterion_note: "The camera-ready prints both the trigger 0.015 and the target 0.01, so the gap recorded against main.tex (which printed only the target) is closed. $.config.stage25_update_config.kl_stop_margin = 1.5 and src/raas_marl/final_training/stage25_update.py:1952 computes kl_stop_threshold = kl_stop_margin * target_kl = 0.015."
   source_file: results/experiments/t1_retain_s147/RUN_MANIFEST.json
   field_path: $.config.stage25_update_config.target_kl  (with $.config.stage25_update_config.kl_stop_margin = 1.5)
   expected_value: "0.01 (target); effective stop threshold 0.015"
-  paper_value: "0.01"
+  paper_value: "0.015 (1.5× a target of 0.01)"
   match: true
   reads: analysis_json
   recompute: "effective = kl_stop_margin * target_kl = 1.5 * 0.01 = 0.015"
@@ -1004,7 +1009,7 @@
   printed_label: "a single-layer gated recurrent unit of hidden size 16"
   criterion: "Recurrent actor hidden-state width and layer count."
   source_file: src/raas_marl/environments/active_sensing/tensor_adapter.py
-  field_path: "tensor_adapter.py:76 STAGE23_HISTORY_STATE_DIM = 16; recurrent_layer_count = 1 at :189"
+  field_path: "tensor_adapter.py:88 STAGE23_HISTORY_STATE_DIM = 16; recurrent_layer_count = 1 at :201"
   expected_value: "16 (single layer)"
   paper_value: "16"
   match: true
@@ -1016,7 +1021,7 @@
   printed_label: "two critics are feedforward networks of width 32"
   criterion: "Hidden width of the reward and hazard-cost critics."
   source_file: src/raas_marl/environments/active_sensing/tensor_adapter.py
-  field_path: "tensor_adapter.py:186 critic_hidden_dim=32 (inside default_stage23_core_config, :177)"
+  field_path: "tensor_adapter.py:198 critic_hidden_dim=32 (inside default_stage23_core_config, :189)"
   expected_value: "32"
   paper_value: "32"
   match: true
@@ -1100,8 +1105,8 @@
   paper_location: "Sec. IV (main.tex:543)"
   printed_label: "the nine-seed replication uses seeds 147 to 149 and 153 to 158"
   criterion: "The exact seed set of the nine graded runs."
-  source_file: results/experiments/*/RUN_MANIFEST.json
-  field_path: "$.config.seed across t1_retain_s147/148/149 and t1_seedscale_s153..s158 (also $.seeds and $.runtime_record.seed_values)"
+  source_file: results/experiments/t1_retain_s147/RUN_MANIFEST.json
+  field_path: "$.config.seed in each of the nine manifests results/experiments/{t1_retain_s147,t1_retain_s148,t1_retain_s149,t1_seedscale_s153,...,t1_seedscale_s158}/RUN_MANIFEST.json (also $.seeds and $.runtime_record.seed_values)"
   expected_value: "{147,148,149,153,154,155,156,157,158}"
   paper_value: "147-149, 153-158"
   match: true
@@ -1194,7 +1199,7 @@
 
 - id: setup-sensing-cost-coefficient
   paper_location: "Sec. IV (main.tex:558-559)"
-  printed_label: "the sensing cost enters the reward with coefficient 0.5"
+  printed_label: "The sensing cost, always on, enters the reward with a fixed coefficient 0.5"
   criterion: "Fixed weight of the sensing cost in the shaped reward channel (sensing is not a second Lagrangian constraint)."
   source_file: results/experiments/t1_retain_s147/RUN_MANIFEST.json
   field_path: $.config.stage25_update_config.losses.sensing_cost_coefficient
@@ -1269,7 +1274,7 @@
   recompute: null
 
 - id: method-cost-estimator
-  paper_location: "Sec. III Method (main.tex:296-300)"
+  paper_location: "Sec. II Problem Setting (main.tex:296-300)"
   printed_label: "a bound on the expected undiscounted per-episode team hazard cost"
   criterion: "The constraint estimator: episodic team mean rather than a per-step mean."
   source_file: results/experiments/t1_retain_s147/RUN_MANIFEST.json
@@ -1281,12 +1286,12 @@
   recompute: null
 
 - id: method-grid-size
-  paper_location: "Sec. III Method (main.tex:359); restated Sec. VI Limitations (main.tex:771)"
+  paper_location: "Sec. II Problem Setting (main.tex:359); restated Sec. VI Limitations (main.tex:771)"
   printed_label: "a family of 8x8 grids"
   criterion: "Grid width and height of every fork scenario."
   criterion_note: "There is no single field named 'grid size'; the claim is an aggregate over ten separate pairs of dedicated dataclass fields. Verified this phase across all ten fork scenario definitions: width=8, height=8 on every one. Not classed prose_only, because width and height ARE dedicated fields - only the aggregation is unstored."
   source_file: src/raas_marl/environments/active_sensing/grid_environment.py
-  field_path: "grid_environment.py:817-965 — the `width=8, height=8` pair on each of the ten fork Stage23Scenario definitions"
+  field_path: "grid_environment.py:818-966 — the `width=8, height=8` pair on each of the ten fork Stage23Scenario definitions"
   expected_value: "8x8 on all ten fork scenarios"
   paper_value: "8x8"
   match: true
@@ -1304,7 +1309,7 @@
   printed_label: "the boxed cell (3,3)"
   criterion: "The cell at which the anchor pair and the {0,3} curriculum pair present a byte-identical actor observation under the one-cell encoding."
   source_file: src/raas_marl/environments/active_sensing/grid_environment.py
-  field_path: "grid_environment.py:817-845 (risk_fork_train_upper at :817, _lower at :832) and :883-910 (risk_fork_curriculum_r0r3_upper at :883, _lower at :897) — the obstacle tuples that determine the radius-1 obstacle count at (3,3)"
+  field_path: "grid_environment.py:818-846 (risk_fork_train_upper at :818, _lower at :833) and :884-911 (risk_fork_curriculum_r0r3_upper at :884, _lower at :898) — the obstacle tuples that determine the radius-1 obstacle count at (3,3)"
   expected_value: "(3,3); anchor obstacles on column 4 are rows {0,1,2,5,6,7}, {0,3} obstacles are rows {1,2,4,5,6,7}; (3,4) is open in both"
   paper_value: "(3,3)"
   match: true
@@ -1315,7 +1320,7 @@
   paper_location: "Fig. 1 caption (main.tex:203-205)"
   printed_label: "the count of obstacles one step away is 0 for both"
   criterion: "Radius-1 (Manhattan) obstacle count from (3,3) under the ORIGINAL one-cell encoding, on both scenarios."
-  criterion_note: "METRIC-DEPENDENT, and the caption does not pin the metric — Sec. III does. The code metric is Manhattan/L1 (grid_environment.py:1209-1210 _manhattan, applied at :745-749) and the paper pins it at main.tex:447 with '(four-connected)'. Under Chebyshev the counts would be 1 and 2 rather than 0 and 0, and the headline contradiction would dissolve. Corroborated by docs/paper/figure_data/fig1_aliasing.json original_radius1_obstacle_count_feature9 = {train_upper: 0, curriculum_r0r3_lower: 0} (PRIVATE)."
+  criterion_note: "METRIC-DEPENDENT, and the caption does not pin the metric — Sec. III does. The code metric is Manhattan/L1 (grid_environment.py:1210-1211 _manhattan, applied at :746-750) and the paper pins it at main.tex:447 with '(four-connected)'. Under Chebyshev the counts would be 1 and 2 rather than 0 and 0, and the headline contradiction would dissolve. Corroborated by docs/paper/figure_data/fig1_aliasing.json original_radius1_obstacle_count_feature9 = {train_upper: 0, curriculum_r0r3_lower: 0}, a file shipped in this repository."
   source_file: src/raas_marl/environments/active_sensing/grid_environment.py
   field_path: "grid_environment.py obstacle tuples for risk_fork_train_upper and risk_fork_curriculum_r0r3_lower; the only column-4 cell within one step of (3,3) is (3,4), an open gate in both"
   expected_value: "0 for both scenarios"
@@ -1329,7 +1334,7 @@
   printed_label: "the anchor's safe gate (4,4) one row down"
   criterion: "The non-hazardous gate of risk_fork_train_upper (whose hidden hazard is at (3,4))."
   source_file: src/raas_marl/environments/active_sensing/grid_environment.py
-  field_path: "grid_environment.py:817-831 — risk_fork_train_upper, hidden_hazard_cells=((3,4),), obstacles excluding rows 3 and 4 on column 4"
+  field_path: "grid_environment.py:818-832 — risk_fork_train_upper, hidden_hazard_cells=((3,4),), obstacles excluding rows 3 and 4 on column 4"
   expected_value: "(4,4)"
   paper_value: "(4,4)"
   match: true
@@ -1341,7 +1346,7 @@
   printed_label: "the other pair's safe gate (0,4) three rows up"
   criterion: "The non-hazardous gate of risk_fork_curriculum_r0r3_lower (whose hidden hazard is at (3,4))."
   source_file: src/raas_marl/environments/active_sensing/grid_environment.py
-  field_path: "grid_environment.py:897-910 — risk_fork_curriculum_r0r3_lower, hidden_hazard_cells=((3,4),), obstacles ((1,4),(2,4),(4,4),(5,4),(6,4),(7,4))"
+  field_path: "grid_environment.py:898-911 — risk_fork_curriculum_r0r3_lower, hidden_hazard_cells=((3,4),), obstacles ((1,4),(2,4),(4,4),(5,4),(6,4),(7,4))"
   expected_value: "(0,4)"
   paper_value: "(0,4)"
   match: true
@@ -1353,7 +1358,7 @@
   printed_label: "adds cell (4,4): open for the anchor, a wall for {0,3}"
   criterion: "Occupancy of cell (4,4) in the two scenarios — the bit the two-cell egocentric patch supplies and the one-cell count does not."
   source_file: src/raas_marl/environments/active_sensing/grid_environment.py
-  field_path: "risk_fork_train_upper obstacles exclude (4,4); risk_fork_curriculum_r0r3_lower obstacles include (4,4); corroborated by docs/paper/figure_data/fig1_aliasing.json patch_cell_(4,4)_value = {train_upper OPEN 0.0, curriculum_r0r3_lower WALL 1.0} (PRIVATE)"
+  field_path: "risk_fork_train_upper obstacles exclude (4,4); risk_fork_curriculum_r0r3_lower obstacles include (4,4); corroborated by docs/paper/figure_data/fig1_aliasing.json patch_cell_(4,4)_value = {train_upper OPEN 0.0, curriculum_r0r3_lower WALL 1.0}"
   expected_value: "(4,4) open for the anchor, obstacle for {0,3}"
   paper_value: "open / wall"
   match: true
@@ -1370,7 +1375,7 @@
   paper_value: "four steps"
   match: true
   reads: analysis_json
-  recompute: "manhattan((3,3),(0,4)) = 4; compare against tensor_adapter.py:99 STAGE23_LOCAL_OBSTACLE_RADIUS = 2"
+  recompute: "manhattan((3,3),(0,4)) = 4; compare against tensor_adapter.py:111 STAGE23_LOCAL_OBSTACLE_RADIUS = 2"
 
 - id: vb-obstacle-count-at-43
   paper_location: "Sec. V-B (main.tex:634-635)"
@@ -1385,12 +1390,12 @@
   recompute: "count of {(3,3),(5,3),(4,2),(4,4)} present in each scenario's obstacles tuple"
 
 - id: setup-patch-window-size
-  paper_location: "Fig. 1 caption (main.tex:208, 211); abstract (main.tex:110); Sec. V-B (main.tex:638)"
-  printed_label: "an egocentric two-cell obstacle patch"
+  paper_location: "Fig. 1 caption (main.tex:208, 211); Sec. V-B (main.tex:638)"
+  printed_label: "A two-cell egocentric obstacle patch"
   criterion: "The Manhattan radius of the enriched actor obstacle patch."
-  criterion_note: "The paper's phrase 'two-cell' denotes the RADIUS (Manhattan 2), not a two-cell patch: the patch is the twelve non-centre cells of the Manhattan-radius-2 ball. The dimension arithmetic confirms it — 10 legacy features + 12 patch cells = 22, and the trained checkpoints carry actor_encoder.weight of shape (32, 26) = 22 + 4 reveal features."
+  criterion_note: "The camera-ready Method (Sec. III) prints the reading this note argues for: 'a two-cell-radius encoding that both widens that count and adds a small egocentric occupancy patch'. 'Two-cell' denotes the RADIUS (Manhattan 2), not a two-cell patch: the patch is the twelve non-centre cells of the Manhattan-radius-2 ball. The dimension arithmetic confirms it — 10 legacy features + 12 patch cells = 22, and the trained checkpoints carry actor_encoder.weight of shape (32, 26) = 22 + 4 reveal features."
   source_file: src/raas_marl/environments/active_sensing/tensor_adapter.py
-  field_path: "tensor_adapter.py:99 STAGE23_LOCAL_OBSTACLE_RADIUS = 2; :60 _RADIUS2_PATCH_OFFSETS (12 offsets); :74 STAGE23_ACTOR_OBSERVATION_DIM = 10 + 12 = 22"
+  field_path: "tensor_adapter.py:111 STAGE23_LOCAL_OBSTACLE_RADIUS = 2; :72 _RADIUS2_PATCH_OFFSETS (12 offsets); :86 STAGE23_ACTOR_OBSERVATION_DIM = 10 + 12 = 22"
   expected_value: "radius 2, 12 patch cells, observation dim 22"
   paper_value: "two-cell"
   match: true
@@ -1405,7 +1410,7 @@
   paper_location: "Fig. 2 caption (main.tex:399-401)"
   printed_label: "A blind route to the goal incurs a mean hazard of 1.0 per episode"
   criterion: "The no-sense comparator's team hazard, averaged over the two layouts of a fork pair — the budget-level witness that no blind policy both reaches the goal and satisfies the constraint."
-  criterion_note: "Stated only in a Python docstring. The same docstring is explicit that the per-layout MINIMUM no-sense hazard is 0.0 (the safe-guess layout), and that it is the union CUT, not this mean, that forbids a blind safe route. The caption's 'a blind route incurs a mean hazard of 1.0' is therefore a statement about the AVERAGE over the pair, not about any single episode."
+  criterion_note: "Stated only in a Python docstring. The same docstring is explicit that the per-layout MINIMUM no-sense hazard is 0.0 (the safe-guess layout), and that it is the union CUT, not this mean, that forbids a blind safe route. The caption's 'A blind route to the goal incurs a mean hazard of 1.0 per episode' is therefore a statement about the AVERAGE over the pair, not about any single episode."
   source_file: src/raas_marl/environments/active_sensing/stage24_diagnostics.py
   field_path: "PROSE:stage24_diagnostics.py:1237 'For the 2-layout fork this mean is 1.0 (per-layout {0.0, 2.0})'"
   expected_value: "1.0 (per-layout 0.0 and 2.0)"
@@ -1562,9 +1567,9 @@
   paper_location: "Sec. V-B (main.tex:640-641); restated Sec. V-D (main.tex:719)"
   printed_label: "seven of nine, exact interval [0.40,0.97]"
   criterion: "Clopper-Pearson exact two-sided 95% binomial interval for the anchor-consolidation rate 7 of 9."
-  criterion_note: "NOT STORED ANYWHERE. Exhaustive search this phase over docs/evidence/ (all JSON keys walked, plus the .md files) found no field carrying this interval. It is a derived statistic that exists only in the paper. Recomputed here and matched to the printed 2-dp precision."
-  source_file: NONE
-  field_path: "not present in any repository artifact; the underlying COUNT is docs/evidence/t1_seedscale_analysis.json $.retain_reliability_tallies_n9.anchor_clean_class_haz_AND_witness"
+  criterion_note: "Not stored as a field in docs/evidence/: no JSON key there carries this interval. instruments/reproduce_table3.py pins it as (0.400, 0.972), the 3-dp form Table III prints, and recomputes it from the count with instruments/statistics.py clopper_pearson. Sec. V-B and Sec. V-D print it at 2 dp."
+  source_file: instruments/reproduce_table3.py
+  field_path: "instruments/reproduce_table3.py pins (0.400, 0.972) under anchor_consolidation; the underlying COUNT is docs/evidence/t1_seedscale_analysis.json $.retain_reliability_tallies_n9.anchor_clean_class_haz_AND_witness"
   expected_value: DERIVED
   derived_from: "docs/evidence/t1_seedscale_analysis.json $.retain_reliability_tallies_n9.anchor_clean_class_haz_AND_witness = '7/9', confirmed per seed from $.per_seed.*.anchor_clean_class"
   paper_value: "[0.40, 0.97]"
@@ -1604,7 +1609,7 @@
 
 - id: vc-two-seeds-transfer
   paper_location: "Sec. V-C (main.tex:664-670); restated Sec. I bullet 3 (main.tex:277-279), abstract (main.tex:120-121)"
-  printed_label: "Two seeds produce policies whose selective sensing generalizes ... each with a magnitude-floored own-ablation causal witness on the validation surface at two graded checkpoints"
+  printed_label: "Two seeds produce policies whose selective sensing generalizes ... each with an own-ablation causal witness on the validation surface at two graded checkpoints"
   criterion: "Same criterion as table3-transfer-n9, stated in prose with the per-seed checkpoint count."
   source_file: docs/evidence/t1_seedscale_analysis.json
   field_path: $.per_seed.147.c4_gen_2of3 and $.per_seed.158.c4_gen_2of3 (with $.per_seed.*.c4_gen_checkpoints)
@@ -1625,7 +1630,7 @@
 #   '[0.40, 0.97]'  -> vb-anchor-exact-interval
 #   '0.028 to 0.600'-> table3-transfer-ci-95
 #   'one third'     -> table3-chance-level
-#   'one of six'    -> table3-fresh-seed-transfer
+#   'every fresh-seed rate is lower' -> table3-fresh-seed-transfer (Table III prints 1/6 = 0.17)
 # No Sec. V-D or Sec. VI number lacks a registered entry.
 # -----------------------------------------------------------------------------
 
@@ -1652,29 +1657,29 @@
 #   'two of nine'                   -> table3-transfer-n9
 #   'two seeds' (transfer)          -> vc-two-seeds-transfer
 #   'four of five armed seeds'      -> va-armed-five-held-four
-#   'two families of low-burden levers' -> intro-two-lever-families (below)
+#   'two families of low-burden training levers' -> intro-two-lever-families (below)
 # -----------------------------------------------------------------------------
 
 - id: setup-three-further-mechanisms
   paper_location: "Sec. IV (main.tex:551-552)"
-  printed_label: "Beyond Table~I, every reported run enables three further off-by-default mechanisms"
-  criterion: "The number of off-by-default mechanisms, beyond the Table I corridor, that the reported runs actually enable."
-  criterion_note: "THE ONE match: false IN THIS REGISTER. The paragraph goes on to name exactly three - potential-based shaping, the sensing keep-alive, and the entropy floors. Diffing the nine runs' config against the driver's own dataclass defaults (src/raas_marl/final_training/stage25_driver.py, Stage25RunConfig) shows 32 keys set away from an OFF default. Twenty-five of those are disclosed (13 by Table I, 5 by the entropy-sustain schedule, 7 by the three named mechanisms). SEVEN are not disclosed anywhere in the paper: movement_recovery_gate=true plus its six midband_recovery_* parameters - the DR-H5 lever-K movement-recovery gate - and separately advantage_std_guard_threshold=1e-06. The words 'midband' and 'containment' appear ZERO times in main.tex, and all six occurrences of 'recovery' describe the RESULT (recovery of the behavior) or the s147 arm-then-recovery episode, never the lever. The mechanism is not inert: t1_retain_analysis.json $.lever_k_now_tested records it FIRING on all three RETAIN seeds (s147 twice, s148 once, s149 once, with named round ranges). So the published count of three is an undercount of what the runs behind Table II's dim-22 row and Table III's n=3 column enabled."
+  printed_label: "Beyond Table I, every reported run enables further off-by-default mechanisms"
+  criterion: "The off-by-default mechanisms, beyond the Table I corridor, that the reported runs enable."
+  criterion_note: "Closed in the camera-ready. main.tex counted three further mechanisms and named no fourth, while the runs also enable the movement-recovery gate (movement_recovery_gate=true plus six midband_recovery_* parameters) and advantage_std_guard_threshold=1e-06, so this entry was match: false. The camera-ready (Sec. IV) gives no count: it names the potential-based shaping, the sensing keep-alive and the entropy floors, says the movement-recovery gate is enabled in every reported run, says the advantage-standardization guard is off by default and enabled here, and points to the per-run configuration records for values it does not print (the six midband_recovery_* values and the 1e-06 threshold). THE REPORTED RUNS. The Fig. 2 caption speaks of the training budget of 0.25 used in the reported runs, and the Table I caption says its values are those frozen for the reported runs. Of the 55 RUN_MANIFEST.json files under results/experiments/, 24 have $.config.hazard_budget = 0.25; those 24 are exactly the ones with movement_recovery_gate = true, and all 24 set each mechanism above as Sec. IV describes it. The other 31 (b101-b104 and t1_d4 to t1_d12) have hazard_budget 0.1 or 0.5 and no movement_recovery_gate key. One tension remains: Sec. V-A's statement that, across the corridor's tuning campaign, the floor armed on five seeds and four held covers t1_d11_s128 and t1_d12_s130/s131, whose records have hazard_budget 0.5 and no movement_recovery_gate key."
   source_file: results/experiments/t1_retain_s147/RUN_MANIFEST.json
   field_path: "$.config - compared key-by-key against the Stage25RunConfig dataclass defaults in src/raas_marl/final_training/stage25_driver.py:226-365"
-  expected_value: "at least 4 (the three named, plus the movement-recovery gate); 32 config keys total are set away from an OFF default, of which 7 are undisclosed"
-  paper_value: "three"
-  match: false
+  expected_value: "the three named mechanisms plus the movement-recovery gate and the advantage-standardization guard, all enabled in the 24 manifests with hazard_budget 0.25"
+  paper_value: "further (uncounted); the movement-recovery gate and the advantage-standardization guard are named"
+  match: true
   reads: analysis_json
-  recompute: "parse the Stage25RunConfig dataclass field defaults from stage25_driver.py; for each key in $.config, flag it where the default is an OFF sentinel (None / 0 / 0.0 / False) and the run value is not; subtract the keys disclosed by Table I, the entropy-sustain sentence, and the three named mechanisms"
+  recompute: "for each results/experiments/*/RUN_MANIFEST.json with $.config.hazard_budget == 0.25: movement_recovery_gate is true, the six midband_recovery_* keys are present, advantage_std_guard_threshold is 1e-06, and the shaping, keep-alive and entropy-floor values equal those Sec. IV prints"
 
 - id: method-encoding-radii
   paper_location: "Sec. III Method (main.tex:446-448)"
-  printed_label: "a scalar count of obstacles within a one-cell radius (four-connected), and a small egocentric occupancy patch within a two-cell radius"
+  printed_label: "a scalar count of obstacles within a one-cell radius (four-connected), and a two-cell-radius encoding that both widens that count and adds a small egocentric occupancy patch"
   criterion: "The two obstacle-percept radii being compared: radius 1 for the original encoding, radius 2 for the enriched one."
-  criterion_note: "Only the radius-2 value is present in the shipped source. src/raas_marl/environments/active_sensing/tensor_adapter.py:99 reads STAGE23_LOCAL_OBSTACLE_RADIUS = 2 and grid_environment.py:219 reads local_observation_radius: int = 2. The radius-1 value is the PRE-3591d61 state of those same constants and is recoverable only from git history (git show 7ae9650:src/.../tensor_adapter.py), which is class PRIVATE. See the CLAIM-SOURCE CROSS-CHECK in SHIPPING_MANIFEST.md."
+  criterion_note: "Only the radius-2 value is present in the shipped source. src/raas_marl/environments/active_sensing/tensor_adapter.py:111 reads STAGE23_LOCAL_OBSTACLE_RADIUS = 2 and grid_environment.py:219 reads local_observation_radius: int = 2. The radius-1 value is the PRE-3591d61 state of those same constants and is recoverable only from git history (git show 7ae9650:src/.../tensor_adapter.py), which is class PRIVATE. See the CLAIM-SOURCE CROSS-CHECK in SHIPPING_MANIFEST.md."
   source_file: src/raas_marl/environments/active_sensing/tensor_adapter.py
-  field_path: "tensor_adapter.py:99 STAGE23_LOCAL_OBSTACLE_RADIUS = 2 (radius-2 arm); the radius-1 arm exists only at git revision 7ae9650 and earlier"
+  field_path: "tensor_adapter.py:111 STAGE23_LOCAL_OBSTACLE_RADIUS = 2 (radius-2 arm); the radius-1 arm exists only at git revision 7ae9650 and earlier"
   expected_value: "radius 2 present in HEAD; radius 1 only in git history"
   paper_value: "one-cell radius / two-cell radius"
   match: true
