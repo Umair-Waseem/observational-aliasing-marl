@@ -24,7 +24,7 @@ of nine seeds and transfer on two of nine, indistinguishable from chance. The pa
 evaluation on the held-out geometry, which is deliberately preserved.
 
 The state reported in the paper is the tag [`v1.0-icet2026`](https://github.com/Umair-Waseem/observational-aliasing-marl/releases/tag/v1.0-icet2026).
-This branch differs from the tag only in `.github/workflows/ci.yml`, `README.md`, `CITATION.cff`, and `docs/PAPER_MAP.md`. No instrument, record, manifest, or checkpoint differs from the tag, and no number the paper reported differs.
+This branch differs from the tag only in `.github/workflows/ci.yml`, `README.md`, `CITATION.cff`, `docs/PAPER_MAP.md`, and `pyproject.toml`. No instrument, record, manifest, or checkpoint differs from the tag, and no number the paper reported differs.
 
 [Citation](#citation) · [Reproduce the numbers in Table III](#reproduce-the-numbers-in-table-iii) · [Install and tests](#install-and-tests) · [The paper map](#the-paper-map) · [Data availability](#data-availability) · [What is here, by directory](#what-is-here-by-directory) · [What is not here and why](#what-is-not-here-and-why) · [Reproduction environment](#reproduction-environment) · [Provenance](#provenance) · [License](#license)
 
