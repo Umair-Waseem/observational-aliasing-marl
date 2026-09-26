@@ -123,7 +123,7 @@ Source: `src/raas_marl/final_training/stage25_driver.py` (`run_stage25_training`
 
 ## Grade record: top level and surfaces
 
-Each of the 27 files holds one object whose only key is `grade`. `grade_policy` builds its value from a policy and a seed. On each of the ten fork surfaces it rolls the policy once as it is. It rolls it again with the revealed-information channel zeroed for the whole episode: the counterfactual own-ablation witness, as the paper called it. It also rolls the scripted no-sense policy as a reported cross-check. `derive_checkpoint` reads `tightened_verdict`, `witness_surfaces`, and, on the two validation surfaces, `team_success` and `hazard_entry_count`. The README's [What this repository contains](../README.md#what-this-repository-contains) section compares a re-grade from a shipped checkpoint with a stored record.
+Each of the 27 files holds one object whose only key is `grade`. `grade_policy` builds its value from a policy and a seed. On each of the ten fork surfaces it rolls the policy once as it is. It rolls it again with the revealed-information channel zeroed for the whole episode: the ablation behind what the paper called the counterfactual own-ablation witness. It also rolls the scripted no-sense policy as a reported cross-check. `derive_checkpoint` reads `tightened_verdict`, `witness_surfaces`, and, on the two validation surfaces, `team_success` and `hazard_entry_count`. The README's [What this repository contains](../README.md#what-this-repository-contains) section compares a re-grade from a shipped checkpoint with a stored record.
 
 | keys (type) | present in | meaning |
 |---|---|---|

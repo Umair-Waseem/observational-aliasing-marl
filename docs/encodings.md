@@ -24,7 +24,7 @@ Source: code `src/raas_marl/environments/active_sensing/grid_environment.py` (`S
 
 ## The enriched encoding: 22 features
 
-The observation encoding (`actor_observation_from_stage23`) builds the enriched encoding and no other. It returns 22 features (`STAGE23_ACTOR_OBSERVATION_DIM`): ten scalar features (`STAGE23_LEGACY_ACTOR_FEATURE_COUNT`), then the two-cell obstacle patch (`_RADIUS2_PATCH_OFFSETS`).
+The observation encoding (`actor_observation_from_stage23`) builds the enriched encoding and no other. It returns 22 features (`STAGE23_ACTOR_OBSERVATION_DIM`): ten scalar features (`STAGE23_LEGACY_ACTOR_FEATURE_COUNT`), then 12 patch features, one per cell in `_RADIUS2_PATCH_OFFSETS`.
 
 | index | feature |
 |---|---|
