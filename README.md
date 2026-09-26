@@ -24,9 +24,9 @@ of nine seeds and transfer on two of nine, indistinguishable from chance. The pa
 evaluation on the held-out geometry, which is deliberately preserved.
 
 The state reported in the paper is the tag [`v1.0-icet2026`](https://github.com/Umair-Waseem/observational-aliasing-marl/releases/tag/v1.0-icet2026).
-This branch differs from the tag only in `.github/workflows/ci.yml`, `README.md`, `CITATION.cff`, `docs/PAPER_MAP.md`, `pyproject.toml`, `CLAIMS.yaml`, `LICENSE`, `docs/paper/figure_data/generate_fig5.py`, `requirements-figures.txt`, and `SECURITY.md`. Apart from `CLAIMS.yaml`, no instrument, record, manifest, or checkpoint differs from the tag, and no number the paper reported differs.
+This branch differs from the tag only in documentation (`README.md`, `SECURITY.md`, and the Markdown files under `docs/`), metadata and the claim register (`CITATION.cff`, `CLAIMS.yaml`, `LICENSE`, and `pyproject.toml`), CI (`.github/workflows/ci.yml`), and the Fig. 5 generator (`docs/paper/figure_data/generate_fig5.py` and `requirements-figures.txt`). `git diff --stat v1.0-icet2026 main` gives the exact list. Apart from `CLAIMS.yaml`, no instrument, record, manifest, or checkpoint differs from the tag, and no number the paper reported differs.
 
-[Citation](#citation) · [Reproduce the numbers in Table III](#reproduce-the-numbers-in-table-iii) · [Install and tests](#install-and-tests) · [The paper map](#the-paper-map) · [Data availability](#data-availability) · [What is here, by directory](#what-is-here-by-directory) · [What is not here and why](#what-is-not-here-and-why) · [Reproduction environment](#reproduction-environment) · [Provenance](#provenance) · [License](#license)
+[Citation](#citation) · [Reproduce the numbers in Table III](#reproduce-the-numbers-in-table-iii) · [Install and tests](#install-and-tests) · [The paper map](#the-paper-map) · [Data availability](#data-availability) · [What is here, by directory](#what-is-here-by-directory) · [What is not here and why](#what-is-not-here-and-why) · [Reproduction environment](#reproduction-environment) · [Provenance](#provenance) · [License](#license) · [Reference pages](docs/README.md)
 
 ## Citation
 
@@ -498,6 +498,7 @@ policy checkpoints and their per-checkpoint grade records.
 |---|---|
 | `instruments/` | The three release instruments (the reroute-basin classifier, the grade composer, and the Clopper–Pearson/Fisher statistics), plus `reproduce_table3.py`, which runs all three. Standard library only. |
 | `src/raas_marl/` | The package: environment, enriched encoding, MAPPO-Lagrangian core, control corridor, training drivers. |
+| `docs/README.md` | The index of the reference pages: short pages on the environment and the risk fork, what an agent observes, the control corridor, how a run is graded, the scenarios and the reserved held-out geometry, and the run manifest and grade record schemas. |
 | `docs/evidence/*.py` | The five certification and regression instruments, at their source-repository paths. |
 | `docs/evidence/*_analysis.json` | The graded per-unit run analyses, one per experimental unit. |
 | `results/experiments/*/RUN_MANIFEST.json` | Per-run provenance and configuration for all 55 runs. |
